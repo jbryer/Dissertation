@@ -1,0 +1,32 @@
+\begin{table}[ht]
+\caption{Summary of Multilevel PSA}
+\begin{center}
+\begin{tabular}{lrrrrrrrr}
+\hline
+ & \multicolumn{ 2}{c}{Adjusted Mean} &  & \multicolumn{1}{c}{} &  &  & \multicolumn{1}{c}{} \\ \cline{2-3}
+ & Public & Charter & Diff & ATE & \textit{n} & \multicolumn{2}{c}{95\% CI} \\ \hline
+ & \multicolumn{ 7}{c}{Grade 4 Math} \\ \cline{2-8}
+Logistic Regression & 236.51 & 236.55 & 3.40 & 0.04 & 83241 & -1.50 & 1.58 \\ 
+Logistic Regression Step AIC & 237.25 & 236.83 & 4.22 & -0.41 & 95290 & -2.05 & 1.23 \\ 
+Conditional Inference Trees & 236.70 & 237.78 & 3.89 & 1.10 & 118812 & -0.26 & 2.54 \\
+% Matching &  &  &  &  &  &  &  &  \\ 
+ & \multicolumn{ 7}{c}{Grade 4 Reading} \\ \cline{2-8}
+Logistic Regression & 217.14 & 216.87 & 4.65 & -0.27 & 80465 & -2.29 & 1.75 \\ 
+Logistic Regression Step AIC & 217.05 & 217.46 & 4.71 & 0.41 & 86885 & -1.52 & 2.33 \\ 
+Conditional Inference Trees & 216.09 & 220.92 & 5.99 & 4.83 & 108938 & 2.91 & 6.75 \\
+% Matching &  &  &  &  &  &  &  &  \\
+ & \multicolumn{ 7}{c}{Grade 8 Math} \\ \cline{2-8}
+Logistic Regression & 278.13 & 277.90 & 5.31 & -0.23 & 61795 & -2.41 & 1.94 \\
+Logistic Regression Step AIC & 278.62 & 280.52 & 6.07 & 1.90 & 69535 & -0.33 & 4.13 \\
+Conditional Inference Trees & 277.61 & 281.11 & 5.28 & 3.50 & 80594 & 1.48 & 5.52 \\
+%Matching &  &  &  &  &  &  &  & \multicolumn{1}{l}{} \\
+ & \multicolumn{ 7}{c}{Grade 8 Reading} \\ \cline{2-8}
+Logistic Regression & 258.97 & 263.19 & 4.14 & 4.22 & 71270 & 2.45 & 5.99 \\
+Logistic Regression Step AIC & 259.25 & 263.61 & 4.25 & 4.36 & 77513 & 2.58 & 6.14 \\
+Conditional Inference Trees & 258.10 & 264.97 & 4.37 & 6.87 & 84352 & 5.12 & 8.63 \\
+%Matching &  &  &  &  &  &  &  & \multicolumn{1}{l}{} \\ 
+\hline
+\end{tabular}
+\label{overallresults}
+\end{center}
+\end{table}

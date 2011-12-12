@@ -1,0 +1,872 @@
+%\documentclass[letterpaper,12pt]{article} %For final submission
+\documentclass[letterpaper,12p,twoside]{article} %For two-sided printing
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\usepackage[tocbib,bibnewpage]{apacite}
+\usepackage{graphicx}
+\usepackage{rotating}
+\usepackage{color}
+\definecolor{lightgrey}{rgb}{.5,.5,.5}
+\usepackage{tabularx}
+\usepackage{appendix}
+\usepackage{longtable}
+
+%\usepackage{caption}
+%\DeclareCaptionLabelSeparator{apatablestyle}{\\}
+%\captionsetup{format=plain,labelsep=apatablestyle,singlelinecheck=false}
+
+\usepackage{myapa}
+\FiveLevelHeading
+\raggedright
+\setlength{\parindent}{0.3in}
+
+\usepackage{setspace}
+\doublespacing
+
+\usepackage{ifthen}
+\newboolean{draft}
+\setboolean{draft}{false} %===== DRAFT =====%
+\ifthenelse{\boolean{draft}}{
+	\usepackage{draftwatermark}
+	\SetWatermarkScale{6}
+}{}
+
+\def\quote{\singlespacing\parindent2em\hangindent2em}
+
+\newcommand{\smaller}{\fontsize{9}{10}\selectfont}
+
+\oddsidemargin 0.5in
+%\evensidemargin 0.5in %For final submission
+\evensidemargin 0in %For two-sided printing
+\textwidth 6.0in
+\headheight 0.0in
+\topmargin 0.0in
+\textheight 8.5in
+\doublerulesep 0pt
+
+\newcommand{\thickline}{\hline\hline\hline}
+
+\pagenumbering{roman}
+\renewcommand*\contentsname{Table of Contents}
+
+\begin{document}
+\begin{titlepage}
+\vspace*{\fill}
+\begin{center}
+\uppercase{Comparing Charter and Public Schools\\Using Multilevel Propensity Score Analysis}\\
+\ \\
+by
+\ \\ \ \\
+Jason M. Bryer\\
+\ \\ \ \\ \ \\
+A Dissertation Submitted to the\\
+University at Albany, State University of New York\\
+In Partial Fulfillment of\\
+the Requirements for the Degree of\\
+Doctor of Philosophy\\
+\ \\ \ \\ \ \\ \ \\
+School of Education\\
+Department of Educational and Counseling Psychology\\
+Division of Educational Psychology \& Methodology\\
+2011
+\ifthenelse{\boolean{draft}}{
+	\ \\	\LARGE{}Draft as of \today
+}{}
+\end{center}
+\vspace*{\fill}
+\end{titlepage}
+\setcounter{page}{2}
+\newpage
+
+
+%\section{Dedication} \vspace*{\fill} \begin{center}To my wife, Heather,\\and two boys Gabriel and Miles,\\for providing the inspiration and support\\for life's journey.\vspace*{\fill}\end{center}\newpage
+%\section{Acknowledgements} Thank you \newpage
+\ \\
+\cleardoublepage
+\section{Abstract}
+The concept of school choice within the United States is not new. Private schools have been educating students since the founding of the United States. However, in 1988, Ray Budde proposed an alternate approach to school choice that has grown to be known as charter schools \cite{kolderie05}. Unlike their private school counterparts, charter schools receive public funding, but they are relieved of many of the bureaucratic and regulatory constraints public schools adhere to, but are still held accountable for student performance. Despite claims by charter school advocates that charter schools are performing as well if not better than the public school counterparts \cite<see e.g.>{allen09}, some studies suggest ambiguity with regard to charter school performance \cite<see e.g.>{braun06hlm, credo, hubbard2009}. Ultimately, there is agreement that more research is necessary to address the question of whether charter schools provide substantially better academic experiences for students. This study will investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics.
+
+At the center of the charter school debate is an issue that has concerned thinkers for centuries, the question of how to support causal inferences. In this context we aim to assess the effect of a treatment on a measurable outcome using observational data. Traditionally, randomized experiments have been considered the ``gold standard" for studying questions of causality. In the context of this study, and many other questions in education randomization is either impractical or unethical. This means that observational studies are often essential to support inferences about whether treatments influence outcomes.
+
+However, lacking randomization, observational studies nearly always invite selection bias. Charter schools are, by definition, schools of choice. In observational data contexts, simple comparisons of two groups such as public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, with an appropriately designed observational study, and an appropriate analysis, the effects of the selection bias can be taken into account in a way that simple comparisons are replaced by adjusted comparisons of groups. This is done utilizing a class of statistical procedures introduced by \citeA{rosenbaum83} called propensity score analysis.
+
+Propensity score analysis has seen considerably increased use in the social sciences within the last few years \citeA{ThoemmesKim2011}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \citeA{ArpinoMealli2008}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analysis will be conducted using the \texttt{multilevelPSA} package in R \citeA{RCore}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be within states. Effects will then aggregated to provide state and national effect estimates.
+
+As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \citeA<see e.g.>{Stuart2010}. This study will utilize logistic regression and conditional inference trees \citeA{HorthornHornikZeileis2010} to estimate propensity scores. Both matching and stratification methods will be used, in different ways, depending on specific analytic needs. Lastly, the use of graphics will be employed to evaluate balance and outcome differences \citeA{HelmreichPruzek2009}.
+
+\cleardoublepage 
+
+\addcontentsline{toc}{section}{Table of Contents}
+\setcounter{tocdepth}{5}
+\tableofcontents
+\cleardoublepage
+\addcontentsline{toc}{section}{List of tables}  \listoftables
+\cleardoublepage
+\addcontentsline{toc}{section}{List of figures} \listoffigures
+
+%==================== CHAPTER 1 ====================================================================
+\cleardoublepage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\section{Chapter 1: Introduction}
+
+Since the opening of the first charter school in Minnesota in 1991, the United States\footnote{Though this study focuses on charter schools in the U.S., Canada \cite{canada2007}, Chile \cite{larranaga2004}, England \cite{wohlstetter1994}, Germany \cite{herbst2006}, and New Zealand \cite{lander2001} also have charter schools.} has increasingly embraced charter schools as an important option for educational reform. In the last 10 years alone, the number of charter schools has grown from 507 in the 1998-1999 school year to 4,561 in the 2007-2008 school year \cite<see figure \ref{fig:charterSchoolGrowth};>{cernumbers}. Currently, 40 states and the District of Columbia have charter school laws (see appendix A for enrollment by state \& appendix B for a thematic map of the U.S. depicting the number of operating charter schools as of 2008). And, given Arne Duncan's appointment as Secretary of Education by President Barack Obama, who has been a charter school supporter, charter school growth and support is unlikely to slow in the near future.
+
+In principal, charter schools have opted out of bureaucratic rules and union contracts in order to gain academic autonomy in exchange for accountability and better academic environments for students \cite{wells2002}. The idea is that, under this framework, teachers, administrators, students, and the community that comprise the charter school would be free to innovate. It is also the assumption that charter schools would serve as experimental schools where the innovations would inform reform of public education at large. However, some supporters argue for the eventual replacement of traditional public schools with charter schools, as further exemplified by the attempted school voucher legislation during the second Bush Administration.
+
+\begin{figure}[tp]
+\includegraphics[width=\textwidth]{../Figures/CharterSchoolGrowth.pdf}
+\caption{Charter School Growth 1999-2008}
+\label{fig:charterSchoolGrowth}
+\end{figure}
+
+Clearly charter schools have become a popular vehicle for educational reform among parents as well. The \citeA{cersurvey} reports that 59\% of charter schools have waiting lists averaging 198 students. Charter schools provide an apparent choice to parents and are copacetic to the United State's individualistic \cite<see e.g.,>{hofstede2004,maccall1847,swart1962} culture. Moreover, like so many other fields, school reform has further emphasized marketization and privatization \cite{wells2002}. The influence of capitalism on education is not new. A major contributor to the expanded role of education during the industrial revolution is capitalism itself. That is, education expanded its initial purpose of providing a minimally informed electorate to providing an educated work force, not to mention keeping children off the streets as child labor laws came into existence. However, the shift of capitalistic principles from being the inspiration of educational reform to being the educational reform has profound implications.
+
+Proponents of charter schools argue that public schools have been bogged down by bureaucracy and union contracts. Freeing schools of these requirements then allows teachers and schools to innovate, which in theory leads to increased student performance. The principled argument is the ``market metaphor" \cite{wells2002}. That is, if schools were forced to compete for ``customers" (i.e. students), then the differentiating factor between schools would be the quality of education. 
+
+Opponents on the other hand have questioned the accountability, equity, effectiveness, and sustainability of charter schools. Several studies have shown that charter schools are not only failing to increase student performance, in many instances they are performing well under their traditional public school counterparts \cite<see e.g.,>{credo,braun06hlm,aft2004}. Others still argue whether charter schools may be a solution in search of a problem. \citeA{carnoy2005} in summarizing the controversy that ensued after the \citeA{aft2004} study argue that:
+
+\begin{quote}
+If, however, charter schools are not improving the achievement of disadvantages children, it may be that the cause of low student performance is not bureaucratic rules but something else. When a treatment is based on a diagnosis, and the treatment doesn't work, it is prudent to examine not only whether the treatment should be improved, but also whether the diagnosis might be flawed. \cite{carnoy2005}
+\end{quote}
+
+\subsection{Issues with Charter School Research}
+The issues surrounding charter schools are immense. However, given the implications for the current and future generations of students, the issue must be explored using the best data and methods available. As \citeA{betts2006} point out, there are three major obstacles to addressing the question of ``whether students in charter schools are learning more or less than they would have learned in conventional schools" (p. 1), namely:
+
+\begin{enumerate}
+\item The issues of counterfactuals. That is, there are several barriers to determine the causal relationship between school choice and learning.
+\item The variation in types of charter schools.
+\item The nature of student achievement. Research has shown there are many other factors that contribute to student success including, but not limited to, social economic status, parents education, motivation, etc. The ability to decipher how school choice contributes to student learning in the context of all the other factors proves difficult.
+\end{enumerate}
+
+Though these issues are significant, they can to a large extent be reasonably addressed. We will not claim to fully account for these issues, however given the need for evidence to inform policy makers regarding charter school effectiveness, we will attempt to address these issues using the best data and methods available while clearly stating the limitations.
+
+Issue one will be dealt with in more detail in chapter three. However, in short, the propensity score analysis (PSA) proposed for this study is arguably, assuming proper implementation, one of the best approaches to estimating causal inferences short of well designed randomized experiments. Of course in the context of an observational study the fundamental problem of causal inference \citeA{Holland1986} remains, but limitations of this will be addressed.
+
+The issue of charter school variation is often cited in critiques of national or large scale charter school studies. Given that the charter school debate is a national debate that has implications at the Federal level, large scales studies are not only necessary, they are critical. If charter schools are to be offered wholly as an alternative to traditional public schools, then charter schools as a whole must be evaluated against public schools as a whole. More specifically, we wish not to evaluate whether a particular charter school, or type of charter school, is better, but whether the entire charter school concept is a better approach for educational reform.
+
+Lastly, the environmental, social, community, and cultural factors that contribute to a student's academic achievement are often significantly underestimated. Often educational reform, as exemplified most recently by the No Child Left Behind Act, places the responsibility solely on the school without consideration of the context in which the school operates. We are encouraged by President Obama's remarks to his first Joint Session of Congress \cite{obama}:
+
+\begin{quote}
+These education policies will open the doors of opportunity for our children. But it is up to us to ensure they walk through them. In the end, there is no program or policy that can substitute for a mother or father who will attend those parent/teacher conferences, or help with homework after dinner, or turn off the TV, put away the video games, and read to their child. I speak to you not just as a President, but as a father when I say that \textit{responsibility for our children's education must begin at home} [emphasis added].
+\end{quote}
+
+\noindent Though we must be acutely aware and acknowledge the fact that schools are merely one factor of many that contribute to a students academic achievement, it does not preclude us from evaluating schools for their part. Similar to issue one, we argue that PSA provides an approach to best approximate the effects of school choice.
+
+\subsection{Guiding Research Question}
+Given that charter schools are being offered as a solution for the needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter schools and public schools using the National Assessment of Educational Progress and propensity score analysis. More specifically, this study proposes to address the question: Are there differences between charter and public schools? And if so, what is the nature and extent of those differences?
+
+
+
+%==================== CHAPTER 2 ====================================================================
+\cleardoublepage
+\section{Chapter 2: Review of the Literature}
+
+\subsection{History of Charter Schools}
+Though Ray Budde is often credited with the current charter school movement \cite{kolderie05}, the term \textit{school choice} can be traced back to Adam Smith's \textit{Wealth of Nations}, Thomas Paine's \textit{Rights of Man}, and John Stuart Mill's \textit{On Liberty} \cite{herbst2006}. Prior to the Revolutionary War, given the religious diversity of colonial America, issues of education were left to local communities. However, after the war Revolutionary leaders argued that local schools were no longer sufficient for educating students for the emerging state and federal governments. It was Thomas Jefferson who, in 1779, introduced the first bill in Virginia that would establish a public school system. It was this, along with numerous other American intellects during the 1780s and 1790s, that established public schools throughout the young nation thereby relegating school choice to a choice between the public school and, predominately religious, private schools.
+
+In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
+
+\begin{figure}[tp]
+\includegraphics[width=\textwidth]{../Figures/Timeline.pdf}
+\caption{Stages of a Charter School Life Cycle (adapted from Budde, 1988)}
+\label{fig:timeline}
+\end{figure}
+
+Following the suggestions of Budde, Minnesota passed the first charter school law in 1991 with California being the second following in 1992. As of spring 2009, 40 states and the District of Columbia have charter school laws which comprise 1,407,421 students in 4,578 schools \cite{cernumbers}. According to \citeA{whatweknow}, there are currently over 200 studies that examine charter school achievement. 
+
+
+
+\subsection{Empirical Evidence for Charter School Effectiveness}
+Given that program evaluation and accountability are fundamental components of the philosophical foundations of charter schools, there are remarkably few \textit{high quality} empirical studies that address, at a national level, the academic effectiveness of charter schools \cite<c.f.>{whatweknow,betts2008}. That is not to say that there are not any studies that examine charter school achievement. The \citeA{whatweknow} provide a review of 140 studies selected on several criteria. Their review reveals significant gaps in the research with regard to states evaluated, research quality that addresses achievement, as well as timeliness of results. This is further exemplified by a meta-analysis conducted by \citeA{betts2008} that includes just 13 studies that represent nine states. In this section we will provide an overview of the current literature available vis-\`a-vis the published meta-analysis and literature reviews. We then focus on two recent studies that together provide the context for the study proposed here. More specifically, a hierarchical linear modeling analysis of the 2005 NAEP study \cite{braun06hlm} and a matching study comparing charter and public schools in 16 states \cite{credo}.
+
+\subsubsection{Overview of Current Studies}
+Research has shown that parents of students in charter schools are generally more satisfied with the charter school than the public school and will also tend to be more involved in their child's education \cite{teske2001,vanourek1998}. However, their satisfaction may simply be a rationalization \cite{hubbard2009}. Moreover, Fuller et al. \cite<1996, as cited in>{hubbard2009} suggest that parents that choose charter schools ``believe that the charter must therefore be superior to a conventional public school" (p. 177). This is collaborated by a study conducted by \citeA{cullen2005} that examines school choice in Chicago Public Schools whereby more than half of students elect to attend another Chicago Public School (e.g. career academy, high-achieving school) rather than their locally assigned school. Though students who opt out of their local school are more likely to graduate, \citeA{cullen2005} argue that ``those who opt out are superiour along unobservable dimensions such as their motivation level and parental involvement" (p. 755). 
+
+The \citeA{whatweknow} provides perhaps the most comprehensive review of available research on charter school performance. The current report, \textit{Charter School Achievement: What We Know} is now in its fifth edition having been updated periodically to account for recent studies. In addition to covering published research reports, the review includes unpublished reports including conference presentations, dissertations, policy group and think tank reports, and state evaluations. Of the 210 studies identified, 140 are included in their review given that the study compares charter schools with traditional public schools, the study uses ``serious research methods" (p. 2), and ``examines a significant segment of the charter sector." The studies are then further categorized into one of three categories: (1) panel studies that are longitudinal and examine student growth over time; (2) cohort change studies that are longitudinal but use some other method than tracking individual students; and (3) snapshot studies that examine school performance at a single point in time (also known as observational studies).
+
+Table \ref{charterAchievement} summarizes the findings of the 140 studies included first, by breaking out the year(s) the study's data is based upon, and second by the results reported. It should be noted that many of the pre-2001 studies were concentrated in a few states (Arizona, California, Florida, North Carolina, and Texas). This is expected given that these states are among the earliest to adopt charter school laws (see appendix A) as well as the substantial increase in the number of charter schools since 2000 (see figure \ref{fig:charterSchoolGrowth}). The National Alliance of Public Charter Schools conclude that:
+
+\begin{quote}
+[I]t becomes dramatically clear that studies examining public charter schools in more recent academic years show that charter schools produce more instances of larger achievement gains in both math and reading when compared to traditional public schools. (p. 3)
+\end{quote}
+
+\noindent However, this interpretation downplays the fact that approximately 30\% of charter schools performed worse than their traditional public school counterpart. These results are consistent with a recent by the \citeA{credo} that reported that 37\% of charter schools performed worse than their public school counterpart (this study is discussed in more detail below).
+
+\input{../Tables/Chapter2.table.SummaryCharterSchoolAcievement.tex}
+
+\citeA{betts2008} employ more stringent selection criteria for including studies in their meta-analysis. More specifically, only studies that used experimental student-level growth-based methods were included, resulting in a total of 14 studies published between 2001 and 2007 utilizing data ranging from 1998 through 2005. Similarly to \citeA{whatweknow}, studies included a limited number of locations including Arizona, California (three of which from San Diego specifically), Chicago, Delaware, Florida, Idaho, North Carolina, and Texas with one additional anonymous location. Overall, their analysis of the available studies provide very mixed results. However, some patterns to charter and public school differences emerge, specifically that charter schools generally outperform traditional public schools in elementary school reading and middle school math, though effect sizes for the latter are small. However, for high school reading and math charter schools are generally underperforming traditional public schools, but it should be noted that studies examining these grade levels is relatively small \cite<see also,>{whatweknow}.
+
+
+\subsubsection{Two NAEP Studies Using HLM}
+An increasingly used statistical method that allows for the analysis of studies where observations are not independent is hierarchical linear modeling (HLM), or multi-level analysis. In the context of the charter school question, comparing students in charter schools to public school counterparts with, say ordinary least squares or ANOVA, is inappropriate since these statistical models do not account for the school effects. HLM provides a model for which school effects can be partitioned from student effects thereby providing adjustments for the lack of independence of observations \cite<see e.g.,>{bryk1992,gelman2006}.
+
+Braun, Jenkins, and Grigg have published two research reports utilizing NAEP and HLM that look at how public school students compare to private school students \citeyear{braun2006private} and charter schools students \citeyear{braun06hlm}. Note that the former study used the 2005 administering of NAEP whereas the latter used the 2003 administering of NAEP. A key advantage of using NAEP is that many student (see appendix C) and school level variables are available. Moreover, as of 2003 charter schools have been oversampled to ensure sufficient sample sizes for appropriate comparisons to be made. 
+
+\paragraph{Comparing Private and Public Schools}
+For the private school study \cite{braun2006private}, results found that students in private schools scored significantly higher than public school students in both mathematics and reading at grades 4 and 8. Differences ranged from 8 points for grade 4 mathematics to 18 points for grade 8 reading. Adjusting for student characteristics with HLM resulted in reductions in all four comparisons of approximately 11 to 14 points. After adjustment, private school students still scored significantly higher than public school students in grade 8 reading, but public schools scored significantly better in grade 4 mathematics. There was no significant difference for grade 4 reading and grade 8 mathematics.
+
+\paragraph{Comparing Charter and Private Schools}
+For the charter school study \cite{braun06hlm} analysis was conducted in three phases for both reading and mathematics. In phase one, all charter schools were compared to all public schools. Results found that, when student characteristics were adjusted for, charter schools performed on average 4.2 points lower than publics schools in reading (corresponding effect size is 0.11 standard deviations) and 4.7 points lower in mathematics (corresponding effect size is 0.17 standard deviations). 
+
+Phase two separated charter schools into two groups: charter schools that are associated with a public school district (PSD) and those that are not. Separate analysis were performed for each charter school type with public schools. For reading, there was no significant difference between charter schools affiliated with a PSD and public schools. However, for schools not affiliated with a PSD, charter school students scored significantly lower than public school students with an adjusted difference of 0.17 standard deviations. Similarly for mathematics, there was no difference between charter schools affiliated with a PSD and public schools but charter schools not affiliated with PSD scored significantly lower with an adjusted difference of 0.23 standard deviations.
+
+Lastly, phase three compared only charter and publics schools located in a central city and serving a high-minority population. For reading, there was no significant difference between charter and public schools for any model. For mathematics however, charter schools not affiliated with a PSD scored significantly lower than public school students with an adjusted difference of 0.17 standard differences. There was no difference for schools affiliated with a PSD.
+
+
+\subsubsection{The CREDO Study}
+The \citeA{credo} conducted a study of more than 1.7 million records from 2400 charter within 16 states. The methodology involves creating a Virtual Control Record (VCR) for each charter school student \cite<see also,>{abadie2007,nea} which is used to find matching student from an eligible traditional public school. Students within a traditional public school become available in a pool of potential matches when at least one student is identified as transferring to a charter school. Once the ``feeder schools" are identified, all students from feeder schools are pooled and serve as the source to select matches to the charter school students. Students are then matched on the following factors: grade-level, gender\footnote{Gender was not available in Florida}, race/ethnicity, free or reduced price lunch status, English language learner status, special education status, and prior test score on state achievement tests. This procedure, which is similar to propensity matching, resulted in 83.7\% and 84.4\% of charter school students being matched to a public school student for reading and math, respectively.
+
+Once matches were determined, ordinary least squares regression was utilized to analyze both math and reading scores, separately, across the charter school students and matched public school students. Moreover, controls for student characteristics used above, excluding gender, along with state indicators and scores affected by Hurricane Katrina, were added to the basic model. Overall results show that charter school students performed, on average, 0.01 and 0.03 standard deviations below public school students for reading and math, respectively. Both results are significant at \textit{p} $\leq$ 0.01.
+
+Though the magnitude of the overall effects may not necessarily suggest charter schools are performing substantially lower than their public school counterparts, further analysis by \citeA{credo} reveal more nuanced understanding of the differences. More specifically, the effectiveness of charter schools varied considerably by state. Five states (Arkansas, Colorado, Illinois, Louisiana, \& Missouri) were found to have higher learning gains for charter schools. Six states (Arizona, Florida, Minnesota, New Mexico, Ohio, \& Texas) were found to have lower learning gains for charter schools. The remaining four states (California, District of Columbia, Georgia, \& North Carolina) had either mixed results or no difference in academic gains. 
+
+Lastly, the \citeA{credo} found variation of charter school effectiveness across school characteristics. That is, schools that focused on elementary or middle grades separately, tended to perform as well or better than their public school counterparts. However, for charter schools that focused on high grades or multi-level grades performed anywhere from .02 to .08 standard deviations below public schools. Moreover, school level comparisons find that only 17\% of charter schools perform better than public schools while 46\% perform no differently and 37\% perform significantly worse.
+
+%\paragraph{Criticisms of the CREDO Study}
+
+
+
+
+%==================== CHAPTER 3 ====================================================================
+\cleardoublepage
+\section{Chapter 3: Method}
+This chapter will outline the methods that will be utilized to describe and analyze the data in order to address the research questions central to this study. Given the strong political interests in the question of charter school effectiveness and the implications for educational policy both at the state and national level, obtaining good empirical evidence, preferably with strong causal inferences, is most desirable. The \textit{gold standard} of inferential research is the randomized experiment. A research design that addresses the charter school question proposed here would require that students be randomly assigned, possibly with blocking on key covariates, to either a charter or public school. The theoretical justification for such a scheme is that any systematic differences between the two groups would be balanced through the randomization processes. However, in practice, especially in education, such randomization is neither feasible nor ethical. The result of the lack of randomization is a phenomenon called selection bias. That is, any comparisons of the two groups will be biased given the fact that the units of study, students in this study, self-selected to be in their respected group. Propensity score analysis \cite{rosenbaum83} is a statistical approach whereby the differences between the two groups are balanced by the careful analysis of covariate information. This procedure lends itself well to secondary analysis of observational data.
+
+\subsection{Overview of NAEP}
+The source of the data that will be utilized in this study is provided by the National Center for Educational Statistics (NCES) which is within the U.S. Department of Education's Institute of Education Sciences (IES). The National Assessment of Educational Progress (NAEP) was started in 1971 and has provided national measures of student achievement in many subjects including mathematics, reading, science, writing, history, civics, and the arts. In 2003 NAEP began assessing charter schools as well as private and public schools. This study will utilize the 2007 administering of the NAEP assessments in mathematics and reading within grades four and eight. The 2007 assessment included over 6,000 public schools and over 200 charter schools comprising of over 145,000 and 3,000 students, respectively. Given this relatively large, nationally representative sample, analysis of NAEP assessments utilizing propensity score analysis may prove to provide valuable insights into the academic differences between charter and public schools.
+
+More than simply providing large samples, another key advantage of NAEP is the fact that it is not designed to assess individual students or schools, but instead is designed to inform subject-matter achievement, instructional experiences, and school environments (Braun, Jenkins, \& Grigg, 2006). To achieve this goal, NAEP utilizes a complex item-sampling design such that individual students are presented a subset of the total items, thereby reducing the burden on participants. Though not appropriate for assessing individual student achievement, in aggregate the NAEP measures provide a robust and accurate estimate of student achievement.
+
+In addition to subject area measures, NAEP includes student, teacher, and school questionnaires that provide contextual information about the students' environment. Given that PSA relies on adjusting for selection bias by adjusting for known covariates, it are the answers to these questionnaires that will serve as the basis for determining a students propensity score, or likelihood of being in the treatment (i.e. charter school in the context of this study). In addition to typical demographic items such as gender and race, students are asked about computers, books, magazines, and encyclopedias in the home; parents education level; and the level of interaction with academics within the home (see appendix C for complete list of items).
+
+The responsibility for developing the assessment objectives and test specifications lies with the National Assessment Governing Board which was created by Congress in 1988. Traditionally they are the states that have provided the legal guidance for school governance including accountability measures. Given the varied standards across states, it is this governing board that is to determine nationally what are appropriate achievement goals for each age and grade. The following two sections will provide the framework for mathematics and reading assessments.
+
+\subsubsection{Mathematics}
+Since 1990, the Council of Chief State School Officers (CCSSO) has been contracted to design a framework for the mathematics assessment \cite{naepmath}. The framework was most recently updated in 2000 to take into account state standards, the National Council of Teachers of Mathematics (NCTM) standards, the Trends International Mathematics and Science Study (TIMSS), the Achieve Project, and a 2001 report issued by the National research Council of the National Academy of Sciences. The result of their work was six recommendations for the mathematics assessment regarding content areas, mathematical complexity of items, distribution of items, item formats, manipulatives, and calculators. For the purposes of the study proposed, a composite score will be utilized that is comprised of five content areas, number properties and operations; measurement; geometry; data analysis and probability; and algebra. Table \ref{naepMathContent} provides details regarding the distribution of items comprising the composite score for the grade four and eight assessments.
+
+\input{../Tables/Chapter3.table.DistributionOfMathItems.tex}
+
+\subsubsection{Reading}
+The NAEP Reading Framework (2006) provides guidelines and a theoretical basis for reading assessment. This framework is designed with the input of individuals and organizations involved in reading education including researchers, policymakers, teachers, and business representatives. However, a particular emphasis is placed on the work of the National Institute for Child Health and Human Development (NICHID). More specifically, the NICHID summarizes how the research describes a reader as:
+
+\begin{quote}
+In the cognitive research, reading is purposeful and active. According to this view, a reader reads a text to understand what is read, to construct memory representations of what is understood, and to put this understanding to use. \cite<p. 4, NICHD, 2000, as cited in>{naepreading}
+\end{quote}
+
+\noindent Moreover, reading is considered to be a complex process rather than a simple set of skills. As such, the NAEP reading assessment is designed such that comprehension is defined as:
+
+\begin{quote}
+``[I]ntentional thinking during which meaning is constructed through interactions between text and reader" (Harris \& Hodges, 1995). Thus, readers derive meaning from text when they engage in intentional, problem solving thinking processes. \cite<p. 14, NICHD, 2000, as cited in>{naepreading}
+\end{quote}
+
+\noindent Given this framework, NAEP provides an excellent tool for evaluating overall reading achievement, but not to diagnosis specific individuals.
+
+The NAEP reading assessment is designed to account for three reading contexts: reading for literacy experience, reading for information, and reading to perform a task. Within these contexts, four aspects of reading are considered: forming a general understanding, developing interpretation, making reader/text connections, and examining content and structure. The reading assessment is administered by supplying students with booklets that contain reading materials and comprehension questions. The questions consist of both multiple-choice and constructed-response question formats with at least half of the questions being of the constructed-response type. 
+
+
+\subsection{Analysis}
+
+
+
+\subsubsection{Phase I}
+Propensity score analysis \cite<PSA;>{rosenbaum83} is a statistical method or approach that attempts to adjust for selection bias in observational studies. Most of the studies conducted using PSA involve analysis in two phases where phase one involves the the calculation of propensity scores or matching for both treatment and control units of analysis; and phase two involves the comparison of those two groups. However, in situations where data is multilevel, or clustered, special consideration is necessary both at phase I and II. For the NAEP data, the state variable will be used as the level 2 identifier. The algorithm in the \texttt{multilevelPSA} package \citeA{Bryer2011} will facilitate the multilevel PSA analysis. Specifically, for phase I, three approaches will be used for stratifying students for comparison, namely conditional inference trees \citeA{HorthornHornikZeileis2010}, logistic regression, and matching. For each approach, the stratification procedure will be performed separately for each state so that direct comparisons between students in phase II do not occur between states. That is, students within a stratification or two students being matched must reside in the same state.
+
+\subsubsection{Phase II}
+The second phase of the propensity score analysis involves comparing dependent variables of students with similar propensity scores using standard \textit{t}-tests and reporting corresponding confidence intervals and effect sizes. However, for multilevel data analysis occurs in two states. First, comparisons are made for each state. The results from each state can then be aggregated to provide an overall difference and effect size. 
+
+\subsubsection{Graphical Representation}
+Given the large amount of data that needs to be summarized, the use of graphics will be emphasized. The \texttt{multilevelPSA} package provides a number of graphing functions that extend the framework introduced by Helmreich and Pruzek for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot. In this graphic, the x-axis corresponds public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle is a state with its size corresponding the number of students within each state. The distribution of differences between charter and public schools across states are represented as tick marks along the diagonal line in the bottom left of the graphic. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 281 and the overall adjusted mean for public school student is 278. The dashed blue line parallel to the unit line corresponds to the overall adjusted mean difference and likewise, the dashed green lines correspond to the confidence interval.
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8mathlrcircplot.pdf}
+\caption{Multilevel PSA Assessment Plot: Grade 8 Math}
+\label{fig:g8math:circ}
+\end{center}
+\end{figure}
+
+
+Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the differences both between and across states. Similar to the mutlielvel PSA assessment plot, each blue dot corresponds to a state and is sized relative to the number of students within each state. The light gray dots correspond to each of the strata within each state. The graphic also provides confidence intervals for each state as well as the overall adjusted mean difference and confidence interval.
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrdiffplot.pdf}
+\caption{Multilevel PSA Difference Plot: Grade 8 Math}
+\label{fig:g8math:diff}
+\end{center}
+\end{figure}
+
+
+%==================== CHAPTER 4 ====================================================================
+\cleardoublepage
+\section{Chapter 4: Results}
+
+This chapter summarizes the results of the multilevel propensity score analysis. 
+
+\subsection{Missing Data Imputation}
+Stratification by logistic regression (using two approaches to covariate selection) and matching require a complete dataset to estimate the models. As such, missing data was imputed using multivariate imputation by chained equations \citeA{vanbuuren} vis-\`a-vis the MICE package \citeA{mice} in R.
+
+
+\input{../Tables/descriptives.tex}
+
+\subsection{Propensity Score Analysis with Stratification}
+
+\subsubsection{Phase I}
+
+\subsubsection{Phase II}
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4mathloess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 4 Math}
+\label{fig:g4math:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4readingloess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 4 Reading}
+\label{fig:g4reading:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8mathloess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 8 Math}
+\label{fig:g8math:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[tp]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8readingloess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 8 Reading}
+\label{fig:g8reading:loess}
+\end{center}
+\end{figure}
+
+\input{../Tables/overall.results.tex}
+
+
+\clearpage
+\subsection{Propensity Score Matching}
+
+\subsubsection{Phase I}
+
+\subsubsection{Phase II}
+
+\input{../Tables/overall.matching.results.tex}
+
+
+\clearpage
+\subsection{Multilevel Propensity Score Analysis}
+
+\subsubsection{Phase I}
+
+\subsubsection{Phase II}
+
+\input{../Tables/overall.multilevel.results.tex}
+
+\subsubsection{Graphical Representations of Multilevel PSA}
+
+
+%==================== CHAPTER 5 ====================================================================
+\cleardoublepage
+\section{Chapter 5: Discussion}
+
+
+Given the significant difference in sample \textit{n}'s for charter and public schools (i.e. there are as much as three to four orders of magnitude more public schools students available in the NAEP data sets), it is expected that there would be public school students who would not have a counterpart from the charter school group. However, the relatively high percentage of public schools students who do not have a charter school counterpart (as much as 35\%) suggest that there may be imbalance between the two groups as a whole. That is, although reasonable balance was achieved with regard to the individual strata where comparisons are made, the overall sample imbalance, as evidenced by the unmatched public school students, suggests that public schools serve a more heterogeneous population.
+
+
+%==================== REFERENCES ====================================================================
+\cleardoublepage
+\bibliographystyle{apacite}
+\bibliography{Bibliography}
+
+\newpage
+
+%==================== Appendices ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{section}{Appendices}
+\appendix
+
+%==================== Appendix A ====================================================================
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}% Change the footnote style to lowercase letters
+\addcontentsline{toc}{subsection}{Appendix A: Charter School \& Student Enrollment by State}
+\subsection*{Appendix A\\Charter Schools \& Student Enrollment by State}
+\label{appendixCharterStats}
+\begin{center} \begin{singlespace}
+\begin{longtable}{lrrrrrrr}
+\caption[Charter Schools \& Student Enrollment by State]{Charter Schools \& Student Enrollment by State} \\
+\thickline
+      & Law     & \multicolumn{3}{c}{Totals for Charter Schools\tabfnm{b}}              & & \multicolumn{2}{c}{NAEP Students}\\
+\cline{3-5} \cline{7-8}
+State & Enacted & Operating & Closed & Students & & Charters & Publics\\
+\hline
+\endfirsthead
+\multicolumn{8}{l}{Charter Schools \& Student Enrollment by State (cont.)}\\
+\hline
+      & Law     & \multicolumn{3}{c}{Totals for Charter Schools\tabfnm{b}}              & & \multicolumn{2}{c}{NAEP Students}\\
+\cline{3-5} \cline{7-8}
+State & Enacted & Operating & Closed & Students & & Charters & Publics\\
+\hline
+\endhead
+\hline 
+\endfoot
+\thickline
+\endlastfoot
+Alabama\tabfnm{a}       &      & 0   & 0   & 0       & &   0 & 2759\\
+Alaska                  & 1995 & 26  & 5   & 5,198   & &  69 & 2517\\
+Arizona                 & 1994 & 510 & 96  & 119,903 & &  99 & 2674\\
+Arkansas                & 1995 & 25  & 6   & 6,750   & &  30 & 2407\\
+California              & 1992 & 802 & 103 & 316,468 & & 417 & 7803\\
+Colorado                & 1993 & 151 & 10  & 54,497  & & 108 & 2598\\
+Connecticut             & 1996 & 21  & 5   & 3,932   & &   0 & 2531\\
+Delaware                & 1995 & 21  & 2   & 8,740   & & 180 & 2641\\
+Washington DC           & 1996 & 93  & 16  & 25,385  & & 652 & 1336\\
+Florida                 & 1996 & 382 & 82  & 108,382 & & 175 & 3876\\
+Georgia                 & 1993 & 83  & 5   & 40,807  & &  64 & 3465\\
+Hawaii                  & 1994 & 32  & 0   & 7,317   & & 132 & 2605\\
+Idaho                   & 1998 & 32  & 1   & 10,492  & &  59 & 2784\\
+Illinois                & 1996 & 74  & 8   & 27,683  & &  33 & 4015\\
+Indiana                 & 2001 & 50  & 2   & 12,631  & &  11 & 2720\\
+Iowa                    & 2002 & 10  & 0   & 1,462   & &   0 & 2839\\
+Kansas                  & 1994 & 40  & 10  & 3,361   & &  17 & 2726\\
+Kentucky\tabfnm{a}      &      & 0   & 0   & 0       & &   0 & 2696\\
+Louisiana               & 1995 & 66  & 10  & 23,634  & &  97 & 2264\\
+Maine\tabfnm{a}         &      & 0   & 0   & 0       & &   0 & 2658\\
+Maryland                & 2003 & 34  & 2   & 7,301   & &   6 & 2825\\
+Massachusetts           & 1993 & 64  & 6   & 23,905  & &  56 & 3667\\
+Michigan                & 1993 & 250 & 27  & 94,092  & & 134 & 2480\\
+Minnesota               & 1991 & 159 & 29  & 28,371  & &  16 & 2875\\
+Mississippi             & 1997 & 1   & 0   & 367     & &   0 & 2613\\
+Missouri                & 1998 & 39  & 5   & 13,125  & &  38 & 2771\\
+Montana\tabfnm{a}       &      & 0   & 0   & 0       & &   0 & 2581\\
+Nebraska\tabfnm{a}      &      & 0   & 0   & 0       & &   0 & 2688\\
+Nevada                  & 1997 & 26  & 7   & 7,295   & &   0 & 2662\\
+New Hampshire           & 1995 & 11  & 2   & 1,212   & &   0 & 2803\\
+New Jersey              & 1996 & 64  & 19  & 17,986  & &   0 & 2813\\
+New Mexico              & 1993 & 70  & 3   & 11,426  & &  54 & 2722\\
+New York                & 1998 & 118 & 10  & 32,602  & &  16 & 3745\\
+North Carolina          & 1996 & 103 & 32  & 30,445  & &  72 & 4090\\
+North Dakota\tabfnm{a}  &      & 0   & 0   & 0       & &   0 & 2307\\
+Ohio                    & 1997 & 293 & 48  & 94,171  & &  45 & 3746\\
+Oklahoma                & 1999 & 14  & 1   & 4,770   & &   0 & 2612\\
+Oregon                  & 1999 & 93  & 8   & 13,612  & &  41 & 2626\\
+Pennsylvania            & 1997 & 133 & 12  & 61,823  & &  64 & 2709\\
+Rhode Island            & 1995 & 11  & 0   & 2,894   & &  30 & 2621\\
+South Carolina          & 1996 & 36  & 10  & 8,705   & &  16 & 2697\\
+South Dakota\tabfnm{a}  &      & 0   & 0   & 0       & &   0 & 2889\\
+Tennessee               & 2002 & 14  & 1   & 2,585   & &  54 & 2815\\
+Texas                   & 1995 & 331 & 33  & 108,541 & & 199 & 7070\\
+Utah                    & 1998 & 68  & 1   & 23,233  & &  38 & 2722\\
+Vermont\tabfnm{a}       &      & 0   & 0   & 0       & &   0 & 2003\\
+Virginia                & 1998 & 4   & 3   & 275     & &   0 & 2848\\
+Washington\tabfnm{a}    &      & 0   & 0   & 0       & &   0 & 2968\\
+West Virginia\tabfnm{a} &      & 0   & 0   & 0       & &   0 & 2831\\
+Wisconsin               & 1993 & 221 & 37  & 41,799  & & 114 & 2592\\
+Wyoming                 & 1995 & 3   & 0   & 244     & &   0 & 1897\\
+\hline
+Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
+\end{longtable}
+\tabfnt{a}{State currently does not have a charter school law.}
+\tabfnt{b}{Source: \citeA{cernumbers}}
+\end{singlespace} \end{center}
+\renewcommand{\thefootnote}{\arabic{footnote}}% Reset the footnotes back to numbers
+
+
+%==================== Appendix B ====================================================================
+\newpage
+\addcontentsline{toc}{subsection}{Appendix B: Thematic Map of Number of Charter Schools in the United States}
+\subsection*{Appendix B\\Thematic Map of Number of Charter Schools by State in 2008}
+\label{appendixMap}
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{../Figures/CharterMap.pdf}
+\caption{Thematic Map of Number of Charter Schools by State in 2008}
+\label{fig:charterMap}
+\end{figure}
+
+%==================== Appendix C ====================================================================
+\newpage
+\addcontentsline{toc}{subsection}{Appendix C: Student Background Questionnaire}
+\subsection*{Appendix C\\NAEP Student Background Questionnaire}
+\label{appendixDemographics}
+\begin{singlespace}
+\subsubsection{Core Questions}
+\begin{itemize}
+	\item Are you Hispanic or Latino? [No, I am not Hispanic or Latino; Yes, I am Mexican, Mexican American, or Chicano; Yes, I am Puerto Rican or Puerto Rican American; Yes, I am Cuban or Cuban American; Yes, I am from some other Hispanic or Latino background]
+	\item Which of the following best describes you? [White; Black or African American; Asian; American Indian or Alaska Native; Native Hawaiian or other Pacific Islander]
+	\item Does your family get a newspaper at least four times a week?
+	\item Does your family get any magazines regularly?
+	\item About how many books are there in your home?
+	\item Is there a computer at home that you use?
+	\item Is there an encyclopedia in your home? It could be a set of books, or it could be on the computer.
+	\item About how many pages a day do you have to read in school and for homework?
+	\item How often do you talk about thinks you have studied in school with someone in your family?
+	\item How many days were you absent from school in the last month?
+	\item How far in school did your mother go? [Grade 8 Only]
+	\item How far in school did your father go? [Grade 8 Only]
+	\item How often do people in your home talk to each other in language other than English?
+\end{itemize}
+
+\subsubsection{Grade 4 Math Related Questions}
+\begin{itemize}
+	\item Use computer at school for math
+	\item Use computer to practice or drill on math
+	\item Use computer to play math games
+	\item Kind of calculator you normally use
+	\item Use calculator for math tests-student
+	\item Difficulty of this math test
+	\item Effort on this math test
+	\item Importance of success on this math test
+	\item The math work is too hard
+	\item I have done a good job on my homework
+	\item I have done a good job in class
+	\item The math work is too easy
+	\item I like what we do in math class
+\end{itemize}
+
+\subsubsection{Grade 4 Reading Related Questions}
+\begin{itemize}
+	\item Learn a lot when reading books
+	\item Reading is a favorite activity
+	\item Writing stories or letters is a favorite activity
+	\item Writing helps share ideas
+	\item Read for fun on own
+	\item Talk with friends about what you read
+	\item Write e-mails to friends or family
+	\item Read stories or poems for fun
+	\item Read to learn about real things
+	\item Read stories on Internet for fun
+	\item Class discussion about something class has read
+	\item Work in groups to talk about something read
+	\item Write in journal about something read
+	\item Write a book report
+	\item Make presentation to class about something read
+	\item Do school project about something read
+	\item Read books or magazines for reading
+	\item Read books or magazines for science
+	\item Read books or magazines for social studies/history
+	\item Read books or magazines for math
+	\item Write long answers on reading tests
+	\item Read own books for reading assignment
+	\item Difficulty of this reading test
+	\item Effort on this reading test
+	\item Importance of success on this reading test
+\end{itemize}
+
+\subsubsection{Grade 8 Math Related Questions}
+\begin{itemize}
+	\item Use computer at school for math
+	\item Use computer to practice or drill on math
+	\item Use computer to play math games
+	\item Kind of calculator you normally use
+	\item Use calculator for math tests-student
+	\item Difficulty of this math test
+	\item Effort on this math test
+	\item Importance of success on this math test
+	\item Time per day on computer for math work
+	\item Use spreadsheet program for math assignments
+	\item Use program to drill on math facts
+	\item Use program for new lessons on problem-solving
+	\item Use Internet to learn things for math class
+	\item Use calculator program for math class
+	\item Using graphing program for charts for math class
+	\item Use statistical program for math class
+	\item Use word processing program for math class
+	\item Use drawing program for math class
+	\item Use basic four-function calculator in math class
+	\item Use scientific calculator in math class
+	\item Use graphing calculator in math class
+	\item Have clear understanding what teacher asking to do
+	\item The math work is too easy
+	\item The math work is boring
+	\item I have done a good job on my homework
+	\item I have done a good job on my classwork
+	\item The math work is challenging
+	\item The math work is engaging and interesting
+	\item I am learning
+\end{itemize}
+
+\subsubsection{Grade 8 Reading Related Questions}
+\begin{itemize}
+	\item Write long answers on reading tests
+	\item Learn a lot when reading books
+	\item Reading is a favorite activity
+	\item Writing stories or letters is a favorite activity
+	\item Writing helps share ideas
+	\item Read for fun on own
+	\item Talk with friends about what you read
+	\item Write e-mails to friends or family
+	\item Read comic books or joke books outside school
+	\item Read fiction books or stories outside school
+	\item Read plays outside school
+	\item Read poems outside school
+	\item Read biographies/autobiographies outside school
+	\item Read books on science outside school
+	\item Read books on technology outside school
+	\item Read books on other countries outside school
+	\item Read books on history outside school
+	\item Read other non-fiction books outside school
+	\item Read newspaper articles or stories outside school
+	\item Read magazine articles or stories outside school
+	\item Read Internet articles or stories outside school
+	\item Class discussion about something class has read
+	\item Work in groups to talk about something read
+	\item Write in journal about something read
+	\item Write report or paper about something read
+	\item Make presentation to class about something read
+	\item Done project about something read
+	\item Read other than textbook for English class
+	\item Read other than textbook for science class
+	\item Read other than textbook for social studies class
+	\item Read other than textbook for math class
+	\item Explain understanding of what you read
+	\item Discuss interpretation of what you read
+	\item Difficulty of this reading test
+	\item Effort on this reading test
+	\item Importance of success on this reading test
+\end{itemize}
+
+\end{singlespace}
+
+
+%==================== Appendix D ====================================================================
+\newpage
+\addcontentsline{toc}{subsection}{Appendix D: Descriptive Statistics}
+\subsection*{Appendix D\\Descriptive Statistics}
+\label{appendixDescriptives}
+
+\begin{singlespace}
+
+\input{../Tables/g4math.descriptives.tex} \clearpage
+\input{../Tables/g4math.unadjusted.tex} \clearpage
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathDensityByState.pdf}
+\caption{Density Distribution of Grade 4 Math Scores by State}
+\label{fig:g4math:density}
+\end{center}
+\end{figure}
+\clearpage
+
+\input{../Tables/g4reading.descriptives.tex} \clearpage
+\input{../Tables/g4reading.unadjusted.tex} \clearpage
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g4readingDensityByState.pdf}
+\caption{Density Distribution of Grade 4 Reading Scores by State}
+\label{fig:g4reading:density}
+\end{center}
+\end{figure}
+\clearpage
+
+%\input{../Tables/g8math.school.descriptives.tex} \clearpage
+\input{../Tables/g8math.descriptives.tex} \clearpage
+\input{../Tables/g8math.unadjusted.tex} \clearpage
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathDensityByState.pdf}
+\caption{Density Distribution of Grade 8 Math Scores by State}
+\label{fig:g8math:density}
+\end{center}
+\end{figure}
+\clearpage
+
+%\input{../Tables/g8reading.school.descriptives.tex} \clearpage
+\input{../Tables/g8reading.descriptives.tex} \clearpage
+\input{../Tables/g8reading.unadjusted.tex} \clearpage
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g8readingDensityByState.pdf}
+\caption{Density Distribution of Grade 8 Reading Scores by State}
+\label{fig:g8reading:density}
+\end{center}
+\end{figure}
+\clearpage
+
+\end{singlespace}
+
+%==================== Appendix E ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix E: Covariate Missingness}
+\subsection*{Appendix E\\Covariate Missingness}
+\label{appendixmissing}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4mathmissing.pdf}
+\caption{Covariate Missingness for Grade 4 Math}
+\label{fig:g4math:missing}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4readingmissing.pdf}
+\caption{Covariate Missingness for Grade 4 Reading}
+\label{fig:g4reading:missing}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8mathmissing.pdf}
+\caption{Covariate Missingness for Grade 8 Math}
+\label{fig:g8math:missing}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8readingmissing.pdf}
+\caption{Covariate Missingness for Grade 8 Reading}
+\label{fig:g8reading:missing}
+\end{center}
+\end{figure}
+
+
+%==================== Appendix F ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix F: Logistic Regression Full Model Results}
+\subsection*{Appendix F\\Logistic Regression Full Model}
+\label{appendixlogistic}
+\begin{singlespace}
+\input{../Tables/g4math.lr.level1.tex} \clearpage
+\input{../Tables/g4math.lr.level2.tex} \clearpage
+\input{../Tables/g4reading.lr.level1.tex} \clearpage
+\input{../Tables/g4reading.lr.level2.tex} \clearpage
+\input{../Tables/g8math.lr.level1.tex} \clearpage
+\input{../Tables/g8math.lr.level2.tex} \clearpage
+\input{../Tables/g8reading.lr.level1.tex} \clearpage
+\input{../Tables/g8reading.lr.level2.tex} \clearpage
+\end{singlespace}
+
+%==================== Appendix G ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix G: Logistic Regression Step AIC Model Results}
+\subsection*{Appendix G\\Logistic Regression Step AIC Model}
+\label{appendixlogisticaic}
+\begin{singlespace}
+\input{../Tables/g4math.lraic.level1.tex} \clearpage
+\input{../Tables/g4math.lraic.level2.tex} \clearpage
+\input{../Tables/g4reading.lraic.level1.tex} \clearpage
+\input{../Tables/g4reading.lraic.level2.tex} \clearpage
+\input{../Tables/g8math.lraic.level1.tex} \clearpage
+\input{../Tables/g8math.lraic.level2.tex} \clearpage
+\input{../Tables/g8reading.lraic.level1.tex} \clearpage
+\input{../Tables/g8reading.lraic.level2.tex} \clearpage
+\end{singlespace}
+
+%==================== Appendix H ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix H: Conditional Inference Trees Results}
+\subsection*{Appendix H\\Conditional Inference Trees}
+\label{appendixtree}
+\begin{singlespace}
+\input{../Tables/g4math.tree.level1.tex} \clearpage
+\input{../Tables/g4math.tree.level2.tex} \clearpage
+\input{../Tables/g4reading.tree.level1.tex} \clearpage
+\input{../Tables/g4reading.tree.level2.tex} \clearpage
+\input{../Tables/g8math.tree.level1.tex} \clearpage
+\input{../Tables/g8math.tree.level2.tex} \clearpage
+\input{../Tables/g8reading.tree.level1.tex} \clearpage
+\input{../Tables/g8reading.tree.level2.tex} \clearpage
+\end{singlespace}
+
+
+%==================== Appendix I ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix I: Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
+\subsection*{Appendix I\\Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
+\label{appendixtree}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4mathtreeHeat.pdf}
+\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Math}
+\label{fig:g4math:treeheat}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g4readingtreeHeat.pdf}
+\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Reading}
+\label{fig:g4reading:treeheat}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8mathtreeHeat.pdf}
+\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Math}
+\label{fig:g8math:treeheat}
+\end{center}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/g8readingtreeHeat.pdf}
+\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Reading}
+\label{fig:g8reading:treeheat}
+\end{center}
+\end{figure}
+
+
+%==================== Appendix J ====================================================================
+\cleardoublepage
+\addcontentsline{toc}{subsection}{Appendix J: Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
+\subsection*{Appendix J\\Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
+\label{appendixPublicDensity}
+
+The figures in this appendix represent the distributions of matched and unmatched public school students as identified by the full logistic regression model. These models were chosen since they resulted in the largest number of unmatched public school students vis-\`a-vis stratification. It should be noted that for some states there may be only one density line. This indicates that all public school students within that state were either all matched or all not matched.
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathlrPublicDensity.pdf}
+\caption{Density Distribution of Grade 4 Math: Matched vs. Unmatched Public School Students}
+\label{fig:g4reading:publicdensity}
+\end{center}
+\end{figure}
+\clearpage
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g4readinglrPublicDensity.pdf}
+\caption{Density Distribution of Grade 4 Reading: Matched vs. Unmatched Public School Students}
+\label{fig:g4reading:publicdensity}
+\end{center}
+\end{figure}
+\clearpage
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrPublicDensity.pdf}
+\caption{Density Distribution of Grade 8 Math: Matched vs. Unmatched Public School Students}
+\label{fig:g8reading:publicdensity}
+\end{center}
+\end{figure}
+\clearpage
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[height=\textwidth,angle=90]{../Figures/g8readinglrPublicDensity.pdf}
+\caption{Density Distribution of Grade 8 Reading: Matched vs. Unmatched Public School Students}
+\label{fig:g8reading:publicdensity}
+\end{center}
+\end{figure}
+\clearpage
+
+\end{document}
