@@ -124,6 +124,7 @@ g8math.orig$state = factor(g8math.orig$state, levels=c(1:2,4:42,44:56,60,72,97),
 
 g8math.school.orig = g8.math.school.complete[,c(
 	'SSCHID', 
+	'SNCESSC', #NCES School id
 	'SNAEPRS', # NAEP Region (1=Northeast; 2=Southeast; 3=Central; 4=West; 9=DoDDS)
 	'SFIPS',   # State
 	'SMLOCAL', # Metro-centric type of locale (1=Large city; 8=Rural; 9=DoD Intl)
@@ -142,7 +143,7 @@ g8math.school.orig = g8.math.school.complete[,c(
 	'CS01101'  #Number of years since charter was granted (1 to 12; 88=omitted)
 	
 )]
-names(g8math.school.orig) = c('school', 'region', 'state', 'urbanicity', 'asian', 'black', 'hispanic', 'enrollment', 'absent', 'hoursinst', 'teacherabsent', 'stillenroll', 'lunch', 'esl', 'specialed', 'charter', 'chartergranted')
+names(g8math.school.orig) = c('school', 'ncesschoolid','region', 'state', 'urbanicity', 'asian', 'black', 'hispanic', 'enrollment', 'absent', 'hoursinst', 'teacherabsent', 'stillenroll', 'lunch', 'esl', 'specialed', 'charter', 'chartergranted')
 
 
 #Recode charter school so that 0=public school and 1=charter school
