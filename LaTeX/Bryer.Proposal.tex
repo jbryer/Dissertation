@@ -74,8 +74,11 @@ Division of Educational Psychology \& Methodology\\
 \section{Abstract}
 The concept of school choice within the United States is not new. Private schools have been educating students since the founding of the United States. However, in 1988, Ray Budde proposed an alternative approach to school choice that has come to be known as charter schools \cite{Kolderie2005}. Unlike their private school counterparts, charter schools receive public funding, but they are relieved of many of the bureaucratic and regulatory constraints public schools adhere to, but are still held accountable for student performance. Despite claims by charter school advocates that charter schools are performing as well if not better than the public school counterparts \cite<see e.g.>{AllenConsolettieKerwin2009}, studies provide mixed results with regard to charter school performance \cite<see e.g.>{BraunJenkinsGrigg2006, credo, HubbardKulkarni2009}. Ultimately, there is agreement that more research is necessary to address the question of whether charter schools provide substantially better academic experiences for students. 
 
-This study uses new methods designed for observational data analysis to investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics. The new methods aim to reduce if not eliminate selection bias. Charter schools are, by definition, schools of choice, and this means that observational data methods are preferred for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, given well designed observational studies, and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The end result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. This is done utilizing a class of statistical procedures introduced by \citeA{RosenbaumRubin1983} called propensity score analysis. Propensity score analysis has seen considerable increased use in the social sciences within the last few years \cite{ArpinoMealli2008}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \cite{ThoemmesKim2011}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analyses will be conducted using the newly developed \texttt{multilevelPSA} package \cite{multilevelPSA} in R \cite{rdevelopment}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be done within states. Effects will then aggregated to provide state and national effect estimates.
-As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \cite<see e.g.>{Stuart2010}. Doing so can help to provide confidence that results reflect what the data have to say, and is not merely an artifact of model specification or method choice. This study will utilize three overall approaches to propensity score analysis, namely stratification, matching, and multilevel stratification. Lastly, the use of graphics will be employed to evaluate balance and outcome differences using methods (functions) found in \citeA{HelmreichPruzek2009}.
+This study uses new methods designed for observational data analysis to investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics. The new methods aim to reduce if not eliminate selection bias. Charter schools are, by definition, schools of choice, and this means that observational data methods are preferred for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, given well designed observational studies, and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The end result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. 
+
+This is done utilizing a class of statistical procedures introduced by \citeA{RosenbaumRubin1983} called propensity score analysis. Propensity score analysis has seen considerable increased use in the social sciences within the last few years \cite{ArpinoMealli2008}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \cite{ThoemmesKim2011}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analyses will be conducted using the newly developed \texttt{multilevelPSA} package \cite{multilevelPSA} in R \cite{rdevelopment}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be done within states. Effects will then aggregated to provide state and national effect estimates.
+
+As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \cite<see e.g.>{Stuart2010}. Doing so can help to provide confidence that results reflect what the data have to say, and is not merely an artifact of model specification or method choice. This study will utilize three overall approaches to propensity score analysis, namely stratification, matching, and multilevel stratification. Lastly, the use of graphics will be employed to evaluate balance and outcome differences using methods (functions) found in \citeA{HelmreichPruzek2009}.
 
 \newpage 
 
@@ -127,16 +130,16 @@ Lastly, the roles of environmental, social, community, and cultural factors that
 
 Although educators acknowledge that schools, in their various forms, are only part of what contributes to student academic achievement, they are nevertheless important parts and it behooves educators to evaluate school effects quite generally. The particular approach used there is to compare school effects using a class of statistical methods that should make it possible to make clearer, less qualified conclusions, than is usually has been possible. 
 
-\subsection{Guiding Research Questions} 
+\subsection{Research Questions \& Objectives} 
 Given that charter schools are regularly being offered as solutions for needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter and traditional public schools using the National Assessment of Educational Progress (NAEP) using multiple propensity score methods. More specifically, this study proposes to address the questions:
 
 \begin{enumerate} 
-	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and public schools with regard to math and reading scores at grades 4 and 8?
+	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and traditional public schools with regard to math and reading scores at grades 4 and 8?
 	\item If so, what is the nature and magnitude of this difference for the two outcomes reading and mathematics (for two grade levels)? 
 	\item And finally, do identified differences differ between states with differing charter school laws? 
 \end{enumerate}
 
-In addition to the important policy questions indicated above, this dissertation will emphasize the development of the \texttt{multilevelPSA} package for R. This package implements new methods for the estimation of propensity score models with multilevel, or clustered, data and will be presented within the context of traditional, non-clustered, propensity score analysis. Moreover, graphics will be emphasized for the analysis and interpretation of results. 
+In addition to the educational policy implications this study addresses, it will also make important methodological contributions. Research questions two and three above can not be adequately addressed if not for the methods and graphics developed and described in this study. That is, the development of the \texttt{multilevelPSA} package for R provides a reproducible means of estimating and visualizing propensity score analyses with clustered data (these procedures are discussed more fully below; see also Figure \ref{fig:g8math:circ}). Moreover, the use of pre-existing visualization procedures such as Loess regression plots, density plots, as well as the PSA balance and assessment plots introduced by \citeA{HelmreichPruzek2009} provide critical insight into the analysis and eventual interpretation of results. Or more succinctly, the presentation of graphics in this study are not merely provided for diagnostic or descriptive purposes, but are a critical component of presenting, analyzing, and interpreting results. For instance, related to research questions two and three above, the differences, if any, will not be revealed through numerical analysis (though numerical analyses are provided), but through visual displays.
 
 \section{Method}
 In this section I outline methods that will be utilized to describe and analyze the data in order to address the research questions central to this study. Given the strong political interests in the question of charter school effectiveness and the implications for educational policy both at the state and national level, obtaining sound and interpretable empirical evidence, preferably with support for causal inferences, is most desirable. 
@@ -345,8 +348,8 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \addcontentsline{toc}{subsection}{Appendix C: Student Background Questionnaire}
 \subsection*{Appendix C\\NAEP Student Background Questionnaire}
 \label{appendixQuestionnaire}
-\begin{singlespace}
 \subsubsection{Core Questions}
+\begin{singlespace}
 \begin{itemize}
 	\item Are you Hispanic or Latino? [No, I am not Hispanic or Latino; Yes, I am Mexican, Mexican American, or Chicano; Yes, I am Puerto Rican or Puerto Rican American; Yes, I am Cuban or Cuban American; Yes, I am from some other Hispanic or Latino background]
 	\item Which of the following best describes you? [White; Black or African American; Asian; American Indian or Alaska Native; Native Hawaiian or other Pacific Islander]
@@ -362,8 +365,10 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 	\item How far in school did your father go? [Grade 8 Only]
 	\item How often do people in your home talk to each other in language other than English?
 \end{itemize}
+\end{singlespace}
 
 \subsubsection{Grade 4 Math Related Questions}
+\begin{singlespace}
 \begin{itemize}
 	\item Use computer at school for math
 	\item Use computer to practice or drill on math
@@ -379,8 +384,10 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 	\item The math work is too easy
 	\item I like what we do in math class
 \end{itemize}
+\end{singlespace}
 
 \subsubsection{Grade 4 Reading Related Questions}
+\begin{singlespace}
 \begin{itemize}
 	\item Learn a lot when reading books
 	\item Reading is a favorite activity
@@ -408,8 +415,10 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 	\item Effort on this reading test
 	\item Importance of success on this reading test
 \end{itemize}
+\end{singlespace}
 
 \subsubsection{Grade 8 Math Related Questions}
+\begin{singlespace}
 \begin{itemize}
 	\item Use computer at school for math
 	\item Use computer to practice or drill on math
@@ -441,8 +450,10 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 	\item The math work is engaging and interesting
 	\item I am learning
 \end{itemize}
+\end{singlespace}
 
 \subsubsection{Grade 8 Reading Related Questions}
+\begin{singlespace}
 \begin{itemize}
 	\item Write long answers on reading tests
 	\item Learn a lot when reading books
@@ -493,6 +504,8 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \input{../Tables/g4math.descriptives.tex} \clearpage
 \input{../Tables/g4math.unadjusted.tex} \clearpage
+\end{singlespace}
+
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth,angle=90]{../Figures/g4mathDensityByState.pdf}
@@ -502,7 +515,6 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \end{figure}
 \clearpage
 
-\end{singlespace}
 
 %==================== Appendix E ====================================================================
 \cleardoublepage
