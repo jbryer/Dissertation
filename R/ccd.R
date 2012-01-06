@@ -29,7 +29,7 @@ for(s in unique(publics$LSTATE06)) {
 	dist = apply(distMatrix, 1, min)
 	distances = rbind(distances, data.frame(NSESSCH=ids, dist=dist))
 }
-distances$close = ifelse(distances$dist < 10, TRUE, FALSE)
+distances$close = ifelse(distances$dist < 5, TRUE, FALSE)
 head(distances)
 table(distances$close, useNA='ifany')
 ggplot(distances[!distances$close,], aes(x=dist)) + geom_histogram()
@@ -56,7 +56,11 @@ toplot = data.frame(ps=fitted(lr2), math=g8math3$mathscore, charter=g8math3$char
 ggplot(toplot, aes(x=ps, y=math, colour=charter)) + geom_smooth()
 ggplot(toplot, aes(x=ps, colour=charter)) + geom_density()
 
-#distMatrix = rdist.earth(publics[,c('LONCOD06', 'LATCOD06')], charters[,c('LONCOD06', 'LATCOD06')])
-#dist = apply(distMatrix, 1, min)
+#Read the data dictionary
+catalog = readLines(file('~/Dropbox/School/Dissertation/CCD/2007-08/psu071blay.txt'))
+strsplit(catalog[25], split='\t')
+strsplit(catalog[38], split='\t')
 
-
+catalog = read.table('~/Dropbox/School/Dissertation/CCD/2007-08/sc071b.txt', header=TRUE, sep='\t', fill=TRUE, stringsAsFactors=FALSE)
+nrow(catalog)
+names(catalog)
