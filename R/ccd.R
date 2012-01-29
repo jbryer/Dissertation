@@ -32,6 +32,11 @@ for(s in unique(publics$LSTATE06)) {
 distances$close = ifelse(distances$dist < 5, TRUE, FALSE)
 head(distances)
 table(distances$close, useNA='ifany')
+write.csv(distances, '../R/data2009/SchoolDistances.csv')
+
+
+
+#####
 ggplot(distances[!distances$close,], aes(x=dist)) + geom_histogram()
 
 g8formula = charter ~ gender + race + iep + ell + lunch + parented + books + newspapers + magazines + computer + encyclopedia + pagesread + talkstudies + daysabsent + langinhome
