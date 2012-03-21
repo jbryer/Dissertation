@@ -18,6 +18,7 @@
 \usepackage{tabularx}
 \usepackage{appendix}
 \usepackage{longtable}
+\usepackage{multirow}
 
 %\usepackage{caption}
 %\DeclareCaptionLabelSeparator{apatablestyle}{\\}
@@ -61,7 +62,7 @@
 \begin{titlepage}
 \vspace*{\fill}
 \begin{center}
-\uppercase{Comparing Charter and Public Schools\\Using Multilevel Propensity Score Analysis}\\
+\uppercase{A National Study Comparing Charter and Traditional\\Public Schools Using Propensity Score Analysis}\\
 \ \\
 by
 \ \\ \ \\
@@ -76,7 +77,7 @@ Doctor of Philosophy\\
 School of Education\\
 Department of Educational and Counseling Psychology\\
 Division of Educational Psychology \& Methodology\\
-2011
+2012
 \ifthenelse{\boolean{draft}}{
 	\ \\	\LARGE{}Draft as of \today
 }{}
@@ -86,21 +87,20 @@ Division of Educational Psychology \& Methodology\\
 \setcounter{page}{2}
 \newpage
 
+\setkeys{Gin}{width=\textwidth} %Make images fit full text width of the page
 
 %\section{Dedication} \vspace*{\fill} \begin{center}To my wife, Heather,\\and two boys Gabriel and Miles,\\for providing the inspiration and support\\for life's journey.\vspace*{\fill}\end{center}\newpage
 %\section{Acknowledgements} Thank you \newpage
 \ \\
 \cleardoublepage
 \section{Abstract}
-The concept of school choice within the United States is not new. Private schools have been educating students since the founding of the United States. However, in 1988, Ray Budde proposed an alternate approach to school choice that has grown to be known as charter schools \cite{kolderie05}. Unlike their private school counterparts, charter schools receive public funding, but they are relieved of many of the bureaucratic and regulatory constraints public schools adhere to, but are still held accountable for student performance. Despite claims by charter school advocates that charter schools are performing as well if not better than the public school counterparts \cite<see e.g.>{allen09}, some studies suggest ambiguity with regard to charter school performance \cite<see e.g.>{braun06hlm, credo, hubbard2009}. Ultimately, there is agreement that more research is necessary to address the question of whether charter schools provide substantially better academic experiences for students. This study will investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics.
+The concept of school choice within the United States is not new. Private schools have been educating students since the founding of the United States. However, in 1988, Ray Budde proposed an alternative approach to school choice that has come to be known as charter schools \cite{Kolderie2005}. Unlike their private school counterparts, charter schools receive public funding, but they are relieved of many of the bureaucratic and regulatory constraints public schools adhere to, but are still held accountable for student performance. Despite claims by charter school advocates that charter schools are performing as well if not better than the public school counterparts \cite<see e.g.>{AllenConsolettieKerwin2009}, studies provide mixed results with regard to charter school performance \cite<see e.g.>{BraunJenkinsGrigg2006, credo, HubbardKulkarni2009}. Ultimately, there is agreement that more research is necessary to address the question of whether charter schools provide substantially better academic experiences for students. 
 
-At the center of the charter school debate is an issue that has concerned thinkers for centuries, the question of how to support causal inferences. In this context we aim to assess the effect of a treatment on a measurable outcome using observational data. Traditionally, randomized experiments have been considered the ``gold standard" for studying questions of causality. In the context of this study, and many other questions in education randomization is either impractical or unethical. This means that observational studies are often essential to support inferences about whether treatments influence outcomes.
+This study includes development of new methods designed for observational data analysis to investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics. The new methods represent extensions of modern methods for propensity score analysis (see below) and aim to reduce if not eliminate selection bias in the context of clustered data. Charter schools are, by definition, schools of choice, and this means that observational data methods are preferred for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, given well designed observational studies, and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The end result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. 
 
-However, lacking randomization, observational studies nearly always invite selection bias. Charter schools are, by definition, schools of choice. In observational data contexts, simple comparisons of two groups such as public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, with an appropriately designed observational study, and an appropriate analysis, the effects of the selection bias can be taken into account in a way that simple comparisons are replaced by adjusted comparisons of groups. This is done utilizing a class of statistical procedures introduced by \citeA{rosenbaum83} called propensity score analysis.
+This is done utilizing a class of statistical procedures introduced by \citeA{RosenbaumRubin1983} called propensity score analysis. Propensity score analysis has seen considerable increased use in the social sciences within the last few years \cite{ArpinoMealli2008}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \cite{ThoemmesKim2011}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analyses will be conducted using the newly developed \texttt{multilevelPSA} package \cite{multilevelPSA} in R \cite{rdevelopment}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be done within states. Effects will then aggregated to provide state and national effect estimates.
 
-Propensity score analysis has seen considerably increased use in the social sciences within the last few years \citeA{ThoemmesKim2011}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \citeA{ArpinoMealli2008}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analysis will be conducted using the \texttt{multilevelPSA} package in R \citeA{RCore}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be within states. Effects will then aggregated to provide state and national effect estimates.
-
-As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \citeA<see e.g.>{Stuart2010}. This study will utilize logistic regression and conditional inference trees \citeA{HorthornHornikZeileis2010} to estimate propensity scores. Both matching and stratification methods will be used, in different ways, depending on specific analytic needs. Lastly, the use of graphics will be employed to evaluate balance and outcome differences \citeA{HelmreichPruzek2009}.
+As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \cite<see e.g.>{Stuart2010}. Doing so can help to provide confidence that results reflect what the data have to say, and is not merely an artifact of model specification or method choice. This study will utilize three overall approaches to propensity score analysis, namely stratification, matching, and multilevel stratification. Lastly, the use of graphics will be employed to evaluate balance and outcome differences using methods (functions) found in \citeA{HelmreichPruzek2009}.
 
 \cleardoublepage 
 
@@ -316,7 +316,7 @@ This chapter summarizes the results of the multilevel propensity score analysis.
 Stratification by logistic regression (using two approaches to covariate selection) and matching require a complete dataset to estimate the models. As such, missing data was imputed using multivariate imputation by chained equations \citeA{vanbuuren} vis-\`a-vis the MICE package \citeA{mice} in R.
 
 
-\input{../Tables/descriptives.tex}
+\input{../Tables2009/descriptives.tex}
 
 \subsection{Propensity Score Analysis with Stratification}
 
@@ -324,37 +324,36 @@ Stratification by logistic regression (using two approaches to covariate selecti
 
 \subsubsection{Phase II}
 
-\begin{figure}[tp]
+\begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4mathloess.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-loess-grid.pdf}
 \caption{Loess Regression Assessment Plot: Grade 4 Math}
 \label{fig:g4math:loess}
 \end{center}
 \end{figure}
 
-\begin{figure}[tp]
+\begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4readingloess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 4 Reading}
-\label{fig:g4reading:loess}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree.pdf}
+\caption{Multilevel PSA Assessment Plot: Grade 4 Math}
+\label{fig:g4math:loess}
 \end{center}
 \end{figure}
 
-\begin{figure}[tp]
+\begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8mathloess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 8 Math}
-\label{fig:g8math:loess}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-diff.pdf}
+\caption{Multilevel PSA Difference Plot: Grade 4 Math}
+\label{fig:g4math:loess}
 \end{center}
 \end{figure}
 
-\begin{figure}[tp]
-\begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8readingloess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 8 Reading}
-\label{fig:g8reading:loess}
-\end{center}
-\end{figure}
+
+\begin{singlespace}
+\input{../Tables2009/g4math-ctree-level1.tex}
+\input{../Tables2009/g4math-ctree-level2.tex}
+\input{../Tables2009/g4math-desc.tex}
+\end{singlespace}
 
 \input{../Tables/overall.results.tex}
 

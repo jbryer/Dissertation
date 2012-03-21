@@ -99,10 +99,10 @@ naepAnalysis <- function(grade, subject, ask=FALSE) {
 	ggsave(paste('Figures/g', grade, subject, 'lraicPublicDensity.pdf', sep=''), width=8, height=6)
 
 	print('Conditional inference trees:')
-	party.results = multilevelCtree(df, formula=formula, level2='state')
+	party.results = mlpsa.ctree(df, formula=formula, level2='state')
 	party = getStrata(party.results, df, level2='state')
 	df$state = as.factor(as.character(df$state))
-	treeHeat(party.results, names(df)[c(10:26)], df$state)
+	plot.tree(party.results, names(df)[c(10:26)], df$state)
 	ggsave(paste('Figures/g', grade, subject, 'treeHeat.pdf', sep=''))
 	tree.psa.results = multilevelPSA(response=party[,paste(subject,'score',sep='')], treatment=party$charter, strata=party$strata, level2=party$state, minN=4)
 	plotpsa.multilevel.psa(multilevelPSA=tree.psa.results, level1.points=TRUE, ylab='State', jitter=FALSE) + opts(axis.text.y=theme_text(size=8, hjust=1)) + ylab(paste('Difference Score (', tree.psa.results$y.label, ' - ', tree.psa.results$x.label, ')', sep='')) + opts(legend.position=c(-1,-1))
