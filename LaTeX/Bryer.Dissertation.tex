@@ -77,7 +77,7 @@ Doctor of Philosophy\\
 School of Education\\
 Department of Educational and Counseling Psychology\\
 Division of Educational Psychology \& Methodology\\
-2012
+2013
 \ifthenelse{\boolean{draft}}{
 	\ \\	\LARGE{}Draft as of \today
 }{}
@@ -173,7 +173,7 @@ Given that charter schools are being offered as a solution for the needed educat
 \subsection{History of Charter Schools}
 Though Ray Budde is often credited with the current charter school movement \cite{kolderie05}, the term \textit{school choice} can be traced back to Adam Smith's \textit{Wealth of Nations}, Thomas Paine's \textit{Rights of Man}, and John Stuart Mill's \textit{On Liberty} \cite{herbst2006}. Prior to the Revolutionary War, given the religious diversity of colonial America, issues of education were left to local communities. However, after the war Revolutionary leaders argued that local schools were no longer sufficient for educating students for the emerging state and federal governments. It was Thomas Jefferson who, in 1779, introduced the first bill in Virginia that would establish a public school system. It was this, along with numerous other American intellects during the 1780s and 1790s, that established public schools throughout the young nation thereby relegating school choice to a choice between the public school and, predominately religious, private schools.
 
-In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
+In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see Figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
 
 \begin{figure}[tp]
 \includegraphics[width=\textwidth]{../Figures/Timeline.pdf}
@@ -278,7 +278,9 @@ The NAEP reading assessment is designed to account for three reading contexts: r
 
 
 \subsubsection{Phase I}
-Propensity score analysis \cite<PSA;>{rosenbaum83} is a statistical method or approach that attempts to adjust for selection bias in observational studies. Most of the studies conducted using PSA involve analysis in two phases where phase one involves the the calculation of propensity scores or matching for both treatment and control units of analysis; and phase two involves the comparison of those two groups. However, in situations where data is multilevel, or clustered, special consideration is necessary both at phase I and II. For the NAEP data, the state variable will be used as the level 2 identifier. The algorithm in the \texttt{multilevelPSA} package \citeA{Bryer2011} will facilitate the multilevel PSA analysis. Specifically, for phase I, three approaches will be used for stratifying students for comparison, namely conditional inference trees \citeA{HorthornHornikZeileis2010}, logistic regression, and matching. For each approach, the stratification procedure will be performed separately for each state so that direct comparisons between students in phase II do not occur between states. That is, students within a stratification or two students being matched must reside in the same state.
+Propensity score analysis \cite<PSA;>{rosenbaum83} is a statistical method or approach that attempts to adjust for selection bias in observational studies and has become increasingly popular in medical research \cite{Austin2008} and in the social sciences \cite{ThoemmesKim2011}. 
+
+Most of the studies conducted using PSA involve analysis in two phases where phase one involves the the calculation of propensity scores or matching for both treatment and control units of analysis; and phase two involves the comparison of those two groups. However, in situations where data is multilevel, or clustered, special consideration is necessary both at phase I and II. For the NAEP data, the state variable will be used as the level 2 identifier. The algorithm in the \texttt{multilevelPSA} package \citeA{Bryer2011} will facilitate the multilevel PSA analysis. Specifically, for phase I, three approaches will be used for stratifying students for comparison, namely conditional inference trees \citeA{HorthornHornikZeileis2010}, logistic regression, and matching. For each approach, the stratification procedure will be performed separately for each state so that direct comparisons between students in phase II do not occur between states. That is, students within a stratification or two students being matched must reside in the same state.
 
 \subsubsection{Phase II}
 The second phase of the propensity score analysis involves comparing dependent variables of students with similar propensity scores using standard \textit{t}-tests and reporting corresponding confidence intervals and effect sizes. However, for multilevel data analysis occurs in two states. First, comparisons are made for each state. The results from each state can then be aggregated to provide an overall difference and effect size. 
@@ -288,8 +290,8 @@ Given the large amount of data that needs to be summarized, the use of graphics 
 
 \begin{figure}[tp]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8mathlrcircplot.pdf}
-\caption{Multilevel PSA Assessment Plot: Grade 8 Math}
+\includegraphics[width=\textwidth]{../Figures/AnnotatedCircPlot.pdf}
+\caption{Multilevel PSA Assessment Plot: Grade 4 Math}
 \label{fig:g8math:circ}
 \end{center}
 \end{figure}
@@ -299,7 +301,7 @@ Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the difference
 
 \begin{figure}[tp]
 \begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrdiffplot.pdf}
+\includegraphics[height=\textwidth]{../Figures2009/g8math-mlpsa-lr-diff.pdf}
 \caption{Multilevel PSA Difference Plot: Grade 8 Math}
 \label{fig:g8math:diff}
 \end{center}
@@ -310,13 +312,13 @@ Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the difference
 \cleardoublepage
 \section{Chapter 4: Results}
 
-This chapter summarizes the results of the multilevel propensity score analysis. 
+This chapter summarizes the results of the multilevel propensity score analysis. All analysis was conducted using R \cite{redevelopment}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN).
 
 \subsection{Missing Data Imputation}
 Stratification by logistic regression (using two approaches to covariate selection) and matching require a complete dataset to estimate the models. As such, missing data was imputed using multivariate imputation by chained equations \citeA{vanbuuren} vis-\`a-vis the MICE package \citeA{mice} in R.
 
 
-\input{../Tables2009/descriptives.tex}
+%\input{../Tables2009/descriptives.tex}
 
 \subsection{Propensity Score Analysis with Stratification}
 
@@ -326,7 +328,7 @@ Stratification by logistic regression (using two approaches to covariate selecti
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4math-loess-grid.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-loess.pdf}
 \caption{Loess Regression Assessment Plot: Grade 4 Math}
 \label{fig:g4math:loess}
 \end{center}
@@ -336,7 +338,7 @@ Stratification by logistic regression (using two approaches to covariate selecti
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree.pdf}
 \caption{Multilevel PSA Assessment Plot: Grade 4 Math}
-\label{fig:g4math:loess}
+\label{fig:g4math-mlpsa-ctree}
 \end{center}
 \end{figure}
 
@@ -344,18 +346,18 @@ Stratification by logistic regression (using two approaches to covariate selecti
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-diff.pdf}
 \caption{Multilevel PSA Difference Plot: Grade 4 Math}
-\label{fig:g4math:loess}
+\label{fig:g4math-mlpsa-ctree-diff}
 \end{center}
 \end{figure}
 
 
-\begin{singlespace}
-\input{../Tables2009/g4math-ctree-level1.tex}
-\input{../Tables2009/g4math-ctree-level2.tex}
-\input{../Tables2009/g4math-desc.tex}
-\end{singlespace}
+%\begin{singlespace}
+%\input{../Tables2009/g4math-ctree-level1.tex}
+%\input{../Tables2009/g4math-ctree-level2.tex}
+%\input{../Tables2009/g4math-desc.tex}
+%\end{singlespace}
 
-\input{../Tables/overall.results.tex}
+%\input{../Tables/overall.results.tex}
 
 
 \clearpage
@@ -365,7 +367,7 @@ Stratification by logistic regression (using two approaches to covariate selecti
 
 \subsubsection{Phase II}
 
-\input{../Tables/overall.matching.results.tex}
+%\input{../Tables/overall.matching.results.tex}
 
 
 \clearpage
@@ -375,9 +377,34 @@ Stratification by logistic regression (using two approaches to covariate selecti
 
 \subsubsection{Phase II}
 
-\input{../Tables/overall.multilevel.results.tex}
+%\input{../Tables/overall.multilevel.results.tex}
 
 \subsubsection{Graphical Representations of Multilevel PSA}
+
+
+
+\subsection{Summary and Overall Results}
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/OverallScatter.pdf}
+\caption{PSA Circle Plot of Adjusted Means}
+\label{fig:overallcirc}
+\end{center}
+\end{figure}
+
+
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/Overall.pdf}
+\caption{Overall Differences in Effect Size}
+\label{fig:overalldiff}
+\end{center}
+\end{figure}
+
+
+\input{../Tables2009/Overall.tex}
 
 
 %==================== CHAPTER 5 ====================================================================
@@ -497,149 +524,6 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \end{figure}
 
 %==================== Appendix C ====================================================================
-\newpage
-\addcontentsline{toc}{subsection}{Appendix C: Student Background Questionnaire}
-\subsection*{Appendix C\\NAEP Student Background Questionnaire}
-\label{appendixDemographics}
-\begin{singlespace}
-\subsubsection{Core Questions}
-\begin{itemize}
-	\item Are you Hispanic or Latino? [No, I am not Hispanic or Latino; Yes, I am Mexican, Mexican American, or Chicano; Yes, I am Puerto Rican or Puerto Rican American; Yes, I am Cuban or Cuban American; Yes, I am from some other Hispanic or Latino background]
-	\item Which of the following best describes you? [White; Black or African American; Asian; American Indian or Alaska Native; Native Hawaiian or other Pacific Islander]
-	\item Does your family get a newspaper at least four times a week?
-	\item Does your family get any magazines regularly?
-	\item About how many books are there in your home?
-	\item Is there a computer at home that you use?
-	\item Is there an encyclopedia in your home? It could be a set of books, or it could be on the computer.
-	\item About how many pages a day do you have to read in school and for homework?
-	\item How often do you talk about thinks you have studied in school with someone in your family?
-	\item How many days were you absent from school in the last month?
-	\item How far in school did your mother go? [Grade 8 Only]
-	\item How far in school did your father go? [Grade 8 Only]
-	\item How often do people in your home talk to each other in language other than English?
-\end{itemize}
-
-\subsubsection{Grade 4 Math Related Questions}
-\begin{itemize}
-	\item Use computer at school for math
-	\item Use computer to practice or drill on math
-	\item Use computer to play math games
-	\item Kind of calculator you normally use
-	\item Use calculator for math tests-student
-	\item Difficulty of this math test
-	\item Effort on this math test
-	\item Importance of success on this math test
-	\item The math work is too hard
-	\item I have done a good job on my homework
-	\item I have done a good job in class
-	\item The math work is too easy
-	\item I like what we do in math class
-\end{itemize}
-
-\subsubsection{Grade 4 Reading Related Questions}
-\begin{itemize}
-	\item Learn a lot when reading books
-	\item Reading is a favorite activity
-	\item Writing stories or letters is a favorite activity
-	\item Writing helps share ideas
-	\item Read for fun on own
-	\item Talk with friends about what you read
-	\item Write e-mails to friends or family
-	\item Read stories or poems for fun
-	\item Read to learn about real things
-	\item Read stories on Internet for fun
-	\item Class discussion about something class has read
-	\item Work in groups to talk about something read
-	\item Write in journal about something read
-	\item Write a book report
-	\item Make presentation to class about something read
-	\item Do school project about something read
-	\item Read books or magazines for reading
-	\item Read books or magazines for science
-	\item Read books or magazines for social studies/history
-	\item Read books or magazines for math
-	\item Write long answers on reading tests
-	\item Read own books for reading assignment
-	\item Difficulty of this reading test
-	\item Effort on this reading test
-	\item Importance of success on this reading test
-\end{itemize}
-
-\subsubsection{Grade 8 Math Related Questions}
-\begin{itemize}
-	\item Use computer at school for math
-	\item Use computer to practice or drill on math
-	\item Use computer to play math games
-	\item Kind of calculator you normally use
-	\item Use calculator for math tests-student
-	\item Difficulty of this math test
-	\item Effort on this math test
-	\item Importance of success on this math test
-	\item Time per day on computer for math work
-	\item Use spreadsheet program for math assignments
-	\item Use program to drill on math facts
-	\item Use program for new lessons on problem-solving
-	\item Use Internet to learn things for math class
-	\item Use calculator program for math class
-	\item Using graphing program for charts for math class
-	\item Use statistical program for math class
-	\item Use word processing program for math class
-	\item Use drawing program for math class
-	\item Use basic four-function calculator in math class
-	\item Use scientific calculator in math class
-	\item Use graphing calculator in math class
-	\item Have clear understanding what teacher asking to do
-	\item The math work is too easy
-	\item The math work is boring
-	\item I have done a good job on my homework
-	\item I have done a good job on my classwork
-	\item The math work is challenging
-	\item The math work is engaging and interesting
-	\item I am learning
-\end{itemize}
-
-\subsubsection{Grade 8 Reading Related Questions}
-\begin{itemize}
-	\item Write long answers on reading tests
-	\item Learn a lot when reading books
-	\item Reading is a favorite activity
-	\item Writing stories or letters is a favorite activity
-	\item Writing helps share ideas
-	\item Read for fun on own
-	\item Talk with friends about what you read
-	\item Write e-mails to friends or family
-	\item Read comic books or joke books outside school
-	\item Read fiction books or stories outside school
-	\item Read plays outside school
-	\item Read poems outside school
-	\item Read biographies/autobiographies outside school
-	\item Read books on science outside school
-	\item Read books on technology outside school
-	\item Read books on other countries outside school
-	\item Read books on history outside school
-	\item Read other non-fiction books outside school
-	\item Read newspaper articles or stories outside school
-	\item Read magazine articles or stories outside school
-	\item Read Internet articles or stories outside school
-	\item Class discussion about something class has read
-	\item Work in groups to talk about something read
-	\item Write in journal about something read
-	\item Write report or paper about something read
-	\item Make presentation to class about something read
-	\item Done project about something read
-	\item Read other than textbook for English class
-	\item Read other than textbook for science class
-	\item Read other than textbook for social studies class
-	\item Read other than textbook for math class
-	\item Explain understanding of what you read
-	\item Discuss interpretation of what you read
-	\item Difficulty of this reading test
-	\item Effort on this reading test
-	\item Importance of success on this reading test
-\end{itemize}
-
-\end{singlespace}
-
 
 %==================== Appendix D ====================================================================
 \newpage
@@ -649,63 +533,29 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{singlespace}
 
-\input{../Tables/g4math.descriptives.tex} \clearpage
-\input{../Tables/g4math.unadjusted.tex} \clearpage
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathDensityByState.pdf}
-\caption{Density Distribution of Grade 4 Math Scores by State}
-\label{fig:g4math:density}
-\end{center}
-\end{figure}
-\clearpage
+\input{../Tables2009/g4Math-desc.tex} \clearpage
+\input{../Tables2009/g4math-unadjscore.tex} \clearpage
 
-\input{../Tables/g4reading.descriptives.tex} \clearpage
-\input{../Tables/g4reading.unadjusted.tex} \clearpage
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g4readingDensityByState.pdf}
-\caption{Density Distribution of Grade 4 Reading Scores by State}
-\label{fig:g4reading:density}
-\end{center}
-\end{figure}
-\clearpage
+\input{../Tables2009/g4Reading-desc.tex} \clearpage
+\input{../Tables2009/g4read-unadjscore.tex} \clearpage
 
-%\input{../Tables/g8math.school.descriptives.tex} \clearpage
-\input{../Tables/g8math.descriptives.tex} \clearpage
-\input{../Tables/g8math.unadjusted.tex} \clearpage
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathDensityByState.pdf}
-\caption{Density Distribution of Grade 8 Math Scores by State}
-\label{fig:g8math:density}
-\end{center}
-\end{figure}
-\clearpage
+\input{../Tables2009/g8Math-desc.tex} \clearpage
+\input{../Tables2009/g8math-unadjscore.tex} \clearpage
 
-%\input{../Tables/g8reading.school.descriptives.tex} \clearpage
-\input{../Tables/g8reading.descriptives.tex} \clearpage
-\input{../Tables/g8reading.unadjusted.tex} \clearpage
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g8readingDensityByState.pdf}
-\caption{Density Distribution of Grade 8 Reading Scores by State}
-\label{fig:g8reading:density}
-\end{center}
-\end{figure}
-\clearpage
+\input{../Tables2009/g8Reading-desc.tex} \clearpage
+\input{../Tables2009/g8read-unadjscore.tex} \clearpage
 
 \end{singlespace}
 
 %==================== Appendix E ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix E: Covariate Missingness}
 \subsection*{Appendix E\\Covariate Missingness}
 \label{appendixmissing}
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4mathmissing.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-missing.pdf}
 \caption{Covariate Missingness for Grade 4 Math}
 \label{fig:g4math:missing}
 \end{center}
@@ -713,7 +563,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4readingmissing.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-missing.pdf}
 \caption{Covariate Missingness for Grade 4 Reading}
 \label{fig:g4reading:missing}
 \end{center}
@@ -721,7 +571,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8mathmissing.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-missing.pdf}
 \caption{Covariate Missingness for Grade 8 Math}
 \label{fig:g8math:missing}
 \end{center}
@@ -729,7 +579,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8readingmissing.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-missing.pdf}
 \caption{Covariate Missingness for Grade 8 Reading}
 \label{fig:g8reading:missing}
 \end{center}
@@ -737,135 +587,170 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 
 %==================== Appendix F ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix F: Logistic Regression Full Model Results}
 \subsection*{Appendix F\\Logistic Regression Full Model}
 \label{appendixlogistic}
-\begin{singlespace}
-\input{../Tables/g4math.lr.level1.tex} \clearpage
-\input{../Tables/g4math.lr.level2.tex} \clearpage
-\input{../Tables/g4reading.lr.level1.tex} \clearpage
-\input{../Tables/g4reading.lr.level2.tex} \clearpage
-\input{../Tables/g8math.lr.level1.tex} \clearpage
-\input{../Tables/g8math.lr.level2.tex} \clearpage
-\input{../Tables/g8reading.lr.level1.tex} \clearpage
-\input{../Tables/g8reading.lr.level2.tex} \clearpage
-\end{singlespace}
+%\begin{singlespace}
+%\input{../Tables/g4math.lr.level1.tex} \clearpage
+%\input{../Tables/g4math.lr.level2.tex} \clearpage
+%\input{../Tables/g4reading.lr.level1.tex} \clearpage
+%\input{../Tables/g4reading.lr.level2.tex} \clearpage
+%\input{../Tables/g8math.lr.level1.tex} \clearpage
+%\input{../Tables/g8math.lr.level2.tex} \clearpage
+%\input{../Tables/g8reading.lr.level1.tex} \clearpage
+%\input{../Tables/g8reading.lr.level2.tex} \clearpage
+%\end{singlespace}
 
 %==================== Appendix G ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix G: Logistic Regression Step AIC Model Results}
 \subsection*{Appendix G\\Logistic Regression Step AIC Model}
 \label{appendixlogisticaic}
-\begin{singlespace}
-\input{../Tables/g4math.lraic.level1.tex} \clearpage
-\input{../Tables/g4math.lraic.level2.tex} \clearpage
-\input{../Tables/g4reading.lraic.level1.tex} \clearpage
-\input{../Tables/g4reading.lraic.level2.tex} \clearpage
-\input{../Tables/g8math.lraic.level1.tex} \clearpage
-\input{../Tables/g8math.lraic.level2.tex} \clearpage
-\input{../Tables/g8reading.lraic.level1.tex} \clearpage
-\input{../Tables/g8reading.lraic.level2.tex} \clearpage
-\end{singlespace}
+%\begin{singlespace}
+%\input{../Tables/g4math.lraic.level1.tex} \clearpage
+%\input{../Tables/g4math.lraic.level2.tex} \clearpage
+%\input{../Tables/g4reading.lraic.level1.tex} \clearpage
+%\input{../Tables/g4reading.lraic.level2.tex} \clearpage
+%\input{../Tables/g8math.lraic.level1.tex} \clearpage
+%\input{../Tables/g8math.lraic.level2.tex} \clearpage
+%\input{../Tables/g8reading.lraic.level1.tex} \clearpage
+%\input{../Tables/g8reading.lraic.level2.tex} \clearpage
+%\end{singlespace}
 
 %==================== Appendix H ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix H: Conditional Inference Trees Results}
 \subsection*{Appendix H\\Conditional Inference Trees}
 \label{appendixtree}
-\begin{singlespace}
-\input{../Tables/g4math.tree.level1.tex} \clearpage
-\input{../Tables/g4math.tree.level2.tex} \clearpage
-\input{../Tables/g4reading.tree.level1.tex} \clearpage
-\input{../Tables/g4reading.tree.level2.tex} \clearpage
-\input{../Tables/g8math.tree.level1.tex} \clearpage
-\input{../Tables/g8math.tree.level2.tex} \clearpage
-\input{../Tables/g8reading.tree.level1.tex} \clearpage
-\input{../Tables/g8reading.tree.level2.tex} \clearpage
-\end{singlespace}
+%\begin{singlespace}
+%\input{../Tables/g4math.tree.level1.tex} \clearpage
+%\input{../Tables/g4math.tree.level2.tex} \clearpage
+%\input{../Tables/g4reading.tree.level1.tex} \clearpage
+%\input{../Tables/g4reading.tree.level2.tex} \clearpage
+%\input{../Tables/g8math.tree.level1.tex} \clearpage
+%\input{../Tables/g8math.tree.level2.tex} \clearpage
+%\input{../Tables/g8reading.tree.level1.tex} \clearpage
+%\input{../Tables/g8reading.tree.level2.tex} \clearpage
+%\end{singlespace}
 
 
 %==================== Appendix I ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix I: Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
 \subsection*{Appendix I\\Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
 \label{appendixtree}
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4mathtreeHeat.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
 \caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Math}
-\label{fig:g4math:treeheat}
+\label{fig:g4math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g4readingtreeHeat.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-heat.pdf}
 \caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Reading}
-\label{fig:g4reading:treeheat}
+\label{fig:g4read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8mathtreeHeat.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-heat.pdf}
 \caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Math}
-\label{fig:g8math:treeheat}
+\label{fig:g8math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/g8readingtreeHeat.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-heat.pdf}
 \caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Reading}
-\label{fig:g8reading:treeheat}
+\label{fig:g8read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
 
 %==================== Appendix J ====================================================================
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{subsection}{Appendix J: Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
 \subsection*{Appendix J\\Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
 \label{appendixPublicDensity}
 
 The figures in this appendix represent the distributions of matched and unmatched public school students as identified by the full logistic regression model. These models were chosen since they resulted in the largest number of unmatched public school students vis-\`a-vis stratification. It should be noted that for some states there may be only one density line. This indicates that all public school students within that state were either all matched or all not matched.
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathlrPublicDensity.pdf}
-\caption{Density Distribution of Grade 4 Math: Matched vs. Unmatched Public School Students}
-\label{fig:g4reading:publicdensity}
-\end{center}
-\end{figure}
-\clearpage
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathlrPublicDensity.pdf}
+%\caption{Density Distribution of Grade 4 Math: Matched vs. Unmatched Public School Students}
+%\label{fig:g4reading:publicdensity}
+%\end{center}
+%\end{figure}
+%\clearpage
+%
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[height=\textwidth,angle=90]{../Figures/g4readinglrPublicDensity.pdf}
+%\caption{Density Distribution of Grade 4 Reading: Matched vs. Unmatched Public School Students}
+%\label{fig:g4reading:publicdensity}
+%\end{center}
+%\end{figure}
+%\clearpage
+%
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrPublicDensity.pdf}
+%\caption{Density Distribution of Grade 8 Math: Matched vs. Unmatched Public School Students}
+%\label{fig:g8reading:publicdensity}
+%\end{center}
+%\end{figure}
+%\clearpage
+%
+%\begin{figure}[h]
+%\begin{center}
+%\includegraphics[height=\textwidth,angle=90]{../Figures/g8readinglrPublicDensity.pdf}
+%\caption{Density Distribution of Grade 8 Reading: Matched vs. Unmatched Public School Students}
+%\label{fig:g8reading:publicdensity}
+%\end{center}
+%\end{figure}
+%\clearpage
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g4readinglrPublicDensity.pdf}
-\caption{Density Distribution of Grade 4 Reading: Matched vs. Unmatched Public School Students}
-\label{fig:g4reading:publicdensity}
-\end{center}
-\end{figure}
+%==================== Appendix J ====================================================================
 \clearpage
+\addcontentsline{toc}{subsection}{Appendix K: multilevelPSA R Package}
+\subsection*{Appendix K\\multilevelPSA R Package}
+\label{multilevelPSAPackage}
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrPublicDensity.pdf}
-\caption{Density Distribution of Grade 8 Math: Matched vs. Unmatched Public School Students}
-\label{fig:g8reading:publicdensity}
-\end{center}
-\end{figure}
-\clearpage
+The \texttt{multilevelPSA} R package was developed, in part, to conduct the analysis for this dissertation. It is available from the Comprehensive R Archive Network (CRAN) at \url{http://cran.r-project.org/web/packages/multilevelPSA}. The latest version can be installed using the \texttt{install.packages} function in R:
 
-\begin{figure}[h]
-\begin{center}
-\includegraphics[height=\textwidth,angle=90]{../Figures/g8readinglrPublicDensity.pdf}
-\caption{Density Distribution of Grade 8 Reading: Matched vs. Unmatched Public School Students}
-\label{fig:g8reading:publicdensity}
-\end{center}
-\end{figure}
-\clearpage
+\begin{verbatim}
+> install.packages('multilevelPSA', repos='http://cran.r-project.org')
+\end{verbatim}
+
+The following list provides brief descriptions of the key functions in the \texttt{multilevelPSA} package. More information is available vis-\`a-vis the R help system.
+
+\renewcommand{\descriptionlabel}[1]{\hspace{\labelsep}\textbf{\texttt{#1}}}
+\begin{description}
+\item[getPropensityScores] Returns a data frame with two columns corresponding to the level 2 variable and the fitted value from the logistic regression.
+\item[getStrata] Returns a data frame with two columns corresponding to the level 2 variable and the leaves from the conditional inference trees.
+\item[loess.plot] Loess plot with density distributions for propensity scores and outcomes on top and right, respectively.
+\item[missing.plot] Returns a heat map graphic representing missingness of variables grouped by the given grouping vector.
+\item[mlpsa] This function will perform phase II of the multilevel propensity score analysis.
+\item[plot.mlpsa] Creates the multilevel assessment plot.
+\item[mlpsa.circ.plot] Plots the results of a multilevel propensity score model.
+\item[mlpsa.ctree] Estimates propensity scores using the recursive partitioning in a conditional inference framework.
+\item[mlpsa.difference.plot] Creates a graphic summarizing the differences between treatment and comparison groups within and across level two clusters.
+\item[mlpsa.distribution.plot] Plots distribution for either the treatment or comparison group.
+\item[mlpsa.logistic] Estimates propensity scores using logistic regression.
+\item[psrange] Estimates models with increasing number of comparison subjects starting from 1:1 to using all available comparison group subjects.
+\item[plot.psrange] Plots the results of \texttt{psrange}.
+\item[tree.plot] Heat map representing variables used in a conditional inference tree across level 2 variables.
+\end{description}
+
+
+
 
 \end{document}

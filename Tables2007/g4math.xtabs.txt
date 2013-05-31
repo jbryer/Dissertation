@@ -1,0 +1,198 @@
+########### BEFORE #############################################################
+   FieldName             Description
+55   PCHARTR CCD charter school flag
+
+    Charter Not Charter        <NA> 
+       3098      117828         456 
+   FieldName Description
+76      DSEX      Gender
+
+  Male Female   <NA> 
+ 62317  59065      0 
+   FieldName                                   Description
+16     SRACE Race/ethnicity from school records (raw data)
+
+              White               Black            Hispanic Asian Amer/Pacif Is Amer Ind/Alaska Nat 
+              59721               23658               26578                6847                2693 
+              Other                <NA> 
+               1885                   0 
+   FieldName                                       Description
+18   SLUNCH1 Natl School Lunch Prog eligibility (3 categories)
+
+          Eligible       Not eligible Info not available               <NA> 
+             63244              57265                873                  0 
+   FieldName                               Description
+19       SD4 Student has Individualized Education Plan
+
+           Yes, IEP       Yes, 504 plan Yes, 504 in process             Not IEP             Omitted 
+              15975                1153                   0              104232                   0 
+               <NA> 
+                 22 
+   FieldName                                        Description
+20      ELL3 Student classified Eng Lang Learner (3 categories)
+
+         Yes           No Formerly ELL      Omitted         <NA> 
+       12479       105825         3044            0           34 
+    FieldName                  Description
+196     SDELL Student classified SD or ELL
+
+Student with disabi English language le     Both SD and ELL  Neither SD nor ELL                <NA> 
+              15478               10829                1650               93387                  38 
+    FieldName                                     Description
+194       IEP Student classified as having a disability (504)
+
+Student with disabi Not student with di             Omitted                <NA> 
+              17128              104232                  22                   0 
+    FieldName       Description
+291   B017001 Newspaper in home
+
+         Yes           No I Don't Know      Omitted     Multiple         <NA> 
+       32866        41022        41230         2918           12         3334 
+    FieldName       Description
+292   B000905 Magazines in home
+
+         Yes           No I Don't Know      Omitted     Multiple         <NA> 
+       65522        29027        20423         3054           22         3334 
+    FieldName   Description
+293   B013801 Books in home
+
+         0-10 books         11-25 books        26-100 books More than 100 books             Omitted 
+              15002               25743               37788               36441                3045 
+           Multiple                <NA> 
+                 29                3334 
+    FieldName      Description
+294   B017101 Computer in home
+
+     Yes       No  Omitted Multiple     <NA> 
+  100033    14457     3548       10     3334 
+    FieldName          Description
+295   B017201 Encyclopedia in home
+
+         Yes           No I Don't Know      Omitted     Multiple         <NA> 
+       58955        18906        37133         3032           22         3334 
+    FieldName                           Description
+296   B001151 Pages read in school and for homework
+
+  5 or fewer         6-10        11-15        16-20 More than 20      Omitted     Multiple         <NA> 
+       24927        20250        15068        16732        37880         3130           61         3334 
+    FieldName                Description
+297   B017451 Talk about studies at home
+
+Never or hardly eve     Every few weeks   About once a week    2-3 times a week           Every day 
+              20976               15833               13625               22899               41544 
+            Omitted            Multiple                <NA> 
+               3122                  49                3334 
+    FieldName                        Description
+298   B018101 Days absent from school last month
+
+             None          1-2 days          3-4 days         5-10 days More than 10 days 
+            58623             34099             13591              5530              3072 
+          Omitted          Multiple              <NA> 
+             3091                42              3334 
+    FieldName                                Description
+299   B018201 Language other than English spoken in home
+
+              Never     Once in a while       Half the time All or most of time             Omitted 
+              57592               25105                9429               22796                3097 
+           Multiple                <NA> 
+                 29                3334 
+    FieldName                                 Description
+313   M821401 Do math at after-school or tutoring program
+
+     Yes       No  Omitted Multiple     <NA> 
+   41764    72737     3526       21     3334
+
+########### AFTER ##############################################################
+
+   FieldName             Description
+55   PCHARTR CCD charter school flag
+
+    Charter Not Charter        <NA> 
+       3098      117828         456 
+   FieldName Description
+76      DSEX      Gender
+
+  Male Female   <NA> 
+ 62317  59065      0 
+   FieldName                                   Description
+16     SRACE Race/ethnicity from school records (raw data)
+
+              White               Black            Hispanic Asian Amer/Pacif Is Amer Ind/Alaska Nat 
+              59721               23658               26578                6847                2693 
+              Other                <NA> 
+               1885                   0 
+   FieldName                                       Description
+18   SLUNCH1 Natl School Lunch Prog eligibility (3 categories)
+
+    0     1  <NA> 
+57265 63244   873 
+   FieldName                               Description
+19       SD4 Student has Individualized Education Plan
+
+     0      1      2   <NA> 
+104232   1153  15975     22 
+   FieldName                                        Description
+20      ELL3 Student classified Eng Lang Learner (3 categories)
+
+     1   <NA> 
+108869  12513 
+    FieldName                  Description
+196     SDELL Student classified SD or ELL
+
+    0     1     2  <NA> 
+93387 26307  1650    38 
+    FieldName                                     Description
+194       IEP Student classified as having a disability (504)
+
+     0      1   <NA> 
+104232  17128     22 
+    FieldName       Description
+291   B017001 Newspaper in home
+
+    0     1  <NA> 
+41022 32866 47494 
+    FieldName       Description
+292   B000905 Magazines in home
+
+    0     1  <NA> 
+29027 65522 26833 
+    FieldName   Description
+293   B013801 Books in home
+
+  <NA> 
+121382 
+    FieldName      Description
+294   B017101 Computer in home
+
+     0      1   <NA> 
+ 14457 100033   6892 
+    FieldName          Description
+295   B017201 Encyclopedia in home
+
+    0     1  <NA> 
+18906 58955 43521 
+    FieldName                           Description
+296   B001151 Pages read in school and for homework
+
+    1     2     3     4     5  <NA> 
+24927 20250 15068 16732 37880  6525 
+    FieldName                Description
+297   B017451 Talk about studies at home
+
+    1     2     3     4     5  <NA> 
+20976 15833 13625 22899 41544  6505 
+    FieldName                        Description
+298   B018101 Days absent from school last month
+
+    1     2     3     4     5  <NA> 
+58623 34099 13591  5530  3072  6467 
+    FieldName                                Description
+299   B018201 Language other than English spoken in home
+
+    1     2     3     4  <NA> 
+57592 25105  9429 22796  6460 
+    FieldName                                 Description
+313   M821401 Do math at after-school or tutoring program
+
+    0     1  <NA> 
+72737 41764  6881 

@@ -15,7 +15,7 @@ cpt = table(ccd2$LSTATE08, ccd2$CHARTR08, useNA='ifany')
 cpt = as.data.frame(cpt)
 charterStates = as.character(cpt[which(cpt$Var2 == 'Yes' & cpt$Freq > 0),'Var1'])
 charters = ccd2[which(ccd2$CHARTR08 == 'Yes'),]
-notCharters = ccd2[which(ccd2$CHARTR08 != 'No'),]
+notCharters = ccd2[which(ccd2$CHARTR08 != 'Yes'),]
 notCharters = notCharters[which(notCharters$LSTATE08 %in% charterStates),]
 notCharters$LSTATE08 = as.character(notCharters$LSTATE08)
 
