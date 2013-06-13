@@ -1,5 +1,5 @@
-if(file.exists('data2009/g4math.mice.Rdata')) {
-	load('data2009/g4math.mice.Rdata')
+if(file.exists('../Data2009/g4math.mice.Rdata')) {
+	load('../Data2009/g4math.mice.Rdata')
 } else {
 	g4math.toimpute = g4math3[, names(g4math3) %in% all.covars]
 	
@@ -11,5 +11,5 @@ if(file.exists('data2009/g4math.mice.Rdata')) {
 # 	dev.off()
 	
 	g4math.mice = mice(g4math.toimpute, m=1)
-	save(g4math.mice, file='data2009/g4math.mice.Rdata')
+	save(g4math.mice, file='../Data2009/g4math.mice.Rdata')
 }

@@ -27,7 +27,7 @@
 #' @param dir.tab directory to save tables.
 #' @param return a data frame with one row per method including the mean difference
 #'        and confidence interval.
-naep.analysis <- function(naep, complete, score, grade, subject,
+naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 						  dir.fig='../Figures2009',
 						  dir.tab='../Tables2009',
 						  dir.data='../Data2009') {
@@ -65,15 +65,27 @@ naep.analysis <- function(naep, complete, score, grade, subject,
 		ml.lr.ps <- getPropensityScores(ml.lr)
 		ml.lrAIC.ps <- getPropensityScores(ml.lrAIC)
 			
-		ml.ctree.balance <- covariate.balance(covariates = ml.data1[,!names(ml.data1) %in% c('charter','state')],
+		covariates = ml.data1[,!names(ml.data1) %in% c('charter','state')]
+		covars <- catalog[catalog$FieldName %in% all.covars,c('FieldName','Description')]
+		covars <- covars[covars$FieldName %in% names(covariates),]
+		tmp <- covariates[,covars$FieldName]
+		names(tmp) <- covars$Description
+		ml.ctree.balance <- covariate.balance(covariates = tmp,
 											  treatment = ml.ctree.strata$charter,
 											  level2 = ml.ctree.strata$state,
 										      strata = ml.ctree.strata$strata )
-		ml.lr.balance <- covariate.balance(covariates = complete[,!names(complete) %in% c('charter','state')],
+		
+		
+		covariates = complete[,!names(complete) %in% c('charter','state')]
+		covars <- catalog[catalog$FieldName %in% all.covars,c('FieldName','Description')]
+		covars <- covars[covars$FieldName %in% names(covariates),]
+		tmp <- covariates[,covars$FieldName]
+		names(tmp) <- covars$Description
+		ml.lr.balance <- covariate.balance(covariates = tmp,
 										      treatment = complete$charter,
 										      level2 = complete$state,
 										      strata = ml.lr.ps$strata)
-		ml.lrAIC.balance <- covariate.balance(covariates = complete[,!names(complete) %in% c('charter','state')],
+		ml.lrAIC.balance <- covariate.balance(covariates = tmp,
 											  treatment = complete$charter,
 											  level2 = complete$state,
 										      strata = ml.lrAIC.ps$strata)
@@ -214,21 +226,34 @@ naep.analysis <- function(naep, complete, score, grade, subject,
 	tree.plot(ml.ctree, level2Col=naep$state)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-heat.pdf'), width=8, height=8)
 	
+	# mlpsa plots
+	pdf(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree.pdf'), width=8, height=8)
+	plot(ml.ctree.result, ratio=c(2,3), axis.text.size=6)
+	dev.off()
+	
+	pdf(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr.pdf'), width=8, height=8)
+	plot(ml.lr.result, ratio=c(2,3), axis.text.size=6)
+	dev.off()
+	
+	pdf(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC.pdf'), width=8, height=8)
+	plot(ml.lrAIC.result, ratio=c(2,3), axis.text.size=6)
+	dev.off()
+	
 	# Circ and diff plots
-	mlpsa.circ.plot(ml.ctree.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree.pdf'))
+	mlpsa.circ.plot(ml.ctree.result) + coord_flip() + theme(aspect.ratio=1)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-circ.pdf'))
 	
 	mlpsa.difference.plot(ml.ctree.result)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-diff.pdf'))
 	
-	mlpsa.circ.plot(ml.lr.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr.pdf'))
+	mlpsa.circ.plot(ml.lr.result) + coord_flip() + theme(aspect.ratio=1)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-circ.pdf'))
 
 	mlpsa.difference.plot(ml.lr.result)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-diff.pdf'))
 	
-	mlpsa.circ.plot(ml.lrAIC.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC.pdf'))
+	mlpsa.circ.plot(ml.lrAIC.result) + coord_flip() + theme(aspect.ratio=1)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-circ.pdf'))
 	
 	mlpsa.difference.plot(ml.lrAIC.result)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-diff.pdf'))
@@ -292,23 +317,23 @@ naep.analysis <- function(naep, complete, score, grade, subject,
 				   method='Logistic Regression',
 				   charter=ml.lr.result$overall.mnx,
 				   public=ml.lr.result$overall.mny,
-				   diff=ml.lr.result$overall.wtd * -1,
-				   ci.min=ml.lr.result$overall.ci[2] * -1,
-				   ci.max=ml.lr.result$overall.ci[1] * -1 ),
+				   diff=ml.lr.result$overall.wtd,
+				   ci.min=ml.lr.result$overall.ci[2],
+				   ci.max=ml.lr.result$overall.ci[1]),
 		data.frame(class='Multilevel PSA',
 				   method='Logistic Regression AIC',
 				   charter=ml.lrAIC.result$overall.mnx,
 				   public=ml.lrAIC.result$overall.mny,
-				   diff=ml.lrAIC.result$overall.wtd * -1,
-				   ci.min=ml.lrAIC.result$overall.ci[2] * -1,
-				   ci.max=ml.lrAIC.result$overall.ci[1] * -1),
+				   diff=ml.lrAIC.result$overall.wtd,
+				   ci.min=ml.lrAIC.result$overall.ci[2],
+				   ci.max=ml.lrAIC.result$overall.ci[1]),
 		data.frame(class='Multilevel PSA',
 				   method='Classification Trees',
 				   charter=ml.ctree.result$overall.mnx,
 				   public=ml.ctree.result$overall.mny,
-				   diff=ml.ctree.result$overall.wtd * -1,
-				   ci.min=ml.ctree.result$overall.ci[2] * -1,
-				   ci.max=ml.ctree.result$overall.ci[1] * -1 )
+				   diff=ml.ctree.result$overall.wtd,
+				   ci.min=ml.ctree.result$overall.ci[2],
+				   ci.max=ml.ctree.result$overall.ci[1])
 	)
 	row.names(overall) <- 1:nrow(overall)
 	return(overall)

@@ -312,19 +312,35 @@ Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the difference
 \cleardoublepage
 \section{Chapter 4: Results}
 
-This chapter summarizes the results of the multilevel propensity score analysis. All analysis was conducted using R \cite{redevelopment}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN).
+In this chapter I will outline in detail the results of all the propensity score models described in chapter three. Since NAEP is organized such that each grade and subject combination is a separate dataset, this chapter will focus on the analysis of grade four math. The results for grade four reading, grade eight math, and grade eight reading are included in the appendices. The chapter begins with a discussion of data preparation, followed by details of the nine propensity score methods used, and concludes with a summary, including tables and figures, of the overall results across all grades and subjects.
 
-\subsection{Missing Data Imputation}
+All analysis was conducted using R \cite{redevelopment}\footnote{All R scripts are available from Github at \url{https://github.com/jbryer/Dissertation}. Due to the licensing agreement with NCES, data is not included. However, researchers with access to the 2009 restricted use data should be able to replicate the analysis outlined in this chapter.}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN). 
+
+\textit{Formatting note}. Since the development of the R packages are in and of themselves a major component of this dissertation, I will make reference to some of the functions available. All references to R packages and functions will appear in a \texttt{fixed width font}.
+
+\subsection{Data Preparation}
+
+
+\subsubsection{Missing Data Imputation}
 Stratification by logistic regression (using two approaches to covariate selection) and matching require a complete dataset to estimate the models. As such, missing data was imputed using multivariate imputation by chained equations \citeA{vanbuuren} vis-\`a-vis the MICE package \citeA{mice} in R.
 
 
-%\input{../Tables2009/descriptives.tex}
+\input{../Tables2009/descriptives.tex}
 
-\subsection{Propensity Score Analysis with Stratification}
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-missing.pdf}
+\caption{Missing Data Plot: Grade 4 Math}
+\label{fig:g4math:missing}
+\end{center}
+\end{figure}
 
-\subsubsection{Phase I}
 
-\subsubsection{Phase II}
+
+\subsection{Propensity Score Analysis
+
+\subsubsection{Propensity Score Analysis with Stratification}
+
 
 \begin{figure}[ht]
 \begin{center}
@@ -361,17 +377,13 @@ Stratification by logistic regression (using two approaches to covariate selecti
 
 
 \clearpage
-\subsection{Propensity Score Matching}
-
-\subsubsection{Phase I}
-
-\subsubsection{Phase II}
+\subsubsection{Propensity Score Matching}
 
 %\input{../Tables/overall.matching.results.tex}
 
 
-\clearpage
-\subsection{Multilevel Propensity Score Analysis}
+%\clearpage
+\subsubsection{Multilevel Propensity Score Analysis}
 
 \subsubsection{Phase I}
 

@@ -18,8 +18,10 @@ source('Functions/naep.analysis.R') # This does most of the PSA analysis.
 source('Functions/naep.data.R') # Read in NAEP data.
 source('Functions/close.publics.R') # Remove publics further than 5 miles from a charters.
 source('Functions/latexDescriptives.R') # Create descriptive tables.
+source('Functions/descriptives.R')
 source('Functions/recode.r') # Utility function to recode factors.
 source('Functions/naep.recode.R') # Recode factors specifically for NAEP.
+source('Functions/impute.R') # Impute missing values.
 source('../Data2009/states.r') # Data frame with state names and abbreviations.
 
 # These are all the covariates that will be used at least once
@@ -194,6 +196,41 @@ g8math.cv.map <- g8math$catalog[g8math$catalog$FieldName %in% names(g8math.compl
 g8read.cv.map <- g8read$catalog[g8read$catalog$FieldName %in% names(g8read.complete),
 								c('FieldName','Description')]
 
+##### Unadjusted Results #######################################################
+descriptives.out <- function(score, charter) {
+	ttest <- t.test(score[charter], score[!charter])
+	mn <- aggregate(score, by=list(charter), mean)
+	std <- aggregate(score, by=list(charter), sd)
+	result <- c(mn[2,2], std[2,2], mn[1,2], std[1,2], 
+				(mn[2,2] - mn[1,2]), 
+				as.numeric(ttest$conf.int) )
+	names(result) <- c(paste0(mn[2,1], '.mean'), paste0(std[2,1], '.sd'),
+					   paste0(mn[1,1], '.mean'), paste0(std[1,1], '.sd'),
+					   'Diff', 'ci.min', 'ci.max')
+	return(result)
+}
+
+unadj.out <- rbind(descriptives.out(g4math3$mathscore, g4math3$charter),
+				   descriptives.out(g4read3$readscore, g4read3$charter),
+				   descriptives.out(g8math3$mathscore, g8math3$charter),
+				   descriptives.out(g8read3$readscore, g8read3$charter))
+unadj.out <- as.data.frame(unadj.out)
+unadj.out$Subject <- c('Grade 4 Math','Grade 4 Reading','Grade 8 Math','Grade 8 Reading')
+addtorow <- list()
+addtorow$pos <- list()
+addtorow$pos[[1]] <- c(0)
+addtorow$command <- c(paste0(' & \\multicolumn{2}{c}{Charter} & ',
+							 '\\multicolumn{2}{c}{Public} & Mean & ',
+							 '\\multicolumn{2}{c}{Confidence} \\\\',
+							 ' \\cline{2-3} \\cline{4-5} ',
+							 ' Subject & Mean & SD & Mean & SD & Difference & ',
+							 '\\multicolumn{2}{c}{Interval} \\\\ '))
+x <- xtable(unadj.out[,c(8,1:7)], digits=1, label='dependentDescriptives',
+			caption='Descriptive Statistics of Dependent Variables (Unadjusted)',
+			align=c('l','l','r','r@{\\extracolsep{.2cm}}','r','r','r','r','r') )
+print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow,
+	  caption.placement='top', file='../Tables2009/descriptives.tex')
+
 ##### Propensity Score Analysis ################################################
 # The naep.analysis function is the workhorse for all of the propensity score
 # analysis to be conducted. It will save many figures and LaTeX tables as it
@@ -201,24 +238,28 @@ g8read.cv.map <- g8read$catalog[g8read$catalog$FieldName %in% names(g8read.compl
 g4math.overall <- naep.analysis(naep=g4math3,
 								complete=g4math.complete,
 								score=g4math3$mathscore,
+								catalog=g4math$catalog,
 								grade=4,
 								subject='math')
 
 g4read.overall <- naep.analysis(naep=g4read3, 
 								complete=g4read.complete, 
 								score=g4read3$readscore, 
+								catalog=g4read$catalog,
 								grade=4, 
 								subject='read')
 
 g8math.overall <- naep.analysis(naep=g8math3, 
 								complete=g8math.complete, 
 								score=g8math3$mathscore, 
+								catalog=g8math$catalog,
 								grade=8, 
 								subject='math')
 
 g8read.overall <- naep.analysis(naep=g8read3, 
 								complete=g8read.complete, 
 								score=g8read3$readscore, 
+								catalog=g8read$catalog,
 								grade=8, 
 								subject='read')
 
@@ -259,6 +300,7 @@ ggplot(overall, aes(x=x, y=es, ymin=std.ci.min, ymax=std.ci.max)) +
 	facet_wrap(~ GradeSubject, ncol=2) + coord_flip() + 
 	xlab('') + ylab('Effect Size (charter - public)') +
 	ylim(c(-.25, 0.25))
+
 ggsave('../Figures2009/Overall.pdf', width=8, height=6)
 
 
@@ -312,7 +354,7 @@ ggplot(circs, aes(x=x, y=y)) +
 									  color=GradeSubject), 
 			  hjust=1.1, vjust=-.2, size=4, angle=-90) +
 	geom_abline(slope=1, intercept=0, alpha=.3) +
-	geom_polygon(data=circs, aes(x=x, y=y, group=label), alpha=.5) + 
+	geom_polygon(data=circs, aes(x=x, y=y, group=label), fill='green', alpha=.3) + 
 	geom_point(data=overall, aes(x=charter, y=public, color=GradeSubject, shape=class)) +
 	coord_fixed(ratio=1) + xlab('Charter') + ylab('Public') +
 	scale_x_continuous(limits=limits, expand=c(0,0)) + 
