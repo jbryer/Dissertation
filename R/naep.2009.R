@@ -67,6 +67,15 @@ g8math <- naep.data(grade=8, subject='math', vars=all.vars,
 g8read <- naep.data(grade=8, subject='read', vars=all.vars, 
 					dir='/Volumes/NAEP2009/NAEP 2009 Reading G4G8/')
 
+g4math.cv.map <- g4math$catalog[g4math$catalog$FieldName %in% all.covars,
+								c('FieldName','Description')]
+g4read.cv.map <- g4read$catalog[g4read$catalog$FieldName %in% all.covars,
+								c('FieldName','Description')]
+g8math.cv.map <- g8math$catalog[g8math$catalog$FieldName %in% all.covars,
+								c('FieldName','Description')]
+g8read.cv.map <- g8read$catalog[g8read$catalog$FieldName %in% all.covars,
+								c('FieldName','Description')]
+
 # Recode the "treatment" (i.e. charter) as a logical variable
 g4math$data$charter <- ifelse(g4math$data$CHRTRPT == 'Charter school', TRUE, FALSE)
 table(g4math$data$charter, useNA='ifany')
@@ -147,18 +156,47 @@ g8math3 <- close.publics(g8math)
 g8read3 <- close.publics(g8read)
 
 # Missingness plots
-pdf('../Figures2009/g4math-missing.pdf', width=6, height=6)
-missing.plot(g4math3[,names(g4math3) %in% all.covars], as.character(g4math3$FIPS))
+pdf('../Figures2009/g4math-missing.pdf', width=11, height=8.5)
+tmp <- g4math3[,g4math.cv.map$FieldName]
+names(tmp) <- g4math.cv.map$Description
+missing.plot(tmp, as.character(g4math3$FIPS))
+#missing.plot(g4math3[,names(g4math3) %in% all.covars], as.character(g4math3$FIPS))
 dev.off()
-pdf('../Figures2009/g4read-missing.pdf', width=6, height=6)
-missing.plot(g4read3[,names(g4read3) %in% all.covars], as.character(g4read3$FIPS))
+pdf('../Figures2009/g4read-missing.pdf', width=11, height=8.5)
+g4read.cv.map <- g4read.cv.map[g4read.cv.map$FieldName %in% names(g4read3),]
+tmp <- g4read3[,g4read.cv.map$FieldName]
+names(tmp) <- g4read.cv.map$Description
+missing.plot(tmp, as.character(g4read3$FIPS))
+#missing.plot(g4read3[,names(g4read3) %in% all.covars], as.character(g4read3$FIPS))
 dev.off()
-pdf('../Figures2009/g8math-missing.pdf', width=6, height=6)
-missing.plot(g8math3[,names(g8math3) %in% all.covars], as.character(g8math3$FIPS))
+pdf('../Figures2009/g8math-missing.pdf', width=11, height=8.5)
+tmp <- g8math3[,g8math.cv.map$FieldName]
+names(tmp) <- g8math.cv.map$Description
+missing.plot(tmp, as.character(g8math3$FIPS))
+#missing.plot(g8math3[,names(g8math3) %in% all.covars], as.character(g8math3$FIPS))
 dev.off()
-pdf('../Figures2009/g8read-missing.pdf', width=6, height=6)
-missing.plot(g8read3[,names(g8read3) %in% all.covars], as.character(g8read3$FIPS))
+pdf('../Figures2009/g8read-missing.pdf', width=11, height=8.5)
+tmp <- g8read3[,g8read.cv.map$FieldName]
+names(tmp) <- g8read.cv.map$Description
+missing.plot(tmp, as.character(g8read3$FIPS))
+#missing.plot(g8read3[,names(g8read3) %in% all.covars], as.character(g8read3$FIPS))
 dev.off()
+
+# Check if missingness predicts treatment
+missing.test <- function(df, cv.map, Tr) {
+	tmp <- df[,cv.map$FieldName]
+	names(tmp) <- cv.map$Description
+	for(i in 1:ncol(tmp)) {
+		tmp[,i] <- as.integer(is.na(tmp[,i]))
+	}
+	tmp$Tr <- Tr
+	test <- glm(Tr ~ ., data=tmp, family=binomial)
+	return(test)
+}
+summary(missing.test(g4math3, g4math.cv.map, g4math3$charter))
+summary(missing.test(g4read3, g4read.cv.map, g4read3$charter))
+summary(missing.test(g8math3, g8math.cv.map, g8math3$charter))
+summary(missing.test(g8read3, g8read.cv.map, g8read3$charter))
 
 # Remove Alaska due to large amounts of missing data
 g4math3 <- g4math3[g4math3$FIPS != 'Alaska',]
@@ -186,15 +224,6 @@ g8read.complete$charter <- g8read3$charter
 
 # View(g4math$catalog[g4math$catalog$FieldName %in% names(g4math.complete),
 # 					c('FieldName','Description','CodeValues')], 'Catalog')
-
-g4math.cv.map <- g4math$catalog[g4math$catalog$FieldName %in% names(g4math.complete),
-								c('FieldName','Description')]
-g4read.cv.map <- g4read$catalog[g4read$catalog$FieldName %in% names(g4read.complete),
-								c('FieldName','Description')]
-g8math.cv.map <- g8math$catalog[g8math$catalog$FieldName %in% names(g8math.complete),
-								c('FieldName','Description')]
-g8read.cv.map <- g8read$catalog[g8read$catalog$FieldName %in% names(g8read.complete),
-								c('FieldName','Description')]
 
 ##### Unadjusted Results #######################################################
 descriptives.out <- function(score, charter) {
@@ -240,28 +269,32 @@ g4math.overall <- naep.analysis(naep=g4math3,
 								score=g4math3$mathscore,
 								catalog=g4math$catalog,
 								grade=4,
-								subject='math')
+								subject='math',
+								cv.map=g4math.cv.map)
 
 g4read.overall <- naep.analysis(naep=g4read3, 
 								complete=g4read.complete, 
 								score=g4read3$readscore, 
 								catalog=g4read$catalog,
 								grade=4, 
-								subject='read')
+								subject='read',
+								cv.map=g4read.cv.map)
 
 g8math.overall <- naep.analysis(naep=g8math3, 
 								complete=g8math.complete, 
 								score=g8math3$mathscore, 
 								catalog=g8math$catalog,
 								grade=8, 
-								subject='math')
+								subject='math',
+								cv.map=g8math.cv.map)
 
 g8read.overall <- naep.analysis(naep=g8read3, 
 								complete=g8read.complete, 
 								score=g8read3$readscore, 
 								catalog=g8read$catalog,
 								grade=8, 
-								subject='read')
+								subject='read',
+								cv.map=g8read.cv.map)
 
 # Divide by standard deviation to get effect size
 g4math.overall$std.ci.min <- g4math.overall$ci.min / sd(g4math3$mathscore)
@@ -379,7 +412,7 @@ addtorow$command <- c(
 		     overall[19,'GradeSubject'], overall[28,'GradeSubject']),
 		   '} \\\\ \\cline{2-6} '),
 	'\\hline Method & Charter & Public & ATE & \\multicolumn{2}{c}{95\\% CI} \\\\')
-x <- xtable(overall[,c('x','charter','public','diff','ci.min','ci.max')],
+x <- xtable(overall[,c('x','charter','public','es','ci.min','ci.max')],
 			caption='Summary of Overall Propensity Score Results', label='tab:overall')
 print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow, 
 	  hline.after=c(nrow(overall)), file='../Tables2009/Overall.tex')

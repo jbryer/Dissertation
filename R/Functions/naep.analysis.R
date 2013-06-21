@@ -23,11 +23,12 @@
 #' @param score vector with the outcome variable.
 #' @param grade the grade (either 4 or 8).
 #' @param subject the subject (either math or read).
+#' @param cv.map data frame with two columns to map variable names to labels.
 #' @param dir.fig directory to save figures.
 #' @param dir.tab directory to save tables.
 #' @param return a data frame with one row per method including the mean difference
 #'        and confidence interval.
-naep.analysis <- function(naep, complete, catalog, score, grade, subject,
+naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map,
 						  dir.fig='../Figures2009',
 						  dir.tab='../Tables2009',
 						  dir.data='../Data2009') {
@@ -117,12 +118,37 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 						  labels=1:10, include.lowest=TRUE)
 	
 	# Balance plots
-# 	message('Saving balance plot...')
-# 	pdf(paste0(dir.fig, '/g', grade, subject, '-balance.pdf'))
+ 	message('Saving balance plot...')
 # 	cv.bal.psa(cv.trans.psa(complete[,!names(complete) %in% c('charter','state')]), 
 # 			   complete$charter, df$ps, strata=df$strata5)
-# 	dev.off()
-		
+	tmp <- complete[,cv.map$FieldName]
+	SRACE_White <- as.integer(tmp$SRACE == 'White')
+	SRACE_Black <- as.integer(tmp$SRACE == 'Black')
+	DSEX_Male <- as.integer(tmp$DSEX == 'Male')
+	tmp$SRACE <- NULL
+	tmp$DSEX <- NULL
+	tmp.map <- cv.map[cv.map$FieldName %in% names(tmp),]
+	tmp <- tmp[,tmp.map$FieldName]
+	names(tmp) <- tmp.map$Description
+	tmp$Race_White <- SRACE_White
+	tmp$Race_Black <- SRACE_Black
+	tmp$Gender_Male <- DSEX_Male
+
+	pdf(paste0(dir.fig, '/g', grade, subject, '-lr-balance.pdf'), width=10, height=8)
+	par(mai=c(1,3.5,1,1))
+	cv.bal.psa(tmp, complete$charter, df$ps, strata=df$strata10)
+ 	dev.off()
+
+	pdf(paste0(dir.fig, '/g', grade, subject, '-lrAIC-balance.pdf'), width=10, height=8)
+	par(mai=c(1,3.5,1,1))
+	cv.bal.psa(tmp, complete$charter, df$ps, strata=df$strata10AIC)
+	dev.off()
+	
+	pdf(paste0(dir.fig, '/g', grade, subject, '-tree-balance.pdf'), width=10, height=8)
+	par(mai=c(1,3.5,1,1))
+	cv.bal.psa(tmp, complete$charter, df$ps, strata=df$leaf)
+	dev.off()
+	
 	# Loess plots
 	message('Saving loess plots...')
 	pdf(paste0(dir.fig, '/g', grade, subject, '-loess.pdf'), width=12.0, height=8.0)
@@ -130,7 +156,8 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 			   responseTitle=paste0('Grade ', grade, ' ', subject, ' Score'), 
 			   treatmentTitle='Charter School',
 			   percentPoints.control=0.05, 
-			   percentPoints.treat=0.4)
+			   percentPoints.treat=0.4,
+			   plot.strata=10, plot.strata.alpha=.1)
 	dev.off()
 	
 	pdf(paste0(dir.fig, '/g', grade, subject, '-loessAIC.pdf'), width=12.0, height=8.0)
@@ -138,7 +165,8 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 			   responseTitle=paste0('Grade ', grade, ' ', subject, ' Score'), 
 			   treatmentTitle='Charter School',
 			   percentPoints.control=0.05, 
-			   percentPoints.treat=0.4)
+			   percentPoints.treat=0.4,
+			   plot.strata=10, plot.strata.alpha=.1)
 	dev.off()
 	
 	##### Stratification ###########################################################
@@ -162,22 +190,26 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 		ylab(paste0('Grade ', grade, ' ', subject, ' Score')) + scale_colour_hue('Charter School')
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-strata10AIC-boxplot.pdf'))
 	
-	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa5.pdf'))
+	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa5.pdf'), width=12, height=12)
+	par(oma=c(0,0,0,0))
 	strata5.results = circ.psa(df$score, df$charter, df$strata5, revc=TRUE)
 	dev.off()
 	
-	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa10.pdf'))
+	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa10.pdf'), width=12, height=12)
+	par(oma=c(0,0,0,0))
 	strata10.results = circ.psa(df$score, df$charter, df$strata10, revc=TRUE)
 	dev.off()
 	
-	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa5-AIC.pdf'))
+	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa5-AIC.pdf'), width=12, height=12)
+	par(oma=c(0,0,0,0))
 	strata5AIC.results = circ.psa(df$score, df$charter, df$strata5AIC, revc=TRUE)
 	dev.off()
 	
-	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa10-AIC.pdf'))
+	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa10-AIC.pdf'), width=12, height=12)
+	par(oma=c(0,0,0,0))
 	strata10AIC.results = circ.psa(df$score, df$charter, df$strata10AIC, revc=TRUE)
 	dev.off()
-	
+
 	test <- as.data.frame(table(df$leaf, df$charter))
 	badleaves <- test[test$Freq < 1,]$Var1
 	if(length(badleaves) > 0) {
@@ -185,15 +217,40 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 	} else {
 		df2 <- df
 	}
-	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa-tree.pdf'))
+	pdf(paste0(dir.fig, '/g', grade, subject, '-circpsa-tree.pdf'), width=12, height=12)
+	par(oma=c(0,0,0,0))
 	tree.results <- circ.psa(df2$score, df2$charter, df2$leaf, revc=TRUE)
 	dev.off()
+		
+	circ.psa.xtable <- function(circ, method, label) {
+		addtorow <- list()
+		addtorow$pos <- list()
+		addtorow$pos[[1]] <- c(0)
+		addtorow$command <- c(' & \\multicolumn{2}{c}{Public} & \\multicolumn{2}{c}{Charter} \\\\ \\cline{2-3} \\cline{4-5} Strata & Mean & n & Mean & n \\\\')
+		tmp <- as.data.frame(circ$summary.strata)[,c('means.FALSE','n.FALSE','means.TRUE','n.TRUE')]
+		tmp[,2] <- as.integer(tmp[,2])
+		tmp[,4] <- as.integer(tmp[,4])
+		x <- xtable(tmp, 
+					align=c('l','r','r@{\\extracolsep{.2cm}}','r','r'),
+					label=paste0('g', grade, subject, label),
+					caption=paste0(method, ' Results for Grade ', grade, ' ', subject))
+		print(x, include.rownames=TRUE, include.colnames=FALSE, add.to.row=addtorow, digits=0,
+			  caption.placement='top',
+			  file=paste0(dir.tab, '/g', grade, subject, label, '.tex'))		
+	}
+	
+	circ.psa.xtable(strata10.results, method='Logistic Regression Stratification', label='-circpsa10')
+	circ.psa.xtable(strata10AIC.results, method='Logistic Regression AIC Stratification', label='-circpsa10AIC')
+	circ.psa.xtable(tree.results, method='Classification Trees Stratification', label='-circpsa-tree')
 	
 	##### Matching #################################################################
 	df1 <- data.frame(state=naep[match1$index.control,]$FIPS02,
 					  public=score[match1$index.control], 
 					  charter=score[match1$index.treat])
 	t1 = t.test(df1$charter, df1$public, paired=TRUE)
+	
+	#granovagg.ds(df1[,c(2,3)])
+	#boxplot(df1[,3]-df1[,2])
 	
 	df5 <- data.frame(state=naep[match5$index.control,]$FIPS02,
 					  public=score[match5$index.control], 
@@ -214,17 +271,17 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 		
 	# Balance plots
  	plot(ml.ctree.balance)
- 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-balance.pdf'), width=11, height=8.5)
+ 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-balance.pdf'), width=11, height=5)
 
 	plot(ml.lr.balance)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-balance.pdf'), width=11, height=8.5)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-balance.pdf'), width=11, height=5)
 	
 	plot(ml.lrAIC.balance)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-balance.pdf'), width=11, height=8.5)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-balance.pdf'), width=11, height=5)
 	
 	# Tree heat map
-	tree.plot(ml.ctree, level2Col=naep$state)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-heat.pdf'), width=8, height=8)
+	tree.plot(ml.ctree, level2Col=naep$state) + scale_y_discrete(breaks=cv.map$FieldName, labels=cv.map$Description)
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-heat.pdf'), width=8, height=4)
 	
 	# mlpsa plots
 	pdf(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree.pdf'), width=8, height=8)
@@ -244,19 +301,19 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject,
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-circ.pdf'))
 	
 	mlpsa.difference.plot(ml.ctree.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-diff.pdf'))
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-ctree-diff.pdf'), width=8, height=6)
 	
 	mlpsa.circ.plot(ml.lr.result) + coord_flip() + theme(aspect.ratio=1)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-circ.pdf'))
 
 	mlpsa.difference.plot(ml.lr.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-diff.pdf'))
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lr-diff.pdf'), width=8, height=6)
 	
 	mlpsa.circ.plot(ml.lrAIC.result) + coord_flip() + theme(aspect.ratio=1)
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-circ.pdf'))
 	
 	mlpsa.difference.plot(ml.lrAIC.result)
-	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-diff.pdf'))
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-diff.pdf'), width=8, height=6)
 	
 	x <- xtable(ml.ctree.result, label=paste0('g', grade, subject, '-mlpsa-ctree'), display=NULL,
 				caption=paste0('Multilevel PSA Results using Conditional Inference Trees: Grade ', grade, ' ', subject))

@@ -19,6 +19,8 @@
 \usepackage{appendix}
 \usepackage{longtable}
 \usepackage{multirow}
+\usepackage{MnSymbol}
+\usepackage{moreverb}
 
 %\usepackage{caption}
 %\DeclareCaptionLabelSeparator{apatablestyle}{\\}
@@ -108,9 +110,9 @@ As with all propensity score analyses, it is preferable to utilize multiple meth
 \setcounter{tocdepth}{5}
 \tableofcontents
 \cleardoublepage
-\addcontentsline{toc}{section}{List of tables}  \listoftables
+\addcontentsline{toc}{section}{List of Tables}  \listoftables
 \cleardoublepage
-\addcontentsline{toc}{section}{List of figures} \listoffigures
+\addcontentsline{toc}{section}{List of Figures} \listoffigures
 
 %==================== CHAPTER 1 ====================================================================
 \cleardoublepage
@@ -161,8 +163,23 @@ These education policies will open the doors of opportunity for our children. Bu
 
 \noindent Though we must be acutely aware and acknowledge the fact that schools are merely one factor of many that contribute to a students academic achievement, it does not preclude us from evaluating schools for their part. Similar to issue one, we argue that PSA provides an approach to best approximate the effects of school choice.
 
-\subsection{Guiding Research Question}
-Given that charter schools are being offered as a solution for the needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter schools and public schools using the National Assessment of Educational Progress and propensity score analysis. More specifically, this study proposes to address the question: Are there differences between charter and public schools? And if so, what is the nature and extent of those differences?
+%\subsection{Guiding Research Questions}
+%Given that charter schools are being offered as a solution for the needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter schools and public schools using the National Assessment of Educational Progress and propensity score analysis. More specifically, this study proposes to address the question: Are there differences between charter and public schools? And if so, what is the nature and extent of those differences?
+
+%Moreover, this study proposes a new approach to propensity score analysis with multilevel data. Given that states have varying laws regarding how charter schools operate, data analysis should account for those potential systematic differences. The development of the \texttt{multilevelPSA} R package will provide methods to estimate and visualize the propensity score results both within states as well as provide an overall national estimate. Additionally, this study will introduce this new class of propensity score method within the context of two well established approaches, stratification and matching, where the former does not directly account for multilevel data and the latter makes indirect, partial, and implicit, adjustment for clustering. Lastly, I will emphasize and show the importance of visualizations to interpret all aspects of propensity score analysis.
+
+\subsection{Research Questions \& Objectives} 
+The primary focus of this study is the development of a new set of methods for propensity score analysis with multilevel, or clustered, data. One of these aims is to show how graphics can be used to address research questions in the context of multilevel propensity score analysis; another is to describe and illustrate the key features of a new package of R functions to facilitate multilevel propensity score analyses, vis-\`{a}-vis the \texttt{multilevelPSA} package in R. Moreover, these new multilevel methods for propensity score analysis will be presented within the context of more traditional methods for propensity score analysis, namely stratification and matching. Not only will this show how these new methods perform with regard to more established methods, they may show with the use of modern graphics, how clusters may vary. 
+
+The newly developed multilevelPSA package will be shown to provide an effective means of estimating and visualizing propensity score results with clustered (multilevel) data (these procedures are discussed more fully below; see also Figure 2). Moreover, the use of pre-existing visualization procedures such as loess regression plots, density plots, as well as the PSA balance and assessment plots introduced by \citeA{HelmreichPruzek2009}, can provide critical insight into the analysis and eventual interpretation of results. More succinctly, the presentation of graphics in this study are not merely provided for diagnostic or descriptive purposes, but are a critical component of presenting, analyzing, and interpreting results. For instance, related to research questions two and three below, it is the graphics that will be most revealing in the differences, if any, and not the numerical analyses (though numerical analyses are provided).
+
+Given that charter schools are regularly being offered as solutions for needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter and traditional public schools using the National Assessment of Educational Progress (NAEP) using multiple propensity score methods. More specifically, this study proposes to address the questions:
+
+\begin{enumerate} 
+	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and traditional public schools with regard to math and reading scores at grades 4 and 8?
+	\item If so, what is the nature and magnitude of this difference for the two outcomes reading and mathematics (for two grade levels)?
+	\item And finally, how, and how much do identified differences differ between states with differing charter school laws?
+\end{enumerate}
 
 
 
@@ -170,7 +187,7 @@ Given that charter schools are being offered as a solution for the needed educat
 \cleardoublepage
 \section{Chapter 2: Review of the Literature}
 
-\subsection{History of Charter Schools}
+%\subsection{History of Charter Schools}
 Though Ray Budde is often credited with the current charter school movement \cite{kolderie05}, the term \textit{school choice} can be traced back to Adam Smith's \textit{Wealth of Nations}, Thomas Paine's \textit{Rights of Man}, and John Stuart Mill's \textit{On Liberty} \cite{herbst2006}. Prior to the Revolutionary War, given the religious diversity of colonial America, issues of education were left to local communities. However, after the war Revolutionary leaders argued that local schools were no longer sufficient for educating students for the emerging state and federal governments. It was Thomas Jefferson who, in 1779, introduced the first bill in Virginia that would establish a public school system. It was this, along with numerous other American intellects during the 1780s and 1790s, that established public schools throughout the young nation thereby relegating school choice to a choice between the public school and, predominately religious, private schools.
 
 In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see Figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
@@ -233,6 +250,13 @@ Lastly, the \citeA{credo} found variation of charter school effectiveness across
 
 %\paragraph{Criticisms of the CREDO Study}
 
+\subsection{Propensity Score Analysis}
+
+Randomized experiments are the gold standard for estimating causal effects of a treatment. However, as is frequently the case in educational contexts, randomization for this project is neither ethical nor feasible. Therefore, propensity score methods (Rosenbaum \& Rubin, 1983) using matching (Stuart \& Rubin, 2007; Stuart, 2010) and stratification methods (Raudenbush, Hong, \& Rowan, 2003) will be used to make available quasi-experimental estimates of causal effects (see e.g., Schneider, Carnoy, Kilpatrick, Schmidt, \& Shavelson, 2007; Stuart \& Rubin, 2007). Recent research comparing the use of propensity score methods with randomized experiments have shown that causal estimates from observational studies using propensity score methods are generally consistent with those from randomized experiments (Cook, Shadish, \& Wong, 2008; Shadish, Clark, \& Steiner, 2008). The use of propensity score methods in published psychology and education research has been growing over the last decade (Thoemmes \& Kim, 2011).
+
+The selection of covariates is particularly challenging in propensity score analysis. As such, multiple methods for the estimation of propensity scores will be used (Rosenbaum, 2012). The goal in the estimation of propensity scores is to reduce selection bias, therefore simple significance testing is not appropriate (Rosenbaum, 2002) since potentially non-significant covariates may be proxies for important non-observed covariates. Although this study has been designed to measure the same covariates as would be used in a randomized block design, multiple methods utilizing varying number of covariates will be used. Moreover, we wish to provide overall effect sizes but also measure the effects of clustering of state. 
+
+
 
 
 
@@ -275,74 +299,96 @@ The NAEP reading assessment is designed to account for three reading contexts: r
 
 \subsection{Analysis}
 
+This study utilizes propensity score analysis for estimating causal effects of students attending charter schools. The propensity score is ``the conditional probability of assignment to a particular treatment given a vector of observed covariates" \cite{RosenbaumRubin1983}. The probability of being the in treatment is defined as:
 
+$$\pi ({ X }_{ i }) \; \equiv \; Pr({ T }_{ i } = 1 | { X }_{ i })$$
 
-\subsubsection{Phase I}
-Propensity score analysis \cite<PSA;>{rosenbaum83} is a statistical method or approach that attempts to adjust for selection bias in observational studies and has become increasingly popular in medical research \cite{Austin2008} and in the social sciences \cite{ThoemmesKim2011}. 
+\noindent Where $X$ is a matrix of observed covariates. The balancing property under exogeneity states that,
 
-Most of the studies conducted using PSA involve analysis in two phases where phase one involves the the calculation of propensity scores or matching for both treatment and control units of analysis; and phase two involves the comparison of those two groups. However, in situations where data is multilevel, or clustered, special consideration is necessary both at phase I and II. For the NAEP data, the state variable will be used as the level 2 identifier. The algorithm in the \texttt{multilevelPSA} package \citeA{Bryer2011} will facilitate the multilevel PSA analysis. Specifically, for phase I, three approaches will be used for stratifying students for comparison, namely conditional inference trees \citeA{HorthornHornikZeileis2010}, logistic regression, and matching. For each approach, the stratification procedure will be performed separately for each state so that direct comparisons between students in phase II do not occur between states. That is, students within a stratification or two students being matched must reside in the same state.
+$${ T }_{ i } \; \upModels { X }_{ i } \;| \; \pi ({ X }_{ i })$$
 
-\subsubsection{Phase II}
-The second phase of the propensity score analysis involves comparing dependent variables of students with similar propensity scores using standard \textit{t}-tests and reporting corresponding confidence intervals and effect sizes. However, for multilevel data analysis occurs in two states. First, comparisons are made for each state. The results from each state can then be aggregated to provide an overall difference and effect size. 
+\noindent In the case of randomized experiments, the strong ignobility assumption states,
+
+$$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i }|{ X }_{ i }$$
+
+\noindent for all ${X}_{i}$. That is, treatment is independent of all covariates, observed or otherwise. However, we can restate the strong ignobility assumption with the propensity score as,
+
+$$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i } \; | \; \pi({ X }_{ i })$$
+
+\noindent So that treatment placement is ignorable given the propensity score presuming sufficient balance is achieved.
+
+The average treatment effects (ATE) is defined as $E(r_1) - E(r_0)$ where $E(.)$ is the expected value in the population. Given a set of covariates, $X$, and outcomes $Y$, where 0 denotes traditional public school student and 1 denotes charter school student, ATE is defined as:
+
+$$ATE=E(Y_{1}-Y_{0}|X)=E(Y_{1}|X)-E(Y_{0}|X)$$
+ 
+\noindent Or the difference between charter and traditional public school given the set observed covariates.
+
+\citeA{Rosenbaum2012} suggests that hypotheses should be tested more than once in observational study. This study will estimate treatment effects using nine separate propensity score models within three larger classes. The third class of PSA, multilevel PSA, and as implemented in the \texttt{multilevelPSA} R package, was developed in part for this dissertation. For each of the four subject and grade combinations, the following methods will be used resulting in a total of 36 propensity score analyses being conducted.
+
+\begin{enumerate}
+\item Propensity score analysis using stratification. This method ignores state assignment as a clustering variable. Under this broader method three statistical methods for stratification will be used:
+	\begin{enumerate}	\item Full logistic regression. This method will estimate propensity scores using logistic regression with all available covariates, but will exclude interaction or product terms.	\item Logistic regression with step AIC. The step AIC in the MASS package (Venables \& Ripley, 2002) will select the best logistic model based upon the Akaike Information Criterion (Akaike, 1974). In this case the ‘best’ first order interaction terms will be added to the main effect terms in a.	\item Conditional inference trees, based on all covariates; missing data will also be accommodated with the tree-based methods.
+	\end{enumerate}\item Propensity score matching. This method implicitly accounts for clustering. That is, the method used will find matches between treated and control units that first match exactly on state, ethnicity, and gender, then finds a best match based upon the propensity scores estimated using logistic regression. As suggested by Stuart (2010), multiple matched sets will be formed using:
+	\begin{enumerate}	\item One-to-one.	\item One-to-five.	\item One-to-ten.	\end{enumerate}
+	A dependent sample analysis will be performed on the resulting matched pairs (Austin, 2011).\item Multilevel propensity score analysis (see e.g. Bryer, 2011). This method will utilize the same stratification methods as described in method one above, namely:
+	\begin{enumerate}
+	\item Full logistic regression.	\item Logistic regression with step AIC.	\item Conditional inference trees.
+	\end{enumerate}
+\end{enumerate}
+
 
 \subsubsection{Graphical Representation}
-Given the large amount of data that needs to be summarized, the use of graphics will be emphasized. The \texttt{multilevelPSA} package provides a number of graphing functions that extend the framework introduced by Helmreich and Pruzek for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot. In this graphic, the x-axis corresponds public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle is a state with its size corresponding the number of students within each state. The distribution of differences between charter and public schools across states are represented as tick marks along the diagonal line in the bottom left of the graphic. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 281 and the overall adjusted mean for public school student is 278. The dashed blue line parallel to the unit line corresponds to the overall adjusted mean difference and likewise, the dashed green lines correspond to the confidence interval.
+%Given the large amount of data that needs to be summarized, the use of graphics will be emphasized. The \texttt{multilevelPSA} package provides a number of graphing functions that extend the framework introduced by Helmreich and Pruzek for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot. In this graphic, the x-axis corresponds public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle is a state with its size corresponding the number of students within each state. The distribution of differences between charter and public schools across states are represented as tick marks along the diagonal line in the bottom left of the graphic. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 281 and the overall adjusted mean for public school student is 278. The dashed blue line parallel to the unit line corresponds to the overall adjusted mean difference and likewise, the dashed green lines correspond to the confidence interval. This figure will be explored in further detail in chapter four.
 
-\begin{figure}[tp]
+Given the large amount of data that needs to be summarized, the use of graphics will be an integral component of representing the results. The \texttt{multilevelPSA}\footnote{The \texttt{multilevelPSA} package was written by the author and is available from \url{http://github.com/jbryer/multilevelPSA}.} package provides a number of graphing functions that extend the framework introduced by \citeA{HelmreichPruzek2009} for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot with annotations. In this graphic, the x-axis corresponds to traditional public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle (a) is a state with its size corresponding the number of students within each state. Each state is projected to the lower left, parallel to the unit line, such that a tick mark is placed on the line with slope -1 (b). These tick marks represent the distribution of differences between charter and traditional public schools across states. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 278 and the overall adjusted mean for traditional public school student is 278 and represented by the horizontal (c) and vertical (d) blue lines, respectively. The dashed blue line parallel to the unit line (e) corresponds to the overall adjusted mean difference and likewise, the dashed green lines (f) correspond to the confidence interval. Lastly, rug plots along the right and top edges of the graphic (g) correspond to the distribution of each state's overall mean charter and traditional public school NAEP scores, respectively.
+
+\begin{figure}[t]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/AnnotatedCircPlot.pdf}
-\caption{Multilevel PSA Assessment Plot: Grade 4 Math}
+\includegraphics[width=.9\textwidth]{../Figures/AnnotatedCircPlot.pdf}
+\caption{Annotated Multilevel PSA Assessment Plot}
 \label{fig:g8math:circ}
 \end{center}
 \end{figure}
 
+Figure \ref{fig:g8math:circ} represents a large amount of data and allows provides much greater insight into the data and results. The figure provides overall results that would be present in a traditional table, for instance the fact that the green dashed lines span the unit line (i.e. y = x) indicates that there is a non-significant difference between the two groups. However additional information is difficult to convey in tabular format. For exmaple, the rug plots indicate that the variance in the performance of charter schools is much greater than that of traditional public schools. We can also observe that most states cluster near the overall mean (i.e. where the vertical and horizontal blue lines intersect), but there are a few states that perform well below the rest of the states (namely those located towards the bottom left of the figure). These are of particular interest due to the fact that theese states are among those with the greatest difference in favor of charter schools. That is, the states where charter schools are performing substantially better than their traditional public school counterparts are overall performing substaintly worse than other states.
 
-Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the differences both between and across states. Similar to the mutlielvel PSA assessment plot, each blue dot corresponds to a state and is sized relative to the number of students within each state. The light gray dots correspond to each of the strata within each state. The graphic also provides confidence intervals for each state as well as the overall adjusted mean difference and confidence interval.
 
-\begin{figure}[tp]
-\begin{center}
-\includegraphics[height=\textwidth]{../Figures2009/g8math-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA Difference Plot: Grade 8 Math}
-\label{fig:g8math:diff}
-\end{center}
-\end{figure}
+
+%Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the differences both between and across states. Similar to the mutlielvel PSA assessment plot, each blue dot corresponds to a state and is sized relative to the number of students within each state. The light gray dots correspond to each of the strata within each state. The graphic also provides confidence intervals for each state as well as the overall adjusted mean difference and confidence interval.
 
 
 %==================== CHAPTER 4 ====================================================================
 \cleardoublepage
 \section{Chapter 4: Results}
 
-In this chapter I will outline in detail the results of all the propensity score models described in chapter three. Since NAEP is organized such that each grade and subject combination is a separate dataset, this chapter will focus on the analysis of grade four math. The results for grade four reading, grade eight math, and grade eight reading are included in the appendices. The chapter begins with a discussion of data preparation, followed by details of the nine propensity score methods used, and concludes with a summary, including tables and figures, of the overall results across all grades and subjects.
+This chapter will outline in detail the results of all the propensity score models described in chapter three. Since NAEP is organized such that each grade and subject combination is a separate dataset, this chapter will focus on the analysis of grade four math. The results for grade four reading, grade eight math, and grade eight reading are included in the appendices. The chapter begins with a discussion of data preparation, followed by details of the nine propensity score methods used, and concludes with a summary, including tables and figures, of the overall results across all grades and subjects.
 
 All analysis was conducted using R \cite{redevelopment}\footnote{All R scripts are available from Github at \url{https://github.com/jbryer/Dissertation}. Due to the licensing agreement with NCES, data is not included. However, researchers with access to the 2009 restricted use data should be able to replicate the analysis outlined in this chapter.}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN). 
+
 
 \textit{Formatting note}. Since the development of the R packages are in and of themselves a major component of this dissertation, I will make reference to some of the functions available. All references to R packages and functions will appear in a \texttt{fixed width font}.
 
 \subsection{Data Preparation}
 
+The propensity score methods I will use attempt to adjust for selection bias using the available observed covariates. However, the the geographic distribution of charter schools is not equal. That is, charter schools are more prevalent in certain geographic regions of the country, often within urban areas. Since there are several orders of magnitude difference in the number of charter school to traditional public school students, selecting a subset of all the traditional public school students available in NAEP is possible. Specifically, by selecting traditional public school students who live in close proximity to a charter school the likelihood of them actually choosing a school increases. According to the National Household Travel Study, students travel an average of five miles to school. The Common Core of Data \cite{ccd} provides the location of very public school in the United States. For each traditional public school the distance to the closest charter school was calculated using line-of-sight distance. Approximately 20\% of traditional public schools, within states that have charter schools, were more than five miles from a charter school. Those schools, and subsequently students attending those schools and in any of the NAEP datasets, were eliminated from the study.
 
-\subsubsection{Missing Data Imputation}
-Stratification by logistic regression (using two approaches to covariate selection) and matching require a complete dataset to estimate the models. As such, missing data was imputed using multivariate imputation by chained equations \citeA{vanbuuren} vis-\`a-vis the MICE package \citeA{mice} in R.
-
+Appendix B provides descriptive statistics for all the covariates for the four datasets. Additionally, unadjusted differences in NAEP scores for each state containing a charter school are provided. Table \ref{dependentDescriptives} below provide the overall, unadjusted, differences in NAEP scorers for the four datasets.
 
 \input{../Tables2009/descriptives.tex}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4math-missing.pdf}
-\caption{Missing Data Plot: Grade 4 Math}
-\label{fig:g4math:missing}
-\end{center}
-\end{figure}
+\subsubsection{Missing Data Imputation}
+Logistic regression, which is one of the two ways propensity scores will be estimated, require a complete dataset for estimation. Appendix D provides figures created using the \texttt{missing.plot} function in the \texttt{multilevelPSA} package representing the extent of missingness for each covariate within each state. The first thing these figures reveal is that there is complete missingness in the majority of covariates for Alaska in grade four. As a result Alaska was removed from all datasets and will not be included in the study. 
+
+Secondly, the figures show that there are fewer than 5\% of values are missing for the vast majority of covariates. In grade four math and reading, the three exceptions are newspapers in home, magazines in home, and encyclopedia in home. Grade eight math and reading also show a higher rate of missingness in these three covariates, but also in parent's education level. To examine whether data is missing at random, a logistic regression model was estimated predicting treatment from a shadow matrix (i.e. a matrix with the same dimension of the original dataset with 0s and 1s where 1s indicate the value is missing). The results of these models indicate that there is no relationship between charter school attendance and whether a student completed items regarding newspapers, magazines, and encyclopedias in the home. However, for grade eight math and reading, missingness of mother's and father's education level were statistically significant (\textit{p} < .05) predictors of treatment. It should also be noted that charter school students mother's education level was less likely to be missing whereas father's education level was less likely to be missing for traditional public schools. Although these two covariates are often important for understanding students educational backgrounds, the figures in Appendix I depicting the relative importance of each covariate for predicting charter school attendance using conditional inference trees which are estimated with missingness included, suggest that these covariates have relatively low, or no, predictive value for charter school attendance. Therefore, missing values for these covariates will be imputed and used to estimate propensity scores for the logistic regression and matching methods. 
+
+Multiple imputation \cite{rubin1987,rubin1996} has become a popular approach for imputing missing values in datasets. For this study, missing data was imputed using  by multivariate imputation by chained equations vis-\`a-vis the MICE package \citeA{mice} in R\citeA{vanbuuren}. This package implements the fully conditional specification (FCS) method of imputation whereby separate multivariate imputation models are estimated for each variable containing missing values so that each model has its own set of conditional densities. Since the algorithm iterates through the data in small steps, providing diagnosing the imputed values as proceeding, the result is a robots estimate of imputed values. For this study, we will utilize both the original incomplete data for estimating propensity scores with classification trees and the complete imputed data for estimation propensity scores using logistic regression.
 
 
+\subsection{Propensity Score Analysis with Stratification}
 
-\subsection{Propensity Score Analysis
+The first class of propensity score methods used is stratification. The general approach of stratification methods is to subdivide the available sample into smaller groups that have similar covariate profiles. Then a comparison using of mean differences between the treatment and control are made and an overall result is pooled from those individual comparisons. There are several ways to stratify the sample. For this study deciles based upon the propensity scores (i.e. fitted values of a logistic regression model) and leaves of a fitted classification tree. Moreover, given the importance of covariate selection and omission from propensity score models, two types of logistic regression models are used, namely a full model using all available covariates and an Akaike Information Criterion \cite<AIC;>{Akaike1974} optimized model. The former is determined by a stepwise model selection algorithm where covariates are added and dropped and the model with that optimizes the AIC is retained.
 
-\subsubsection{Propensity Score Analysis with Stratification}
-
-
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-loess.pdf}
 \caption{Loess Regression Assessment Plot: Grade 4 Math}
@@ -350,54 +396,116 @@ Stratification by logistic regression (using two approaches to covariate selecti
 \end{center}
 \end{figure}
 
-\begin{figure}[ht]
+However, before stratifying the logistic regression models we can examine the relationship between propensity scores and the outcome variable for the two groups. Furthermore, fitting a Loess regression line to that scatter plot provides an overall indication of the differences, if any. Figure \ref{fig:g4math:loess} is a Loess Regression Assessment Plot created using the \texttt{loess.plot} function in the \texttt{multilevelPSA} package. The main panel is a scatterplot of each students propensity score on the \textit{x}-axis and math score on the \textit{y}-axis (for clarity a random 10\% sample of data points are plotted). Two fitted Loess regression lines with approximate 95\% confidence intervals are also plotted (Loess lines are based upon the full dataset and not the sample). The panel on the top provides a density distributions of the propensity scores and shows that there is generally good overlap between the two groups. The panel on the right is a density distribution of the unadjusted outcome and here shows that before propensity score adjustment traditional public school students performed slightly better than charter school students. However, given the strong overlap in the two Loess regression lines, this figure suggests there is no discernible difference in performance between traditional public school students and charter school students in grade four math. Corresponding plots for the other datasets as well as those for the AIC optimized models are provided in Appendix D.
+
+The vertical lines in the main panel of Figure \ref{fig:g4math:loess} represent the deciles, or strata. Figure \ref{fig:g4math:circpsa} is a propensity score assessment plot where the \textit{x}-axis is the outcome score for charter schools and the \textit{y}-axis is the outcome sore for traditional public schools. Each circle corresponds to each strata and the size of the circle is proportional to the number of students within each strata. For the Logistic regression models, since deciles were used, each circle is of the same size. Figure \ref{fig:g4math:circpsa:tree} is the corresponding propensity score assessment plot for the classification tree model and therefore each strata is not of the same size. For points that lie on or near the unit line, $y = x$, indicate no significant difference in the outcome of the two scores. Lines are projected to a line perpendicular to the unit line and the tick placed. These tick marks correspond to the distribution of difference scores and the dashed blue line parallel to the unit line the overall mean difference. Furthermore, the green bar represents exactly the 95\% confidence interval. Therefore, we can interpret the fact that the confidence interval does not span the unit line and is on the tradition public school side to indicate there is small statistically significant difference in favor of traditional public school students. Tables \ref{g4math-circpsa10}, \ref{g4math-circpsa10AIC}, and \ref{g4math-circpsa-tree} provide numeric results for each strata. Appendix F contains propensity score assessment plots and summary tables for grade four reading, grade eight math, and grade eight reading.
+
+\subsubsection{Covariate Balance}
+
+The goal of propensity score methods is to adjust for selection bias with the available observed covariates. In practice we test for the effectiveness of bias reduction by evaluating covariate balance. Perfect balance is achieved when there are no differences in covariate values for any matched pair or strata. However, perfect balance is almost never achieved. Figure \ref{fig:g4math:balance} is a Covariate Effect Size balance plot. For each covariate on the \textit{y}-axis the absolute standardized effect size before adjustment (in red) and after adjustment (in blue) are plotted. Effect sizes for individual strata are represented by letters. This figures shows that the propensity score adjustment greatly reduced the effects of each covariate. The remaining covariate balance plots are provided in Appendix E.
+
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-lr-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 4 Math}
+\label{fig:g4math:balance}
+\end{center}
+\end{figure}
+
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-circpsa10.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 4 Math}
+\label{fig:g4math:circpsa}
+\end{center}
+\end{figure}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-circpsa-tree.pdf}
+\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 4 Math}
+\label{fig:g4math:circpsa:tree}
+\end{center}
+\end{figure}
+
+\clearpage
+\input{../Tables2009/g4math-circpsa10.tex}
+\input{../Tables2009/g4math-circpsa10AIC.tex}
+\input{../Tables2009/g4math-circpsa-tree.tex}
+
+
+\subsection{Propensity Score Matching}
+
+The second class of propensity score method used is propensity score matching. In propensity score matching the goal is to match students from the two groups with small differences in their propensity scores. In large datasets, or when particular covariates are determined to be more important for adjusting selection bias, whether theoretically or otherwise, partial exact matching is done. In the context of this study partial exact matching is akin to implicitly adjusting for the multilevel nature of the data. That is, for this study, students are first matched exactly by state, gender, and ethnicity, then by propensity score. Propensity scores from the full logistic regression model are used for matching.
+
+The \texttt{Matchby} function in the \texttt{Matching} \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement.
+
+Once matched pairs were determined, dependent sample \textit{t}-tests were performed \cite{Austin2011} to estimate average treatment effect and corresponding confidence intervals. Figures \ref{fig:overallcirc} and \ref{fig:overalldiff} and Table \ref{tab:overall} at the end of the chapter provide the overall results. In general however, matching methods tend to estimate slightly larger treatment effects than both the stratification and multilevel models. And of additional note, the confidence intervals shrink as the ratio of treatment-to-control units increases.
+
+
+\subsection{Multilevel Propensity Score Analysis}
+
+The final class of propensity score method utilized in multilevel propensity score analysis. This approach to PSA was developed for this dissertation and implemented in the \texttt{multilevelPSA} R package. The multilevel PSA approach makes explicit in both phase I and II the multilevel nature of the data dat,. in the case of this study, state. In principle the multilevel PSA approach is a conceptual combining of the partial exact matching and stratification. However, whereas partial exact matching utilizes propensity scores estimated from a single logistic regression model, the multilevel PSA algorithm will estimate separate propensity score models, using either logistic regression or classification trees, for each level two cluster (i.e. state). That is, the algorithm will perform \textit{m} separate propensity score analyses using stratification where \textit{m} is the number of states. This approach provides average treatment effects for each state as well as an overall, national, estimated treatment effect.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
+\caption{Multilevel PSA Covariate Heat Map for Classification Trees: Grade 4 Math}
+\label{fig:g4math-mlpsa-ctree-heat}
+\end{center}
+\end{figure}
+
+
+The same three methods of stratification described above will be used, full logistic regression model using all covariates, logistic regression model that optimized Akaike Information Criterion (AIC), and classification trees. For the logistic regression models strata will be defined using quintiles of the propensity scores. One difficulty in interpreting results for multilevel PSA models is the relative importance of covariates for predicting treatment. Figure \ref{fig:g4math-mlpsa-ctree-heat} is a covariate heat map that depicts each covariate on the \textit{y}-axis and state on the \textit{x}-axis. If a covariate is present in fitted classification tree for that state, the intersecting cell is shaded. The darkness of the color represents how far down the tree that covariate first appears. That is, the darkest color indicates that the covariate was used to split the tree at the root (or the first splitting covariate). This provides an opportunity to compare the relative importance of each covariate across states. The results for grade four math show that ethnicity is the strongest predictor of treatment having appeared in 17 of the trees with National School Lunch eligibility as the second. It should be noted that for the classification tree methods, strata with fewer than five students in either of the two groups were eliminated. Since quintiles were used for the logistic regression models, all students within those states are used. Table \ref{g4math-mlpsa-ctree} provides the results within each each strata of each state including strata size.
+
+
+\subsubsection{Covariate Balance}
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Classification Trees: Grade 4 Math}
+\label{fig:g4math-mlpsa-ctree-balance}
+\end{center}
+\end{figure}
+
+
+Figure \ref{fig:g4math-mlpsa-ctree-balance} is multilevel PSA counterpart to the covariate balance plot described above. Individual strata have been excluded for clarity since there substantially more strata. This figure shows that, in general, relatively good balance has been achieved since the adjusted absolute effect sizes are one, smaller or not substantially different than the unadjusted effect sizes, and two, all the adjusted effect sizes are smaller than 0.1. The remaining multilevel PSA covariate balance plots are provided in Appendix G. It should be noted that the classification tree methods, in general, provide much better balance than the logistic regression models. This is a limitation of estimating logistic regression models with smaller samples which have disproportional number of control-to-treatment students in the dependent variable. As such, interpreting the multilevel PSA logistic regression models in isolation is discouraged. However, this study follows the advise of \citeA{Rosenbaum2012} in that these are two of the nine methods used to estimate causal effects.
+
+
+\subsubsection{Visualizing Multilevel PSA}
+
+
+An important advantage of multilevel PSA is that average treatment effects can be estimated for each state and then aggregated to provide a national average treatment effect. A number of graphics have been developed to help interpret these results. Figure \ref{fig:g4math-mlpsa-ctree-diff} is a multilevel PSA assessment plot for grade four math. This is an extension of the PSA assessment plots described above. The main panel (top-right) is a scatter plot where each point represents the overall adjusted score for each state (the point size is proportional to the number of students sampled in each state) with traditional public schools on the \textit{x}-axis and charter schools on the \textit{y}-axis. The panels to the bottom and left provide adjusted scores for each strata within each state as well as the overall state score for traditional public schools and charter schools, respectively. The overall national mean scores are represented by the blue lines. The tick marks on the line perpendicular to the unit line ($y = x$) represent the distribution of differences for states. The dashed blue line\footnote{For this dataset the blue line almost complete overlaps the unit line but is present.} is the overall national mean difference and the green lines the 95\% confidence interval. This figure depicts that there is now statistically significant difference nationally for grade four math using classification trees. Moreover, we see that there is minimal difference for most states since most of the points fall close to the unit line. Although there are some states that have a small positive effect size while others have a small negative effect. 
+
+\begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree.pdf}
-\caption{Multilevel PSA Assessment Plot: Grade 4 Math}
+\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 4 Math}
 \label{fig:g4math-mlpsa-ctree}
 \end{center}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA Difference Plot: Grade 4 Math}
+\caption{Multilevel PSA Difference Plot Classification Trees: Grade 4 Math}
 \label{fig:g4math-mlpsa-ctree-diff}
 \end{center}
 \end{figure}
 
-
-%\begin{singlespace}
-%\input{../Tables2009/g4math-ctree-level1.tex}
-%\input{../Tables2009/g4math-ctree-level2.tex}
-%\input{../Tables2009/g4math-desc.tex}
-%\end{singlespace}
-
-%\input{../Tables/overall.results.tex}
-
+Figure \ref{fig:g4math-mlpsa-ctree-diff} provided a more detailed depiction of the differences. The small grey points correspond to the difference within each strata. The blue points are the overall difference for each state; the point size corresponding to the number of students sampled; and 95\% confidence intervals for each state in green. The overall adjusted national effect size and corresponding 95\% confidence interval are represented by the vertical blue line and vertical green lines, respectively. Figures for grade four reading, grade eight math,and grade eight reading are provided in Appendix H.
 
 \clearpage
-\subsubsection{Propensity Score Matching}
-
-%\input{../Tables/overall.matching.results.tex}
-
-
-%\clearpage
-\subsubsection{Multilevel Propensity Score Analysis}
-
-\subsubsection{Phase I}
-
-\subsubsection{Phase II}
-
-%\input{../Tables/overall.multilevel.results.tex}
-
-\subsubsection{Graphical Representations of Multilevel PSA}
-
-
-
 \subsection{Summary and Overall Results}
 
-\begin{figure}[ht]
+Up to this point in the chapter I have outlined the nine propensity score methods used for estimating treatment effects with grade four math. The corresponding tables and figures have been references in the appendices. In this section I will provide two figures and one table that summarize the 36 propensity score models estimated.
+
+Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated treatment effects for all 36 PSA methods. The differences across subjects and grades is inconsequential. The diameter of the circles in this figure are equal to the confidence interval so that circles that overlap the unit line indicate a non-significant difference. This figure shows that, in general, the scores for charter school students are in general higher when adjusted whereas the traditional public school scores are the same or lower. Regardless, in most cases the differences do not deviate substantially from the unit line indicating either no, or a small, difference is scores. 
+
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/OverallScatter.pdf}
 \caption{PSA Circle Plot of Adjusted Means}
@@ -405,9 +513,11 @@ Stratification by logistic regression (using two approaches to covariate selecti
 \end{center}
 \end{figure}
 
+Figure \ref{fig:overalldiff} provides the overall national effect sizes for each PSA method within each grade and subject. Table \ref{tab:overall} provide numeric results for this figure. This figure reveals a number of important conclusions. First, with regard to the effects of charter schools, there is some variety in effects across the different grades and subjects. In general, it appears charter schools either perform worse than or equal to traditional public schools in grade four. A few models within grade eight in both math and reading suggest small positive effects. However, even when there are statistically significant positive effects the maximum effect size is relatively small 0.1. 
 
+Secondly, Figure \ref{fig:overalldiff} reveal some trends in the behavior of the different propensity score methods. There appear to be fairly good consistency in the estimated effects within stratification and matching method although in general the matching methods provide larger effect size estimates. It should be noted that the matching methods, even with one-to-ten, use fewer than 40\% of the available traditional public school students whereas the stratification methods use all traditional public school students. There is some variation in the estimated effect sizes for the multilevel models with the classification trees providing larger estimates. As noted above, this may be due, in part, to insufficient balance being achieved. This is likely a limitation of the logistic regression to provide stable estimates given one, the larger charter-to-public school student ratio and two, the smaller samples within each state. The following chapter will provide a discussion of the implications of these results.
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/Overall.pdf}
 \caption{Overall Differences in Effect Size}
@@ -423,8 +533,31 @@ Stratification by logistic regression (using two approaches to covariate selecti
 \cleardoublepage
 \section{Chapter 5: Discussion}
 
+This study aims to make two major contributions: first, develop a new method of propensity score analysis for multilevel data, and two, address the question of the effectiveness of charter schools from a state and national perspective. This chapter will provide some concluding remarks and conclusions as well as point some limitations of this study.
 
-Given the significant difference in sample \textit{n}'s for charter and public schools (i.e. there are as much as three to four orders of magnitude more public schools students available in the NAEP data sets), it is expected that there would be public school students who would not have a counterpart from the charter school group. However, the relatively high percentage of public schools students who do not have a charter school counterpart (as much as 35\%) suggest that there may be imbalance between the two groups as a whole. That is, although reasonable balance was achieved with regard to the individual strata where comparisons are made, the overall sample imbalance, as evidenced by the unmatched public school students, suggests that public schools serve a more heterogeneous population.
+\subsection{Multilevel Propensity Score Analysis}
+
+The development of the \texttt{multilevelPSA} R package for estimating and visualizing propensity score models of multilevel data provides important insight into the implications of what traditionally would have been one of many covariates. The results suggest that this method performs and provide effect size estimates consistent with other propensity score methods. However, a key advantage to using this new method include an explicit adjustment of the multilevel nature of some data as well as being able to understand the implication of clustering when comparing the outcome of interest. As researchers work with larger and larger datasets, the advancements in data visualization should not be understated. The data visualizations developed for this dissertation provide important insight into data analysis at all stages.
+
+Propensity score methods have shown to be effective for estimating treatment effects with relatively small samples. However, as observed in chapter four, estimating multilevel PSA models require larger samples given the need to stratify within clusters. Although NCES began oversampling charter schools in 2005, the fact that ratio of charter to traditional public schools/students is so large result in model specification problems, especially with logistic regression. This has been alleviated to some extent by removing traditional public school students who attend a school further than five miles from a charter school. 
+
+More specifically with regard to propensity score ranges, the range tends to shrink as the ratio of treatment-to-control increases. Figure \ref{fig:psranges} depicts the range and distribution of propensity scores (using logistic regression) with varying treatment-to-control ratios. The data used to create this figure is simulated and available in Appendix K. The \texttt{psrange} and \texttt{plot.psrange} functions are included in the \texttt{multilevelPSA} R package. Propensity scores are estimated with a single covariate where the mean for the treatment and control are 0.6 and 0.4, respectively. The standard deviation for both are 0.4. There are 100 treatment units and 1,000 control units simulated. The goal in choosing these means and standard deviations is to have some separation between treatment and control. Each row in the figure represents the percentage of control units sampled before estimating the propensity scores starting with 100\% (i.e. all 1,000 control units) to 10\% (100 of the control units). As the figure shows, as the ratio decreases to where there are equal treatment and control units, the range of the propensity scores becomes more normal. To calculate the ranges each sampling step is bootstrapped so the green bar and black points represent each of the 20 bootstrap staples taken. The bars then represent the mean of minimum and mean of the maximum for each step.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/PSRanges.pdf}
+\caption{Propensity Score Ranges for Varying Treatment-to-Control Ratios}
+\label{fig:psranges}
+\end{center}
+\end{figure}
+
+\subsection{Differences between Charter and Traditional Public Schools}
+
+Given the significant difference in sample \textit{n}'s for charter and public schools (i.e. there are as much as three to four orders of magnitude more public schools students available in the NAEP data sets), it is expected that there would be public school students who would not have a counterpart from the charter school group. However, the relatively high percentage of public schools students who do not have a charter school counterpart (as much as 35\%) suggest that there may be imbalance between the two groups as a whole. That is, although reasonable balance was achieved with regard to the individual strata where comparisons are made, the overall sample imbalance, as evidenced by the unmatched public school students, suggests that public schools serve a more heterogeneous population. 
+
+Moreover, the methodological issues described above may, in part, be evidence of any underlying fundamental difference in charter school and traditional public school populations. Figure \ref{fig:overalldiff} in chapter four reveals that the methods with higher effect sizes are the matching methods and classification trees. These models, especially the matching methods, often eliminate a large proportion of tradition public school students. Perhaps there may be a small positive effect of chatter schools for a very specific type of student, but there also appears to be a large number of students who appear better served, or at least equivalently served, by traditional public schools. This needs to be considered when weighing the cost and extent of charter schools.
+
+
 
 
 %==================== REFERENCES ====================================================================
@@ -526,21 +659,8 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 %==================== Appendix B ====================================================================
 \newpage
-\addcontentsline{toc}{subsection}{Appendix B: Thematic Map of Number of Charter Schools in the United States}
-\subsection*{Appendix B\\Thematic Map of Number of Charter Schools by State in 2008}
-\label{appendixMap}
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{../Figures/CharterMap.pdf}
-\caption{Thematic Map of Number of Charter Schools by State in 2008}
-\label{fig:charterMap}
-\end{figure}
-
-%==================== Appendix C ====================================================================
-
-%==================== Appendix D ====================================================================
-\newpage
-\addcontentsline{toc}{subsection}{Appendix D: Descriptive Statistics}
-\subsection*{Appendix D\\Descriptive Statistics}
+\addcontentsline{toc}{subsection}{Appendix B: Descriptive Statistics}
+\subsection*{Appendix B\\Descriptive Statistics}
 \label{appendixDescriptives}
 
 \begin{singlespace}
@@ -559,10 +679,10 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \end{singlespace}
 
-%==================== Appendix E ====================================================================
+%==================== Appendix C ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix E: Covariate Missingness}
-\subsection*{Appendix E\\Covariate Missingness}
+\addcontentsline{toc}{subsection}{Appendix C: Covariate Missingness}
+\subsection*{Appendix C\\Covariate Missingness}
 \label{appendixmissing}
 
 \begin{figure}[h]
@@ -598,89 +718,528 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \end{figure}
 
 
+%==================== Appendix D ====================================================================
+\clearpage
+\addcontentsline{toc}{subsection}{Appendix D: Loess Regression Plots}
+\subsection*{Appendix D\\Loess Regression Plots}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g4read-loess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 4 Reading}
+\label{fig:g4read:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g8math-loess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 8 Math}
+\label{fig:g8math:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g8read-loess.pdf}
+\caption{Loess Regression Assessment Plot: Grade 8 Reading}
+\label{fig:g8read:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g4math-loessAIC.pdf}
+\caption{Loess Regression AIC Assessment Plot: Grade 4 Math}
+\label{fig:g4math:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g4read-loessAIC.pdf}
+\caption{Loess Regression AIC Assessment Plot: Grade 4 Reading}
+\label{fig:g4read:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g8math-loessAIC.pdf}
+\caption{Loess Regression AIC Assessment Plot: Grade 8 Math}
+\label{fig:g8math:loess}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight]{../Figures2009/g8read-loessAIC.pdf}
+\caption{Loess Regression AIC Assessment Plot: Grade 8 Reading}
+\label{fig:g8read:loess}
+\end{center}
+\end{figure}
+
+
+%==================== Appendix E ====================================================================
+\clearpage
+\addcontentsline{toc}{subsection}{Appendix E: Covariate Balance Plots}
+\subsection*{Appendix E\\Covariate Balance Plots}
+
+% Grade 4 math
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-lrAIC-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 4 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-tree-balance.pdf}
+\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 4 Math}
+\end{center}
+\end{figure}
+
+% Grade 4 reading
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-lr-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-lrAIC-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-tree-balance.pdf}
+\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+% Grade 8 math
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-lr-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-lrAIC-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-tree-balance.pdf}
+\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+% Grade 8 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-lr-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-lrAIC-balance.pdf}
+\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-tree-balance.pdf}
+\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
 %==================== Appendix F ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix F: Logistic Regression Full Model Results}
-\subsection*{Appendix F\\Logistic Regression Full Model}
-\label{appendixlogistic}
-%\begin{singlespace}
-%\input{../Tables/g4math.lr.level1.tex} \clearpage
-%\input{../Tables/g4math.lr.level2.tex} \clearpage
-%\input{../Tables/g4reading.lr.level1.tex} \clearpage
-%\input{../Tables/g4reading.lr.level2.tex} \clearpage
-%\input{../Tables/g8math.lr.level1.tex} \clearpage
-%\input{../Tables/g8math.lr.level2.tex} \clearpage
-%\input{../Tables/g8reading.lr.level1.tex} \clearpage
-%\input{../Tables/g8reading.lr.level2.tex} \clearpage
-%\end{singlespace}
+\addcontentsline{toc}{subsection}{Appendix F: Classification Method Results}
+\subsection*{Appendix F\\Classification Method Results}
+
+% Grade 4 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g4read-circpsa10.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10-AIC.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g4read-circpsa10AIC.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa-tree.pdf}
+\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g4read-circpsa-tree.tex}
+
+% Grade 8 math
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8math-circpsa10.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10-AIC.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8math-circpsa10AIC.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa-tree.pdf}
+\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8math-circpsa-tree.tex}
+
+% Grade 8 reading
+\clearpage
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8read-circpsa10.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10-AIC.pdf}
+\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8read-circpsa10AIC.tex}
+
+\clearpage
+\begin{figure}
+\begin{center}
+\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa-tree.pdf}
+\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\input{../Tables2009/g8read-circpsa-tree.tex}
+
+
 
 %==================== Appendix G ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix G: Logistic Regression Step AIC Model Results}
-\subsection*{Appendix G\\Logistic Regression Step AIC Model}
-\label{appendixlogisticaic}
-%\begin{singlespace}
-%\input{../Tables/g4math.lraic.level1.tex} \clearpage
-%\input{../Tables/g4math.lraic.level2.tex} \clearpage
-%\input{../Tables/g4reading.lraic.level1.tex} \clearpage
-%\input{../Tables/g4reading.lraic.level2.tex} \clearpage
-%\input{../Tables/g8math.lraic.level1.tex} \clearpage
-%\input{../Tables/g8math.lraic.level2.tex} \clearpage
-%\input{../Tables/g8reading.lraic.level1.tex} \clearpage
-%\input{../Tables/g8reading.lraic.level2.tex} \clearpage
-%\end{singlespace}
+\addcontentsline{toc}{subsection}{Appendix G: Multilevel PSA Covariate Balance Plots}
+\subsection*{Appendix G\\Multilevel PSA Covariate Balance Plots}
+
+% Grade 4 math
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lr-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 4 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lrAIC-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 4 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 4 Math}
+\end{center}
+\end{figure}
+
+% Grade 4 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+% Grade 8 math
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 8 Math}
+\end{center}
+\end{figure}
+
+% Grade 8 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-balance.pdf}
+\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 8 Reading}
+\end{center}
+\end{figure}
+
 
 %==================== Appendix H ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix H: Conditional Inference Trees Results}
-\subsection*{Appendix H\\Conditional Inference Trees}
-\label{appendixtree}
+\addcontentsline{toc}{subsection}{Appendix H: Multilevel PSA Results}
+\subsection*{Appendix H\\Multilevel PSA Results}
+
+% Grade 4 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree.pdf}
+\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-diff.pdf}
+\caption{Multilevel PSA Difference Plot Classification Trees: Grade 4 Reading}
+\end{center}
+\end{figure}
+
+% Grade 8 math
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree.pdf}
+\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Math}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-diff.pdf}
+\caption{Multilevel PSA Difference Plot Classification Trees: Grade 8 Math}
+\end{center}
+\end{figure}
+
+% Grade 8 reading
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC.pdf}
+\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-diff.pdf}
+\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree.pdf}
+\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-diff.pdf}
+\caption{Multilevel PSA Difference Plot Classification Trees: Grade 8 Reading}
+\end{center}
+\end{figure}
+
+
 %\begin{singlespace}
-%\input{../Tables/g4math.tree.level1.tex} \clearpage
-%\input{../Tables/g4math.tree.level2.tex} \clearpage
-%\input{../Tables/g4reading.tree.level1.tex} \clearpage
-%\input{../Tables/g4reading.tree.level2.tex} \clearpage
-%\input{../Tables/g8math.tree.level1.tex} \clearpage
-%\input{../Tables/g8math.tree.level2.tex} \clearpage
-%\input{../Tables/g8reading.tree.level1.tex} \clearpage
-%\input{../Tables/g8reading.tree.level2.tex} \clearpage
+%\input{../Tables2009/g4math-mlpsa-ctree.tex}
+%\clearpage
+%\input{../Tables2009/g4read-mlpsa-ctree.tex}
+%\clearpage
+%\input{../Tables2009/g8math-mlpsa-ctree.tex}
+%\clearpage
+%\input{../Tables2009/g8read-mlpsa-ctree.tex}
 %\end{singlespace}
+
 
 
 %==================== Appendix I ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix I: Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
-\subsection*{Appendix I\\Heat Maps of Relative Importance of Covariates Identified from Conditional Inference Tree Analysis}
+\addcontentsline{toc}{subsection}{Appendix I: Multilevel PSA Classification Tree Heat Maps}
+\subsection*{Appendix I\\Multilevel PSA Classification Tree Heat Maps}
 \label{appendixtree}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Math}
+\includegraphics[height=.37\textheight]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
+\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 4 Math}
 \label{fig:g4math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 4 Reading}
+\includegraphics[height=.37\textheight]{../Figures2009/g4read-mlpsa-ctree-heat.pdf}
+\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 4 Reading}
 \label{fig:g4read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Math}
+\includegraphics[height=.37\textheight]{../Figures2009/g8math-mlpsa-ctree-heat.pdf}
+\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 8 Math}
 \label{fig:g8math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates for Phase I: Grade 8 Reading}
+\includegraphics[height=.37\textheight]{../Figures2009/g8read-mlpsa-ctree-heat.pdf}
+\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 8 Reading}
 \label{fig:g8read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -688,52 +1247,8 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 %==================== Appendix J ====================================================================
 \clearpage
-\addcontentsline{toc}{subsection}{Appendix J: Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
-\subsection*{Appendix J\\Distribution of NAEP Scores for Matched vs. Unmatched Public School Students}
-\label{appendixPublicDensity}
-
-The figures in this appendix represent the distributions of matched and unmatched public school students as identified by the full logistic regression model. These models were chosen since they resulted in the largest number of unmatched public school students vis-\`a-vis stratification. It should be noted that for some states there may be only one density line. This indicates that all public school students within that state were either all matched or all not matched.
-
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[height=\textwidth,angle=90]{../Figures/g4mathlrPublicDensity.pdf}
-%\caption{Density Distribution of Grade 4 Math: Matched vs. Unmatched Public School Students}
-%\label{fig:g4reading:publicdensity}
-%\end{center}
-%\end{figure}
-%\clearpage
-%
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[height=\textwidth,angle=90]{../Figures/g4readinglrPublicDensity.pdf}
-%\caption{Density Distribution of Grade 4 Reading: Matched vs. Unmatched Public School Students}
-%\label{fig:g4reading:publicdensity}
-%\end{center}
-%\end{figure}
-%\clearpage
-%
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[height=\textwidth,angle=90]{../Figures/g8mathlrPublicDensity.pdf}
-%\caption{Density Distribution of Grade 8 Math: Matched vs. Unmatched Public School Students}
-%\label{fig:g8reading:publicdensity}
-%\end{center}
-%\end{figure}
-%\clearpage
-%
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[height=\textwidth,angle=90]{../Figures/g8readinglrPublicDensity.pdf}
-%\caption{Density Distribution of Grade 8 Reading: Matched vs. Unmatched Public School Students}
-%\label{fig:g8reading:publicdensity}
-%\end{center}
-%\end{figure}
-%\clearpage
-
-%==================== Appendix J ====================================================================
-\clearpage
-\addcontentsline{toc}{subsection}{Appendix K: multilevelPSA R Package}
-\subsection*{Appendix K\\multilevelPSA R Package}
+\addcontentsline{toc}{subsection}{Appendix J: multilevelPSA R Package}
+\subsection*{Appendix J\\multilevelPSA R Package}
 \label{multilevelPSAPackage}
 
 The \texttt{multilevelPSA} R package was developed, in part, to conduct the analysis for this dissertation. It is available from the Comprehensive R Archive Network (CRAN) at \url{http://cran.r-project.org/web/packages/multilevelPSA}. The latest version can be installed using the \texttt{install.packages} function in R:
@@ -762,6 +1277,108 @@ The following list provides brief descriptions of the key functions in the \text
 \item[tree.plot] Heat map representing variables used in a conditional inference tree across level 2 variables.
 \end{description}
 
+%==================== Appendix K ====================================================================
+\clearpage
+\addcontentsline{toc}{subsection}{Appendix K: Simulating Propensity Score Ranges}
+\subsection*{Appendix K\\Simulating Propensity Score Ranges}
+
+\begin{singlespace}
+
+\noindent The \texttt{getSimulatedData} function is what is used to simulate covariates with varying overlap.
+
+\begin{verbatim}
+getSimulatedData <- function(nvars = 3, 
+    ntreat = 100, treat.mean = 0.6, treat.sd = 0.5, 
+    ncontrol = 1000, control.mean = 0.4, control.sd = 0.5) {
+    if (length(treat.mean) == 1) {
+        treat.mean = rep(treat.mean, nvars)
+    }
+    if (length(treat.sd) == 1) {
+        treat.sd = rep(treat.sd, nvars)
+    }
+    if (length(control.mean) == 1) {
+        control.mean = rep(control.mean, nvars)
+    }
+    if (length(control.sd) == 1) {
+        control.sd = rep(control.sd, nvars)
+    }
+    
+    df <- c(rep(0, ncontrol), rep(1, ntreat))
+    for (i in 1:nvars) {
+        df <- cbind(df, c(
+            rnorm(ncontrol, mean = control.mean[1], sd = control.sd[1]), 
+            rnorm(ntreat, mean = treat.mean[1], sd = treat.sd[1])
+        ) )
+    }
+    df <- as.data.frame(df)
+    names(df) <- c("treat", letters[1:nvars])
+    return(df)
+}
+\end{verbatim}
+
+\noindent The following code was used to create Figure \ref{fig:psranges} in Chapter 5 which represents moderate overlap but some separation in covariates between treatment and control.
+
+
+\begin{verbatim}
+set.seed(2112)
+df.psrange <- getSimulatedData(ncontrol = 1000, nvars=1,
+                               treat.mean=0.6, treat.sd=0.4,
+                               control.mean=0.4, control.sd=0.4)
+psrange.test <- psrange(df.psrange, df.psrange$treat, treat ~ ., 
+                        samples = seq(100, 1000, by = 100), nboot = 20)
+plot(psrange.test)
+\end{verbatim}
+
+\noindent The following simulates covariates with perfect overlap (i.e. the differences between covariate values between treatment and control is random).
+
+\begin{verbatim}
+df.overlap <- getSimulatedData(ncontrol = 1000, nvars=1,
+                               treat.mean=0.5, treat.sd=0.4,
+                               control.mean=0.5, control.sd=0.4)
+psrange.overlap <- psrange(df.overlap, df.overlap$treat, treat ~ ., 
+                           samples = seq(100, 1000, by = 100), nboot = 20)
+plot(psrange.overlap)
+\end{verbatim}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/PSRanges-Overlap.pdf}
+\caption{Propensity Score Ranges for Varying Treatment-to-Control Ratios with Perfect Overlapping Covariate}
+\end{center}
+\end{figure}
+
+\noindent The following simulates covariates with almost no overlap (i.e. the covariate values can almost perfectly predict treatment placement).
+
+\begin{verbatim}
+df.nooverlap <- getSimulatedData(ncontrol = 1000, nvars=1,
+                                 treat.mean=0.2, treat.sd=0.4,
+                                 control.mean=0.8, control.sd=0.4)
+psrange.nooverlap <- psrange(df.nooverlap, df.nooverlap$treat, treat ~ ., 
+                             samples = seq(100, 1000, by = 100), nboot = 20)
+plot(psrange.nooverlap)
+\end{verbatim}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/PSRanges-NoOverlap.pdf}
+\caption{Propensity Score Ranges for Varying Treatment-to-Control Ratios with Non-Overlapping Covariate}
+\end{center}
+\end{figure}
+
+\end{singlespace}
+
+%%%%% Left Overs %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Themeatic Map
+
+%\newpage
+%\addcontentsline{toc}{subsection}{Appendix B: Thematic Map of Number of Charter Schools in the United States}
+%\subsection*{Appendix B\\Thematic Map of Number of Charter Schools by State in 2008}
+%\label{appendixMap}
+%\begin{figure}[h]
+%\includegraphics[width=\textwidth]{../Figures/CharterMap.pdf}
+%\caption{Thematic Map of Number of Charter Schools by State in 2008}
+%\label{fig:charterMap}
+%\end{figure}
 
 
 

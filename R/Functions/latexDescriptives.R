@@ -1,5 +1,5 @@
 #' Generage LaTeX descriptives table. 
-#' @seealso latexDescriptivess
+#' @seealso latexDescriptives
 covariate.descriptive <- function(naep, all.covars, subject, grade, year=2009) {
 	#' Creates a LaTeX table for the given categorical variables.
 	#' 
