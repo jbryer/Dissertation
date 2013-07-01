@@ -1,4 +1,5 @@
-setwd('~/Dropbox/School/Dissertation/R')
+setwd('./R')
+getwd()
 
 if(!require(naep) | !require(foreach) | !require(plyr) | !require(compiler) |
    	!require(mice) | !require(multilevelPSA) | !require(PSAgraphics) |
