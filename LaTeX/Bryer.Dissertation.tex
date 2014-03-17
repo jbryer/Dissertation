@@ -46,6 +46,8 @@
 
 \newcommand{\smaller}{\fontsize{9}{10}\selectfont}
 
+\renewcommand{\normalsize}{\fontsize{12}{13}\selectfont}
+
 \oddsidemargin 0.5in
 %\evensidemargin 0.5in %For final submission
 \evensidemargin 0in %For two-sided printing
@@ -64,8 +66,7 @@
 \begin{titlepage}
 \vspace*{\fill}
 \begin{center}
-\uppercase{A National Study Comparing Charter and Traditional\\Public Schools Using Propensity Score Analysis}\\
-\ \\
+A NATIONAL STUDY COMPARING CHARTER AND TRADITIONAL PUBLIC SCHOOLS USING PROPENSITY SCORE ANALYSIS\ \\
 by
 \ \\ \ \\
 Jason M. Bryer\\
@@ -79,7 +80,7 @@ Doctor of Philosophy\\
 School of Education\\
 Department of Educational and Counseling Psychology\\
 Division of Educational Psychology \& Methodology\\
-2013
+2014
 \ifthenelse{\boolean{draft}}{
 	\ \\	\LARGE{}Draft as of \today
 }{}
@@ -98,11 +99,11 @@ Division of Educational Psychology \& Methodology\\
 \section{Abstract}
 The concept of school choice within the United States is not new. Private schools have been educating students since the founding of the United States. However, in 1988, Ray Budde proposed an alternative approach to school choice that has come to be known as charter schools \cite{Kolderie2005}. Unlike their private school counterparts, charter schools receive public funding, but they are relieved of many of the bureaucratic and regulatory constraints public schools adhere to, but are still held accountable for student performance. Despite claims by charter school advocates that charter schools are performing as well if not better than the public school counterparts \cite<see e.g.>{AllenConsolettieKerwin2009}, studies provide mixed results with regard to charter school performance \cite<see e.g.>{BraunJenkinsGrigg2006, credo, HubbardKulkarni2009}. Ultimately, there is agreement that more research is necessary to address the question of whether charter schools provide substantially better academic experiences for students. 
 
-This study includes development of new methods designed for observational data analysis to investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics. The new methods represent extensions of modern methods for propensity score analysis (see below) and aim to reduce if not eliminate selection bias in the context of clustered data. Charter schools are, by definition, schools of choice, and this means that observational data methods are preferred for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, given well designed observational studies, and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The end result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. 
+This study includes development of new methods designed for observational data analysis to investigate the question of whether students who attend charter schools outperform their public school counterparts on two key academic domains: reading and mathematics. The new methods represent extensions of modern methods for propensity score analysis and aim to reduce if not eliminate selection bias in the context of clustered data. Charter schools are, by definition, schools of choice, and this means that observational data methods are preferred for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools cannot help but ignore the inherent and systematic differences between the two groups. However, given well-designed observational studies and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The end result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. 
 
-This is done utilizing a class of statistical procedures introduced by \citeA{RosenbaumRubin1983} called propensity score analysis. Propensity score analysis has seen considerable increased use in the social sciences within the last few years \cite{ArpinoMealli2008}. However, its use in situations where multilevel, or clustered data are of interest, have been limited \cite{ThoemmesKim2011}. Using data from the 2007 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely state and national. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analyses will be conducted using the newly developed \texttt{multilevelPSA} package \cite{multilevelPSA} in R \cite{rdevelopment}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be done within states. Effects will then aggregated to provide state and national effect estimates.
+This is done utilizing a class of statistical procedures introduced by \citeA{RosenbaumRubin1983} called propensity score analysis. Propensity score analysis has seen considerable increased use in the social sciences within the last few years \cite{ArpinoMealli2008}. However, its use in situations where multilevel, or clustered data are of interest have been limited \cite{ThoemmesKim2011}. Using data from the 2009 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools will be calculated at two levels, namely at the state and national levels. Given the variability of charter schools laws across states, it is important to consider the impact of clustering. Analyses will be conducted using the newly developed \texttt{multilevelPSA} package \cite{multilevelPSA} in R \cite{rdevelopment}. Specifically, propensity scores will be estimated within each state and these will be used for matching or stratification of students within each state. Comparisons of specific students, or groups of students, will in all cases be done within states. Effects will then be aggregated to provide state and national effect estimates.
 
-As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \cite<see e.g.>{Stuart2010}. Doing so can help to provide confidence that results reflect what the data have to say, and is not merely an artifact of model specification or method choice. This study will utilize three overall approaches to propensity score analysis, namely stratification, matching, and multilevel stratification. Lastly, the use of graphics will be employed to evaluate balance and outcome differences using methods (functions) found in \citeA{HelmreichPruzek2009}.
+As with all propensity score analyses, it is preferable to utilize multiple methods for estimating propensity scores \cite<see e.g.>{Stuart2010,Rosenbaum2012}. Doing so can help to provide confidence that results reflect what the data have to say, and is not merely an artifact of model specification or method choice. This study will utilize three overall approaches to propensity score analysis, namely stratification, matching, and multilevel stratification. Lastly, the use of graphics will be employed to evaluate balance and outcome differences using methods (functions) found in \citeA{HelmreichPruzek2009}.
 
 \cleardoublepage 
 
@@ -120,9 +121,9 @@ As with all propensity score analyses, it is preferable to utilize multiple meth
 \setcounter{page}{1}
 \section{Chapter 1: Introduction}
 
-Since the opening of the first charter school in Minnesota in 1991, the United States\footnote{Though this study focuses on charter schools in the U.S., Canada \cite{canada2007}, Chile \cite{larranaga2004}, England \cite{wohlstetter1994}, Germany \cite{herbst2006}, and New Zealand \cite{lander2001} also have charter schools.} has increasingly embraced charter schools as an important option for educational reform. In the last 10 years alone, the number of charter schools has grown from 507 in the 1998-1999 school year to 4,561 in the 2007-2008 school year \cite<see figure \ref{fig:charterSchoolGrowth};>{cernumbers}. Currently, 40 states and the District of Columbia have charter school laws (see appendix A for enrollment by state \& appendix B for a thematic map of the U.S. depicting the number of operating charter schools as of 2008). And, given Arne Duncan's appointment as Secretary of Education by President Barack Obama, who has been a charter school supporter, charter school growth and support is unlikely to slow in the near future.
+Since the opening of the first charter school in Minnesota in 1991, the United States\footnote{Though this study focuses on charter schools in the U.S., Canada \cite{canada2007}, Chile \cite{larranaga2004}, England \cite{wohlstetter1994}, Germany \cite{herbst2006}, and New Zealand \cite{lander2001} also have charter schools.} has increasingly embraced charter schools as an important option for educational reform. In the last 10 years alone, the number of charter schools has grown from 507 in the 1998-1999 school year to 4,561 in the 2007-2008 school year \cite<see figure \ref{fig:charterSchoolGrowth};>{cernumbers}. Currently, 40 states and the District of Columbia have charter school laws (see appendix A for enrollment by state \& appendix B for a thematic map of the U.S. depicting the number of operating charter schools as of 2008). And, given Arne Duncan's appointment as Secretary of Education by President Barack Obama and the \textit{Race to the Top} program, charter school growth and support is unlikely to slow in the near future.
 
-In principal, charter schools have opted out of bureaucratic rules and union contracts in order to gain academic autonomy in exchange for accountability and better academic environments for students \cite{wells2002}. The idea is that, under this framework, teachers, administrators, students, and the community that comprise the charter school would be free to innovate. It is also the assumption that charter schools would serve as experimental schools where the innovations would inform reform of public education at large. However, some supporters argue for the eventual replacement of traditional public schools with charter schools, as further exemplified by the attempted school voucher legislation during the second Bush Administration.
+In principal, charter schools have opted out of bureaucratic rules and union contracts in exchange for gaining academic autonomy in exchange for accountability and better academic environments for students \cite{wells2002}. The idea is that, under this framework, teachers, administrators, students, and the community that comprise the charter school would be free to innovate. It is also the assumption that charter schools would serve as experimental schools where the innovations would inform reform of public education at large. However, some supporters argue for the eventual replacement of traditional public schools with charter schools \cite<c.f.>{Ravitch2013}, as further exemplified by the attempted school voucher legislation during the second Bush Administration and required increased cap on the number of charter schools within states as a requirement of the \textit{Race to the Top} initiative of the Obama Administration..
 
 \begin{figure}[tp]
 \includegraphics[width=\textwidth]{../Figures/CharterSchoolGrowth.pdf}
@@ -130,34 +131,34 @@ In principal, charter schools have opted out of bureaucratic rules and union con
 \label{fig:charterSchoolGrowth}
 \end{figure}
 
-Clearly charter schools have become a popular vehicle for educational reform among parents as well. The \citeA{cersurvey} reports that 59\% of charter schools have waiting lists averaging 198 students. Charter schools provide an apparent choice to parents and are copacetic to the United State's individualistic \cite<see e.g.,>{hofstede2004,maccall1847,swart1962} culture. Moreover, like so many other fields, school reform has further emphasized marketization and privatization \cite{wells2002}. The influence of capitalism on education is not new. A major contributor to the expanded role of education during the industrial revolution is capitalism itself. That is, education expanded its initial purpose of providing a minimally informed electorate to providing an educated work force, not to mention keeping children off the streets as child labor laws came into existence. However, the shift of capitalistic principles from being the inspiration of educational reform to being the educational reform has profound implications.
+Clearly charter schools have become a popular vehicle for educational reform among parents as well. The \citeA{cersurvey} reports that 59\% of charter schools have waiting lists averaging 198 students. Charter schools provide an apparent choice to parents and are copacetic to the United State's individualistic culture \cite<see e.g.,>{hofstede2004,maccall1847,swart1962}. Moreover, like so many other fields, school reform has further emphasized marketization and privatization \cite{wells2002}. The influence of capitalism on education is not new. A major contributor to the expanded role of education during the industrial revolution is capitalism itself. That is, education expanded its initial purpose of providing a minimally informed electorate to providing an educated work force, not to mention keeping children off the streets as child labor laws came into existence. However, the shift of capitalistic principles from being the inspiration of educational reform to being the educational reform has profound implications.
 
 Proponents of charter schools argue that public schools have been bogged down by bureaucracy and union contracts. Freeing schools of these requirements then allows teachers and schools to innovate, which in theory leads to increased student performance. The principled argument is the ``market metaphor" \cite{wells2002}. That is, if schools were forced to compete for ``customers" (i.e. students), then the differentiating factor between schools would be the quality of education. 
 
-Opponents on the other hand have questioned the accountability, equity, effectiveness, and sustainability of charter schools. Several studies have shown that charter schools are not only failing to increase student performance, in many instances they are performing well under their traditional public school counterparts \cite<see e.g.,>{credo,braun06hlm,aft2004}. Others still argue whether charter schools may be a solution in search of a problem. \citeA{carnoy2005} in summarizing the controversy that ensued after the \citeA{aft2004} study argue that:
+Opponents on the other hand have questioned the accountability, equity, effectiveness, and sustainability of charter schools. Several studies have shown that charter schools are not only failing to increase student performance, in many instances they are performing well under their traditional public school counterparts \cite<see e.g.,>{credo,braun06hlm,aft2004}. Still, others argue whether charter schools may be a solution in search of a problem. \citeA{carnoy2005} in summarizing the controversy that ensued after the \citeA{aft2004} study argue that:
 
-\begin{quote}
+\begin{quote} \normalsize
 If, however, charter schools are not improving the achievement of disadvantages children, it may be that the cause of low student performance is not bureaucratic rules but something else. When a treatment is based on a diagnosis, and the treatment doesn't work, it is prudent to examine not only whether the treatment should be improved, but also whether the diagnosis might be flawed. \cite{carnoy2005}
 \end{quote}
 
 \subsection{Issues with Charter School Research}
-The issues surrounding charter schools are immense. However, given the implications for the current and future generations of students, the issue must be explored using the best data and methods available. As \citeA{betts2006} point out, there are three major obstacles to addressing the question of ``whether students in charter schools are learning more or less than they would have learned in conventional schools" (p. 1), namely:
+The issues surrounding charter schools are large in scope. However, given the implications for the current and future generations of students, the question must be explored using the best data and methods available. As \citeA{BettsHill2006} point out, there are three major obstacles to addressing the question of ``whether students in charter schools are learning more or less than they would have learned in conventional schools" (p. 1), namely:
 
 \begin{enumerate}
 \item The issues of counterfactuals. That is, there are several barriers to determine the causal relationship between school choice and learning.
 \item The variation in types of charter schools.
-\item The nature of student achievement. Research has shown there are many other factors that contribute to student success including, but not limited to, social economic status, parents education, motivation, etc. The ability to decipher how school choice contributes to student learning in the context of all the other factors proves difficult.
+\item The nature of student achievement. Research has shown there are many other factors that contribute to student success including, but not limited to, socioeconomic status, parents education, motivation, etc. The ability to decipher how school choice contributes to student learning in the context of all the other factors proves difficult.
 \end{enumerate}
 
-Though these issues are significant, they can to a large extent be reasonably addressed. We will not claim to fully account for these issues, however given the need for evidence to inform policy makers regarding charter school effectiveness, we will attempt to address these issues using the best data and methods available while clearly stating the limitations.
+Though these issues are significant, they can be to a large extent reasonably addressed. We will not claim to fully account for these issues, however given the need for evidence to inform policy makers regarding charter school effectiveness, we will attempt to address these issues using the best data and methods available while clearly stating the limitations.
 
-Issue one will be dealt with in more detail in chapter three. However, in short, the propensity score analysis (PSA) proposed for this study is arguably, assuming proper implementation, one of the best approaches to estimating causal inferences short of well designed randomized experiments. Of course in the context of an observational study the fundamental problem of causal inference \citeA{Holland1986} remains, but limitations of this will be addressed.
+Issue one will be dealt with in more detail in chapter three. However, in short, the propensity score analysis (PSA) proposed for this study is arguably, assuming proper implementation, the best approach to estimating causal inferences short of well designed randomized experiments. Of course in the context of an observational study the fundamental problem of causal inference \citeA{Holland1986} remains, but limitations of this will be addressed.
 
-The issue of charter school variation is often cited in critiques of national or large scale charter school studies. Given that the charter school debate is a national debate that has implications at the Federal level, large scales studies are not only necessary, they are critical. If charter schools are to be offered wholly as an alternative to traditional public schools, then charter schools as a whole must be evaluated against public schools as a whole. More specifically, we wish not to evaluate whether a particular charter school, or type of charter school, is better, but whether the entire charter school concept is a better approach for educational reform.
+The issue of charter school variation is often cited in critiques of national or large scale charter school studies. Given that the charter school debate is a national debate with implications at the Federal level as exemplified by the \textit{No Child Left Behind} legislation of the George W. Bush Administration and the \textit{Race to the Top} policy of the Barak Obama Adminsitration, large scales studies are not only necessary, they are critical. If charter schools are to wholly be offered as an alternative to traditional public schools, then charter schools as a whole must be evaluated against public schools as a whole. More specifically, we wish not to evaluate whether a particular charter school, or type of charter school, is better, but whether the entire charter school concept is a better approach for educational reform.
 
-Lastly, the environmental, social, community, and cultural factors that contribute to a student's academic achievement are often significantly underestimated. Often educational reform, as exemplified most recently by the No Child Left Behind Act, places the responsibility solely on the school without consideration of the context in which the school operates. We are encouraged by President Obama's remarks to his first Joint Session of Congress \cite{obama}:
+Lastly, the environmental, social, community, and cultural factors that contribute to a student's academic achievement are often significantly underestimated. Often educational reform, as exemplified by the \textit{No Child Left Behind} Act and \textit{Race to the Top}, places the responsibility solely on the school without consideration of the context in which the school operates. We are encouraged by President Obama's remarks to his first Joint Session of Congress \cite{obama}:
 
-\begin{quote}
+\begin{quote} \normalsize
 These education policies will open the doors of opportunity for our children. But it is up to us to ensure they walk through them. In the end, there is no program or policy that can substitute for a mother or father who will attend those parent/teacher conferences, or help with homework after dinner, or turn off the TV, put away the video games, and read to their child. I speak to you not just as a President, but as a father when I say that \textit{responsibility for our children's education must begin at home} [emphasis added].
 \end{quote}
 
@@ -171,14 +172,14 @@ These education policies will open the doors of opportunity for our children. Bu
 \subsection{Research Questions \& Objectives} 
 The primary focus of this study is the development of a new set of methods for propensity score analysis with multilevel, or clustered, data. One of these aims is to show how graphics can be used to address research questions in the context of multilevel propensity score analysis; another is to describe and illustrate the key features of a new package of R functions to facilitate multilevel propensity score analyses, vis-\`{a}-vis the \texttt{multilevelPSA} package in R. Moreover, these new multilevel methods for propensity score analysis will be presented within the context of more traditional methods for propensity score analysis, namely stratification and matching. Not only will this show how these new methods perform with regard to more established methods, they may show with the use of modern graphics, how clusters may vary. 
 
-The newly developed multilevelPSA package will be shown to provide an effective means of estimating and visualizing propensity score results with clustered (multilevel) data (these procedures are discussed more fully below; see also Figure 2). Moreover, the use of pre-existing visualization procedures such as loess regression plots, density plots, as well as the PSA balance and assessment plots introduced by \citeA{HelmreichPruzek2009}, can provide critical insight into the analysis and eventual interpretation of results. More succinctly, the presentation of graphics in this study are not merely provided for diagnostic or descriptive purposes, but are a critical component of presenting, analyzing, and interpreting results. For instance, related to research questions two and three below, it is the graphics that will be most revealing in the differences, if any, and not the numerical analyses (though numerical analyses are provided).
+The newly developed \texttt{multilevelPSA} package will be shown to provide an effective means of estimating and visualizing propensity score results with clustered (multilevel) data (these procedures are discussed more fully below). Moreover, the use of pre-existing visualization procedures such as loess regression plots, density plots, as well as the PSA balance and assessment plots introduced by \citeA{HelmreichPruzek2009}, can provide critical insight into the analysis and eventual interpretation of results. More succinctly, the presentation of graphics in this study are not merely provided for diagnostic or descriptive purposes, but are a critical component of presenting, analyzing, and interpreting results. For instance, related to research questions two and three below, it is the graphics that will be most revealing in the differences, if any, and not the numerical analyses (though numerical analyses are provided).
 
 Given that charter schools are regularly being offered as solutions for needed educational reform nationally, it is imperative that they be evaluated from a national perspective. This study proposes to compare the academic performance in two domains of charter and traditional public schools using the National Assessment of Educational Progress (NAEP) using multiple propensity score methods. More specifically, this study proposes to address the questions:
 
 \begin{enumerate} 
-	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and traditional public schools with regard to math and reading scores at grades 4 and 8?
-	\item If so, what is the nature and magnitude of this difference for the two outcomes reading and mathematics (for two grade levels)?
-	\item And finally, how, and how much do identified differences differ between states with differing charter school laws?
+	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and traditional public schools with regard to math and reading scores evaluated at grades 4 and 8?
+	\item If so, what is the nature and magnitude of this difference for the two outcomes, reading and mathematics?
+	\item And finally, what is the impact, if any, of different charter school laws?
 \end{enumerate}
 
 
@@ -188,9 +189,9 @@ Given that charter schools are regularly being offered as solutions for needed e
 \section{Chapter 2: Review of the Literature}
 
 %\subsection{History of Charter Schools}
-Though Ray Budde is often credited with the current charter school movement \cite{kolderie05}, the term \textit{school choice} can be traced back to Adam Smith's \textit{Wealth of Nations}, Thomas Paine's \textit{Rights of Man}, and John Stuart Mill's \textit{On Liberty} \cite{herbst2006}. Prior to the Revolutionary War, given the religious diversity of colonial America, issues of education were left to local communities. However, after the war Revolutionary leaders argued that local schools were no longer sufficient for educating students for the emerging state and federal governments. It was Thomas Jefferson who, in 1779, introduced the first bill in Virginia that would establish a public school system. It was this, along with numerous other American intellects during the 1780s and 1790s, that established public schools throughout the young nation thereby relegating school choice to a choice between the public school and, predominately religious, private schools.
+Though Ray Budde is often credited with the current charter school movement \cite{Kolderie2005}, the term \textit{school choice} can be traced back to Adam Smith's \textit{Wealth of Nations}, Thomas Paine's \textit{Rights of Man}, and John Stuart Mill's \textit{On Liberty} \cite{herbst2006}. Prior to the Revolutionary War, given the religious diversity of colonial America, issues of education were left to local communities. However, after the war Revolutionary leaders argued that local schools were no longer sufficient for educating students for the emerging state and federal governments. It was Thomas Jefferson who, in 1779, introduced the first bill in Virginia that would establish a public school system. It was this, along with numerous other American intellects during the 1780s and 1790s, that established public schools throughout the young nation thereby relegating school choice to a choice between the public school and, predominately religious, private schools.
 
-In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see Figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
+In the wake of the landmark report \textit{A Nation at Risk} \cite{nationatrisk}, \citeA{Budde1988} authored a pivotal document that started the charter school movement in the United States. In this document, Budde argues that system-wide changes to the way schools are structured are required including: more rigorous curriculum and graduation standards; extended school days and year; more homework; teacher accountability for student results; termination of ``incompetent" teachers; and higher pay for teachers. To achieve these goals, he proposed a fundamental change to the ``internal organization of the school district... making substantial changes in the roles of teachers, principals, the superintedent, the school board, parents, and others in the community" (p. 16). More specifically, a framework for charter schools was proposed that includes five stages over a three year period (see Figure \ref{fig:timeline}). The five stages include: (1) generating ideas; (2) planning the charter; (3) preparing for teaching; (4) teaching under the educational charter; and (5) program monitoring and evaluation. For the first iteration of the cycle, stages one, two, and three occur prior to the opening of the school with stage one ideally beginning a full school year before. There are several features of this framework that deviate from traditional public school models, but most notably is the repetition of what may appear to be preparational stages. That is, the charter school must re-plan their school structure periodically (every three to five years according to Budde's framework) in a manner consistent to the initial charter school creation, thereby forcing a re-evaluation of the school bureaucracy.
 
 \begin{figure}[tp]
 \includegraphics[width=\textwidth]{../Figures/Timeline.pdf}
@@ -203,36 +204,36 @@ Following the suggestions of Budde, Minnesota passed the first charter school la
 
 
 \subsection{Empirical Evidence for Charter School Effectiveness}
-Given that program evaluation and accountability are fundamental components of the philosophical foundations of charter schools, there are remarkably few \textit{high quality} empirical studies that address, at a national level, the academic effectiveness of charter schools \cite<c.f.>{whatweknow,betts2008}. That is not to say that there are not any studies that examine charter school achievement. The \citeA{whatweknow} provide a review of 140 studies selected on several criteria. Their review reveals significant gaps in the research with regard to states evaluated, research quality that addresses achievement, as well as timeliness of results. This is further exemplified by a meta-analysis conducted by \citeA{betts2008} that includes just 13 studies that represent nine states. In this section we will provide an overview of the current literature available vis-\`a-vis the published meta-analysis and literature reviews. We then focus on two recent studies that together provide the context for the study proposed here. More specifically, a hierarchical linear modeling analysis of the 2005 NAEP study \cite{braun06hlm} and a matching study comparing charter and public schools in 16 states \cite{credo}.
+Given that program evaluation and accountability are fundamental components of the philosophical foundations of charter schools, there are remarkably few \textit{high quality} empirical studies that address, at a national level, the academic effectiveness of charter schools \cite<c.f.>{whatweknow,BettsTang2008}. That is not to say that there are not any studies that examine charter school achievement. The \citeA{whatweknow} provide a review of 140 studies selected on several criteria. Their review reveals significant gaps in the research with regard to states evaluated, research quality that addresses achievement, as well as timeliness of results. This is further exemplified by a meta-analysis conducted by \citeA{BettsTang2008} that includes just 13 studies that represent nine states. In this section we will provide an overview of the current literature available vis-\`a-vis the published meta-analysis and literature reviews. We then focus on two recent studies that together provide the context for the study proposed here. More specifically, a hierarchical linear modeling analysis of the 2005 NAEP study \cite{BraunJenkinsGrigg2006} and a matching study comparing charter and public schools in 2009 with 16 states \cite{credo} and again in 2013 with 27 states \cite{credo2013}.
 
 \subsubsection{Overview of Current Studies}
-Research has shown that parents of students in charter schools are generally more satisfied with the charter school than the public school and will also tend to be more involved in their child's education \cite{teske2001,vanourek1998}. However, their satisfaction may simply be a rationalization \cite{hubbard2009}. Moreover, Fuller et al. \cite<1996, as cited in>{hubbard2009} suggest that parents that choose charter schools ``believe that the charter must therefore be superior to a conventional public school" (p. 177). This is collaborated by a study conducted by \citeA{cullen2005} that examines school choice in Chicago Public Schools whereby more than half of students elect to attend another Chicago Public School (e.g. career academy, high-achieving school) rather than their locally assigned school. Though students who opt out of their local school are more likely to graduate, \citeA{cullen2005} argue that ``those who opt out are superiour along unobservable dimensions such as their motivation level and parental involvement" (p. 755). 
+Research has shown that parents of students in charter schools are generally more satisfied with the charter school than the public school and will also tend to be more involved in their child's education \cite{TeskeSchneider2001,VanourekMannoFinnBierlein1998}. However, their satisfaction may simply be a rationalization \cite{HubbardKulkarni2009}. Moreover, Fuller et al. \cite<1996, as cited in>{HubbardKulkarni2009} suggest that parents that choose charter schools ``believe that the charter must therefore be superior to a conventional public school" (p. 177). This is collaborated by a study conducted by \citeA{CullenJacobLevitt2005} that examines school choice in Chicago Public Schools whereby more than half of students elect to attend another Chicago Public School (e.g. career academy, high-achieving school) rather than their locally assigned school. Though students who opt out of their local school are more likely to graduate, \citeA{CullenJacobLevitt2005} argue that ``those who opt out are superior along unobservable dimensions such as their motivation level and parental involvement" (p. 755). 
 
 The \citeA{whatweknow} provides perhaps the most comprehensive review of available research on charter school performance. The current report, \textit{Charter School Achievement: What We Know} is now in its fifth edition having been updated periodically to account for recent studies. In addition to covering published research reports, the review includes unpublished reports including conference presentations, dissertations, policy group and think tank reports, and state evaluations. Of the 210 studies identified, 140 are included in their review given that the study compares charter schools with traditional public schools, the study uses ``serious research methods" (p. 2), and ``examines a significant segment of the charter sector." The studies are then further categorized into one of three categories: (1) panel studies that are longitudinal and examine student growth over time; (2) cohort change studies that are longitudinal but use some other method than tracking individual students; and (3) snapshot studies that examine school performance at a single point in time (also known as observational studies).
 
 Table \ref{charterAchievement} summarizes the findings of the 140 studies included first, by breaking out the year(s) the study's data is based upon, and second by the results reported. It should be noted that many of the pre-2001 studies were concentrated in a few states (Arizona, California, Florida, North Carolina, and Texas). This is expected given that these states are among the earliest to adopt charter school laws (see appendix A) as well as the substantial increase in the number of charter schools since 2000 (see figure \ref{fig:charterSchoolGrowth}). The National Alliance of Public Charter Schools conclude that:
 
-\begin{quote}
+\begin{quote} \normalsize
 [I]t becomes dramatically clear that studies examining public charter schools in more recent academic years show that charter schools produce more instances of larger achievement gains in both math and reading when compared to traditional public schools. (p. 3)
 \end{quote}
 
-\noindent However, this interpretation downplays the fact that approximately 30\% of charter schools performed worse than their traditional public school counterpart. These results are consistent with a recent by the \citeA{credo} that reported that 37\% of charter schools performed worse than their public school counterpart (this study is discussed in more detail below).
+\noindent However, this interpretation downplays the fact that approximately 30\% of charter schools performed worse than their traditional public school counterpart. These results are consistent with a recent by the \citeA{credo} that reported that 37\% of charter schools performed worse than their public school counterpart in 2009 and 31\% in 2013 (this study is discussed in more detail below).
 
 \input{../Tables/Chapter2.table.SummaryCharterSchoolAcievement.tex}
 
-\citeA{betts2008} employ more stringent selection criteria for including studies in their meta-analysis. More specifically, only studies that used experimental student-level growth-based methods were included, resulting in a total of 14 studies published between 2001 and 2007 utilizing data ranging from 1998 through 2005. Similarly to \citeA{whatweknow}, studies included a limited number of locations including Arizona, California (three of which from San Diego specifically), Chicago, Delaware, Florida, Idaho, North Carolina, and Texas with one additional anonymous location. Overall, their analysis of the available studies provide very mixed results. However, some patterns to charter and public school differences emerge, specifically that charter schools generally outperform traditional public schools in elementary school reading and middle school math, though effect sizes for the latter are small. However, for high school reading and math charter schools are generally underperforming traditional public schools, but it should be noted that studies examining these grade levels is relatively small \cite<see also,>{whatweknow}.
+\citeA{BettsTang2008} employ more stringent selection criteria for including studies in their meta-analysis. More specifically, only studies that used experimental student-level growth-based methods were included, resulting in a total of 14 studies published between 2001 and 2007 utilizing data ranging from 1998 through 2005. Similarly to \citeA{whatweknow}, studies included a limited number of locations including Arizona, California (three of which from San Diego specifically), Chicago, Delaware, Florida, Idaho, North Carolina, and Texas with one additional anonymous location. Overall, their analysis of the available studies provide very mixed results. However, some patterns to charter and public school differences emerge, specifically that charter schools generally outperform traditional public schools in elementary school reading and middle school math, though effect sizes for the latter are small. However, for high school reading and math charter schools are generally underperforming traditional public schools, but it should be noted that studies examining these grade levels is relatively small \cite<see also,>{whatweknow}.
 
 
 \subsubsection{Two NAEP Studies Using HLM}
-An increasingly used statistical method that allows for the analysis of studies where observations are not independent is hierarchical linear modeling (HLM), or multi-level analysis. In the context of the charter school question, comparing students in charter schools to public school counterparts with, say ordinary least squares or ANOVA, is inappropriate since these statistical models do not account for the school effects. HLM provides a model for which school effects can be partitioned from student effects thereby providing adjustments for the lack of independence of observations \cite<see e.g.,>{bryk1992,gelman2006}.
+An increasingly used statistical method that allows for the analysis of studies where observations are not independent is hierarchical linear modeling (HLM), or multi-level analysis. In the context of the charter school question, comparing students in charter schools to public school counterparts with, say ordinary least squares or ANOVA, is inappropriate since these statistical models do not account for the school effects. HLM provides a model for which school effects can be partitioned from student effects thereby providing adjustments for the lack of independence of observations \cite<see e.g.,>{BrykRaudenbush1992,GelmanHill2006}.
 
-Braun, Jenkins, and Grigg have published two research reports utilizing NAEP and HLM that look at how public school students compare to private school students \citeyear{braun2006private} and charter schools students \citeyear{braun06hlm}. Note that the former study used the 2005 administering of NAEP whereas the latter used the 2003 administering of NAEP. A key advantage of using NAEP is that many student (see appendix C) and school level variables are available. Moreover, as of 2003 charter schools have been oversampled to ensure sufficient sample sizes for appropriate comparisons to be made. 
+Braun, Jenkins, and Grigg have published two research reports utilizing NAEP and HLM that look at how public school students compare to private school students \citeyear{BraunJenkinsGrigg2006private} and charter schools students \citeyear{BraunJenkinsGrigg2006}. Note that the former study used the 2005 administering of NAEP whereas the latter used the 2003 administering of NAEP. A key advantage of using NAEP is that many student (see appendix C) and school level variables are available. Moreover, as of 2003 charter schools have been oversampled to ensure sufficient sample sizes for appropriate comparisons to be made. 
 
 \paragraph{Comparing Private and Public Schools}
-For the private school study \cite{braun2006private}, results found that students in private schools scored significantly higher than public school students in both mathematics and reading at grades 4 and 8. Differences ranged from 8 points for grade 4 mathematics to 18 points for grade 8 reading. Adjusting for student characteristics with HLM resulted in reductions in all four comparisons of approximately 11 to 14 points. After adjustment, private school students still scored significantly higher than public school students in grade 8 reading, but public schools scored significantly better in grade 4 mathematics. There was no significant difference for grade 4 reading and grade 8 mathematics.
+For the private school study \cite{BraunJenkinsGrigg2006private}, results found that students in private schools scored significantly higher than public school students in both mathematics and reading at grades 4 and 8. Differences ranged from 8 points for grade 4 mathematics to 18 points for grade 8 reading. Adjusting for student characteristics with HLM resulted in reductions in all four comparisons of approximately 11 to 14 points. After adjustment, private school students still scored significantly higher than public school students in grade 8 reading, but public schools scored significantly better in grade 4 mathematics. There was no significant difference for grade 4 reading and grade 8 mathematics.
 
-\paragraph{Comparing Charter and Private Schools}
-For the charter school study \cite{braun06hlm} analysis was conducted in three phases for both reading and mathematics. In phase one, all charter schools were compared to all public schools. Results found that, when student characteristics were adjusted for, charter schools performed on average 4.2 points lower than publics schools in reading (corresponding effect size is 0.11 standard deviations) and 4.7 points lower in mathematics (corresponding effect size is 0.17 standard deviations). 
+\paragraph{Comparing Charter and Public Schools}
+For the charter school study \cite{BraunJenkinsGrigg2006} analysis was conducted in three phases for both reading and mathematics. In phase one, all charter schools were compared to all public schools. Results found that, when student characteristics were adjusted for, charter schools performed on average 4.2 points lower than publics schools in reading (corresponding effect size is 0.11 standard deviations) and 4.7 points lower in mathematics (corresponding effect size is 0.17 standard deviations). 
 
 Phase two separated charter schools into two groups: charter schools that are associated with a public school district (PSD) and those that are not. Separate analysis were performed for each charter school type with public schools. For reading, there was no significant difference between charter schools affiliated with a PSD and public schools. However, for schools not affiliated with a PSD, charter school students scored significantly lower than public school students with an adjusted difference of 0.17 standard deviations. Similarly for mathematics, there was no difference between charter schools affiliated with a PSD and public schools but charter schools not affiliated with PSD scored significantly lower with an adjusted difference of 0.23 standard deviations.
 
@@ -240,7 +241,7 @@ Lastly, phase three compared only charter and publics schools located in a centr
 
 
 \subsubsection{The CREDO Study}
-The \citeA{credo} conducted a study of more than 1.7 million records from 2400 charter within 16 states. The methodology involves creating a Virtual Control Record (VCR) for each charter school student \cite<see also,>{abadie2007,nea} which is used to find matching student from an eligible traditional public school. Students within a traditional public school become available in a pool of potential matches when at least one student is identified as transferring to a charter school. Once the ``feeder schools" are identified, all students from feeder schools are pooled and serve as the source to select matches to the charter school students. Students are then matched on the following factors: grade-level, gender\footnote{Gender was not available in Florida}, race/ethnicity, free or reduced price lunch status, English language learner status, special education status, and prior test score on state achievement tests. This procedure, which is similar to propensity matching, resulted in 83.7\% and 84.4\% of charter school students being matched to a public school student for reading and math, respectively.
+The \citeA{credo,credo2013} conducted a study of more than 1.7 million records from 2400 charter within 16 and 27 states in 2009 and 2013, respectively. The methodology involves creating a Virtual Control Record (VCR) for each charter school student \cite<see also,>{AbadieDiamondHainueller2007,nea} which is used to find matching student from an eligible traditional public school. Students within a traditional public school become available in a pool of potential matches when at least one student is identified as transferring to a charter school. Once the ``feeder schools" are identified, all students from feeder schools are pooled and serve as the source to select matches to the charter school students. Students are then matched on the following factors: grade-level, gender\footnote{Gender was not available in Florida}, race/ethnicity, free or reduced price lunch status, English language learner status, special education status, and prior test score on state achievement tests. This procedure, which is similar to propensity matching, resulted in 83.7\% and 84.4\% of charter school students being matched to a public school student for reading and math, respectively.
 
 Once matches were determined, ordinary least squares regression was utilized to analyze both math and reading scores, separately, across the charter school students and matched public school students. Moreover, controls for student characteristics used above, excluding gender, along with state indicators and scores affected by Hurricane Katrina, were added to the basic model. Overall results show that charter school students performed, on average, 0.01 and 0.03 standard deviations below public school students for reading and math, respectively. Both results are significant at \textit{p} $\leq$ 0.01.
 
@@ -248,22 +249,26 @@ Though the magnitude of the overall effects may not necessarily suggest charter 
 
 Lastly, the \citeA{credo} found variation of charter school effectiveness across school characteristics. That is, schools that focused on elementary or middle grades separately, tended to perform as well or better than their public school counterparts. However, for charter schools that focused on high grades or multi-level grades performed anywhere from .02 to .08 standard deviations below public schools. Moreover, school level comparisons find that only 17\% of charter schools perform better than public schools while 46\% perform no differently and 37\% perform significantly worse.
 
+The results from the 2013 study \cite{credo2013} show a small increase in the difference between charter and traditional public school students. In 2009, charter school students had a loss of 7 days which increased to a gain of 8 days in 2013. For math, charter school students has a loss of 22 days in 2009 and are on par with traditional public school students in 2013. It should be noted that the Center for Research on Education Outcomes prefers to present their results in a metric of days. This is problematic since it is difficult to compare to other studies. However, these differences are approximately as effect sizes between 0.01 and 0.03 \cite{Loveless2013}. These results, as will be shown in chapter four, are consistent with the results of this study. Moreover, this also demonstrates an issue with null hypothesis testing and \textit{p}-values, especially with large \textit{n}'s. This will be discussed in detail in chapter five.
+
+
 %\paragraph{Criticisms of the CREDO Study}
 
 \subsection{Propensity Score Analysis}
 
-Randomized experiments are the gold standard for estimating causal effects of a treatment. However, as is frequently the case in educational contexts, randomization for this project is neither ethical nor feasible. Therefore, propensity score methods (Rosenbaum \& Rubin, 1983) using matching (Stuart \& Rubin, 2007; Stuart, 2010) and stratification methods (Raudenbush, Hong, \& Rowan, 2003) will be used to make available quasi-experimental estimates of causal effects (see e.g., Schneider, Carnoy, Kilpatrick, Schmidt, \& Shavelson, 2007; Stuart \& Rubin, 2007). Recent research comparing the use of propensity score methods with randomized experiments have shown that causal estimates from observational studies using propensity score methods are generally consistent with those from randomized experiments (Cook, Shadish, \& Wong, 2008; Shadish, Clark, \& Steiner, 2008). The use of propensity score methods in published psychology and education research has been growing over the last decade (Thoemmes \& Kim, 2011).
+Randomized experiments are the gold standard for estimating causal effects of a treatment. However, as is frequently the case in educational contexts, randomization for the current project is neither ethical nor feasible. Therefore, propensity score methods \cite{RosenbaumRubin1983} using matching \cite{StuartRubin2008,Stuart2010} and stratification methods \cite{RaudenbushHongRowan2003} will be used to make available quasi-experimental estimates of causal effects \cite<see e.g.>{SchneiderEtAl2007,StuartRubin2008}. Recent research comparing the use of propensity score methods with randomized experiments have shown that causal estimates from observational studies using propensity score methods are generally consistent with those from randomized experiments \cite{CookShadishWong2008,ShadishClarkSteiner2008}. The use of propensity score methods in published psychology and education research has been growing over the last decade \cite{ThoemmesKim2011}.
 
-The selection of covariates is particularly challenging in propensity score analysis. As such, multiple methods for the estimation of propensity scores will be used (Rosenbaum, 2012). The goal in the estimation of propensity scores is to reduce selection bias, therefore simple significance testing is not appropriate (Rosenbaum, 2002) since potentially non-significant covariates may be proxies for important non-observed covariates. Although this study has been designed to measure the same covariates as would be used in a randomized block design, multiple methods utilizing varying number of covariates will be used. Moreover, we wish to provide overall effect sizes but also measure the effects of clustering of state. 
+The selection of covariates is particularly challenging in propensity score analysis. As such, multiple methods for the estimation of propensity scores will be used \cite{Rosenbaum2012}. The goal in the estimation of propensity scores is to reduce selection bias, therefore simple significance testing is not appropriate \cite{Rosenbaum2002} since potentially non-significant covariates may be proxies for important non-observed covariates. Although this study has been designed to measure the same covariates as would be used in a randomized block design, multiple methods utilizing varying number of covariates will be used. Moreover, we wish to provide overall effect sizes but also measure the effects of clustering of state. 
 
+Although propensity score analysis has been shown to provide estimates consistent with randomized experiments \cite{ShadishClarkSteiner2008,DehejiaWahba1999,HeckmanEtAl1997}, its use has not been immune to criticism \cite<c.f.>{Shadish2013}. \citeA{Pearl2009} has raised concerns about a potential increase in bias due to the inclusion of certain covariates in the estimation of propensity scores in response to \citeauthor{Rosenbaum2002}'s \citeyear{Rosenbaum2002} suggestion that in general the inclusion of all observable covariates is preferable to excluding them. However, Pearl's concerns can be mitigated in at least three ways. First, careful checking of balance across all observable covariates is done even if the covariate is not used in the modeling of the propensity scores. Second, sensitivity analysis \cite{Rosenbaum2002} can be conducted after matching which considers the question of whether the estimate would differ in the presence of additional unobserved covariates. That is, this method tests the robustness of the propensity score estimation for hidden bias. Currently sensitivity analysis is only well defined for one-to-one matching and therefore is not used for this project. And third, utilize multiple methods for estimating propensity scores \cite{Rosenbaum2012}. Specifically, in addition to matching based upon propensity scores estimated from logistic regression, stratification methods using both quintiles on the logistic regression estimated propensity scores and classification trees provide parametric and non-parametric estimates, respectively. 
 
-
+The use of propensity score methods is still preferable over traditional regression models in light of these criticisms. Specifically, propensity score analysis separates the covariates related to selection bias and the comparison of the outcome of interest. This clean separation of the research design also provides a more clear interpretation of results similar to randomized experiments. As will be discussed more fully in chapter three, special must be placed on achieving balance. In the context of propensity score analysis, balance refers to reducing bias or differences between observed covariates for the units that will be compared. For example, if after matching we find that each matched pair has the same ethnicity we would conclude that perfect balance has been achieved for that covariate. In chapter three I will outline a number of approaches for checking balance for both matching and stratification methods. Although there is the possibility of a lack of balance in an unobserved covariate (i.e. "hidden bias"), this would similarly affect regression methods and is admittedly an important limitation of any non-randomized method for estimating causal effects. However, NAEP is designed to include most, if not all, the important covariates one would expect to be related to charter school attendance.
 
 
 %==================== CHAPTER 3 ====================================================================
 \cleardoublepage
 \section{Chapter 3: Method}
-This chapter will outline the methods that will be utilized to describe and analyze the data in order to address the research questions central to this study. Given the strong political interests in the question of charter school effectiveness and the implications for educational policy both at the state and national level, obtaining good empirical evidence, preferably with strong causal inferences, is most desirable. The \textit{gold standard} of inferential research is the randomized experiment. A research design that addresses the charter school question proposed here would require that students be randomly assigned, possibly with blocking on key covariates, to either a charter or public school. The theoretical justification for such a scheme is that any systematic differences between the two groups would be balanced through the randomization processes. However, in practice, especially in education, such randomization is neither feasible nor ethical. The result of the lack of randomization is a phenomenon called selection bias. That is, any comparisons of the two groups will be biased given the fact that the units of study, students in this study, self-selected to be in their respected group. Propensity score analysis \cite{rosenbaum83} is a statistical approach whereby the differences between the two groups are balanced by the careful analysis of covariate information. This procedure lends itself well to secondary analysis of observational data.
+This chapter will outline the methods that will be utilized to describe and analyze the data in order to address the research questions central to this study. Given the strong political interests in the question of charter school effectiveness and the implications for educational policy both at the state and national level, obtaining good empirical evidence, preferably with strong causal inferences, is most desirable. The \textit{gold standard} of inferential research is the randomized experiment. A research design that addresses the charter school question proposed here would require that students be randomly assigned, possibly with blocking on key covariates, to either a charter or public school. The theoretical justification for such a scheme is that any systematic differences between the two groups would be balanced through the randomization processes. However, in practice, especially in education, such randomization is neither feasible nor ethical. The result of the lack of randomization is a phenomenon called selection bias. That is, any comparisons of the two groups will be biased given the fact that the units of study, students in this study, self-selected to be in their respected group. Propensity score analysis \cite{RosenbaumRubin1983} is a statistical approach whereby the observed differences between the two groups are balanced by the careful analysis of covariate information. This procedure lends itself well to secondary analysis of observational data.
 
 \subsection{Overview of NAEP}
 The source of the data that will be utilized in this study is provided by the National Center for Educational Statistics (NCES) which is within the U.S. Department of Education's Institute of Education Sciences (IES). The National Assessment of Educational Progress (NAEP) was started in 1971 and has provided national measures of student achievement in many subjects including mathematics, reading, science, writing, history, civics, and the arts. In 2003 NAEP began assessing charter schools as well as private and public schools. This study will utilize the 2007 administering of the NAEP assessments in mathematics and reading within grades four and eight. The 2007 assessment included over 6,000 public schools and over 200 charter schools comprising of over 145,000 and 3,000 students, respectively. Given this relatively large, nationally representative sample, analysis of NAEP assessments utilizing propensity score analysis may prove to provide valuable insights into the academic differences between charter and public schools.
@@ -282,13 +287,13 @@ Since 1990, the Council of Chief State School Officers (CCSSO) has been contract
 \subsubsection{Reading}
 The NAEP Reading Framework (2006) provides guidelines and a theoretical basis for reading assessment. This framework is designed with the input of individuals and organizations involved in reading education including researchers, policymakers, teachers, and business representatives. However, a particular emphasis is placed on the work of the National Institute for Child Health and Human Development (NICHID). More specifically, the NICHID summarizes how the research describes a reader as:
 
-\begin{quote}
+\begin{quote} \normalsize
 In the cognitive research, reading is purposeful and active. According to this view, a reader reads a text to understand what is read, to construct memory representations of what is understood, and to put this understanding to use. \cite<p. 4, NICHD, 2000, as cited in>{naepreading}
 \end{quote}
 
 \noindent Moreover, reading is considered to be a complex process rather than a simple set of skills. As such, the NAEP reading assessment is designed such that comprehension is defined as:
 
-\begin{quote}
+\begin{quote} \normalsize
 ``[I]ntentional thinking during which meaning is constructed through interactions between text and reader" (Harris \& Hodges, 1995). Thus, readers derive meaning from text when they engage in intentional, problem solving thinking processes. \cite<p. 14, NICHD, 2000, as cited in>{naepreading}
 \end{quote}
 
@@ -315,9 +320,9 @@ $$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i }|{ X }_{ i }$$
 
 $$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i } \; | \; \pi({ X }_{ i })$$
 
-\noindent So that treatment placement is ignorable given the propensity score presuming sufficient balance is achieved.
+\noindent So that treatment placement is ignorable given the propensity score presuming sufficient balance\footnote{Balance in the context of PSA refers to differences in observed covariates between treatment and control units is minimized.} is achieved.
 
-The average treatment effects (ATE) is defined as $E(r_1) - E(r_0)$ where $E(.)$ is the expected value in the population. Given a set of covariates, $X$, and outcomes $Y$, where 0 denotes traditional public school student and 1 denotes charter school student, ATE is defined as:
+The average treatment effect (ATE) is defined as $E(r_1) - E(r_0)$ where $E(.)$ is the expected value in the population. Given a set of covariates, $X$, and outcomes $Y$, where 0 denotes traditional public school student and 1 denotes charter school student, ATE is defined as:
 
 $$ATE=E(Y_{1}-Y_{0}|X)=E(Y_{1}|X)-E(Y_{0}|X)$$
  
@@ -327,20 +332,29 @@ $$ATE=E(Y_{1}-Y_{0}|X)=E(Y_{1}|X)-E(Y_{0}|X)$$
 
 \begin{enumerate}
 \item Propensity score analysis using stratification. This method ignores state assignment as a clustering variable. Under this broader method three statistical methods for stratification will be used:
-	\begin{enumerate}	\item Full logistic regression. This method will estimate propensity scores using logistic regression with all available covariates, but will exclude interaction or product terms.	\item Logistic regression with step AIC. The step AIC in the MASS package (Venables \& Ripley, 2002) will select the best logistic model based upon the Akaike Information Criterion (Akaike, 1974). In this case the �best� first order interaction terms will be added to the main effect terms in a.	\item Conditional inference trees, based on all covariates; missing data will also be accommodated with the tree-based methods.
-	\end{enumerate}\item Propensity score matching. This method implicitly accounts for clustering. That is, the method used will find matches between treated and control units that first match exactly on state, ethnicity, and gender, then finds a best match based upon the propensity scores estimated using logistic regression. As suggested by Stuart (2010), multiple matched sets will be formed using:
-	\begin{enumerate}	\item One-to-one.	\item One-to-five.	\item One-to-ten.	\end{enumerate}
-	A dependent sample analysis will be performed on the resulting matched pairs (Austin, 2011).\item Multilevel propensity score analysis (see e.g. Bryer, 2011). This method will utilize the same stratification methods as described in method one above, namely:
 	\begin{enumerate}
-	\item Full logistic regression.	\item Logistic regression with step AIC.	\item Conditional inference trees.
+	\item Full logistic regression. This method will estimate propensity scores using logistic regression with all available covariates, but will exclude interaction or product terms.
+	\item Logistic regression with step AIC. The step AIC in the MASS package (Venables \& Ripley, 2002) will select the best logistic model based upon the Akaike Information Criterion (Akaike, 1974). In this case the ÔbestÕ first order interaction terms will be added to the main effect terms in a.
+	\item Conditional inference trees, based on all covariates; missing data will also be accommodated with the tree-based methods.
+	\end{enumerate}
+\item Propensity score matching. This method implicitly accounts for clustering. That is, the method used will find matches between treated and control units that first match exactly on state, ethnicity, and gender, then finds a best match based upon the propensity scores estimated using logistic regression. As suggested by Stuart (2010), multiple matched sets will be formed using:
+	\begin{enumerate}
+	\item One-to-one (i.e. one charter school student is matched to no more than one traditional public school student).
+	\item One-to-five (i.e. one charter school student is matched to as many as five traditional public school students).
+	\item One-to-ten (i.e. one charter school student is matched to as many as ten traditional public school students).
+	\end{enumerate}
+	A dependent sample analysis will be performed on the resulting matched pairs (Austin, 2011).
+\item Multilevel propensity score analysis (see e.g. Bryer, 2011). This method will utilize the same stratification methods as described in method one above, namely:
+	\begin{enumerate}
+	\item Full logistic regression.
+	\item Logistic regression with step AIC.
+	\item Conditional inference trees.
 	\end{enumerate}
 \end{enumerate}
 
 
 \subsubsection{Graphical Representation}
 %Given the large amount of data that needs to be summarized, the use of graphics will be emphasized. The \texttt{multilevelPSA} package provides a number of graphing functions that extend the framework introduced by Helmreich and Pruzek for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot. In this graphic, the x-axis corresponds public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle is a state with its size corresponding the number of students within each state. The distribution of differences between charter and public schools across states are represented as tick marks along the diagonal line in the bottom left of the graphic. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 281 and the overall adjusted mean for public school student is 278. The dashed blue line parallel to the unit line corresponds to the overall adjusted mean difference and likewise, the dashed green lines correspond to the confidence interval. This figure will be explored in further detail in chapter four.
-
-Given the large amount of data that needs to be summarized, the use of graphics will be an integral component of representing the results. The \texttt{multilevelPSA}\footnote{The \texttt{multilevelPSA} package was written by the author and is available from \url{http://github.com/jbryer/multilevelPSA}.} package provides a number of graphing functions that extend the framework introduced by \citeA{HelmreichPruzek2009} for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot with annotations. In this graphic, the x-axis corresponds to traditional public school grade 8 NAEP scores and the y-axis corresponds to charter school grade 8 NAEP scores. Each colored circle (a) is a state with its size corresponding the number of students within each state. Each state is projected to the lower left, parallel to the unit line, such that a tick mark is placed on the line with slope -1 (b). These tick marks represent the distribution of differences between charter and traditional public schools across states. Differences are aggregated (and weighted by size) across states. For grade 8 math, the overall adjusted mean for charter school students is 278 and the overall adjusted mean for traditional public school student is 278 and represented by the horizontal (c) and vertical (d) blue lines, respectively. The dashed blue line parallel to the unit line (e) corresponds to the overall adjusted mean difference and likewise, the dashed green lines (f) correspond to the confidence interval. Lastly, rug plots along the right and top edges of the graphic (g) correspond to the distribution of each state's overall mean charter and traditional public school NAEP scores, respectively.
 
 \begin{figure}[t]
 \begin{center}
@@ -350,11 +364,133 @@ Given the large amount of data that needs to be summarized, the use of graphics 
 \end{center}
 \end{figure}
 
-Figure \ref{fig:g8math:circ} represents a large amount of data and allows provides much greater insight into the data and results. The figure provides overall results that would be present in a traditional table, for instance the fact that the green dashed lines span the unit line (i.e. y = x) indicates that there is a non-significant difference between the two groups. However additional information is difficult to convey in tabular format. For exmaple, the rug plots indicate that the variance in the performance of charter schools is much greater than that of traditional public schools. We can also observe that most states cluster near the overall mean (i.e. where the vertical and horizontal blue lines intersect), but there are a few states that perform well below the rest of the states (namely those located towards the bottom left of the figure). These are of particular interest due to the fact that theese states are among those with the greatest difference in favor of charter schools. That is, the states where charter schools are performing substantially better than their traditional public school counterparts are overall performing substaintly worse than other states.
+Given the large amount of data to be summarized, the use of graphics will be an integral component of representing the results. The \texttt{multilevelPSA}\footnote{The \texttt{multilevelPSA} package was written by the author and is available from \url{http://github.com/jbryer/multilevelPSA}.} package provides a number of graphing functions that extend the framework introduced by \citeA{HelmreichPruzek2009} for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot with annotations. This graphic represents the results of comparing private and public schools in North America using the Programme of International Student Assessment \cite<PISA;>{pisa}. The PISA data to create this graphic is included in the \texttt{multilevelPSA} package and a more detailed description of how to create this graphic are discussed at the end of this chapter. The following section will focus on the features of this graphic.
 
+In Figure \ref{fig:g8math:circ}, the x-axis corresponds to math scores for private schools and the y-axis corresponds to public school maths cores. Each colored circle (a) is a country with its size corresponding the number of students sampled within each country. Each country is projected to the lower left, parallel to the unit line, such that a tick mark is placed on the line with slope -1 (b). These tick marks represent the distribution of differences between private and public schools across countries. Differences are aggregated (and weighted by size) across states. For math, the overall adjusted mean for private schools is 487 and the overall adjusted mean for public schools is 459 and represented by the horizontal (c) and vertical (d) blue lines, respectively. The dashed blue line parallel to the unit line (e) corresponds to the overall adjusted mean difference and likewise, the dashed green lines (f) correspond to the confidence interval. Lastly, rug plots along the right and top edges of the graphic (g) correspond to the distribution of each country's overall mean private and public school math scores, respectively.
+
+Figure \ref{fig:g8math:circ} represents a large amount of data and provides much greater insight into the data and results. The figure provides overall results that would be present in a traditional table, for instance the fact that the green dashed lines do not span the unit line (i.e. y = x) indicates that there is a statistically significant difference between the two groups. However additional information is difficult to convey in tabular format. For example, the rug plots indicate that the spread in the performance of both private and public schools across countries is large. We can also observe that Canada, which has the largest PISA scores for both groups, also has the largest difference (in favor of private schools) as represented by the larger distance from the unit line.
 
 
 %Figure \ref{fig:g8math:diff} provides a more nuanced depiction of the differences both between and across states. Similar to the mutlielvel PSA assessment plot, each blue dot corresponds to a state and is sized relative to the number of students within each state. The light gray dots correspond to each of the strata within each state. The graphic also provides confidence intervals for each state as well as the overall adjusted mean difference and confidence interval.
+
+\subsection{The \texttt{multilevelPSA} R Package}
+
+All of the analysis for this study were conducted using R \cite{rdevelopment}., the use of which R provides a number a number of important advantages. First, all the analysis is reproducible. That is, researchers can download all the R scripts \footnote{Available on Github at \url{https://github.com/jbryer/Dissertation}.} and those with access to the restricted NAEP data \footnote{Typically data is included for the analysis to be fully reproducible. However, given the sensitive nature of the data the National Center for Education Statistics (NCES) requires a restricted license for access to the data.} can run all the analyses. Another important advantage of using R is that it is an extensible vis-à-vis R packages. Packages are collections of functions, data, and documentation designed for a specific purpose. Since the multilevel PSA methods described in this dissertation have never been conducted or implemented elsewhere, the \texttt{multilevelPSA} package was developed for R \cite{rdevelopment}. As of this writing, version 1.2 is available on The Comprehensive R Archive Network (CRAN)\footnote{The CRAN package page is available at: \url{http://cran.r-project.org/web/packages/multilevelPSA/index.html}. The project source code is hosted on Github at: \url{https://github.com/jbryer/multilevelPSA}.}. In this section I will outline the core functionality of the \texttt{multlilevelPSA} package. Appendix J provides a complete list of the available functions with brief descriptions of their purpose. By convention, R commands are type faced in a fixed-width font and begin with a greater than (\texttt{>}) symbol.
+
+To begin, the \texttt{install.packages} and \texttt{require} functions will install and load the package, respectively.
+
+\begin{verbatim}
+> install.packages('multilevelPSA', repos='http://cran.r-project.org')
+> require('multilevelPSA')
+\end{verbatim}
+
+The \texttt{multilevelPSA} package includes North American data from the Programme of International Student Assessment \cite<PISA;>{pisa}. This data is made freely available for research and is utilized here so that the R code is reproducible\footnote{NAEP requires a restricted use license and therefore the data is only available to qualified researchers. The R scripts for all analysis however, are available on Github at \url{http://github.com/jbryer/Dissertation}.}. This example compares the performance of private and public schools clustered by country.
+
+\begin{verbatim}
+> data(pisana)
+> data(pisa.psa.cols)
+\end{verbatim}
+
+The \texttt{mlpsa.ctree} function performs phase I of the propensity score analysis using classification trees, specifically using the \texttt{ctree} function in the \texttt{party} package. The \texttt{getStrata} function will return a data frame with a number of rows equivalent to the original data frame indicating the strata for each student.
+
+\begin{verbatim}
+> mlpsa <- mlpsa.ctree(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)], 
+                       formula=PUBPRIV ~ ., level2='CNT')
+> mlpsa.df <- getStrata(mlpsa, pisana, level2='CNT')
+\end{verbatim}
+
+Similarly, the \texttt{mlpsa.logistic} estimates propensity scores using logistic regression. The \texttt{getPropensityScores} function returns a data frame with a number of rows equivalent to the original data frame 
+
+\begin{verbatim}
+> mlpsa.lr <- mlpsa.logistic(pisana[,c('CNT','PUBPRIV',pisa.psa.cols)],
+                             formula=PUBPRIV ~ ., level2='CNT')
+> mlpsa.lr.df <- getPropensityScores(mlpsa.lr, nStrata=5)
+> head(mlpsa.lr.df)
+  level2    ps strata
+1    CAN 0.917      2
+2    CAN 0.941      3
+3    CAN 0.969      4
+4    CAN 0.930      2
+5    CAN 0.836      1
+6    CAN 0.973      4
+\end{verbatim}
+
+The \texttt{covariate.balance} function will calculate balance statistics for each covariate by estimating the effect of each covariate before and after adjustment. The results can be converted to a data frame to view numeric results or the \texttt{plot} function will provide a balance plot.
+
+\begin{verbatim}
+> cv.bal <- covariate.balance(covariates=student[,pisa.psa.cols],
+                              treatment=student$PUBPRIV,
+                              level2=student$CNT,
+                              strata=mlpsa.df$strata)
+> head(as.data.frame(cv.bal))
+  covariate es.adj es.adj.wtd es.unadj
+1   ST04Q01 0.0565  -0.000396   0.0258
+2   ST06Q01 0.0167  -0.000292   0.0796
+3   ST08Q01 0.0766   0.000515   0.1014
+4   ST08Q02 0.0379   0.000500   0.0913
+5   ST08Q03 0.0150  -0.000850   0.0286
+6   ST08Q04 0.0431  -0.000278   0.0058
+> plot(cv.bal)
+\end{verbatim}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/pisabalance.pdf}
+\end{center}
+\end{figure}
+
+\clearpage
+
+The \texttt{mlpsa} function performs phase II of propensity score analysis and requires four parameters: the response variable, treatment indicator, strata, and clustering indicator. The \texttt{minN} parameter (which defaults to five) indicates what the minimum strata size is to be included in the analysis. For this example, 463, or less than once percent of students were removed because the strata (or leaf node for classification trees) did not contain at least five students from both the treatment and control groups.
+
+\begin{verbatim}
+> results.psa.math <- mlpsa(response=mlpsa.df$MathScore, 
+                            treatment=mlpsa.df$PUBPRIV, 
+                            strata=mlpsa.df$strata, 
+                            level2=mlpsa.df$CNT)
+Removed 463 (0.696%) rows due to strata size being less than 5
+\end{verbatim}
+
+\noindent The \texttt{summary} function provides the overall treatment estimates as well as level one and two summaries.
+
+\begin{verbatim}
+> summary(results.psa.math)
+Multilevel PSA Model of 85 strata for 3 levels.
+Approx t: -10.8
+Confidence Interval: -31.3, -24.75
+   level2  strata Treat Treat.n Control Control.n ci.min ci.max
+1     CAN Overall   579    1625     513     21093  -72.1 -59.57
+2    <NA>       1   580      28     492      1128     NA     NA
+3    <NA>       2   600       9     476      1326     NA     NA
+... # Output truncated to save space
+\end{verbatim}
+
+The \texttt{plot} function will create the multilevel assessment plot. Here it is depicted with side panels showing the distribution of math scores for all strata for public school students to the left and private school students below. These panels can be plotted separately using the \texttt{mlpsa.circ.plot} and \texttt{mlpsa.distribution.plot} functions.
+
+\begin{verbatim}
+> plot(results.psa.math)
+\end{verbatim}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/pisamlpsa.pdf}
+\end{center}
+\end{figure}
+
+\clearpage
+Lastly, the \texttt{mlpsa.difference.plot} function plots the overall differences. The \texttt{sd} parameter is optional, but if specified the x-axis can be interpreted as effect sizes.
+
+\begin{verbatim}
+> mlpsa.difference.plot(results.psa.math, 
+                        sd=mean(mlpsa.df$MathScore, na.rm=TRUE))
+\end{verbatim}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures/pisadiffplot.pdf}
+\end{center}
+\end{figure}
+
 
 
 %==================== CHAPTER 4 ====================================================================
@@ -363,7 +499,7 @@ Figure \ref{fig:g8math:circ} represents a large amount of data and allows provid
 
 This chapter will outline in detail the results of all the propensity score models described in chapter three. Since NAEP is organized such that each grade and subject combination is a separate dataset, this chapter will focus on the analysis of grade four math. The results for grade four reading, grade eight math, and grade eight reading are included in the appendices. The chapter begins with a discussion of data preparation, followed by details of the nine propensity score methods used, and concludes with a summary, including tables and figures, of the overall results across all grades and subjects.
 
-All analysis was conducted using R \cite{redevelopment}\footnote{All R scripts are available from Github at \url{https://github.com/jbryer/Dissertation}. Due to the licensing agreement with NCES, data is not included. However, researchers with access to the 2009 restricted use data should be able to replicate the analysis outlined in this chapter.}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN). 
+All analysis was conducted using R \cite{rdevelopment}\footnote{All R scripts are available from Github at \url{https://github.com/jbryer/Dissertation}. Due to the licensing agreement with NCES, data is not included. However, researchers with access to the 2009 restricted use data should be able to replicate the analysis outlined in this chapter.}. R provides a number of advantages over other applications including a framework for extending its core functionality through R packages. I have written and published two R packages primarily for conducting the analysis in this dissertation. The \texttt{naep} package provides functions to read and work with the National Assessment of Educational Progress (NAEP) data sets. Secondly, the \texttt{multilevelPSA} package provides functions to conduct multilevel propensity score analysis as described above. Both of these packages are available from the Comprehensive R Archive Network (CRAN). 
 
 
 \textit{Formatting note}. Since the development of the R packages are in and of themselves a major component of this dissertation, I will make reference to some of the functions available. All references to R packages and functions will appear in a \texttt{fixed width font}.
@@ -371,6 +507,8 @@ All analysis was conducted using R \cite{redevelopment}\footnote{All R scripts a
 \subsection{Data Preparation}
 
 The propensity score methods I will use attempt to adjust for selection bias using the available observed covariates. However, the the geographic distribution of charter schools is not equal. That is, charter schools are more prevalent in certain geographic regions of the country, often within urban areas. Since there are several orders of magnitude difference in the number of charter school to traditional public school students, selecting a subset of all the traditional public school students available in NAEP is possible. Specifically, by selecting traditional public school students who live in close proximity to a charter school the likelihood of them actually choosing a school increases. According to the National Household Travel Study, students travel an average of five miles to school. The Common Core of Data \cite{ccd} provides the location of very public school in the United States. For each traditional public school the distance to the closest charter school was calculated using line-of-sight distance. Approximately 20\% of traditional public schools, within states that have charter schools, were more than five miles from a charter school. Those schools, and subsequently students attending those schools and in any of the NAEP datasets, were eliminated from the study.
+
+\input{../Tables2009/descriptivesClose.tex}
 
 Appendix B provides descriptive statistics for all the covariates for the four datasets. Additionally, unadjusted differences in NAEP scores for each state containing a charter school are provided. Table \ref{dependentDescriptives} below provide the overall, unadjusted, differences in NAEP scorers for the four datasets.
 
@@ -381,12 +519,12 @@ Logistic regression, which is one of the two ways propensity scores will be esti
 
 Secondly, the figures show that there are fewer than 5\% of values are missing for the vast majority of covariates. In grade four math and reading, the three exceptions are newspapers in home, magazines in home, and encyclopedia in home. Grade eight math and reading also show a higher rate of missingness in these three covariates, but also in parent's education level. To examine whether data is missing at random, a logistic regression model was estimated predicting treatment from a shadow matrix (i.e. a matrix with the same dimension of the original dataset with 0s and 1s where 1s indicate the value is missing). The results of these models indicate that there is no relationship between charter school attendance and whether a student completed items regarding newspapers, magazines, and encyclopedias in the home. However, for grade eight math and reading, missingness of mother's and father's education level were statistically significant (\textit{p} < .05) predictors of treatment. It should also be noted that charter school students mother's education level was less likely to be missing whereas father's education level was less likely to be missing for traditional public schools. Although these two covariates are often important for understanding students educational backgrounds, the figures in Appendix I depicting the relative importance of each covariate for predicting charter school attendance using conditional inference trees which are estimated with missingness included, suggest that these covariates have relatively low, or no, predictive value for charter school attendance. Therefore, missing values for these covariates will be imputed and used to estimate propensity scores for the logistic regression and matching methods. 
 
-Multiple imputation \cite{rubin1987,rubin1996} has become a popular approach for imputing missing values in datasets. For this study, missing data was imputed using  by multivariate imputation by chained equations vis-\`a-vis the MICE package \citeA{mice} in R\citeA{vanbuuren}. This package implements the fully conditional specification (FCS) method of imputation whereby separate multivariate imputation models are estimated for each variable containing missing values so that each model has its own set of conditional densities. Since the algorithm iterates through the data in small steps, providing diagnosing the imputed values as proceeding, the result is a robots estimate of imputed values. For this study, we will utilize both the original incomplete data for estimating propensity scores with classification trees and the complete imputed data for estimation propensity scores using logistic regression.
+Multiple imputation \cite{rubin1987,Rubin1996mi} has become a popular approach for imputing missing values in datasets. For this study, missing data was imputed using  by multivariate imputation by chained equations vis-\`a-vis the MICE package \citeA{mice} in R\citeA{vanbuuren}. This package implements the fully conditional specification (FCS) method of imputation whereby separate multivariate imputation models are estimated for each variable containing missing values so that each model has its own set of conditional densities. Since the algorithm iterates through the data in small steps, providing diagnosing the imputed values as proceeding, the result is a robots estimate of imputed values. For this study, we will utilize both the original incomplete data for estimating propensity scores with classification trees and the complete imputed data for estimation propensity scores using logistic regression.
 
 
 \subsection{Propensity Score Analysis with Stratification}
 
-The first class of propensity score methods used is stratification. The general approach of stratification methods is to subdivide the available sample into smaller groups that have similar covariate profiles. Then a comparison using of mean differences between the treatment and control are made and an overall result is pooled from those individual comparisons. There are several ways to stratify the sample. For this study deciles based upon the propensity scores (i.e. fitted values of a logistic regression model) and leaves of a fitted classification tree. Moreover, given the importance of covariate selection and omission from propensity score models, two types of logistic regression models are used, namely a full model using all available covariates and an Akaike Information Criterion \cite<AIC;>{Akaike1974} optimized model. The former is determined by a stepwise model selection algorithm where covariates are added and dropped and the model with that optimizes the AIC is retained.
+The first class of propensity score methods used is stratification. The general approach of stratification methods is to subdivide the available sample into smaller groups that have similar covariate profiles. Then a comparison using of mean differences between the treatment and control are made and an overall result is pooled from those individual comparisons. There are several ways to stratify the sample. For this study deciles based upon the propensity scores (i.e. fitted values of a logistic regression model) and leaves of a fitted classification tree. Moreover, given the importance of covariate selection and omission from propensity score models, two types of logistic regression models are used, namely a full model using all available covariates and an Akaike Information Criterion \cite<AIC;>{Akaike1974} optimized model. The former is determined by a stepwise model selection algorithm where covariates are added and dropped and the model with that optimizes the AIC is retained. Like all analysis in phase one, this is done without outcome variables.
 
 \begin{figure}[t]
 \begin{center}
@@ -396,7 +534,7 @@ The first class of propensity score methods used is stratification. The general 
 \end{center}
 \end{figure}
 
-However, before stratifying the logistic regression models we can examine the relationship between propensity scores and the outcome variable for the two groups. Furthermore, fitting a Loess regression line to that scatter plot provides an overall indication of the differences, if any. Figure \ref{fig:g4math:loess} is a Loess Regression Assessment Plot created using the \texttt{loess.plot} function in the \texttt{multilevelPSA} package. The main panel is a scatterplot of each students propensity score on the \textit{x}-axis and math score on the \textit{y}-axis (for clarity a random 10\% sample of data points are plotted). Two fitted Loess regression lines with approximate 95\% confidence intervals are also plotted (Loess lines are based upon the full dataset and not the sample). The panel on the top provides a density distributions of the propensity scores and shows that there is generally good overlap between the two groups. The panel on the right is a density distribution of the unadjusted outcome and here shows that before propensity score adjustment traditional public school students performed slightly better than charter school students. However, given the strong overlap in the two Loess regression lines, this figure suggests there is no discernible difference in performance between traditional public school students and charter school students in grade four math. Corresponding plots for the other datasets as well as those for the AIC optimized models are provided in Appendix D.
+However, before stratifying the logistic regression models we can examine the relationship between propensity scores and the outcome variable for the two groups. Furthermore, fitting a Loess regression line to that scatter plot provides an overall indication of the differences, if any. Figure \ref{fig:g4math:loess} is a Loess Regression Assessment Plot created using the \texttt{loess.plot} function in the \texttt{multilevelPSA} package. The main panel is a scatterplot of each students propensity score on the \textit{x}-axis and math score on the \textit{y}-axis (for clarity a random 10\% sample of data points are plotted). Two fitted Loess regression lines with approximate 95\% confidence intervals are also plotted (Loess lines are based upon the full dataset and not the sample). The panel on the top provides a density distributions of the propensity scores and shows that there is generally good overlap between the two groups. Having adequate overlap is critical since it indicates there are treatment and comparison units with similar propensity scores that will eventually will be compared on their outcome variables. The panel on the right is a density distribution of the unadjusted outcome and here shows that before propensity score adjustment traditional public school students performed slightly better than charter school students. However, given the strong overlap in the two Loess regression lines, this figure suggests there is no discernible difference in performance between traditional public school students and charter school students in grade four math. Corresponding plots for the other datasets as well as those for the AIC optimized models are provided in Appendix D.
 
 The vertical lines in the main panel of Figure \ref{fig:g4math:loess} represent the deciles, or strata. Figure \ref{fig:g4math:circpsa} is a propensity score assessment plot where the \textit{x}-axis is the outcome score for charter schools and the \textit{y}-axis is the outcome sore for traditional public schools. Each circle corresponds to each strata and the size of the circle is proportional to the number of students within each strata. For the Logistic regression models, since deciles were used, each circle is of the same size. Figure \ref{fig:g4math:circpsa:tree} is the corresponding propensity score assessment plot for the classification tree model and therefore each strata is not of the same size. For points that lie on or near the unit line, $y = x$, indicate no significant difference in the outcome of the two scores. Lines are projected to a line perpendicular to the unit line and the tick placed. These tick marks correspond to the distribution of difference scores and the dashed blue line parallel to the unit line the overall mean difference. Furthermore, the green bar represents exactly the 95\% confidence interval. Therefore, we can interpret the fact that the confidence interval does not span the unit line and is on the tradition public school side to indicate there is small statistically significant difference in favor of traditional public school students. Tables \ref{g4math-circpsa10}, \ref{g4math-circpsa10AIC}, and \ref{g4math-circpsa-tree} provide numeric results for each strata. Appendix F contains propensity score assessment plots and summary tables for grade four reading, grade eight math, and grade eight reading.
 
@@ -440,14 +578,14 @@ The goal of propensity score methods is to adjust for selection bias with the av
 
 The second class of propensity score method used is propensity score matching. In propensity score matching the goal is to match students from the two groups with small differences in their propensity scores. In large datasets, or when particular covariates are determined to be more important for adjusting selection bias, whether theoretically or otherwise, partial exact matching is done. In the context of this study partial exact matching is akin to implicitly adjusting for the multilevel nature of the data. That is, for this study, students are first matched exactly by state, gender, and ethnicity, then by propensity score. Propensity scores from the full logistic regression model are used for matching.
 
-The \texttt{Matchby} function in the \texttt{Matching} \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement.
+The \texttt{Matchby} function in the \texttt{Matching} package \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement.
 
 Once matched pairs were determined, dependent sample \textit{t}-tests were performed \cite{Austin2011} to estimate average treatment effect and corresponding confidence intervals. Figures \ref{fig:overallcirc} and \ref{fig:overalldiff} and Table \ref{tab:overall} at the end of the chapter provide the overall results. In general however, matching methods tend to estimate slightly larger treatment effects than both the stratification and multilevel models. And of additional note, the confidence intervals shrink as the ratio of treatment-to-control units increases.
 
 
 \subsection{Multilevel Propensity Score Analysis}
 
-The final class of propensity score method utilized in multilevel propensity score analysis. This approach to PSA was developed for this dissertation and implemented in the \texttt{multilevelPSA} R package. The multilevel PSA approach makes explicit in both phase I and II the multilevel nature of the data dat,. in the case of this study, state. In principle the multilevel PSA approach is a conceptual combining of the partial exact matching and stratification. However, whereas partial exact matching utilizes propensity scores estimated from a single logistic regression model, the multilevel PSA algorithm will estimate separate propensity score models, using either logistic regression or classification trees, for each level two cluster (i.e. state). That is, the algorithm will perform \textit{m} separate propensity score analyses using stratification where \textit{m} is the number of states. This approach provides average treatment effects for each state as well as an overall, national, estimated treatment effect.
+The final class of propensity score method utilized in multilevel propensity score analysis. This approach to PSA was developed for this dissertation and implemented in the \texttt{multilevelPSA} R package. The multilevel PSA approach makes explicit in both phase I and II the multilevel nature of the data dat,. in the case of this study, state. In principle the multilevel PSA approach is a conceptual combination of the partial exact matching and stratification. However, whereas partial exact matching utilizes propensity scores estimated from a single logistic regression model, the multilevel PSA algorithm will estimate separate propensity score models, using either logistic regression or classification trees, for each level two cluster (i.e. state). That is, the algorithm will perform \textit{m} separate propensity score analyses using stratification where \textit{m} is the number of states. This approach provides average treatment effects for each state as well as an overall, national, estimated treatment effect.
 
 \begin{figure}[t]
 \begin{center}
@@ -458,7 +596,7 @@ The final class of propensity score method utilized in multilevel propensity sco
 \end{figure}
 
 
-The same three methods of stratification described above will be used, full logistic regression model using all covariates, logistic regression model that optimized Akaike Information Criterion (AIC), and classification trees. For the logistic regression models strata will be defined using quintiles of the propensity scores. One difficulty in interpreting results for multilevel PSA models is the relative importance of covariates for predicting treatment. Figure \ref{fig:g4math-mlpsa-ctree-heat} is a covariate heat map that depicts each covariate on the \textit{y}-axis and state on the \textit{x}-axis. If a covariate is present in fitted classification tree for that state, the intersecting cell is shaded. The darkness of the color represents how far down the tree that covariate first appears. That is, the darkest color indicates that the covariate was used to split the tree at the root (or the first splitting covariate). This provides an opportunity to compare the relative importance of each covariate across states. The results for grade four math show that ethnicity is the strongest predictor of treatment having appeared in 17 of the trees with National School Lunch eligibility as the second. It should be noted that for the classification tree methods, strata with fewer than five students in either of the two groups were eliminated. Since quintiles were used for the logistic regression models, all students within those states are used. Table \ref{g4math-mlpsa-ctree} provides the results within each each strata of each state including strata size.
+The same three methods of stratification described above will be used, full logistic regression model using all covariates, logistic regression model that optimized Akaike Information Criterion (AIC), and classification trees. For the logistic regression models strata will be defined using quintiles of the propensity scores. One difficulty in interpreting results for multilevel PSA models is the relative importance of covariates for predicting treatment. Figure \ref{fig:g4math-mlpsa-ctree-heat} is a covariate heat map that depicts each covariate on the \textit{y}-axis and state on the \textit{x}-axis. If a covariate is present in fitted classification tree for that state, the intersecting cell is shaded. The darkness of the color represents how far down the tree that covariate first appears. That is, the darkest color indicates that the covariate was used to split the tree at the root (or the first splitting covariate). This provides an opportunity to compare the relative importance of each covariate across states. The results for grade four math show that ethnicity is the strongest predictor of treatment having appeared in 17 of the trees with National School Lunch eligibility as the second. It should be noted that for the classification tree methods, strata with fewer than five students in either of the two groups were eliminated. Since quintiles were used for the logistic regression models, all students within those states are used. Table \ref{g4math-circpsa10} provides the results within each each strata of each state including strata size.
 
 
 \subsubsection{Covariate Balance}
@@ -478,11 +616,11 @@ Figure \ref{fig:g4math-mlpsa-ctree-balance} is multilevel PSA counterpart to the
 \subsubsection{Visualizing Multilevel PSA}
 
 
-An important advantage of multilevel PSA is that average treatment effects can be estimated for each state and then aggregated to provide a national average treatment effect. A number of graphics have been developed to help interpret these results. Figure \ref{fig:g4math-mlpsa-ctree-diff} is a multilevel PSA assessment plot for grade four math. This is an extension of the PSA assessment plots described above. The main panel (top-right) is a scatter plot where each point represents the overall adjusted score for each state (the point size is proportional to the number of students sampled in each state) with traditional public schools on the \textit{x}-axis and charter schools on the \textit{y}-axis. The panels to the bottom and left provide adjusted scores for each strata within each state as well as the overall state score for traditional public schools and charter schools, respectively. The overall national mean scores are represented by the blue lines. The tick marks on the line perpendicular to the unit line ($y = x$) represent the distribution of differences for states. The dashed blue line\footnote{For this dataset the blue line almost complete overlaps the unit line but is present.} is the overall national mean difference and the green lines the 95\% confidence interval. This figure depicts that there is now statistically significant difference nationally for grade four math using classification trees. Moreover, we see that there is minimal difference for most states since most of the points fall close to the unit line. Although there are some states that have a small positive effect size while others have a small negative effect. 
+An important advantage of multilevel PSA is that average treatment effects can be estimated for each state and then aggregated to provide a national average treatment effect. A number of graphics have been developed to help interpret these results. Figure \ref{fig:g4math-mlpsa-ctree} is a multilevel PSA assessment plot for grade four math. This is an extension of the PSA assessment plots described above. The main panel (top-right) is a scatter plot where each point represents the overall adjusted score for each state (the point size is proportional to the number of students sampled in each state) with traditional public schools on the \textit{x}-axis and charter schools on the \textit{y}-axis. The panels to the bottom and left provide adjusted scores for each strata within each state as well as the overall state score for traditional public schools and charter schools, respectively. The overall national mean scores are represented by the blue lines. The tick marks on the line perpendicular to the unit line ($y = x$) represent the distribution of differences for states. The dashed blue line\footnote{For this dataset the blue line almost complete overlaps the unit line but is present.} is the overall national mean difference and the green lines the 95\% confidence interval. This figure depicts that there is now statistically significant difference nationally for grade four math using classification trees. Moreover, we see that there is minimal difference for most states since most of the points fall close to the unit line. Although there are some states that have a small positive effect size while others have a small negative effect. 
 
 \begin{figure}[h]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Classification Trees: Grade 4 Math}
 \label{fig:g4math-mlpsa-ctree}
 \end{center}
@@ -496,14 +634,14 @@ An important advantage of multilevel PSA is that average treatment effects can b
 \end{center}
 \end{figure}
 
-Figure \ref{fig:g4math-mlpsa-ctree-diff} provided a more detailed depiction of the differences. The small grey points correspond to the difference within each strata. The blue points are the overall difference for each state; the point size corresponding to the number of students sampled; and 95\% confidence intervals for each state in green. The overall adjusted national effect size and corresponding 95\% confidence interval are represented by the vertical blue line and vertical green lines, respectively. Figures for grade four reading, grade eight math,and grade eight reading are provided in Appendix H.
+Figure \ref{fig:g4math-mlpsa-ctree-diff} provided a more detailed depiction of the differences depicted in Figure \ref{fig:g4math-mlpsa-ctree} as the tick marks on the line perpendicular to the unit line in the lower left corner of the plot. In Figure \ref{fig:g4math-mlpsa-ctree-diff} the small grey points correspond to the difference within each strata. The blue points are the overall difference for each state; the point size corresponding to the number of students sampled; and 95\% confidence intervals for each state in green. The overall adjusted national effect size and corresponding 95\% confidence interval are represented by the vertical blue line and vertical green lines, respectively. Figures for grade four reading, grade eight math,and grade eight reading are provided in Appendix H.
 
 \clearpage
 \subsection{Summary and Overall Results}
 
 Up to this point in the chapter I have outlined the nine propensity score methods used for estimating treatment effects with grade four math. The corresponding tables and figures have been references in the appendices. In this section I will provide two figures and one table that summarize the 36 propensity score models estimated.
 
-Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated treatment effects for all 36 PSA methods. The differences across subjects and grades is inconsequential. The diameter of the circles in this figure are equal to the confidence interval so that circles that overlap the unit line indicate a non-significant difference. This figure shows that, in general, the scores for charter school students are in general higher when adjusted whereas the traditional public school scores are the same or lower. Regardless, in most cases the differences do not deviate substantially from the unit line indicating either no, or a small, difference is scores. 
+Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated treatment effects for all 36 PSA methods. The differences across subjects and grades is a result of different scales used for the assessment and therefore comparisons across subject and grade levels is not appropriate. The diameter of the circles in this figure are equal to the confidence interval so that circles that overlap the unit line indicate a non-significant difference. The horizontal and vertical lines (with numeric labels) represent the overall NAEP score for traditional public school students and charter school students, respectively. This figure shows that, in general, the scores for charter school students are in general higher when adjusted whereas the traditional public school scores are the same or lower. Regardless, in most cases the differences do not deviate substantially from the unit line indicating either no, or a small, difference is scores. 
 
 \begin{figure}[t]
 \begin{center}
@@ -551,12 +689,55 @@ More specifically with regard to propensity score ranges, the range tends to shr
 \end{center}
 \end{figure}
 
-\subsection{Differences between Charter and Traditional Public Schools}
+\subsection{The Display of Multilevel Results}
 
-Given the significant difference in sample \textit{n}'s for charter and public schools (i.e. there are as much as three to four orders of magnitude more public schools students available in the NAEP data sets), it is expected that there would be public school students who would not have a counterpart from the charter school group. However, the relatively high percentage of public schools students who do not have a charter school counterpart (as much as 35\%) suggest that there may be imbalance between the two groups as a whole. That is, although reasonable balance was achieved with regard to the individual strata where comparisons are made, the overall sample imbalance, as evidenced by the unmatched public school students, suggests that public schools serve a more heterogeneous population. 
+In the development of the \texttt{multilevelPSA}, as well as all the analysis in the dissertation, two overarching principal decisions were made with regard to how results are displayed, specifically the lack of \textit{p}-values and an emphasis on visualizations over tabular output. Both these issues have received substantial attention and debate over the last several decades. And although there is no clear consensus on "best-practices," I contend that given the nature of propensity score analysis and observational studies, simple null hypotheses reported as either statistically significant or not in tables with \texttt{p}-values does a disservice to the results. The use of graphics with confidence intervals provide context as well as magnitudes of differences.
 
-Moreover, the methodological issues described above may, in part, be evidence of any underlying fundamental difference in charter school and traditional public school populations. Figure \ref{fig:overalldiff} in chapter four reveals that the methods with higher effect sizes are the matching methods and classification trees. These models, especially the matching methods, often eliminate a large proportion of tradition public school students. Perhaps there may be a small positive effect of chatter schools for a very specific type of student, but there also appears to be a large number of students who appear better served, or at least equivalently served, by traditional public schools. This needs to be considered when weighing the cost and extent of charter schools.
+% p-values
 
+The practice of significance testing\footnote{Here, I use the phrases significance testing, null hypothesis testing, and \textit{p}-values to represent the same statistical practice and are generally interchangeable.} dates to the early work of \citeA{Fisher1925}. \citeA{Gigerenzer2004} describes the current practice in peer-reviewed research journals as "the null ritual" that involve three steps:
+
+\begin{enumerate}
+    \item Define a null hypothesis where the researcher is testing that there is no mean difference. Also, don't specify any predictions or alternative hypotheses.
+    \item Use a \textit{p}-value of .05 for rejecting the null hypothesis and report your \textit{p}-value using a range (i.e. \textit{p} \textless .05, \textit{p} \textless .01, or \textit{p} \textless .001).
+    \item Always perform this procedure.
+\end{enumerate}
+
+\noindent In 1996 the American Psychological Association (APA) brought the debate regarding the use of significance testing to the forefront by entertaining a ban in the journals it publishes \cite{Shrout1997,Hunter1997,Harris1997,Abelson1997,Scarr1997,Estes1997}. Although a ban was not instituted, APA now recommends the reporting of exact \textit{p}-values, confidence intervals, and effect sizes. 
+
+What is the issue with \textit{p}-values? First, the practice of significance testing as represented in the social sciences for nearly the last century reduce research question to a dichotomous outcome. Rarely can a study be reduced to simple yes/no answer, especially in the social sciences. Moreover, the use of \textit{p} \textless .05 is entirely arbitrary and the difference between significant and non-significant results is itself not significant \cite{GelmanStern2006}. However, perhaps more damning is the likelihood of committing Type II errors \cite{Bakan1966,Carver1978,Cohen1994,HenkelMorrison1970,Rozeboom1960,Schmidt1996}. In a study by \citeA{SedlmeierGigerener1989} that examined all published articles in 1984 in the \textit{Journal of Abnormal Psychology} found that the error rate was 60\%. That is to say that researchers would have done better to flip a coin!
+
+Lastly, given the relationship between \textit{p}-values and sample size, it would be expected that with \textit{n} \textgreater 100,000, as in this study, most differences would be statistically significant. Even in one-to-one matched analysis where $n \approx 3,000$, we would expect \textit{p} \textless 0.05 for even small differences. The formula for calculating \textit{t} for a dependent sample paired \textit{t}-test is:
+
+$$ t = \frac{{\bar{X}_D} - \mu_0}{S_D / \sqrt{n}} $$
+
+\noindent Where $X_D$ is the mean difference, $\mu_0$ is non-zero for testing differences other than zero, $S_D$ is the standard deviation of the differences, and $n$ is the sample size. Using the approximate sample standard deviation of 40 from grade 8 reading results, a mean difference 2 (representing a small effect size of 0.06 by most standards), and $n = 3000$, we get $t = 2.738$ and $p = 0.003$. For the one-to-one paired analysis with a very small effect size the power estimate \citeA{Cohen1977} is 0.64. However, the one-to-two matched analysis increases the power to a very acceptable 0.90. The results of this exercise is to demonstrate that relying on \textit{p}-values to make decisions is a \textit{fool's errand}. Instead, we should take Scarr's suggestion that "better uses of statstics would focus on the magnitude of effects and error estimates" \cite{Scarr1997}.
+
+The use of graphics have made substantial advancements in the twentieth century with seminal works by Tukey \cite{Cleveland1988}, \citeA{Tufte2001}, \citeA{Cleveland1993,Cleveland1994}, and \citeA{Chambers1983}. The implementations utilized in this dissertation are based upon \citeauthor{Wilkinson2005}'s \citeyear{Wilkinson2005} \textit{grammar of graphics} as implemented in R using the \texttt{ggplot2} package \cite{Wickham2009}. Wherever possible, confidence intervals are used to show the magnitude of the differences \cite<c.f.>{Cumming2012,Estes1997a}. Although the use of graphics are frequently taught in statistics courses, they are often omitted from journal publications \cite{GelmanPasaricaDodhia2002} and relegated to diagnostic purposes \cite{Gelman2011}. The graphics presented here provide important insight into the nature and magnitude of the differences between charter and traditional public schools. The multilevel assessment plots (see Figure \ref{fig:g4math:circpsa} and Appendix H) show the distribution scores (charter, traditional public, and differences) across multiple dimensions simultaneously. Perhaps we would see from a table that the differences are small within states with few exceptions. But what would be lost is that the range of scores across states for charter and traditional public school students separately is relatively wide. Similarly, for the multilevel PSA difference plots (see Figure \ref{fig:g4math-mlpsa-ctree-diff} and Appendix H) the graphic provides immediate evidence of the nature of the differences. Also, by providing confidence intervals, we can express results vis-à-vis the graphic similar to the traditional \textit{p}-value in a summary table.
+
+\clearpage
+
+\subsection{Differences Between Charter and Traditional Public Schools}
+
+Given the substantial difference in sample \textit{n}'s for charter and public schools (i.e. there are as much as three to four orders of magnitude more public schools students available in the NAEP data sets), it is expected that there would be public school students who would not have a counterpart from the charter school group. However, the relatively high percentage of public schools students who do not have a charter school counterpart (as much as 35\%) suggest that there may be imbalance between the two groups as a whole. That is, although reasonable balance was achieved with regard to the individual strata where comparisons are made, the overall sample imbalance, as evidenced by the unmatched public school students, suggests that public schools serve a more heterogeneous population. 
+
+Moreover, the methodological issues described above may, in part, be evidence of any underlying fundamental difference in charter school and traditional public school populations. Figure \ref{fig:overalldiff} in chapter four reveals that the methods with higher effect sizes are the matching methods and classification trees. These models, especially the matching methods, often eliminate a large proportion of tradition public school students. Perhaps there may be a small positive effect of charter schools for a very specific type of student, but there also appears to be a large number of students who appear better served, or at least equivalently served, by traditional public schools. This needs to be considered when weighing the cost and extent of charter schools.
+
+It should also be noted that significant limitation of this study, and many like it, is that it only examines a small subset of a students educational experiences. That is, NAEP as well as CREDO only examine student performance in math and reading. This leaves out all other, and arguably equally important, subjects. These studies are not alone in overemphasizing these subjects. The Common Core State Standards which being implemented in the majority of states and is a cornerstone of the \textit{Race to the Top} initiative, only defines standards and curriculum for mathematics and English Language Arts. The emphasis on only these two subjects has resulted in many schools reducing or eliminating the arts and other subjects to spend more school time preparing students in these subjects \cite<c.f.>{Ravitch2013}.
+
+\subsubsection{What is the Relationship Between Charter School Performance and Charter School Laws?}
+
+The National Alliance for Public Charter Schools (NAPCS) publishes rankings of state charter school laws \cite{NAPCS2012}. They argue that some the performance of charter schools in some states may be hindered by state law. Figure \ref{fig:staterankings} is a slepegraph \cite{Tufte2001} that compares the rankings given to each state by NAPCS with that state's ranking using stratification with classification trees\footnote{A slopegraph for only the stratification with classification trees is provided since 1) it resulted in better balance as compared to the other methods, and 2) the results are consistent regardless of method used.}. Although top rated states by NAPCS had larger differences in NAEP scores, there is considerable crossing of lines between the two rankings. This visual cue indicates that the rankings are not very correlated. It should also be noted that not all states that have charter laws had sufficient sample size in NAEP to be included.
+
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/StateRankings.pdf}
+\caption{Comparison of 2012 National Alliance for Public Charter Schools (NAPCS) State Charter School Law Rankings and NAEP Charter School Rankings}
+\label{fig:staterankings}
+\end{center}
+\end{figure}
+
+In summary, these results are consistent with the wide body of research on charter schools. Namely, some charter schools better than their traditional public school counterpart, while others perform worse. However, in aggregate, the average difference is very small. Ray Budde originally envisioned charter schools as a way for teachers, administrators, and communities to experiment with the goal of finding better ways to teach students. But with \textit{No Child Left Behind} and \textit{Race to the Top}, among other initiatives from private for-profit and not-for-profit organizations, charter schools are often offered as a wholesale replacement for traditional public schools. However, these results along with the other national studies examining the differences between charter and traditional public schools suggest that charter schools do not provide, in aggregate, substantial benefit over their traditional public school counterparts.
 
 
 
@@ -751,7 +932,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g4math-loessAIC.pdf}
 \caption{Loess Regression AIC Assessment Plot: Grade 4 Math}
-\label{fig:g4math:loess}
+\label{fig:g4math:loessAIC}
 \end{center}
 \end{figure}
 
@@ -1067,7 +1248,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 4 reading
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 4 Reading}
 \end{center}
 \end{figure}
@@ -1081,7 +1262,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 4 Reading}
 \end{center}
 \end{figure}
@@ -1095,7 +1276,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Classification Trees: Grade 4 Reading}
 \end{center}
 \end{figure}
@@ -1110,7 +1291,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 8 math
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Math}
 \end{center}
 \end{figure}
@@ -1124,7 +1305,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Math}
 \end{center}
 \end{figure}
@@ -1138,7 +1319,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Math}
 \end{center}
 \end{figure}
@@ -1153,7 +1334,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 8 reading
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Reading}
 \end{center}
 \end{figure}
@@ -1167,7 +1348,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Reading}
 \end{center}
 \end{figure}
@@ -1181,7 +1362,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree.pdf}
+\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-circ.pdf}
 \caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Reading}
 \end{center}
 \end{figure}

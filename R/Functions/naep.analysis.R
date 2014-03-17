@@ -66,7 +66,7 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 		ml.lr.ps <- getPropensityScores(ml.lr)
 		ml.lrAIC.ps <- getPropensityScores(ml.lrAIC)
 			
-		covariates = ml.data1[,!names(ml.data1) %in% c('charter','state')]
+		covariates <- ml.data1[,!names(ml.data1) %in% c('charter','state')]
 		covars <- catalog[catalog$FieldName %in% all.covars,c('FieldName','Description')]
 		covars <- covars[covars$FieldName %in% names(covariates),]
 		tmp <- covariates[,covars$FieldName]
@@ -237,6 +237,9 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 		print(x, include.rownames=TRUE, include.colnames=FALSE, add.to.row=addtorow, digits=0,
 			  caption.placement='top',
 			  file=paste0(dir.tab, '/g', grade, subject, label, '.tex'))		
+# 		print(x, include.rownames=TRUE, include.colnames=FALSE, add.to.row=addtorow, digits=0,
+# 			  caption.placement='top',
+# 			  file=paste0(dir.tab, '/g', grade, subject, label, '.html'), type='html')
 	}
 	
 	circ.psa.xtable(strata10.results, method='Logistic Regression Stratification', label='-circpsa10')
@@ -318,14 +321,24 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 	x <- xtable(ml.ctree.result, label=paste0('g', grade, subject, '-mlpsa-ctree'), display=NULL,
 				caption=paste0('Multilevel PSA Results using Conditional Inference Trees: Grade ', grade, ' ', subject))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-ctree.tex'))
+# 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-ctree.html'), type='html')
 	
 	x <- xtable(ml.lr.result, label=paste0('g', grade, subject, '-mlpsa-lr'), display=NULL,
 				caption=paste0('Multilevel PSA Results using Logistic Regression: Grade ', grade, ' ', subject))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lr.tex'))
+# 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lr.html'), type='html')
 	
 	x <- xtable(ml.lrAIC.result, label=paste0('g', grade, subject, '-mlpsa-lrAIC'), display=NULL,
 				caption=paste0('Multilevel PSA Results using Logistic Regression AIC: Grade ', grade, ' ', subject))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lrAIC.tex'))
+# 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lrAIC.html'), type='html')
+	
+	# Level 2 summary
+	tmp <- ml.ctree.result$level2.summary
+	tmp <- tmp[order(tmp$diffwtd, decreasing=TRUE),]
+	write.csv(tmp[,c('level2','n','diffwtd','ci.min','ci.max','FALSE','TRUE','df')],
+			  file=paste0(dir.data, '/g', grade, subject, '-level2-ctree', '.csv'),
+			  row.names=FALSE)
 	
 	overall <- rbind(
 		data.frame(class='Stratification',

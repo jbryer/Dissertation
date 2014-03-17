@@ -4,11 +4,11 @@ covariate.descriptive <- function(naep, all.covars, subject, grade, year=2009) {
 	#' Creates a LaTeX table for the given categorical variables.
 	#' 
 	#' @param df the data frame.
-	   #' @param cols the column names to use.
-	   #' @param caption the caption of the table.
-	   #' @param label the label of the table.
-	   #' @param filename the name of the file to save the latex code to.
-	   latexDescriptives <- function(df, cols, caption=NULL, label=NULL, filename="") {
+	#' @param cols the column names to use.
+	#' @param caption the caption of the table.
+	#' @param label the label of the table.
+	#' @param filename the name of the file to save the latex code to.
+	latexDescriptives <- function(df, cols, caption=NULL, label=NULL, filename="", type='latex') {
 	   	r = data.frame()
 	   	for(i in cols) {
 	   		t = cast(as.data.frame(table(df[,i], df$charter, useNA='always')), 
@@ -46,9 +46,15 @@ covariate.descriptive <- function(naep, all.covars, subject, grade, year=2009) {
 	   			  '} \\\\ \\cline{1-5} ', sep='') )
 	   	x = xtable(r[2:6], digits=2, caption=caption, label=label, 
 	   			   align=c('l','l','r','r@{\\extracolsep{10pt}}','r','r'))
-	   	print(x, add.to.row=addtorow, floating=FALSE, include.rownames=FALSE, 
-	   		  include.colnames=FALSE, caption.placement='top', 
-	   		  tabular.environment='longtable', file=filename, hline.after=NULL)
+	   	if(type == 'latex') {
+		   	print(x, add.to.row=addtorow, floating=FALSE, include.rownames=FALSE, 
+		   		  include.colnames=FALSE, caption.placement='top', 
+		   		  tabular.environment='longtable', file=filename, hline.after=NULL, )
+	   	} else {
+	   		print(x, include.rownames=FALSE, 
+	   			  include.colnames=TRUE, caption.placement='top', 
+	   			  file=filename, hline.after=NULL, type='html')
+	   	}
 	   }
 	   
 	covars <- naep$catalog[naep$catalog$FieldName %in% all.covars,c('FieldName','Description')]
@@ -60,4 +66,9 @@ covariate.descriptive <- function(naep, all.covars, subject, grade, year=2009) {
 					  caption=paste0('Grade ', grade, ' ', subject, ' Descriptive Statistics'),
 					  label=paste0('tab:g', grade, subject, '-desc'),
 					  filename=paste0('../Tables', year, '/g', grade, subject, '-desc.tex'))
+	latexDescriptives(tmp, cols=covars$Description, 
+	   				  caption=paste0('Grade ', grade, ' ', subject, ' Descriptive Statistics'),
+	   				  label=paste0('tab:g', grade, subject, '-desc'),
+	   				  filename=paste0('../Tables', year, '/g', grade, subject, '-desc.html'),
+	   				  type='html')
 }

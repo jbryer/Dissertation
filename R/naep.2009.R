@@ -24,7 +24,7 @@ source('Functions/recode.r') # Utility function to recode factors.
 source('Functions/naep.recode.R') # Recode factors specifically for NAEP.
 source('Functions/impute.R') # Impute missing values.
 source('../Data2009/states.r') # Data frame with state names and abbreviations.
-
+ 
 # These are all the covariates that will be used at least once
 all.covars <- c('DSEX','SRACE','SLUNCH1','SD4','ELL3','SDELL','IEP',#Base demographics
 				'B017001','B000905','B013801','B017101','B017201','B001151', #Core items
@@ -72,6 +72,7 @@ g4math.cv.map <- g4math$catalog[g4math$catalog$FieldName %in% all.covars,
 								c('FieldName','Description')]
 g4read.cv.map <- g4read$catalog[g4read$catalog$FieldName %in% all.covars,
 								c('FieldName','Description')]
+g4read.cv.map <- g4read.cv.map[g4read.cv.map$FieldName %in% names(g4read$data),]
 g8math.cv.map <- g8math$catalog[g8math$catalog$FieldName %in% all.covars,
 								c('FieldName','Description')]
 g8read.cv.map <- g8read$catalog[g8read$catalog$FieldName %in% all.covars,
@@ -240,6 +241,49 @@ descriptives.out <- function(score, charter) {
 	return(result)
 }
 
+# Descriptive stats of NAEP score for all TPS students and close TPS students
+close.descriptives <- function(all, close, outvar) {
+	close.desc <- c(
+		descriptives.out(all[all$FIPS != 'Alaska',outvar], 
+						 all[all$FIPS != 'Alaska',]$charter)[c('TRUE.mean', 'TRUE.sd', 
+						 								'FALSE.mean', 'FALSE.sd', 'Diff')],
+		table(all$charter)['FALSE'],
+		descriptives.out(close[,outvar], close$charter)[c('FALSE.mean', 'FALSE.sd', 'Diff')],
+		table(close$charter)['FALSE']
+	)
+	names(close.desc) <- c('Charter.mean','Charter.sd','All.mean','All.sd','All.diff','All.n',
+								  'Close.mean','Close.sd','Close.diff','Close.n')
+	return(close.desc)
+}
+
+close.desc <- as.data.frame(rbind(
+	close.descriptives(g4math$data, g4math3, 'mathscore'),
+	close.descriptives(g4read$data, g4read3, 'readscore'),
+	close.descriptives(g8math$data, g8math3, 'mathscore'),
+	close.descriptives(g8read$data, g8read3, 'readscore')
+))
+close.desc$Subject <- c('Grade 4 Math', 'Grade 4 Reading', 'Grade 8 Math', 'Grade 8 Reading')
+close.desc <- close.desc[,c(11,1,3,6,5,7,10,9)]
+close.desc$All.n <- as.integer(close.desc$All.n)
+close.desc$Close.n <- as.integer(close.desc$Close.n)
+
+addtorow <- list()
+addtorow$pos <- list()
+addtorow$pos[[1]] <- c(0)
+addtorow$command <- c(paste0(' & \\multicolumn{1}{c}{Charter} & ',
+							 '\\multicolumn{3}{c}{All Public Schools} & ',
+							 '\\multicolumn{3}{c}{Close Public Schools} \\\\',
+							 ' \\cline{2-2} \\cline{3-5} \\cline{6-8} ',
+							 ' Subject & Mean & Mean & n & Diff & ',
+							 ' Mean & n & Diff \\\\ '))
+x <- xtable(close.desc, digits=1, label='dependentDescriptivesAllAndClose',
+			caption='Descriptive Statistics of Dependent Variables (Unadjusted) for All and Close (within 5 miles) Traditional Public Schools',
+			align=c('l','l','r@{\\extracolsep{.2cm}}','r','r','r@{\\extracolsep{.2cm}}','r','r','r') )
+print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow,
+	  caption.placement='top', file='../Tables2009/descriptivesClose.tex')
+
+
+
 unadj.out <- rbind(descriptives.out(g4math3$mathscore, g4math3$charter),
 				   descriptives.out(g4read3$readscore, g4read3$charter),
 				   descriptives.out(g8math3$mathscore, g8math3$charter),
@@ -339,7 +383,7 @@ ggsave('../Figures2009/Overall.pdf', width=8, height=6)
 
 
 # Overall circle plot
-circle <- function(center = c(0,0), diameter = 1, npoints = 100, label){
+circle <- function(center = c(0,0), diameter = 1, npoints = 100, label, GradeSubject){
 	r = diameter / 2
 	tt <- seq(0,2*pi,length.out = npoints)
 	xx <- center[1] + r * cos(tt)
@@ -347,7 +391,7 @@ circle <- function(center = c(0,0), diameter = 1, npoints = 100, label){
 	if(missing(label)) {
 		return(data.frame(x = xx, y = yy))
 	} else {
-		return(data.frame(label = label, x = xx, y = yy))
+		return(data.frame(label = label, x = xx, y = yy, GradeSubject=GradeSubject))
 	}
 }
 overall$ci <- overall$ci.max - overall$ci.min
@@ -367,14 +411,16 @@ for(i in 1:nrow(overall)) {
 	circs <- rbind(circs, 
 				   circle(center=c(overall[i,]$charter, overall[i,]$public), 
 				   	   diameter=overall[i,]$ci, 
-				   	   label=paste0(overall[i,]$GradeSubject, ' ', overall[i,]$method)))
+				   	   label=paste0(overall[i,]$GradeSubject, ' ', overall[i,]$method),
+				   	   GradeSubject=paste0(overall[i,]$GradeSubject)))
 }
 
 limits <- range(overall[,c('charter','public')])
 range <- diff(limits)
 limits[1] <- limits[1] - .15 * range
 limits[2] <- limits[2] + .15 * range
-ggplot(circs, aes(x=x, y=y)) +
+#ggplot(circs, aes(x=x, y=y)) +
+ggplot(overall) +
 	geom_segment(data=overall.unadj, aes(x=Charter, xend=Charter, y=limits[1], 
 										 yend=Public, color=GradeSubject)) +
 	geom_segment(data=overall.unadj, aes(x=limits[1], xend=Charter, y=Public,
@@ -396,6 +442,27 @@ ggplot(circs, aes(x=x, y=y)) +
 	scale_color_hue('Grade & Subject') +
 	scale_shape('PSA Method') +
 	theme(panel.margin=rep(unit(0,'cm'), 4))
+
+ggplot(overall) +
+	geom_segment(data=overall.unadj, aes(x=Charter, xend=Charter, y=limits[1], 
+										 yend=Public), alpha=.7) +
+	geom_segment(data=overall.unadj, aes(x=limits[1], xend=Charter, y=Public,
+										 yend=Public), alpha=.7) +
+	geom_text(data=overall.unadj, aes(x=limits[1], y=Public, 
+									  label=paste0(round(Public), ' ')), 
+			  hjust=-0.1, vjust=-.2, size=4) +
+ 	geom_text(data=overall.unadj, aes(y=limits[1], x=Charter, 
+ 									  label=paste0(round(Charter), ' ')), 
+ 			  hjust=1.1, vjust=-.2, size=4, angle=-90) +
+	geom_abline(slope=1, intercept=0, alpha=.3) +
+	geom_polygon(data=circs, aes(x=x, y=y, group=label), fill='green', alpha=.3) + 
+	geom_point(data=overall, aes(x=charter, y=public, shape=class, alpha=.5)) +
+	coord_fixed(ratio=1) + xlab('Charter') + ylab('Public') +
+	scale_x_continuous(limits=limits, expand=c(0,0)) + 
+	scale_y_continuous(limits=limits, expand=c(0,0)) + 
+	scale_shape('PSA Method') +
+	theme(panel.margin=rep(unit(0,'cm'), 4)) +
+	facet_wrap( ~ GradeSubject)
 
 ggsave('../Figures2009/OverallScatter.pdf', width=8, height=6)
 
