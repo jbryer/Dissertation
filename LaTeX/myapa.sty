@@ -610,23 +610,51 @@
 %       NOT boldfaced. If you want to follow the manual strictly,
 %       remove \bf in \levelone and \leveltwo macros.
 %
-\def\levelone#1{\apa@startsection%
-    {\z@}{\b@level@one@skip}{\e@level@one@skip}%
-    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
-     \bf\uppercase\expandafter{#1}}}	% <- \bf
-\def\leveltwo#1{\apa@startsection%
-    {\z@}{\b@level@two@skip}{\e@level@two@skip}%
-    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
-     \bf #1}}				% <- \bf
-\def\levelthree#1{\apa@startsection%
-    {\z@}{\b@level@three@skip}{\e@level@three@skip}%
+%\def\levelone#1{\apa@startsection%
+%    {\z@}{\b@level@one@skip}{\e@level@one@skip}%
 %    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
-{\textit{#1}}}
-\def\levelfour#1{\apa@startsection%
-     {\z@}{\b@level@four@skip}{\e@level@four@skip}{\ \ \ \ \ \textit{#1}.\addcontentsline{toc}{paragraph}{#1}}}
-\def\levelfive#1{\apa@startsection%
-    {\parindent}{\b@level@five@skip}{\e@level@five@skip}{\ \ \ \ \ \textit{#1}.\ \addcontentsline{toc}{subparagraph}{#1}}}
+%     \bf\uppercase\expandafter{#1}}}	% <- \bf
+%\def\leveltwo#1{\apa@startsection%
+%    {\z@}{\b@level@two@skip}{\e@level@two@skip}%
+%    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
+%     \bf #1}}				% <- \bf
+%\def\levelthree#1{\apa@startsection%
+%    {\z@}{\b@level@three@skip}{\e@level@three@skip}%
+%    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
+%{\textit{#1}}}
+%\def\levelfour#1{\apa@startsection%
+%     {\z@}{\b@level@four@skip}{\e@level@four@skip}{\ \ \ \ \ \textit{#1}.\addcontentsline{toc}{paragraph}{#1}}}
+%\def\levelfive#1{\apa@startsection%
+%    {\parindent}{\b@level@five@skip}{\e@level@five@skip}{\ \ \ \ \ \textit{#1}.\ \addcontentsline{toc}{subparagraph}{#1}}}
 
+\def\levelone#1{\apa@startsection%
+    {\z@}%
+    {0.01pt}%
+    {0.01pt}%
+    {\leftskip4em plus 1fill\rightskip\leftskip\parindent\z@\relax%
+     \bf\expandafter{#1}}}	% <- \bf
+\def\leveltwo#1{\apa@startsection%
+    {\z@}%
+    {0.01pt}%
+    {0.01pt}%
+    {\rightskip\leftskip\parindent\z@\relax \bf #1}}	%
+\def\levelthree#1{\apa@startsection%
+    {\z@}%
+    {0.01pt}%
+    {0.01pt}%
+    {\bf #1}}
+\def\levelfour#1{\apa@startsection%
+     {\z@}%
+     {0.01pt}%
+     {-1.5ex \@plus -.2ex}%
+     {\ \ \ \ \ \bf{#1}.\ \nobreak\addcontentsline{toc}{paragraph}{#1}}%
+}
+\def\levelfive#1{\apa@startsection%
+    {\z@}%
+    {0.01p}%
+    {-1.5ex \@plus -.2ex}%
+    {\ \ \ \ \ \textit{#1}.\ \addcontentsline{toc}{subparagraph}{#1}}%
+}
 
 %
 % Selecting the Levels of Headings (APA, pp. 66-67)
