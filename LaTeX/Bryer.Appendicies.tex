@@ -5,14 +5,17 @@
 \addcontentsline{toc}{section}{Appendices}
 \appendix
 
+% For large tables, use this just before the \begin{tabular}
+%\resizebox{\linewidth}{!}{%
+
 %==================== Appendix A ====================================================================
 \renewcommand{\thefootnote}{\fnsymbol{footnote}}% Change the footnote style to lowercase letters
 \addcontentsline{toc}{subsection}{Appendix A: Charter School \& Student Enrollment by State}
-\subsection*{Appendix A\\Charter Schools \& Student Enrollment by State}
+\section*{Appendix A\\Charter Schools \& Student Enrollment by State}
 \label{appendixCharterStats}
 \begin{center} \begin{singlespace}
 \begin{longtable}{lrrrrrrr}
-\caption[Charter Schools \& Student Enrollment by State]{Charter Schools \& Student Enrollment by State} \\
+\caption[Charter schools \& student enrollment by state]{Charter schools \& student enrollment by state} \\
 \thickline
       & Law     & \multicolumn{3}{c}{Totals for Charter Schools\tabfnm{b}}              & & \multicolumn{2}{c}{NAEP Students}\\
 \cline{3-5} \cline{7-8}
@@ -93,7 +96,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix B ====================================================================
 \newpage
 \addcontentsline{toc}{subsection}{Appendix B: Descriptive Statistics}
-\subsection*{Appendix B\\Descriptive Statistics}
+\section*{Appendix B\\Descriptive Statistics}
 \label{appendixDescriptives}
 
 \begin{singlespace}
@@ -115,13 +118,13 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix C ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix C: Covariate Missingness}
-\subsection*{Appendix C\\Covariate Missingness}
+\section*{Appendix C\\Covariate Missingness}
 \label{appendixmissing}
 
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-missing.pdf}
-\caption{Covariate Missingness for Grade 4 Math}
+\caption{Covariate missingness for grade 4 math}
 \label{fig:g4math:missing}
 \end{center}
 \end{figure}
@@ -129,7 +132,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-missing.pdf}
-\caption{Covariate Missingness for Grade 4 Reading}
+\caption{Covariate missingness for grade 4 reading}
 \label{fig:g4reading:missing}
 \end{center}
 \end{figure}
@@ -137,7 +140,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-missing.pdf}
-\caption{Covariate Missingness for Grade 8 Math}
+\caption{Covariate missingness for grade 8 math}
 \label{fig:g8math:missing}
 \end{center}
 \end{figure}
@@ -145,7 +148,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-missing.pdf}
-\caption{Covariate Missingness for Grade 8 Reading}
+\caption{Covariate missingness for grade 8 reading}
 \label{fig:g8reading:missing}
 \end{center}
 \end{figure}
@@ -154,12 +157,12 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix D ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix D: Loess Regression Plots}
-\subsection*{Appendix D\\Loess Regression Plots}
+\section*{Appendix D\\Loess Regression Plots}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g4read-loess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 4 Reading}
+\caption{Loess regression assessment plot: Grade 4 reading}
 \label{fig:g4read:loess}
 \end{center}
 \end{figure}
@@ -167,7 +170,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g8math-loess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 8 Math}
+\caption{Loess regression assessment plot: Grade 8 math}
 \label{fig:g8math:loess}
 \end{center}
 \end{figure}
@@ -175,7 +178,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g8read-loess.pdf}
-\caption{Loess Regression Assessment Plot: Grade 8 Reading}
+\caption{Loess regression assessment plot: Grade 8 reading}
 \label{fig:g8read:loess}
 \end{center}
 \end{figure}
@@ -183,7 +186,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g4math-loessAIC.pdf}
-\caption{Loess Regression AIC Assessment Plot: Grade 4 Math}
+\caption{Loess regression AIC assessment plot: Grade 4 math}
 \label{fig:g4math:loessAIC}
 \end{center}
 \end{figure}
@@ -191,7 +194,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g4read-loessAIC.pdf}
-\caption{Loess Regression AIC Assessment Plot: Grade 4 Reading}
+\caption{Loess regression AIC assessment plot: Grade 4 reading}
 \label{fig:g4read:loess}
 \end{center}
 \end{figure}
@@ -199,7 +202,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g8math-loessAIC.pdf}
-\caption{Loess Regression AIC Assessment Plot: Grade 8 Math}
+\caption{Loess regression AIC assessment plot: Grade 8 math}
 \label{fig:g8math:loess}
 \end{center}
 \end{figure}
@@ -207,7 +210,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight]{../Figures2009/g8read-loessAIC.pdf}
-\caption{Loess Regression AIC Assessment Plot: Grade 8 Reading}
+\caption{Loess regression AIC assessment plot: Grade 8 reading}
 \label{fig:g8read:loess}
 \end{center}
 \end{figure}
@@ -216,21 +219,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix E ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix E: Covariate Balance Plots}
-\subsection*{Appendix E\\Covariate Balance Plots}
+\section*{Appendix E\\Covariate Balance Plots}
 
 % Grade 4 math
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-lrAIC-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 4 Math}
+\caption{Covariate balance plot for logistic regression AIC stratification: Grade 4 math}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-tree-balance.pdf}
-\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 4 Math}
+\caption{Covariate balance plot for classification tree stratification: Grade 4 math}
 \end{center}
 \end{figure}
 
@@ -238,21 +241,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-lr-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 4 Reading}
+\caption{Covariate balance plot for logistic regression stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-lrAIC-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 4 Reading}
+\caption{Covariate balance plot for logistic regression AIC stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-tree-balance.pdf}
-\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 4 Reading}
+\caption{Covariate balance plot for classification tree stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
@@ -260,21 +263,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-lr-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 8 Math}
+\caption{Covariate balance plot for logistic regression stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-lrAIC-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 8 Math}
+\caption{Covariate balance plot for logistic regression AIC stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-tree-balance.pdf}
-\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 8 Math}
+\caption{Covariate balance plot for classification tree stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
@@ -282,34 +285,34 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-lr-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression Stratification: Grade 8 Reading}
+\caption{Covariate balance plot for logistic regression stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-lrAIC-balance.pdf}
-\caption{Covariate Balance Plot for Logistic Regression AIC Stratification: Grade 8 Reading}
+\caption{Covariate balance plot for logistic regression AIC stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-tree-balance.pdf}
-\caption{Covariate Balance Plot for Classification Tree Stratification: Grade 8 Reading}
+\caption{Covariate balance plot for classification tree stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
 %==================== Appendix F ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix F: Classification Method Results}
-\subsection*{Appendix F\\Classification Method Results}
+\section*{Appendix F\\Classification Method Results}
 
 % Grade 4 reading
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 4 Reading}
+\caption{Propensity score assessment plot for logistic regression stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
@@ -319,7 +322,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10-AIC.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 4 Reading}
+\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
@@ -329,7 +332,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa-tree.pdf}
-\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 4 Reading}
+\caption{Propensity score assessment plot for classification tree stratification: Grade 4 reading}
 \end{center}
 \end{figure}
 
@@ -339,7 +342,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 8 Math}
+\caption{Propensity score assessment plot for logistic regression stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
@@ -349,7 +352,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10-AIC.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 8 Math}
+\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
@@ -359,7 +362,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa-tree.pdf}
-\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 8 Math}
+\caption{Propensity score assessment plot for classification tree stratification: Grade 8 math}
 \end{center}
 \end{figure}
 
@@ -370,7 +373,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression Stratification: Grade 8 Reading}
+\caption{Propensity score assessment plot for logistic regression stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
@@ -380,7 +383,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10-AIC.pdf}
-\caption{Propensity Score Assessment Plot for Logistic Regression AIC Stratification: Grade 8 Reading}
+\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
@@ -390,7 +393,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa-tree.pdf}
-\caption{Propensity Score Assessment Plot for Classification Tree Stratification: Grade 8 Reading}
+\caption{Propensity score assessment plot for classification tree stratification: Grade 8 reading}
 \end{center}
 \end{figure}
 
@@ -401,27 +404,27 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix G ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix G: Multilevel PSA Covariate Balance Plots}
-\subsection*{Appendix G\\Multilevel PSA Covariate Balance Plots}
+\section*{Appendix G\\Multilevel PSA Covariate Balance Plots}
 
 % Grade 4 math
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 4 Math}
+\caption{Multilevel PSA covariate balance plot logistic regression: Grade 4 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 4 Math}
+\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 4 Math}
+\caption{Multilevel PSA covariate balance plot classification tree: Grade 4 math}
 \end{center}
 \end{figure}
 
@@ -429,21 +432,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 4 Reading}
+\caption{Multilevel PSA covariate balance plot logistic regression: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 4 Reading}
+\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 4 Reading}
+\caption{Multilevel PSA covariate balance plot classification tree: Grade 4 reading}
 \end{center}
 \end{figure}
 
@@ -451,21 +454,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 8 Math}
+\caption{Multilevel PSA covariate balance plot logistic regression: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 8 Math}
+\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 8 Math}
+\caption{Multilevel PSA covariate balance plot classification tree: Grade 8 math}
 \end{center}
 \end{figure}
 
@@ -473,21 +476,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression: Grade 8 Reading}
+\caption{Multilevel PSA covariate balance plot logistic regression: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Logistic Regression AIC: Grade 8 Reading}
+\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA Covariate Balance Plot Classification Tree: Grade 8 Reading}
+\caption{Multilevel PSA covariate balance plot classification tree: Grade 8 reading}
 \end{center}
 \end{figure}
 
@@ -495,135 +498,138 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix H ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix H: Multilevel PSA Results}
-\subsection*{Appendix H\\Multilevel PSA Results}
+\section*{Appendix H\\Multilevel PSA Results}
 
 % Grade 4 reading
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 4 Reading}
+\caption{Multilevel PSA assessment plot logistic regression: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 4 Reading}
+\caption{Multilevel PSA difference plot logistic regression: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 4 Reading}
+\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 4 Reading}
+\caption{Multilevel PSA difference plot logistic regression AIC: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 4 Reading}
+\caption{Multilevel PSA assessment plot classification trees: Grade 4 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA Difference Plot Classification Trees: Grade 4 Reading}
+\caption{Multilevel PSA difference plot classification trees: Grade 4 reading}
 \end{center}
+\label{fig:g4read-mlpsa-ctree-diff}
 \end{figure}
 
 % Grade 8 math
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Math}
+\caption{Multilevel PSA assessment plot logistic regression: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 8 Math}
+\caption{Multilevel PSA difference plot logistic regression: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Math}
+\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 8 Math}
+\caption{Multilevel PSA difference plot logistic regression AIC: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Math}
+\caption{Multilevel PSA assessment plot classification trees: Grade 8 math}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA Difference Plot Classification Trees: Grade 8 Math}
+\caption{Multilevel PSA difference plot classification trees: Grade 8 math}
 \end{center}
+\label{fig:g8math-mlpsa-ctree-diff}
 \end{figure}
 
 % Grade 8 reading
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression: Grade 8 Reading}
+\caption{Multilevel PSA assessment plot logistic regression: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression: Grade 8 Reading}
+\caption{Multilevel PSA difference plot logistic regression: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Logistic Regression AIC: Grade 8 Reading}
+\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA Difference Plot Logistic Regression AIC: Grade 8 Reading}
+\caption{Multilevel PSA difference plot logistic regression AIC: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA Assessment Plot Classification Trees: Grade 8 Reading}
+\caption{Multilevel PSA assessment plot classification trees: Grade 8 reading}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA Difference Plot Classification Trees: Grade 8 Reading}
+\caption{Multilevel PSA difference plot classification trees: Grade 8 reading}
 \end{center}
+\label{fig:g8read-mlpsa-ctree-diff}
 \end{figure}
 
 
@@ -642,13 +648,13 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix I ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix I: Multilevel PSA Classification Tree Heat Maps}
-\subsection*{Appendix I\\Multilevel PSA Classification Tree Heat Maps}
+\section*{Appendix I\\Multilevel PSA Classification Tree Heat Maps}
 \label{appendixtree}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 4 Math}
+\caption{Heat map of relative importance of covariates from classification trees: Grade 4 math}
 \label{fig:g4math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -656,7 +662,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g4read-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 4 Reading}
+\caption{Heat map of relative importance of covariates from classification trees: Grade 4 reading}
 \label{fig:g4read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -664,7 +670,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g8math-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 8 Math}
+\caption{Heat map of relative importance of covariates from classification trees: Grade 8 math}
 \label{fig:g8math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -672,7 +678,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g8read-mlpsa-ctree-heat.pdf}
-\caption{Heat Map of Relative Importance of Covariates from Classification Trees: Grade 8 Reading}
+\caption{Heat map of relative importance of covariates from classification trees: Grade 8 reading}
 \label{fig:g8read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -681,7 +687,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 %==================== Appendix J ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix J: multilevelPSA R Package}
-\subsection*{Appendix J\\multilevelPSA R Package}
+\section*{Appendix J\\multilevelPSA R Package}
 \label{multilevelPSAPackage}
 
 The \texttt{multilevelPSA} R package was developed, in part, to conduct the analysis for this dissertation. It is available from the Comprehensive R Archive Network (CRAN) at \url{http://cran.r-project.org/web/packages/multilevelPSA}. The latest version can be installed using the \texttt{install.packages} function in R:
@@ -713,7 +719,7 @@ The following list provides brief descriptions of the key functions in the \text
 %==================== Appendix K ====================================================================
 \clearpage
 \addcontentsline{toc}{subsection}{Appendix K: Simulating Propensity Score Ranges}
-\subsection*{Appendix K\\Simulating Propensity Score Ranges}
+\section*{Appendix K\\Simulating Propensity Score Ranges}
 
 \begin{singlespace}
 
@@ -776,7 +782,7 @@ plot(psrange.overlap)
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/PSRanges-Overlap.pdf}
-\caption{Propensity Score Ranges for Varying Treatment-to-Control Ratios with Perfect Overlapping Covariate}
+\caption{Propensity score ranges for varying treatment-to-control ratios with perfect overlapping covariate}
 \end{center}
 \end{figure}
 
@@ -794,7 +800,7 @@ plot(psrange.nooverlap)
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/PSRanges-NoOverlap.pdf}
-\caption{Propensity Score Ranges for Varying Treatment-to-Control Ratios with Non-Overlapping Covariate}
+\caption{Propensity score ranges for varying treatment-to-control ratios with non-overlapping covariate}
 \end{center}
 \end{figure}
 
@@ -809,7 +815,7 @@ plot(psrange.nooverlap)
 %\label{appendixMap}
 %\begin{figure}[h]
 %\includegraphics[width=\textwidth]{../Figures/CharterMap.pdf}
-%\caption{Thematic Map of Number of Charter Schools by State in 2008}
+%\caption{Thematic map of number of charter schools by state in 2008}
 %\label{fig:charterMap}
 %\end{figure}
 

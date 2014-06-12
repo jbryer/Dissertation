@@ -233,7 +233,7 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 		x <- xtable(tmp, 
 					align=c('l','r','r@{\\extracolsep{.2cm}}','r','r'),
 					label=paste0('g', grade, subject, label),
-					caption=paste0(method, ' Results for Grade ', grade, ' ', subject))
+					caption=paste0(method, ' results for grade ', grade, ' ', subject))
 		print(x, include.rownames=TRUE, include.colnames=FALSE, add.to.row=addtorow, digits=0,
 			  caption.placement='top',
 			  file=paste0(dir.tab, '/g', grade, subject, label, '.tex'))		
@@ -319,17 +319,17 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 	ggsave(paste0(dir.fig, '/g', grade, subject, '-mlpsa-lrAIC-diff.pdf'), width=8, height=6)
 	
 	x <- xtable(ml.ctree.result, label=paste0('g', grade, subject, '-mlpsa-ctree'), display=NULL,
-				caption=paste0('Multilevel PSA Results using Conditional Inference Trees: Grade ', grade, ' ', subject))
+				caption=paste0('Multilevel PSA results using conditional inference trees: Grade ', grade, ' ', tolower(subject)))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-ctree.tex'))
 # 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-ctree.html'), type='html')
 	
 	x <- xtable(ml.lr.result, label=paste0('g', grade, subject, '-mlpsa-lr'), display=NULL,
-				caption=paste0('Multilevel PSA Results using Logistic Regression: Grade ', grade, ' ', subject))
+				caption=paste0('Multilevel PSA results using logistic regression: Grade ', grade, ' ', tolower(subject)))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lr.tex'))
 # 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lr.html'), type='html')
 	
 	x <- xtable(ml.lrAIC.result, label=paste0('g', grade, subject, '-mlpsa-lrAIC'), display=NULL,
-				caption=paste0('Multilevel PSA Results using Logistic Regression AIC: Grade ', grade, ' ', subject))
+				caption=paste0('Multilevel PSA results using logistic regression AIC: Grade ', grade, ' ', tolower(subject)))
 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lrAIC.tex'))
 # 	print(x, caption.placement='top', file=paste0(dir.tab, '/g', grade, subject, '-mlpsa-lrAIC.html'), type='html')
 	

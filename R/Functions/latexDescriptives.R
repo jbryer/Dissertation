@@ -63,11 +63,11 @@ covariate.descriptive <- function(naep, all.covars, subject, grade, year=2009) {
 	names(tmp) <- covars$Description
 	tmp$charter <- naep$data$charter
 	latexDescriptives(tmp, cols=covars$Description, 
-					  caption=paste0('Grade ', grade, ' ', subject, ' Descriptive Statistics'),
+					  caption=paste0('Grade ', grade, ' ', tolower(subject), ' descriptive statistics'),
 					  label=paste0('tab:g', grade, subject, '-desc'),
 					  filename=paste0('../Tables', year, '/g', grade, subject, '-desc.tex'))
 	latexDescriptives(tmp, cols=covars$Description, 
-	   				  caption=paste0('Grade ', grade, ' ', subject, ' Descriptive Statistics'),
+	   				  caption=paste0('Grade ', grade, ' ', tolower(subject), ' descriptive statistics'),
 	   				  label=paste0('tab:g', grade, subject, '-desc'),
 	   				  filename=paste0('../Tables', year, '/g', grade, subject, '-desc.html'),
 	   				  type='html')

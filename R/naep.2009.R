@@ -116,25 +116,25 @@ covariate.descriptive(g8read, all.covars, 'Reading', 8)
 
 g4math.desc <- descriptives(g4math$data, 'mathscore')
 xtableDescriptives(g4math.desc[g4math.desc$Charter.n > 50,], 
-				   caption='Grade 4 Math Unadjusted NAEP Score', 
+				   caption='Grade 4 math unadjusted NAEP score', 
 				   label='tab:g4math-unadjscore',
 				   file='../Tables2009/g4math-unadjscore.tex',
 				   floating.environment='sidewaystable')
 g4read.desc <- descriptives(g4read$data, 'readscore')
 xtableDescriptives(g4read.desc[g4read.desc$Charter.n > 50,], 
-				   caption='Grade 4 Reading Unadjusted NAEP Score', 
+				   caption='Grade 4 reading unadjusted NAEP score', 
 				   label='tab:g4read-unadjscore',
 				   file='../Tables2009/g4read-unadjscore.tex',
 				   floating.environment='sidewaystable')
 g8math.desc <- descriptives(g8math$data, 'mathscore')
 xtableDescriptives(g8math.desc[g8math.desc$Charter.n > 50,], 
-				   caption='Grade 8 Math Unadjusted NAEP Score', 
+				   caption='Grade 8 math unadjusted NAEP score', 
 				   label='tab:g8math-unadjscore',
 				   file='../Tables2009/g8math-unadjscore.tex',
 				   floating.environment='sidewaystable')
 g8read.desc <- descriptives(g8read$data, 'readscore')
 xtableDescriptives(g8read.desc[g8read.desc$Charter.n > 50,], 
-				   caption='Grade 8 Reading Unadjusted NAEP Score', 
+				   caption='Grade 8 reading unadjusted NAEP score', 
 				   label='tab:g8read-unadjscore',
 				   file='../Tables2009/g8read-unadjscore.tex',
 				   floating.environment='sidewaystable')
@@ -277,7 +277,7 @@ addtorow$command <- c(paste0(' & \\multicolumn{1}{c}{Charter} & ',
 							 ' Subject & Mean & Mean & n & Diff & ',
 							 ' Mean & n & Diff \\\\ '))
 x <- xtable(close.desc, digits=1, label='dependentDescriptivesAllAndClose',
-			caption='Descriptive Statistics of Dependent Variables (Unadjusted) for All and Close (within 5 miles) Traditional Public Schools',
+			caption='Descriptive statistics of dependent variables (unadjusted) for all and close (within 5 miles) traditional public schools',
 			align=c('l','l','r@{\\extracolsep{.2cm}}','r','r','r@{\\extracolsep{.2cm}}','r','r','r') )
 print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow,
 	  caption.placement='top', file='../Tables2009/descriptivesClose.tex')
@@ -300,7 +300,7 @@ addtorow$command <- c(paste0(' & \\multicolumn{2}{c}{Charter} & ',
 							 ' Subject & Mean & SD & Mean & SD & Difference & ',
 							 '\\multicolumn{2}{c}{Interval} \\\\ '))
 x <- xtable(unadj.out[,c(8,1:7)], digits=1, label='dependentDescriptives',
-			caption='Descriptive Statistics of Dependent Variables (Unadjusted)',
+			caption='Descriptive statistics of dependent variables (unadjusted)',
 			align=c('l','l','r','r@{\\extracolsep{.2cm}}','r','r','r','r','r') )
 print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow,
 	  caption.placement='top', file='../Tables2009/descriptives.tex')
@@ -481,6 +481,6 @@ addtorow$command <- c(
 		   '} \\\\ \\cline{2-6} '),
 	'\\hline Method & Charter & Public & ATE & \\multicolumn{2}{c}{95\\% CI} \\\\')
 x <- xtable(overall[,c('x','charter','public','es','ci.min','ci.max')],
-			caption='Summary of Overall Propensity Score Results', label='tab:overall')
+			caption='Summary of overall propensity score results', label='tab:overall')
 print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow, 
 	  hline.after=c(nrow(overall)), file='../Tables2009/Overall.tex')
