@@ -2,6 +2,13 @@
 
 #### Author: Jason M. Bryer <[jason@bryer.org](mailto:jason@bryer.org)>
 
+#### Committee:
+
+* [Robert Pruzek, Ph.D.](http://www.albany.edu/educational_psychology/pruzek.php) (co-chair)
+* [Bruce Dudek, Ph.D.](http://www.albany.edu/psychology/20869.php) (co-chair)
+* [Heidi Andrade, Ed.D.](http://www.albany.edu/educational_psychology/andrade.php)
+* [Kathryn Schiller, Ph.D.](http://www.albany.edu/eaps/faculty_kathryn_schiller.php)
+
 This github repository hosts the support files for my dissertation titled,
 *A National Study Comparing Charter and Traditional Public Schools Using Propensity
 Score Analysis*, from the Division of Educational Psychology and Methodology, University at Albany.
