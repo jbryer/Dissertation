@@ -22,7 +22,7 @@ source('Functions/latexDescriptives.R') # Create descriptive tables.
 source('Functions/descriptives.R')
 source('Functions/recode.r') # Utility function to recode factors.
 source('Functions/naep.recode.R') # Recode factors specifically for NAEP.
-source('Functions/impute.R') # Impute missing values.
+#source('Functions/impute.R') # Impute missing values.
 source('../Data2009/states.r') # Data frame with state names and abbreviations.
  
 # These are all the covariates that will be used at least once
@@ -340,6 +340,8 @@ g8read.overall <- naep.analysis(naep=g8read3,
 								grade=8, 
 								subject='read',
 								cv.map=g8read.cv.map)
+
+save(g4math3, g4read3, g8math3, g8read3, file='../Data2009/SensitivityAnalysis.Rda')
 
 # Divide by standard deviation to get effect size
 g4math.overall$std.ci.min <- g4math.overall$ci.min / sd(g4math3$mathscore)
