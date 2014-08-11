@@ -17,11 +17,11 @@ Score Analysis*, from the Division of Educational Psychology and Methodology, Un
 
 * Dissertation Slides
 
-* Handouts: [Grade 4 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Math.pdf?raw=true), [Grade 4 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Read.pdf?raw=true), [Grade 8 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Math.pdf?raw=true), [Grade 8 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Read.pdf?raw=true)
+* Handouts: [Overall Results](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout.pdf?raw=true), [Grade 4 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Math.pdf?raw=true), [Grade 4 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Read.pdf?raw=true), [Grade 8 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Math.pdf?raw=true), [Grade 8 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Read.pdf?raw=true)
 
 * The `multilevelPSA` package is available on [CRAN](http://cran.r-project.org/web/packages/multilevelPSA/index.html), hosted on [Github](https://github.com/jbryer/multilevelPSA), and documented on [my website](http://jason.bryer.org/multilevelPSA/). Abstract of a talk given at the 2010 [Society of Multivariate Experimental Psychology](https://www.smep.org/) annual meeting was published in [*Multivariate Behavior Research, 46*(6)](http://www.tandfonline.com/doi/full/10.1080/00273171.2011.636693#.U-jqgIBdU3s).
 
-* The `naep` package is hosted on [Github](https://github.com/jbryer/naep) and documented on [my website](http://jason.bryer.org/naep/). It can be installed directly from Github using the `devtools` package using the `devtools::install_github('naep','jbryer')` command.
+* The `naep` package is hosted on [Github](https://github.com/jbryer/naep) and documented on [my website](http://jason.bryer.org/naep/). It can be installed directly from Github using the `devtools` package using the `devtools::install_github('jbryer/naep')` command.
 
 * Dissertation [Proposal](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Proposal.pdf?raw=true) and [slides](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Proposal.Slides.pdf?raw=true).
 
