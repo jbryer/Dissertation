@@ -36,6 +36,11 @@ names(scores)[ncol(scores)] <- 'g8math'
 scores <- merge(scores, g8read[,c('level2','diffwtd')], by.x='abbr', by.y='level2', all.x=TRUE)
 names(scores)[ncol(scores)] <- 'g8read'
 
+lm.g4math <- lm(g4math ~ NAPCS2010Score, data=scores)
+lm.g4read <- lm(g4read ~ NAPCS2010Score, data=scores)
+lm.g8math <- lm(g8math ~ NAPCS2010Score, data=scores)
+lm.g8read <- lm(g8read ~ NAPCS2010Score, data=scores)
+
 df.melted <- melt(scores[,c('abbr','NAPCS2010Score','g4math','g4read','g8math','g8read')],
 				  id=c('abbr','NAPCS2010Score'))
 df.melted$variable <- factor(df.melted$variable, levels=c('g4math','g4read','g8math','g8read'),
@@ -46,36 +51,39 @@ df.cor <- data.frame(variable=c('g4math','g4read','g8math','g8read'),
 					 	   cor(scores$NAPCS2010Score, scores$g4read, use='pairwise.complete.obs'),
 					 	   cor(scores$NAPCS2010Score, scores$g8math, use='pairwise.complete.obs'),
 					 	   cor(scores$NAPCS2010Score, scores$g8read, use='pairwise.complete.obs')),
+					 m=c(lm.g4math$coefficients[2],
+					 	 lm.g4read$coefficients[2],
+					 	 lm.g8math$coefficients[2],
+					 	 lm.g8read$coefficients[2]),
+					 b=c(lm.g4math$coefficients[1],
+					 	 lm.g4read$coefficients[1],
+					 	 lm.g8math$coefficients[1],
+					 	 lm.g8read$coefficients[1]),
 					 stringsAsFactors=FALSE)
 df.cor$variable <- factor(df.cor$variable, levels=c('g4math','g4read','g8math','g8read'),
 							 labels=c('Grade 4 Math', 'Grade 4 Reading',
 							 		 'Grade 8 Math', 'Grade 8 Reading'))
-df.cor$x <- 40
-df.cor$y <- 15
+df.cor$formula <- paste0('y = ', round(df.cor$m, digits=2), 'x', 
+						 ifelse(df.cor$b >= 0, ' + ', ' - '), 
+						 prettyNum(abs(df.cor$b), digits=2, drop0trailing=FALSE, nsmall=2))
 
-ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
+p <- ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
+	geom_abline(data=df.cor, aes(intercept=b, slope=m), color='grey30', alhpa=.1) +
 	geom_point() +
 	geom_text(size=2.5, vjust=-1) +
- 	geom_text(data=df.cor, aes(x=x, y=y, 
- 			  label=paste0('Correlation = ', round(cor, digits=3))),
+ 	geom_text(data=df.cor, x=40, y=15,
+ 			  aes(label=paste0('Correlation = ', prettyNum(cor, digits=2, nsmall=2))),
  			  hjust=0, size=5, parse=FALSE) +
-	facet_wrap(~ variable) +
+	geom_text(data=df.cor, x=150, y=-18,
+			  aes(label=formula), hjust=1, size=4, parse=FALSE) +
 	xlab('NAPCS Score for Quality of State Charter Law (out of a maximum score of 208)') +
 	ylab('NAEP Standardized Mean Difference (Effect Size)')
 
+p + facet_wrap(~ variable)
 ggsave('../Figures2009/LawScoresVsNAEPDifferences.pdf', width=12, height=9)
 
 # This has one row and is used for the poster
-ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
-	geom_point() +
-	geom_text(size=2.5, vjust=-1) +
-	geom_text(data=df.cor, aes(x=x, y=y, 
-							   label=paste0('Correlation = ', round(cor, digits=3))),
-			  hjust=0, size=5, parse=FALSE) +
-	facet_wrap(~ variable, nrow=1) +
-	xlab('NAPCS Score for Quality of State Charter Law (out of a maximum score of 208)') +
-	ylab('NAEP Standardized Mean Difference (Effect Size)')
-
+p + facet_wrap(~ variable, nrow=1)
 ggsave('../Figures2009/LawScoresVsNAEPDifferences2.pdf', width=16, height=5)
 
 ##### For comparing rankings ###################################################
