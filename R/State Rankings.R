@@ -6,6 +6,7 @@ source('../Data2009/states.r')
 require(gdata)
 require(reshape2)
 require(gridExtra)
+require(xtable)
 
 rankings <- read.xls('../Data/StateRankings.xlsx')
 g4math <- read.csv('../Data2009/g4math-level2-ctree.csv')
@@ -63,6 +64,19 @@ ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
 	ylab('NAEP Standardized Mean Difference (Effect Size)')
 
 ggsave('../Figures2009/LawScoresVsNAEPDifferences.pdf', width=12, height=9)
+
+# This has one row and is used for the poster
+ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
+	geom_point() +
+	geom_text(size=2.5, vjust=-1) +
+	geom_text(data=df.cor, aes(x=x, y=y, 
+							   label=paste0('Correlation = ', round(cor, digits=3))),
+			  hjust=0, size=5, parse=FALSE) +
+	facet_wrap(~ variable, nrow=1) +
+	xlab('NAPCS Score for Quality of State Charter Law (out of a maximum score of 208)') +
+	ylab('NAEP Standardized Mean Difference (Effect Size)')
+
+ggsave('../Figures2009/LawScoresVsNAEPDifferences2.pdf', width=16, height=5)
 
 ##### For comparing rankings ###################################################
 rankings <- merge(rankings, g4math[,c('level2','g4math')], by.x='abbr', by.y='level2', all.x=TRUE)
@@ -133,3 +147,39 @@ p.g8read <- ggplot(df.melted,aes(x=variable,y=value)) +
 pdf('../Figures2009/StateRankings.pdf', width=9, height=12)
 grid.arrange(p.g4math, p.g4read, p.g8math, p.g8read)
 dev.off()
+
+##### Rubric to LaTeX ##########################################################
+rubric <- read.xls('../Data/StateRankings.xlsx', sheet=2)
+
+addtorow = list()
+addtorow$pos = list()
+addtorow$pos[[1]] = c(0)
+addtorow$pos[[2]] = c(3)
+addtorow$command = c(paste0('\\hline & & \\multicolumn{5}{c}{Scoring} & \\\\ \\cline{3-7}',
+							'& Component & \\multicolumn{1}{c}{0} & ',
+							'\\multicolumn{1}{c}{1} & ',
+							'\\multicolumn{1}{c}{2} & ',
+							'\\multicolumn{1}{c}{3} & ',
+							'\\multicolumn{1}{c}{4} & Weight \\\\ \\hline',
+							'\\endfirsthead ',
+							'\\multicolumn{8}{l}{{...continued from previous page}}\\\\ ',
+							'\\hline & & \\multicolumn{5}{c}{Scoring} & \\\\ \\cline{3-7}',
+							'& Component & \\multicolumn{1}{c}{0} & ',
+							'\\multicolumn{1}{c}{1} & ',
+							'\\multicolumn{1}{c}{2} & ',
+							'\\multicolumn{1}{c}{3} & ',
+							'\\multicolumn{1}{c}{4} & Weight \\\\ ',							
+							'\\hline \\endhead '),
+					 '\\hline \\pagebreak')
+x <- xtable(rubric, 
+			align='rrp{2.2in}p{0.9in}p{0.9in}p{0.9in}p{0.9in}p{0.9in}c',
+			caption='NAPCS Rubric for Rating the Quality of State Charter Laws',
+			label='NAPCSrubric')
+print(x, 
+	  file='../Tables/NAPCSRubric.tex',
+	  hline.after=1:20,
+	  tabular.environment='longtable',
+	  floating=FALSE,
+	  caption.placement='top',
+	  size='smaller', add.to.row=addtorow,
+	  include.rownames=FALSE, include.colnames=FALSE)
