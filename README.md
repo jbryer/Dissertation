@@ -1,7 +1,6 @@
 ### Dissertation: A National Study Comparing Charter and Traditional Public Schools Using Propensity Score Analysis
 
 #### Author: Jason M. Bryer <[jason@bryer.org](mailto:jason@bryer.org)>  
-
 #### Division of Educational Psychology and Methodology, University at Albany.
 
 **Defense has been scheduled for Monday, September 8, 2014 at 11:00am in ED335.**
