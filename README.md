@@ -1,8 +1,10 @@
 ### Dissertation: A National Study Comparing Charter and Traditional Public Schools Using Propensity Score Analysis
 
-#### Author: Jason M. Bryer <[jason@bryer.org](mailto:jason@bryer.org)>
+#### Author: Jason M. Bryer <[jason@bryer.org](mailto:jason@bryer.org)>  
 
-Defense has been scheduled for Monday, September 8, 2014 at 11:00am in ED335.
+#### Division of Educational Psychology and Methodology, University at Albany.
+
+**Defense has been scheduled for Monday, September 8, 2014 at 11:00am in ED335.**
 
 #### Committee:
 
@@ -11,9 +13,13 @@ Defense has been scheduled for Monday, September 8, 2014 at 11:00am in ED335.
 * [Heidi Andrade, Ed.D.](http://www.albany.edu/educational_psychology/andrade.php)
 * [Kathryn Schiller, Ph.D.](http://www.albany.edu/eaps/faculty_kathryn_schiller.php)
 
-This github repository hosts the support files for my dissertation titled,
-*A National Study Comparing Charter and Traditional Public Schools Using Propensity
-Score Analysis*, from the Division of Educational Psychology and Methodology, University at Albany.
+#### Abstract
+
+Unlike their private school counterparts, charter schools receive public funding but are relieved of some of the bureaucratic and regulatory constraints of public schools in exchange for being held accountable for student performance. Studies provide mixed results with regard to charter school performance. Charter schools are, by definition, schools of choice, and this means that observational data methods are required for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools typically ignore the inherent and systematic differences between the two groups. However, given well-designed observational studies and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. This study includes development of new methods, largely graphic in form, designed for observational data to compare two groups. These methods are then used to investigate the question of whether students who attend charter schools perform differently than their traditional public school counterparts on two key academic domains: reading and mathematics. The new methods represent extensions of propensity score analysis Rosenbaum and Rubin (1983) by aiding descriptions and aim in reducing selection bias in the context of clustered data.
+
+Using data from the 2009 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools were calculated at the state and national levels. This study finds that there is wide variability in math and reading performance for charter schools. But in aggregate, charter schools do not perform any differently than their traditional public school counterparts. The new methods are also used to examine the relationship between the quality of state charter laws as determined by the National Alliance for Public Charter Schools (NAPCS; 2010a) and differences between charter and traditional public schools is explored. Results suggest that there is small to moderate correlation between NAPCS’s ratings of charter law quality and differences between charter and traditional public schools within each state.
+
+#### Contents
 
 * [Dissertation](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Dissertation.pdf?raw=true)
 
@@ -34,11 +40,5 @@ Score Analysis*, from the Division of Educational Psychology and Methodology, Un
 * Dissertation [Proposal](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Proposal.pdf?raw=true) and [slides](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Proposal.Slides.pdf?raw=true).
 
 
-
-#### Abstract
-
-Unlike their private school counterparts, charter schools receive public funding but are relieved of some of the bureaucratic and regulatory constraints of public schools in exchange for being held accountable for student performance. Studies provide mixed results with regard to charter school performance. Charter schools are, by definition, schools of choice, and this means that observational data methods are required for comparing such schools with others. In observational data contexts, simple comparisons of two groups such as traditional public and charter schools typically ignore the inherent and systematic differences between the two groups. However, given well-designed observational studies and appropriate analysis methods, the effects of the selection bias can be reduced, if not eliminated. The result is that the usual simple comparisons of two independent groups are replaced by comparisons that make adjustments for covariate differences. This study includes development of new methods, largely graphic in form, designed for observational data to compare two groups. These methods are then used to investigate the question of whether students who attend charter schools perform differently than their traditional public school counterparts on two key academic domains: reading and mathematics. The new methods represent extensions of propensity score analysis Rosenbaum and Rubin (1983) by aiding descriptions and aim in reducing selection bias in the context of clustered data.
-
-Using data from the 2009 National Assessment of Educational Progress (NAEP) for mathematics and reading at grades four and eight, estimates of the differences between charter and public schools were calculated at the state and national levels. This study finds that there is wide variability in math and reading performance for charter schools. But in aggregate, charter schools do not perform any differently than their traditional public school counterparts. The new methods are also used to examine the relationship between the quality of state charter laws as determined by the National Alliance for Public Charter Schools (NAPCS; 2010a) and differences between charter and traditional public schools is explored. Results suggest that there is small to moderate correlation between NAPCS’s ratings of charter law quality and differences between charter and traditional public schools within each state.
 
 
