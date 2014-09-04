@@ -85,7 +85,7 @@ p <- ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
  			  hjust=0, size=4, parse=FALSE) +
 	geom_text(data=df.cor, x=150, y=-30,
 			  aes(label=formula), hjust=1, size=4, parse=FALSE) +
-	scale_size_continuous('Z-Score') +
+	scale_size_continuous('Average State\nScore (Z-Score)') +
 	ylim(c(-30, 25)) +
 	xlab('NAPCS Score for Quality of State Charter Law (out of a maximum score of 208)') +
 	ylab('NAEP Standardized Mean Difference (Effect Size)')

@@ -93,6 +93,7 @@ Division of Educational Psychology \& Methodology\\
 \vspace*{\fill}
 \end{titlepage}
 
+
 \clearpage
 \begin{titlepage}
 %%%%% Copyright page
@@ -113,6 +114,8 @@ COPYRIGHT 2014
 
 \setkeys{Gin}{width=\textwidth} %Make images fit full text width of the page
 
+\setcounter{page}{3}
+
 %\cleardoublepage
 \topskip0pt
 \vspace*{2.5 in}
@@ -120,9 +123,8 @@ COPYRIGHT 2014
 \noindent To my wife, Heather,\\and three sons Gabriel, Miles, and Rowan\\for providing the inspiration and support\\for life's journey.
 \end{center}
 \vspace*{\fill}
-\newpage
 
-\setcounter{page}{3}
+%\setcounter{page}{3}
 
 \cleardoublepage
 \section{Abstract}
@@ -163,7 +165,7 @@ To my Excelsior College family, Lisa Daniels, Patti Croop, Jane Weyers, Bethany 
 \addcontentsline{toc}{section}{Table of Contents}
 \setcounter{tocdepth}{5}
 \tableofcontents
-\cleardoublepage
+\clearpage
 \addcontentsline{toc}{section}{List of Tables}  \listoftables
 \clearpage
 \addcontentsline{toc}{section}{List of Figures} \listoffigures
@@ -744,12 +746,13 @@ The goal of propensity score methods is to adjust for selection bias with the av
 
 \subsection{Propensity Score Matching}
 
-The second class of propensity score method used is propensity score matching. In propensity score matching, the goal is to match students from the two groups with small differences in their propensity scores in order to adjust for selection bias. In large datasets, or when particular covariates are determined to be more important for adjusting selection bias, whether theoretically or otherwise, partial exact matching is done. In the context of this study, partial exact matching is akin to implicitly adjusting for the multilevel nature of the data. Students were first matched exactly by state, gender, and ethnicity, and then by propensity score using nearest neighbor (i.e. the difference between propensity scores of pairs is minimized). Propensity scores from the full logistic regression model were used for matching.
+The second class of propensity score method used is propensity score matching. In propensity score matching, the goal is to match students from the two groups with small differences in their propensity scores in order to adjust for selection bias. In large datasets, or when particular covariates are determined to be more important for adjusting selection bias, whether theoretically or otherwise, partial exact matching is done. In the context of this study, partial exact matching is akin to implicitly adjusting for the multilevel nature of the data. Students were first matched exactly by state, gender, and ethnicity, and then by propensity score using nearest neighbor (i.e. the difference between propensity scores of pairs is minimized). Furthermore, a caliper of 0.25 is specified which guarantees that the distance between any matched pair is no more than one-fourth of a standard deviation as suggested by \citeA{Rosenbaum2002}. Propensity scores from the full logistic regression model were used for matching.
 
 The \texttt{Matchby} function in the \texttt{Matching} package \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement.
 
 Once matched pairs were determined, dependent sample \textit{t}-tests were performed \cite{Austin2011} to estimate average treatment effect and corresponding confidence intervals. Figures \ref{fig:overallcirc} and \ref{fig:overalldiff} and Table \ref{tab:overall} at the end of the chapter provide the overall results. In general however, matching methods tend to estimate slightly larger treatment effects than both the stratification and multilevel models. And of additional note, the confidence intervals shrink as the ratio of treatment-to-control units increase.
 
+By using partial exact matching, perfect balance is achieved on the covariates exactly matched on, namely state, gender, and ethnicity. Since balance was achieved using the full logistic regression model discussed above in the stratification section, by extension balance is also achieved for propensity score matching. That is, since balance was achieved for students with propensity scores within each quintile, and the fact the maximum distance between any two matched students in 0.25 standard deviations of the propensity score, then any matched pair must also be balanced.
 
 \subsection{Multilevel Propensity Score Analysis}
 
@@ -919,7 +922,9 @@ What is the issue with \textit{p}-values? First, the practice of significance te
 
 Lastly, given the relationship between \textit{p}-values and sample size, it would be expected that with \textit{n} \textgreater 100,000, as in this study, most differences would be statistically significant. Even in one-to-one matched analysis where $n \approx 3,000$, one would expect \textit{p} \textless 0.05 for even small differences. For example, the formula for calculating \textit{t} for a dependent sample paired \textit{t}-test is:
 
-$$ t = \frac{{\bar{X}_D} - \mu_0}{S_D / \sqrt{n}} $$
+\begin{equation}
+t = \frac{{\bar{X}_D} - \mu_0}{S_D / \sqrt{n}}
+\end{equation}
 
 \noindent Where $X_D$ is the mean difference, $\mu_0$ is non-zero for testing differences other than zero, $S_D$ is the standard deviation of the differences, and $n$ is the sample size. Using the approximate sample standard deviation of 40 from grade 8 reading results, a mean difference 2 (representing a small effect size of 0.06 by most standards), and $n = 3000$, results in $t = 2.738$ and $p = 0.003$. For the one-to-one paired analysis with a very small effect size the power estimate \cite{Cohen1988} is 0.64. However, the one-to-two matched analysis increases the power to a very acceptable 0.90. The result of this exercise is to demonstrate that relying on p-values to make decisions is a \textit{fool's errand}. Instead, \citeA{Scarr1997} suggestion that a ``better uses of statistics would focus on the magnitude of effects and error estimates" (p. 17) is appropriate.
 
