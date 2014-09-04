@@ -38,7 +38,8 @@ names(scores)[ncol(scores)] <- 'g8math'
 scores <- merge(scores, g8read[,c('level2','diffwtd')], by.x='abbr', by.y='level2', all.x=TRUE)
 names(scores)[ncol(scores)] <- 'g8read'
 
-meanByState <- merge(meanByState, scores[,c('abbr','State')], by.x='group1', by.y='State', all.x=TRUE)
+meanByState <- merge(meanByState, scores[,c('abbr','State')], 
+					 by.x='group1', by.y='State', all.x=TRUE)
 
 
 lm.g4math <- lm(g4math ~ NAPCS2010Score, data=scores)
@@ -229,7 +230,7 @@ addtorow$command = c(paste0('\\hline & & \\multicolumn{5}{c}{Scoring} & \\\\ \\c
 					 '\\hline \\pagebreak')
 x <- xtable(rubric, 
 			align='rrp{2.2in}p{0.9in}p{0.9in}p{0.9in}p{0.9in}p{0.9in}c',
-			caption='NAPCS Rubric for Rating the Quality of State Charter Laws',
+			caption='NAPCS rubric for rating the quality of state charter laws',
 			label='NAPCSrubric')
 print(x, 
 	  file='../Tables/NAPCSRubric.tex',
