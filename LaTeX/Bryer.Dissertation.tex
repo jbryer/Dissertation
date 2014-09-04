@@ -142,7 +142,7 @@ Using data from the 2009 National Assessment of Educational Progress (NAEP) for 
 \end{center}
 \ \\\ \\
 
-Graduate school is very much like being a child in a village. You enter barely speaking the language, and with the help of an advisor, faculty members, and fellow students, you begin to develop an understanding of the village in which you live. The dissertation is the culmination of all the learning within that village and marks a transition to life outside the village. Like the original proverb states, \textit{it takes a village to raise a child}, a dissertation, although the result of an individual endeavor, is impossible without the support of many people. There are too many people who have influenced and taught me so much over the years to name them all. But some have had a substantial influence in my growth, and I wish to thank them here.
+Being a graduate student is very much like being a child in a village. You enter barely speaking the language, and with the help of an advisor, faculty members, and fellow students, you begin to develop an understanding of the village in which you live. The dissertation is the culmination of all the learning within that village and marks a transition to life outside the village. Like the original proverb states, \textit{it takes a village to raise a child}, a dissertation, although the result of an individual endeavor, is impossible without the support of many people. There are too many people who have influenced and taught me so much over the years to name them all. But some have had a substantial influence in my growth, and I wish to thank them here.
 
 To Bob Pruzek who introduced me to new ways of seeing and measuring the world. By introducing me to PSA, graphics, and R, you have significantly changed my professional life. You have provided the inspiration and foundation for not only the work in this dissertation, but for the work I will be doing for years to come.
 
@@ -154,7 +154,7 @@ To Gabriel, Miles, and Rowan, who provide the inspiration to continue to be the 
 
 To my mom, who has been a constant believer in me and for being a great Nana for the boys when dad was teaching or writing.
 
-To my Excelsior College family, Lisa, Patti, Jane, Bethany, Kim, Vaishali, and Erin, for providing invaluable time, support, and encouragement. And especially to the R Groupers!
+To my Excelsior College family, Lisa Daniels, Patti Croop, Jane Weyers, Bethany de Barros, Kim Speershneider, Vaishali Jahagirdar, and Erin Applegarth Vitali, for providing invaluable time, support, and encouragement. And especially to the R Groupers!
 
 
 \cleardoublepage
@@ -263,7 +263,7 @@ There are several features of this framework that deviate from traditional publi
 
 \begin{figure}[tp]
 \includegraphics[width=\textwidth]{../Figures/Timeline.pdf}
-\caption{Stages of a charter school life cycle (adapted from Budde, 1988)}
+\caption[Stages of a charter school life cycle]{Stages of a charter school life cycle (adapted from Budde, 1988)}
 \label{fig:timeline}
 \end{figure}
 
@@ -375,7 +375,7 @@ Recent research comparing the use of propensity score methods with randomized ex
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=.9\textwidth]{../Figures/PSACitations}
-\caption{Number of PSA Publications by Year (source: Web of Science)}
+\caption[Number of PSA Publications by Year]{Number of PSA Publications by Year (source: Web of Science)}
 \label{fig:PSApublications}
 \end{center}
 \end{figure}
@@ -468,25 +468,35 @@ This study utilizes propensity score analysis for estimating causal effects of s
 
 This study utilizes propensity score analysis for estimating causal effects of students attending charter schools. The propensity score is ``the conditional probability of assignment to a particular treatment given a vector of observed covariates" \cite{RosenbaumRubin1983}. The probability of being in the treatment is defined as:
 
-$$\pi ({ X }_{ i }) \; \equiv \; Pr({ T }_{ i } = 1 | { X }_{ i })$$
+\begin{equation}
+\pi ({ X }_{ i }) \; \equiv \; Pr({ T }_{ i } = 1 | { X }_{ i })
+\end{equation}
 
 \noindent Where $X$ is a matrix of observed covariates. The balancing property under exogeneity states that,
 
-$${ T }_{ i } \; \upModels { X }_{ i } \;| \; \pi ({ X }_{ i })$$
+\begin{equation}
+{ T }_{ i } \; \upModels { X }_{ i } \;| \; \pi ({ X }_{ i })
+\end{equation}
 
 \noindent In the case of randomized experiments, the strong ignobility assumption states,
 
-$$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i }|{ X }_{ i }$$
+\begin{equation}
+({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i }|{ X }_{ i }
+\end{equation}
 
 \noindent for all ${X}_{i}$. That is, treatment is independent of all covariates, observed or otherwise. However, the strong ignobility assumption can be restated with the propensity score as,
 
-$$({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i } \; | \; \pi({ X }_{ i })$$
+\begin{equation}
+({ Y }_{ i }(1),{ Y }_{ i }(0)) \; \upModels \; { T }_{ i } \; | \; \pi({ X }_{ i })
+\end{equation}
 
 \noindent so that treatment placement is ignorable given the propensity score presuming sufficient balance\footnote{Balance in the context of PSA refers to differences in observed covariates between treatment and control units is minimized.} is achieved.
 
 The average treatment effect (ATE) is defined as $E(r_1) - E(r_0)$ where $E(.)$ is the expected value in the population. Given a set of covariates, $X$, and outcomes $Y$, where 0 denotes traditional public school student and 1 denotes charter school student, ATE is defined as:
 
-$$ATE=E(Y_{1}-Y_{0}|X)=E(Y_{1}|X)-E(Y_{0}|X)$$
+\begin{equation}
+ATE=E(Y_{1}-Y_{0}|X)=E(Y_{1}|X)-E(Y_{0}|X)
+\end{equation}
  
 \noindent Or the difference between charter and traditional public school given the set observed covariates.
 
@@ -521,16 +531,16 @@ For matched analysis, the ATE is the mean of the differences between each matche
 
 Given the large amount of data to be summarized, the use of graphics will be an integral component of representing the results. The \texttt{multilevelPSA}\footnote{The \texttt{multilevelPSA} package was written by the author and is available from \url{http://github.com/jbryer/multilevelPSA}.} package provides a number of graphing functions that extend the framework introduced by \citeA{HelmreichPruzek2009} for multilevel PSA. Figure \ref{fig:g8math:circ} represents a multilevel PSA assessment plot with annotations. This graphic represents the results of comparing private and public schools in North America using the Programme of International Student Assessment \cite<PISA;>{pisa}. The PISA data to create this graphic is included in the \texttt{multilevelPSA} package and a more detailed description of how to create this graphic are discussed at the end of this chapter. Additionally, the use of PISA will make more visible certain features of the graphics used. As will be discussed in chapters four and five, the differences between charter and traditional public schools is minimal and therefore some features of the figures will be less apparent. The following section will focus on the features of this graphic.
 
-\begin{figure}[t]
+In Figure \ref{fig:g8math:circ}, the x-axis corresponds to math scores for private schools and the y-axis corresponds to public school maths cores. Each colored circle (a) is a country with its size corresponding to the number of students sampled within each country. Each country is projected to the lower left, parallel to the unit line, such that a tick mark is placed on the line with slope -1 (b). These tick marks represent the distribution of differences between private and public schools across countries. Differences are aggregated (and weighted by size) across countries. For math, the overall adjusted mean for private schools is 487, and the overall adjusted mean for public schools is 459 and represented by the horizontal (c) and vertical (d) blue lines, respectively. The dashed blue line parallel to the unit line (e) corresponds to the overall adjusted mean difference and likewise, the dashed green lines (f) correspond to the confidence interval. Lastly, rug plots along the right and top edges of the graphic (g) correspond to the distribution of each country's overall mean private and public school math scores, respectively.
+
+\begin{figure}[t!]
 \begin{center}
 \includegraphics[width=.9\textwidth]{../Figures/AnnotatedCircPlot.pdf}
-\caption{Annotated multilevel PSA assessment plot}
+\caption[Annotated multilevel PSA assessment plot]{Annotated multilevel PSA assessment plot. This plot compares private schools (\textit{x}-axis) against public schools (\textit{y}-axis) for North America from the Programme of International Student Assessment.}
 \label{fig:g8math:circ}
 \end{center}
 \end{figure}
 
-
-In Figure \ref{fig:g8math:circ}, the x-axis corresponds to math scores for private schools and the y-axis corresponds to public school maths cores. Each colored circle (a) is a country with its size corresponding to the number of students sampled within each country. Each country is projected to the lower left, parallel to the unit line, such that a tick mark is placed on the line with slope -1 (b). These tick marks represent the distribution of differences between private and public schools across countries. Differences are aggregated (and weighted by size) across countries. For math, the overall adjusted mean for private schools is 487, and the overall adjusted mean for public schools is 459 and represented by the horizontal (c) and vertical (d) blue lines, respectively. The dashed blue line parallel to the unit line (e) corresponds to the overall adjusted mean difference and likewise, the dashed green lines (f) correspond to the confidence interval. Lastly, rug plots along the right and top edges of the graphic (g) correspond to the distribution of each country's overall mean private and public school math scores, respectively.
 
 Figure \ref{fig:g8math:circ} represents a large amount of data and provides insight into the data and results. The figure provides overall results that would be present in a traditional table, for instance the fact that the green dashed lines do not span the unit line (i.e. y = x) indicates that there is a statistically significant difference between the two groups. However additional information is difficult to convey in tabular format. For example, the rug plots indicate that the spread in the performance of both private and public schools across countries is large. Also observe that Canada, which has the largest PISA scores for both groups, also has the largest difference (in favor of private schools) as represented by the larger distance from the unit line.
 
@@ -599,7 +609,8 @@ The \texttt{covariate.balance} function will calculate balance statistics for ea
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures/pisabalance.pdf}
+\includegraphics[height=.90\textheight]{../Figures/pisabalance.pdf}
+\caption[Multilevel PSA balance plot for PISA]{Multilevel PSA balance plot for PISA. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
@@ -638,6 +649,7 @@ Confidence Interval: -31.3, -24.75
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures/pisamlpsa.pdf}
+\caption[Multilevel PSA assessment plot for PISA]{Multilevel PSA assessment plot for PISA. The main panel provides the adjusted mean for private (\textit{x}-axis) and public (\textit{y}-axis) for each country. The left and lower panels provide the mean for each strata for the public and private students, respectively. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between private and public school student performance as evidenced by the confidence interval not spanning zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
@@ -652,6 +664,7 @@ Lastly, the \texttt{mlpsa.difference.plot} function plots the overall difference
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures/pisadiffplot.pdf}
+\caption[Multilevel PSA difference plot for PISA]{Multilevel PSA difference plot for PISA. Each blue dot corresponds to the effect size (standardized mean difference) for each country. The vertical blue line corresponds to the overall effect size for all countries. The green lines correspond to the 95\% confidence intervals. The size of each dot is proportional to the sample size within each country.}
 \end{center}
 \end{figure}
 
@@ -678,7 +691,7 @@ The first class of propensity score methods used was stratification. The general
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-loess.pdf}
-\caption{Loess regression assessment plot: Grade 4 math}
+\caption[Loess regression assessment plot: Grade 4 math]{Loess regression assessment plot: Grade 4 math. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Given that the confidence intervals overlap across the entire range of propensity scores provides evidence that there is little or no difference in the performance between charter and traditional public school student.}
 \label{fig:g4math:loess}
 \end{center}
 \end{figure}
@@ -691,7 +704,7 @@ Two fitted Loess regression lines with approximate 95\% confidence intervals are
 
 The vertical lines in the main panel of Figure \ref{fig:g4math:loess} represent the deciles, or strata. Figure \ref{fig:g4math:circpsa} is a propensity score assessment plot \cite{HelmreichPruzek2009} where the \textit{x}-axis is the outcome score for charter schools and the \textit{y}-axis is the outcome score for traditional public schools (corresponding to the points within each vertical line in Figure \ref{fig:g4math:loess}. Each circle corresponds to each stratum and the size of the circle is proportional to the number of students within each stratum. For the Logistic regression models, since deciles were used, each circle is of the same size. Figure \ref{fig:g4math:circpsa:tree} is the corresponding propensity score assessment plot for the classification tree model and therefore each stratum is not of the same size. Points that lie on or near the unit line, $y = x$, indicate no significant difference in the outcome of the two scores. Lines are projected to a line perpendicular to the unit line and the tick placed. These tick marks correspond to the distribution of difference scores and the dashed blue line parallel to the unit line the overall mean difference. Furthermore, the green bar represent exactly the 95\% confidence interval. The fact that the confidence interval does not span the unit line and is on the tradition public school side indicates there is a small, statistically significant difference in favor of traditional public school students. Tables \ref{g4math-circpsa10}, \ref{g4math-circpsa10AIC}, and \ref{g4math-circpsa-tree} provide numeric results for each stratum. Appendix F contains propensity score assessment plots and summary tables for grade four reading, grade eight math, and grade eight reading.
 
-\clearpage
+%\clearpage
 
 \begin{figure}[t]
 \begin{center}
@@ -745,7 +758,7 @@ The final class of propensity score method utilized in multilevel propensity sco
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-heat.pdf}
-\caption{Multilevel PSA covariate heat map for classification trees: Grade 4 math}
+\caption[Multilevel PSA covariate heat map for classification trees: Grade 4 math]{Multilevel PSA covariate heat map for classification trees: Grade 4 math. Each colored cell indicates that that covariate was used in the classification tree for that state. The darkness indicates the relative importance for that covariate in that state such that darker colors indicate that the covariate was used to split closer to the root node.}
 \label{fig:g4math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -796,7 +809,7 @@ Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/OverallScatter.pdf}
-\caption{PSA circle plot of adjusted means}
+\caption[PSA circle plot of adjusted means]{PSA circle plot of adjusted means. The vertical and horizontal lines correspond to the unadjusted means for charter and traditional public schools, respectively. The points represent the overall effect sizes (standardized mean difference) for each of the nine propensity score methods used.}
 \label{fig:overallcirc}
 \end{center}
 \end{figure}
@@ -809,7 +822,7 @@ Figure \ref{fig:overalldiff} also reveals some trends in the behavior of the dif
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/Overall.pdf}
-\caption{Overall differences in effect size}
+\caption[Overall differences in effect size]{Overall differences in effect size. The blue dots correspond to the overall effect (standardized mean difference) for each method. The green bard correspond to the 95\% confidence interval.}
 \label{fig:overalldiff}
 \end{center}
 \end{figure}
@@ -818,7 +831,7 @@ Figure \ref{fig:overalldiff} also reveals some trends in the behavior of the dif
 
 \subsection{Differences Between States}
 
-The National Alliance for Public Charter Schools \citeyear<NAPCS;>{NAPCS2010a} publishes annual ratings and rankings of state charter school laws. The scores are based upon a rubric of 20 essential components of effective charter laws (see Appendix L). Figure \ref{fig:staterankings} is a scatter plot for the NAPCS scores and the effect sizes from the multilevel PSA for math and reading at grades 4 and 8. The correlations are small to moderate \cite{Cohen1988} ranging from 0.095 for grade 4 math to 0.33 for grade 8 math. Additionally, the regression lines are included with the regression formulas provided in the lower right.
+The National Alliance for Public Charter Schools \citeyear<NAPCS;>{NAPCS2010a} publishes annual ratings and rankings of state charter school laws. The scores are based upon a rubric of 20 essential components of effective charter laws (see Appendix L). Figure \ref{fig:staterankings} is a scatter plot for the NAPCS scores and the effect sizes from the multilevel PSA for math and reading at grades 4 and 8. The correlations are small to moderate \cite{Cohen1988} ranging from 0.095 for grade 4 math to 0.33 for grade 8 math. Additionally, the linear (formulas in lower right) and Loess regression lines in black and blue, respectively, are included. Appendix M provides a matrix plot of the NAPCS quality of charter law scores and NAEP effect sizes. In this plot, the lower panels contain scatter plots for each pair of variables with linear and Loess regression lines in black and blue, respectively. The main diagonal contains histograms for each variable. The upper panels contain the Pearson correlation between each pair of variables. Excluding grade 4 math, there appears to be a moderate correlation between each of the charter school effect sizes and NAPCS quality of charter law scores. %It appears that grade 4 math is only correlated with grade 4 reading. 
 
 %\begin{figure}[t]
 %\begin{center}
@@ -831,7 +844,7 @@ The National Alliance for Public Charter Schools \citeyear<NAPCS;>{NAPCS2010a} p
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/LawScoresVsNAEPDifferences.pdf}
-\caption{Comparison of 2010 NAPCS Quality of Charter Law Scores and NAEP Charter School Effect Sizes}
+\caption[Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes]{Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes. Linear and Loess regression lines are provided in black and blue, respectively. Grey bands correspond to the 95\% confidence interval for the Loess regression. The size of the points correspond to the overall mean NAEP score (converted to a z-score) for each state.}
 \label{fig:staterankings}
 \end{center}
 \end{figure}
@@ -912,13 +925,13 @@ $$ t = \frac{{\bar{X}_D} - \mu_0}{S_D / \sqrt{n}} $$
 
 The use of graphics have made substantial advancements in the twentieth century, with seminal works by Tukey \cite{Cleveland1988}, \citeA{Tufte2001}, \citeA{Cleveland1993,Cleveland1994}, and \citeA{Chambers1983}. The implementations in this dissertation are based upon \citeauthor{Wilkinson2005}'s \textit{grammar of graphics} as implemented in R using the \texttt{ggplot2} package \cite{Wickham2009}. Wherever possible, confidence intervals are used to show the magnitude of the differences \cite<c.f.>{Cumming2012,Estes1997a}. 
 
-Although the use of graphics are frequently taught in statistics courses, they are often omitted from journal publications \cite{GelmanPasaricaDodhia2002} and relegated to diagnostic purposes \cite{Gelman2011}. The graphics presented here provide important insight into the nature and magnitude of the differences between charter and traditional public schools. The multilevel assessment plots (see Figure \ref{fig:g4math:circpsa} and Appendix H) show the distribution scores (charter, traditional public, and differences) across multiple dimensions simultaneously. Perhaps a table would show that the differences are small within states with few exceptions. But what would be lost is that the range of scores across states for charter and traditional public school students separately is relatively wide. Similarly, for the multilevel PSA difference plots (see Figure \ref{fig:g4math-mlpsa-ctree-diff} and Appendix H) the graphic provides immediate evidence of the nature of the differences. Also, by providing confidence intervals, the results can be expressed vis-\`{a}-vis the graphic similar to the traditional \textit{p}-value in a summary table.
+Although the use of graphics are frequently taught in statistics courses, they are often omitted from journal publications \cite{GelmanPasaricaDodhia2002} and relegated to diagnostic purposes \cite{Gelman2011}. The graphics presented here provide important insights into the nature and magnitude of the differences between charter and traditional public schools. The multilevel assessment plots (see Figure \ref{fig:g4math:circpsa} and Appendix H) show the distribution scores (charter, traditional public, and differences) across multiple dimensions simultaneously. Although a table could show that the differences are small within states with few exceptions. But what would be lost is that the range of scores across states for charter and traditional public school students separately is relatively wide. Similarly, for the multilevel PSA difference plots (see Figure \ref{fig:g4math-mlpsa-ctree-diff} and Appendix H) the graphic provides immediate evidence of the nature of the differences. Also, by providing confidence intervals, the results can be expressed vis-\`{a}-vis the graphic similar to the traditional \textit{p}-value in a summary table.
 
 \subsection{Limitations}
 
 This study, and many like it, only examined a small subset of students’ educational experiences. That is, NAEP, as well as CREDO \cite{credo,credo2013}, only examine student performance in math and reading. This leaves out all other, and arguably equally important, subjects. These studies are not alone in overemphasizing these subjects. The Common Core State Standards which are being implemented in the majority of states and are a cornerstone of the \textit{Race to the Top} initiative, only define standards and curriculum for mathematics and English Language Arts. As a consequence, the results of this study are limited to reading and math: They are silent in terms of charter school performance in writing, science, physical education, and the arts. .
 
-Lastly, this study considered charter schools as an entire, single class of schools. I believe it is important to explore the effectiveness of charter schools as compared to traditional public schools, especially given that in some cities (e.g. New Orleans and Philadelphia) the majority of students attend charter schools, and the Department of Education is currently emphasizing charter school expansion as part of the \textit{Race to the Top} initiative. However, this study, and other national studies like it \cite<e.g.>{BraunJenkinsGrigg2006,credo}, does not explicitly account for the large variability in type and quality of individual charter schools. This study does provide some evidence that there is wide variability in charter school performance on reading and math, mostly as a feature of the visualizations. Consider the multilevel PSA difference plots (e.g. Figure \ref{fig:g4math-mlpsa-ctree-diff}) where the grey points represent the difference for each stratum (i.e. students with similar covariate profiles). The spread of these points is quite large and there are some stratum with much larger gains than the overall aggregate. This suggests that, for some very specific types of students, charter schools provide much larger gains over their traditional school student counterparts. This should be expected, given \citeauthor{Budde1988}'s \citeyear{Budde1988} original vision and model for charter schools. That is, charter schools provide an opportunity for teachers, administrators, parents, and communities to experiment with alternative school models. Future studies should consider the varying types of charter schools (e.g. for-profit, non-profit, KIPP, online) when making comparisons to traditional public schools. 
+Lastly, this study considered charter schools as an entire, single class of schools. I believe it is important to explore the effectiveness of charter schools as compared to traditional public schools, especially given that in some cities (e.g. New Orleans and Philadelphia) the majority of students attend charter schools, and the Department of Education is currently emphasizing charter school expansion as part of the \textit{Race to the Top} initiative. However, this study, and other national studies like it \cite<e.g.>{BraunJenkinsGrigg2006,credo}, does not explicitly account for the large variability in type and quality of individual charter schools. This study does provide some evidence that there is wide variability in charter school performance on reading and math, mostly as a feature of the visualizations. Consider the multilevel PSA difference plots (e.g. Figure \ref{fig:g4math-mlpsa-ctree-diff}) where the grey points represent the difference for each stratum (i.e. students with similar covariate profiles). The spread of these points is quite large and there are some stratum with much larger gains than the overall aggregate. This suggests that, for some classes of students, charter schools provide much larger gains over their traditional school student counterparts. This should be expected, given \citeauthor{Budde1988}'s \citeyear{Budde1988} original vision and model for charter schools. That is, charter schools provide an opportunity for teachers, administrators, parents, and communities to experiment with alternative school models. Future studies should consider the varying types of charter schools (e.g. for-profit, non-profit, KIPP, online) when making comparisons with traditional public schools. 
 
 %\clearpage
 

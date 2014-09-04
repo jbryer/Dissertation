@@ -108,6 +108,26 @@ g8math$data = g8math$data[!is.na(g8math$data$mathscore),]
 g8read$data$readscore = apply(g8read$data[,c('RRPCM1','RRPCM2','RRPCM3','RRPCM4','RRPCM5')], 1, mean)
 g8read$data = g8read$data[!is.na(g8read$data$readscore),]
 
+# Save mean scores to a file
+require(psych)
+mean.col <- c('group1','n','mean','sd','median')
+g4math.mean <- describeBy(g4math$data$mathscore, g4math$data$FIPS02, mat=TRUE, skew=FALSE)[,mean.col]
+g4read.mean <- describeBy(g4read$data$readscore, g4read$data$FIPS02, mat=TRUE, skew=FALSE)[,mean.col]
+g8math.mean <- describeBy(g8math$data$mathscore, g8math$data$FIPS02, mat=TRUE, skew=FALSE)[,mean.col]
+g8read.mean <- describeBy(g8read$data$readscore, g8read$data$FIPS02, mat=TRUE, skew=FALSE)[,mean.col]
+g4math.mean$Subject <- 'g4math'
+g4read.mean$Subject <- 'g4read'
+g8math.mean$Subject <- 'g8math'
+g8read.mean$Subject <- 'g8read'
+g4math.mean$zscore <- (g4math.mean$mean - mean(g4math$data$mathscore)) / sd(g4math$data$mathscore)
+g4read.mean$zscore <- (g4read.mean$mean - mean(g4read$data$readscore)) / sd(g4read$data$readscore)
+g8math.mean$zscore <- (g8math.mean$mean - mean(g8math$data$mathscore)) / sd(g8math$data$mathscore)
+g8read.mean$zscore <- (g8read.mean$mean - mean(g8read$data$readscore)) / sd(g8read$data$readscore)
+meanByState <- rbind(g4math.mean, g4read.mean, g8math.mean, g8read.mean)
+meanByState <- meanByState[!is.na(meanByState$n),]
+meanByState
+write.csv(meanByState, file='../Data2009/NAEPDescriptivesByState.csv')
+
 ##### Descriptives #############################################################
 covariate.descriptive(g4math, all.covars, 'Math', 4)
 covariate.descriptive(g4read, all.covars, 'Reading', 4)
