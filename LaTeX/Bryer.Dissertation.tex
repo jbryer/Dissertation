@@ -29,6 +29,10 @@
 %\DeclareCaptionLabelSeparator{apatablestyle}{.\ }
 %\captionsetup{format=plain,labelsep=apatablestyle,singlelinecheck=false}
 
+% Sets the amount of padding below a figure
+\setlength{\belowcaptionskip}{0pt}
+\setlength{\floatsep}{0pt}
+
 \usepackage{myapa}
 \FiveLevelHeading
 \raggedright
@@ -148,7 +152,7 @@ Being a graduate student is very much like being a child in a village. You enter
 
 To Bob Pruzek who introduced me to new ways of seeing and measuring the world. By introducing me to PSA, graphics, and R, you have significantly changed my professional life. You have provided the inspiration and foundation for not only the work in this dissertation, but for the work I will be doing for years to come.
 
-To my entire committee, Bruce Dudek, Heidi Andrade, and Katy Schiller. But especially to Bruce and Heidi who went above and beyond to help be bring this dissertation to completion. Their time, patience, and insight are so greatly appreciated. Also a very special thanks to Joan Newman who coordinated and provided invaluable advice in bringing this dissertation to completion.
+To my entire committee, Bruce Dudek, Heidi Andrade, and Katy Schiller. But especially to Bruce and Heidi who went above and beyond to help me bring this dissertation to completion. Their time, patience, and insight are so greatly appreciated. Also a very special thanks to Joan Newman who coordinated and provided invaluable advice in bringing this dissertation to completion.
 
 To my wife, Heather. She has been a constant supporter and cheerleader providing the encouragement when I needed it most.  And for being such a wonderful editor, making sure everything I write sounded the best it could.
 
@@ -676,7 +680,7 @@ Due to the explicit adjustment within clusters in multilevel PSA, a natural mean
 
 This study will compare the effect sizes from the multilevel PSA with the quality of state charter school ratings of NAPCS. Specifically, the correlation between the NAPCS ratings for the quality of charter schools and the state level effect sizes of charter schools will be calculated. Although this analysis is simply correlational, no known analysis exploring the relationship between charter laws and student performance has been conducted despite the fact that \citeA{NAPCS2009} argues that the quality of charters laws are necessary for higher achieving charter schools. Additionally, in keeping with the emphasis of visualizations, scatter plots will be provided.
 
-The \citeA{NAPCS2010a} rates the quality of charter schools using a 4-point rubric across 20 components (see Appendix L). The resulting ratings have a maximum value of 208. These ratings will be compared to the effect sizes from the multilevel PSA (using standardized mean differences). The correlation for each grade and subject will be evaluated to be small, moderate, or strong using \citeauthor{Cohen1988}'s \citeyear{Cohen1988} thresholds of 0.10, 0.30, and 0.50, respectively.
+The \citeA{NAPCS2010a} rates the quality of charter schools using a 4-point rubric across 20 components (see \hyperref[NAPCSrubric]{Appendix L}). The resulting ratings have a maximum value of 208. These ratings will be compared to the effect sizes from the multilevel PSA (using standardized mean differences). The correlation for each grade and subject will be evaluated to be small, moderate, or strong using \citeauthor{Cohen1988}'s \citeyear{Cohen1988} thresholds of 0.10, 0.30, and 0.50, respectively.
 
 
 
@@ -748,7 +752,15 @@ The goal of propensity score methods is to adjust for selection bias with the av
 
 The second class of propensity score method used is propensity score matching. In propensity score matching, the goal is to match students from the two groups with small differences in their propensity scores in order to adjust for selection bias. In large datasets, or when particular covariates are determined to be more important for adjusting selection bias, whether theoretically or otherwise, partial exact matching is done. In the context of this study, partial exact matching is akin to implicitly adjusting for the multilevel nature of the data. Students were first matched exactly by state, gender, and ethnicity, and then by propensity score using nearest neighbor (i.e. the difference between propensity scores of pairs is minimized). Furthermore, a caliper of 0.25 is specified which guarantees that the distance between any matched pair is no more than one-fourth of a standard deviation as suggested by \citeA{Rosenbaum2002}. Propensity scores from the full logistic regression model were used for matching.
 
-The \texttt{Matchby} function in the \texttt{Matching} package \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement.
+\begin{figure}[t]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/g4math-loess-matching.pdf}
+\caption[Loess Plot with Matched Pairs]{Loess Plot with Matched Pairs. This is a modified version of Figure \ref{fig:g4math:loess}. A random sample of 100 matched pairs were selected from the one-to-one matching analysis. The propensity scores are plotted against the grade 4 math NAEP score for each student. The students who were matched are connected by a black line segment. The Loess regression lines, however, are estimated from the full dataset.}
+\label{fig:g4math:loessmatching}
+\end{center}
+\end{figure}
+
+The \texttt{Matchby} function in the \texttt{Matching} package \cite{matching} was used to find matches. First, propensity scores were estimated using the full logistic regression model. The \texttt{Matchby} algorithm first determines which students match exactly on state, gender, and ethnicity. Within those subgroups, students with the smallest standardized difference and less than 0.25 standard deviations, are returned. Three matched sets were produced (stated as charter-to-public): one-to-one, one-to-five, and one-to-ten. Matching was done without replacement. Figure \ref{fig:g4math:loessmatching} depicts the relationship between the propensity scores and NAEP scores for matched pairs. In this figure, 100 random matched pairs were selected from the one-to-one matched analysis for grade 4 math. Note that the Loess regression lines are estimated from the full dataset. For those 100 matched pairs, their propensity scores are plotted against their grade 4 math score. The students who were matched are then connected by the black line segment. Given that the lines are all nearly perfectly vertical shows that the difference in propensity scores is minimized. The ATE is then calculated as approximately\footnote{Technically the lines are the hypotenuse of a right triangle. The ATE is calculated from the difference in scores which would be the side of the triangle parallel with the \textit{y}-axis.} the mean of the lengths of those lines.
 
 Once matched pairs were determined, dependent sample \textit{t}-tests were performed \cite{Austin2011} to estimate average treatment effect and corresponding confidence intervals. Figures \ref{fig:overallcirc} and \ref{fig:overalldiff} and Table \ref{tab:overall} at the end of the chapter provide the overall results. In general however, matching methods tend to estimate slightly larger treatment effects than both the stratification and multilevel models. And of additional note, the confidence intervals shrink as the ratio of treatment-to-control units increase.
 
@@ -807,8 +819,9 @@ Figure \ref{fig:g4math-mlpsa-ctree-diff} provides a more detailed depiction of t
 
 Up to this point in the chapter, I have outlined the nine propensity score methods used for estimating treatment effects with grade four math. The corresponding tables and figures have been referenced in the appendices. In this section, I will provide two figures and one table that summarize the 36 propensity score models estimated.
 
-Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated treatment effects for all 36 PSA methods. The differences across subjects and grades are a result of different scales used for the assessment and therefore comparisons across subject and grade levels is not appropriate. The diameters of the circles in this figure are equal to the confidence interval so that circles that overlap the unit line indicate a non-significant difference. The horizontal and vertical lines (with numeric labels) represent the overall NAEP score for traditional public school students and charter school students. This figure shows that, in general, the scores for charter school students are higher when adjusted, whereas the traditional public school scores are the same or lower. Regardless, in most cases the differences do not deviate substantially from the unit line indicating either no, or a small, difference in scores.
+A scatter plot of the overall national estimated treatment effects for all 36 PSA methods is presented in Figure \ref{fig:overallcirc}. The differences across subjects and grades are a result of different scales used for the assessment and therefore comparisons across subject and grade levels is not appropriate. The diameters of the circles in this figure are equal to the confidence interval so that circles that overlap the unit line indicate a non-significant difference. The horizontal and vertical lines (with numeric labels) represent the overall NAEP score for traditional public school students and charter school students. This figure shows that, in general, the scores for charter school students are higher when adjusted, whereas the traditional public school scores are the same or lower. Regardless, in most cases the differences do not deviate substantially from the unit line indicating either no, or a small, difference in scores.
 
+\setlength{\belowcaptionskip}{-10pt}
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/OverallScatter.pdf}
@@ -816,12 +829,14 @@ Figure \ref{fig:overallcirc} is a scatter plot of the overall national estimated
 \label{fig:overallcirc}
 \end{center}
 \end{figure}
+\setlength{\belowcaptionskip}{0pt}
 
 Figure \ref{fig:overalldiff} provides the overall national effect sizes for each PSA method within each grade and subject. Table \ref{tab:overall} provides numeric results for this figure. Figure \ref{fig:overalldiff} reveals a number of important results. First, with regard to the effects of charter schools, there is some variety in effects across the different grades and subjects. In general, it appears charter schools either perform worse than or equal to traditional public schools in grade four. Nearly half of the grade eight models in both math and reading suggest small positive effects. However, even when there are statistically significant positive effects, the maximum effect size is relatively small (0.11). 
 
 
 Figure \ref{fig:overalldiff} also reveals some trends in the behavior of the different propensity score methods. There appears to be fairly good consistency in the estimated effects within the stratification and matching methods, although in general, the matching methods provide larger effect size estimates. However, the matching methods, even with one-to-ten, use fewer than 40\% of the available traditional public school students, whereas the stratification methods use all traditional public school students. There is some variation in the estimated effect sizes for the multilevel models with the classification trees providing larger estimates. As noted above, this may be due, in part, to insufficient balance being achieved. This is likely a limitation of the logistic regression to provide stable estimates given one, the larger charter-to-public school student ratio and two, the smaller samples within each state. The following chapter will provide a discussion of the implications of these results.
 
+\setlength{\belowcaptionskip}{-10pt}
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/Overall.pdf}
@@ -830,7 +845,15 @@ Figure \ref{fig:overalldiff} also reveals some trends in the behavior of the dif
 \end{center}
 \end{figure}
 
-\input{../Tables2009/Overall.tex}
+\begin{figure}[t!]
+\begin{center}
+\includegraphics[width=\textwidth]{../Figures2009/LawScoresVsNAEPDifferences.pdf}
+\caption[Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes]{Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes. Linear and Loess regression lines are provided in black and blue, respectively. Grey bands correspond to the 95\% confidence interval for the Loess regression. The size of the points correspond to the overall mean NAEP score (converted to a z-score) for each state.}
+\label{fig:staterankings}
+\end{center}
+\end{figure}
+\setlength{\belowcaptionskip}{0pt}
+
 
 \subsection{Differences Between States}
 
@@ -844,13 +867,8 @@ The National Alliance for Public Charter Schools \citeyear<NAPCS;>{NAPCS2010a} p
 %\end{center}
 %\end{figure}
 
-\begin{figure}[t]
-\begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/LawScoresVsNAEPDifferences.pdf}
-\caption[Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes]{Comparison of 2010 NAPCS quality of charter law scores and NAEP charter school effect sizes. Linear and Loess regression lines are provided in black and blue, respectively. Grey bands correspond to the 95\% confidence interval for the Loess regression. The size of the points correspond to the overall mean NAEP score (converted to a z-score) for each state.}
-\label{fig:staterankings}
-\end{center}
-\end{figure}
+
+\input{../Tables2009/Overall.tex}
 
 
 %==================== CHAPTER 5 ====================================================================
@@ -938,15 +956,13 @@ This study, and many like it, only examined a small subset of students’ educat
 
 Lastly, this study considered charter schools as an entire, single class of schools. I believe it is important to explore the effectiveness of charter schools as compared to traditional public schools, especially given that in some cities (e.g. New Orleans and Philadelphia) the majority of students attend charter schools, and the Department of Education is currently emphasizing charter school expansion as part of the \textit{Race to the Top} initiative. However, this study, and other national studies like it \cite<e.g.>{BraunJenkinsGrigg2006,credo}, does not explicitly account for the large variability in type and quality of individual charter schools. This study does provide some evidence that there is wide variability in charter school performance on reading and math, mostly as a feature of the visualizations. Consider the multilevel PSA difference plots (e.g. Figure \ref{fig:g4math-mlpsa-ctree-diff}) where the grey points represent the difference for each stratum (i.e. students with similar covariate profiles). The spread of these points is quite large and there are some stratum with much larger gains than the overall aggregate. This suggests that, for some classes of students, charter schools provide much larger gains over their traditional school student counterparts. This should be expected, given \citeauthor{Budde1988}'s \citeyear{Budde1988} original vision and model for charter schools. That is, charter schools provide an opportunity for teachers, administrators, parents, and communities to experiment with alternative school models. Future studies should consider the varying types of charter schools (e.g. for-profit, non-profit, KIPP, online) when making comparisons with traditional public schools. 
 
-%\clearpage
-
 \subsection{Conclusion}
 
 In summary, the results of this study are consistent with the wide body of research on charter schools. Namely, some charter schools perform better than their traditional public school counterpart on NAEP reading and math tests, while others perform worse. However, in aggregate, the average difference is nonexistent or very small. Ray Budde \citeyear{Budde1988} originally envisioned charter schools as a way for teachers, administrators, parents, and communities to experiment with the goal of finding better ways to teach students. But with \textit{No Child Left Behind} and \textit{Race to the Top}, among other initiatives from private for-profit and not-for-profit organizations, charter schools are often offered as a wholesale replacement for traditional public schools. That is, charter schools were originally envisioned as experimental schools but more recently have been presented as schools of choice (to traditional public schools). The results of this study, along with the other national studies examining the differences between charter and traditional public schools \cite{credo,credo2013,BraunJenkinsGrigg2006}, suggest that charter schools do not provide, in aggregate, substantial benefit on NAEP reading and math scores over their traditional public school counterparts.
 
 
 %==================== REFERENCES ====================================================================
-\cleardoublepage
+%\clearpage
 \bibliographystyle{apacite}
 \bibliography{Bibliography}
 

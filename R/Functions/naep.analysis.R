@@ -249,9 +249,29 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 	##### Matching #################################################################
 	df1 <- data.frame(state=naep[match1$index.control,]$FIPS02,
 					  public=score[match1$index.control], 
-					  charter=score[match1$index.treat])
+					  charter=score[match1$index.treat],
+					  ps.public=fitted(lr)[match1$index.control],
+					  ps.charter=fitted(lr)[match1$index.control])
 	t1 = t.test(df1$charter, df1$public, paired=TRUE)
 	
+	# Loess plot showing matched pairs
+	df1.sample <- df1[sample(nrow(df1), 100),]
+	df1.ps <- melt(df1.sample[,c('state','ps.public','ps.charter')], id='state')
+	df1.ps$variable <- factor(df1.ps$variable, levels=c('ps.public','ps.charter'),
+							  labels=c('public','charter'))
+	df1.score <- melt(df1.sample[,c('state','public','charter')], id='state')
+	df1.melted <- cbind(df1.ps, score=df1.score[,c('value')])
+	df1.melted$variable <- df1.melted$variable == 'charter'
+	
+	ggplot(df1) +
+		geom_point(data=df1.melted, aes(x=value, y=score, color=variable)) +
+		geom_segment(data=df1.sample, aes(x=ps.public, y=public, xend=ps.charter, 
+										  yend=charter), alpha=.5) +
+		geom_smooth(data=df, aes(x=ps, y=score, color=charter), alpha=.2) +
+		scale_color_hue('Charter School') +
+		xlab('Propensity Score') + ylab(paste0('Grade ', grade, ' ', subject, ' Score'))
+	ggsave(paste0(dir.fig, '/g', grade, subject, '-loess-matching.pdf'), width=12.0, height=7.0)
+
 	#granovagg.ds(df1[,c(2,3)])
 	#boxplot(df1[,3]-df1[,2])
 	
