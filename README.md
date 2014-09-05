@@ -22,7 +22,7 @@ Using data from the 2009 National Assessment of Educational Progress (NAEP) for 
 
 * [Dissertation](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Dissertation.pdf?raw=true)
 
-* [Slides from defense](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Dissertation.Slides.pdf?raw=true)
+* [Slides](https://github.com/jbryer/Dissertation/blob/master/LaTeX/Bryer.Dissertation.Slides.pdf?raw=true)
 
 * Handouts (these are best printed on 13x19 photo paper): [Overall Results](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout.pdf?raw=true), [Grade 4 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Math.pdf?raw=true), [Grade 4 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade4Read.pdf?raw=true), [Grade 8 Math](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Math.pdf?raw=true), [Grade 8 Reading](https://github.com/jbryer/Dissertation/blob/master/Figures/Handout-Grade8Read.pdf?raw=true)
 
