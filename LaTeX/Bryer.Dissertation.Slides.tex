@@ -66,6 +66,19 @@ University at Albany}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Overview}
 
+\begin{frame}[c]
+    \frametitle{Purpose}
+    There are two primary purposes of this study:
+    \vspace{15pt}
+    \begin{enumerate}
+        \setlength{\itemsep}{15pt}
+        \item Explore the differences in performance between charter and traditional public schools. Additionally, examine the differences between state performances on NAEP in terms of the quality of state charter laws as measured by the \citeA{NAPCS2010a}.
+        \item Develop new methods for analyzing and visualizing propensity score analysis for multilevel, or clustered, data.
+    \end{enumerate}
+
+\end{frame}
+
+
 \subsection{What are Charter Schools?}
 
 \begin{frame}
@@ -88,7 +101,7 @@ University at Albany}
 \begin{frame}[c]
 	\frametitle{National Studies Examining Charter and Traditional Public Schools}
 	The number of studies that consider charter school effectiveness from a national perspective are limited.
-	\ \\
+	\vspace{10pt}
 	\begin{enumerate}
 	    \setlength{\itemsep}{10pt}
 		\item \citeA{BraunJenkinsGrigg2006} examined charter and traditional public schools using hierarchal linear modeling (HLM) with NAEP 2005. They found that there was often no difference, and in some instances charter school students performed worse.
@@ -108,13 +121,14 @@ University at Albany}
 
 \begin{frame}[c]
 	\frametitle{Issues with Charter Schools Research}
+	\citeA{BettsHill2006} outline three major issues with charter school research:\vspace{15pt}
 	\begin{enumerate}[<+-| alert@+>]
 	    \setlength{\itemsep}{15pt}
 		\item The issue of selection bias
 		\item The variation in types or kinds of charter schools.
 		\item The nature of student achievement. Research has shown there are numerous factors that contribute to student success including, but not limited to, social economic status, parental education, motivation, etc. The ability to decipher how school choice contributes to student learning in the context of all the other factors cannot help but be difficult.
 	\end{enumerate}
-	\ \\\ \\
+    \vspace{15pt}
 	\pause
 	A fourth issue not cited by \citeA{BettsHill2006} is the role of charter school laws.
 \end{frame}
@@ -123,7 +137,6 @@ University at Albany}
 
 \begin{frame}[c]
 	\frametitle{Research Questions}
-	\citeA{BettsHill2006} outline three major issues with charter school research:
 	\begin{enumerate}[<+-| alert@+>]
     \setlength{\itemsep}{15pt}
 	\item Given appropriate adjustments based on available student data, is there a discernible difference between charter and traditional public schools with regard to math and reading scores on the NAEP scores at grades 4 and 8?
@@ -170,6 +183,18 @@ University at Albany}
 
 \end{frame}
 
+\begin{frame}[c]
+    \frametitle{Propensity Score Analysis in Two Phases}
+    PSA is typically conducted in two phases:
+    \vspace{15pt}
+    \begin{description}
+    \setlength{\itemsep}{15pt}
+        \item[Phase 1] Estimate propensity scores (model the treatment indicator).
+        \item[Phase 2] Estimate effects (model the outcome of interest).
+    \end{description}
+\end{frame}
+
+
 \subsection{Methods used for this Study}
 
 \begin{frame}
@@ -206,7 +231,7 @@ University at Albany}
 \begin{frame}
     \frametitle{The \texttt{multilevelPSA} Package}
     \begin{itemize}
-        \setlength{\itemsep}{10pt}
+        \setlength{\itemsep}{15pt}
         \item The \texttt{multilevelPSA} R package was written to perform the analysis and generate the figures used for this dissertation.
         \item Currently available from the Comprehensive R Archive Network (CRAN) at \url{http://cran.r-project.org/web/packages/multilevelPSA/index.html}
         \item Contains 16 functions, 4 demos, and a vignette. Examples utilize the Programme of International Student Assessment (PISA) examining the differences between private and public schools internationally.
@@ -217,7 +242,7 @@ University at Albany}
 \begin{frame}[c]
 	\frametitle{National Assessment of Educational Progress (NAEP)}
 	\begin{itemize}
-    \setlength{\itemsep}{10pt}
+    \setlength{\itemsep}{15pt}
 	\item Congressionally mandated.
 	\item Started in 1971.
 	\item Provides national measures of student achievement in many subjects including mathematics, reading, science, writing, history, civics, and the arts.
@@ -248,14 +273,6 @@ University at Albany}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[c]
-	\frametitle{Missing Data}
-	\begin{center}
-	\includegraphics[height=.70\paperheight,keepaspectratio=true]{../Figures2009/g4math-missing.pdf} \\
-	\end{center}
-	For the logistic regression models the \texttt{MICE} \cite{mice} package was used to impute missing values.
-\end{frame}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Analysis}
 
@@ -273,13 +290,6 @@ University at Albany}
 	\frametitle{PSA Assessment Plot: Grade 4 Math (Stratification)}
 	\begin{center}
 	\includegraphics[height=0.9\textheight,keepaspectratio]{../Figures2009/g4math-circpsa10}
-	\end{center}
-\end{frame}
-
-\begin{frame}[c]
-	\frametitle{Boxplot of Means by Strata: Grade 4 Math}
-	\begin{center}
-	\includegraphics[height=0.86\textheight,keepaspectratio]{../Figures2009/g4math-strata5-boxplot}
 	\end{center}
 \end{frame}
 
@@ -305,7 +315,7 @@ University at Albany}
     \ \\\ \\
     Three match sets were estimated: one-to-one, one-to-five, and one-to-ten.
     \ \\\ \\
-    For each match set, a dependent sample \textit{t}-test were used to estimate ATE.
+    For each match set, a dependent sample \textit{t}-test were used to estimate ATE \cite{Austin2011}.
 \end{frame}
 
 \begin{frame}
@@ -347,13 +357,6 @@ University at Albany}
 
 \subsection{Multilevel Propensity Score Analysis}
 
-\begin{frame}[c]
-	\frametitle{Covariate Heat Map for Stratification using Conditional Inference Trees}
-	\begin{center}
-	\includegraphics[width=\paperwidth,keepaspectratio]{../Figures2009/g4math-mlpsa-ctree-heat}
-	\end{center}
-\end{frame}
-
 
 { % Figure that fills the frame
     \setbeamertemplate{navigation symbols}{}
@@ -383,7 +386,7 @@ University at Albany}
 \begin{frame}[c]
 	\frametitle{Multilevel PSA Balance Plot: Grade 4 Math}
 	\begin{center}
-	\includegraphics[height=\textheight,keepaspectratio]{../Figures2009/g4math-mlpsa-ctree-balance.pdf}
+	\includegraphics[height=\textheight,keepaspectratio]{../Figures2009/g4math-mlpsa-ctree-balance}
 	\end{center}
 \end{frame}
 
@@ -427,7 +430,7 @@ University at Albany}
     \begin{itemize}
     \setlength{\itemsep}{10pt}
         \item There very little difference between the performance of charter and traditional public school in math and reading in grades 4 and 8 using NAEP as a measure of academic performance.
-        \item The use of visualizations can be an important way to present results.
+        \item The use of visualizations can/is be an important way to present results.
         \item The \texttt{multilevelPSA} R package is an important contribution to the PSA literature and is particularly useful in education research where many studies use data that is naturally multilevel (e.g. students within schools, within districts, within states).
         \item There is a small to moderate correlation between the quality of charter laws (as identified by NAPCS) and the outcomes from NAEP.
     \end{itemize}
@@ -438,8 +441,8 @@ University at Albany}
     \begin{itemize}
     \setlength{\itemsep}{10pt}
         \item This study only examines reading and math and does not consider other important subjects (e.g. history, science, the arts, etc.).
-        \item There is variation in the quality and types of charter and traditional public schools, but they are considered together.
-        \item Achieving balance using the multilevel PSA methods requires large sample sizes, especially for the logistic regression stratification methods.
+        \item There is variation in the quality and types of charter and traditional public schools, but they are considered together (see issue two of charter school research identified by \citeA{BettsHill2006}).
+        \item Achieving balance using the multilevel PSA methods requires large sample sizes, especially for logistic regression stratification methods.
         \item The analysis of the quality of charter laws is correlational. Further studies should look at how specific components that NAPCS has identified relate specifically to the performance of specific charter schools.
     \end{itemize}
 \end{frame}
@@ -467,13 +470,14 @@ University at Albany}
 
 
 \begin{frame}[c,shrink=30]
-    \nocite{HelmreichPruzek2009}
+    \nocite{HelmreichPruzek2009,PruzekHelmreich2009}
 	\frametitle{References}
 	\bibliographystyle{apacite}
 	\bibliography{Bibliography}
 \end{frame}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
     \frametitle{20 Components of a Quality Charter Law}
     {\footnotesize
@@ -517,6 +521,110 @@ University at Albany}
 	\begin{center}
 	\includegraphics[height=.8\textheight,keepaspectratio]{../Figures2009/NAEPLawScoresMatrixPlot}
 	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Missing Data}
+	\begin{center}
+	\includegraphics[height=.70\paperheight,keepaspectratio=true]{../Figures2009/g4math-missing.pdf} \\
+	\end{center}
+	For the logistic regression models the \texttt{MICE} \cite{mice} package was used to impute missing values.
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Covariate Heat Map for Stratification using Conditional Inference Trees}
+	\begin{center}
+	\includegraphics[width=\paperwidth,keepaspectratio]{../Figures2009/g4math-mlpsa-ctree-heat}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Boxplot of Means by Strata: Grade 4 Math}
+	\begin{center}
+	\includegraphics[height=0.86\textheight,keepaspectratio]{../Figures2009/g4math-strata5-boxplot}
+	\end{center}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Propensity Score Ranges for Various Treatment-to-Control Ratios: Perfect Overlap}
+	\begin{columns}
+    \begin{column}{0.15\textwidth}
+        Parameters used for simulating dependent variables:
+    	\begin{equation*}
+    	\begin{split}
+    	\mu_T = 0.5\\
+    	sd_T = 0.4\\
+    	\mu_C = 0.5\\
+    	sd_C = 0.4
+    	\end{split}
+    	\end{equation*}
+    \end{column}
+    \begin{column}{0.85\textwidth}
+    	\begin{center}
+    	\includegraphics[height=\textheight,keepaspectratio]{../Figures2009/PSRanges-Overlap}
+    	\end{center}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Propensity Score Ranges for Various Treatment-to-Control Ratios: Moderate Overlap}
+	\begin{columns}
+    \begin{column}{0.15\textwidth}
+        Parameters used for simulating dependent variables:
+    	\begin{equation*}
+    	\begin{split}
+    	\mu_T = 0.6\\
+    	sd_T = 0.4\\
+    	\mu_C = 0.4\\
+    	sd_C = 0.4
+    	\end{split}
+    	\end{equation*}
+    \end{column}
+    \begin{column}{0.85\textwidth}
+    	\begin{center}
+    	\includegraphics[height=\textheight,keepaspectratio]{../Figures2009/PSRanges}
+    	\end{center}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Propensity Score Ranges for Various Treatment-to-Control Ratios: No Overlap}
+	\begin{columns}
+    \begin{column}{0.15\textwidth}
+        Parameters used for simulating dependent variables:
+    	\begin{equation*}
+    	\begin{split}
+    	\mu_T = 0.2\\
+    	sd_T = 0.4\\
+    	\mu_C = 0.8\\
+    	sd_C = 0.4
+    	\end{split}
+    	\end{equation*}
+    \end{column}
+    \begin{column}{0.85\textwidth}
+    	\begin{center}
+    	\includegraphics[height=\textheight,keepaspectratio]{../Figures2009/PSRanges-NoOverlap}
+    	\end{center}
+	\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}[c]
+	\frametitle{Propensity Score Ranges for Canada (source: PISA)}
+	\begin{columns}
+    \begin{column}{0.5\textwidth}
+    	\begin{center}
+    	\includegraphics[height=\textheight,keepaspectratio]{../Figures/PSRanges-lr-PISA}
+    	\end{center}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+    	\begin{center}
+    	\includegraphics[height=\textheight,keepaspectratio]{../Figures/PSRanges-tree-PISA}
+    	\end{center}
+	\end{column}
+	\end{columns}
 \end{frame}
 
 
