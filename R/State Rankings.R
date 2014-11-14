@@ -47,6 +47,12 @@ lm.g4read <- lm(g4read ~ NAPCS2010Score, data=scores)
 lm.g8math <- lm(g8math ~ NAPCS2010Score, data=scores)
 lm.g8read <- lm(g8read ~ NAPCS2010Score, data=scores)
 
+# Get confidence intervals
+cor.g4math <- cor.test(scores$NAPCS2010Score, scores$g4math, use='pairwise.complete.obs')
+cor.g4read <- cor.test(scores$NAPCS2010Score, scores$g4read, use='pairwise.complete.obs')
+cor.g8math <- cor.test(scores$NAPCS2010Score, scores$g8math, use='pairwise.complete.obs')
+cor.g8read <- cor.test(scores$NAPCS2010Score, scores$g8read, use='pairwise.complete.obs')
+
 df.melted <- melt(scores[,c('abbr','NAPCS2010Score','g4math','g4read','g8math','g8read')],
 				  id=c('abbr','NAPCS2010Score'))
 df.melted <- merge(df.melted, meanByState[,c('abbr','zscore','Subject')], 
@@ -55,10 +61,18 @@ df.melted$variable <- factor(df.melted$variable, levels=c('g4math','g4read','g8m
 							 labels=c('Grade 4 Math', 'Grade 4 Reading',
 							 		  'Grade 8 Math', 'Grade 8 Reading'))
 df.cor <- data.frame(variable=c('g4math','g4read','g8math','g8read'),
-					 cor=c(cor(scores$NAPCS2010Score, scores$g4math, use='pairwise.complete.obs'),
-					 	   cor(scores$NAPCS2010Score, scores$g4read, use='pairwise.complete.obs'),
-					 	   cor(scores$NAPCS2010Score, scores$g8math, use='pairwise.complete.obs'),
-					 	   cor(scores$NAPCS2010Score, scores$g8read, use='pairwise.complete.obs')),
+					 cor=c(cor.g4math$estimate,
+					 	   cor.g4read$estimate,
+					 	   cor.g8math$estimate,
+					 	   cor.g8read$estimate),
+					 cor.label=c(paste0(prettyNum(cor.g4math$estimate, digits=2), 
+					 			' ± ', prettyNum(diff(cor.g4math$conf.int)/2, digits=2)),
+					 			paste0(prettyNum(cor.g4read$estimate, digits=2), 
+					 			' ± ', prettyNum(diff(cor.g4read$conf.int)/2, digits=2)),
+					 			paste0(prettyNum(cor.g8math$estimate, digits=2), 
+					 			' ± ', prettyNum(diff(cor.g8math$conf.int)/2, digits=2)),
+					 			paste0(prettyNum(cor.g8read$estimate, digits=2), 
+					 			' ± ', prettyNum(diff(cor.g8read$conf.int)/2, digits=2))),
 					 m=c(lm.g4math$coefficients[2],
 					 	 lm.g4read$coefficients[2],
 					 	 lm.g8math$coefficients[2],
@@ -81,7 +95,8 @@ p <- ggplot(df.melted, aes(x=NAPCS2010Score, y=value, label=abbr)) +
 	geom_point(aes(size=zscore), alpha=.5) +
 	geom_text(size=2.5, vjust=-1) +
  	geom_text(data=df.cor, x=40, y=23,
- 			  aes(label=paste0('Correlation = ', prettyNum(cor, digits=2, nsmall=2))),
+ 			  #aes(label=paste0('Correlation = ', prettyNum(cor, digits=2, nsmall=2))),
+ 			  aes(label=paste0('Correlation = ', cor.label)),
  			  hjust=0, size=4, parse=FALSE) +
 	geom_text(data=df.cor, x=150, y=-30,
 			  aes(label=formula), hjust=1, size=4, parse=FALSE) +
