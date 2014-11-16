@@ -3,8 +3,6 @@
 #### Author: Jason M. Bryer <[jason@bryer.org](mailto:jason@bryer.org)>   
 Division of Educational Psychology and Methodology, University at Albany.
 
-**Defense has been scheduled for Monday, September 8, 2014 at 11:00am in ED335.**
-
 #### Committee:
 
 * [Robert Pruzek, Ph.D.](http://www.albany.edu/educational_psychology/pruzek.php) (co-chair)

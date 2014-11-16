@@ -71,6 +71,7 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 		covars <- covars[covars$FieldName %in% names(covariates),]
 		tmp <- covariates[,covars$FieldName]
 		names(tmp) <- covars$Description
+		library(reshape)
 		ml.ctree.balance <- covariate.balance(covariates = tmp,
 											  treatment = ml.ctree.strata$charter,
 											  level2 = ml.ctree.strata$state,
@@ -242,9 +243,9 @@ naep.analysis <- function(naep, complete, catalog, score, grade, subject, cv.map
 # 			  file=paste0(dir.tab, '/g', grade, subject, label, '.html'), type='html')
 	}
 	
-	circ.psa.xtable(strata10.results, method='Logistic Regression Stratification', label='-circpsa10')
-	circ.psa.xtable(strata10AIC.results, method='Logistic Regression AIC Stratification', label='-circpsa10AIC')
-	circ.psa.xtable(tree.results, method='Classification Trees Stratification', label='-circpsa-tree')
+	circ.psa.xtable(strata10.results, method='Logistic regression stratification', label='-circpsa10')
+	circ.psa.xtable(strata10AIC.results, method='Logistic regression AIC stratification', label='-circpsa10AIC')
+	circ.psa.xtable(tree.results, method='Classification trees stratification', label='-circpsa-tree')
 	
 	##### Matching #################################################################
 	df1 <- data.frame(state=naep[match1$index.control,]$FIPS02,
