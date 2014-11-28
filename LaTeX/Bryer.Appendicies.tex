@@ -1,5 +1,7 @@
 \newpage
 
+\setlength{\belowcaptionskip}{0pt}
+
 %==================== Appendices ====================================================================
 \cleardoublepage
 \addcontentsline{toc}{section}{Appendices}
@@ -14,6 +16,7 @@
 \section*{Appendix A\\Charter Schools \& Student Enrollment by State}
 \label{appendixA}
 \begin{center} \begin{singlespace}
+{\normalsize
 \begin{longtable}{lrrrrrrr}
 \caption[Charter schools \& student enrollment by state]{Charter schools \& student enrollment by state} \\
 \thickline
@@ -86,11 +89,12 @@ Wisconsin               & 1993 & 221 & 37  & 41,799  & & 114 & 2592\\
 Wyoming                 & 1995 & 3   & 0   & 244     & &   0 & 1897\\
 \hline
 Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
-\end{longtable}
+\end{longtable} }
 \tabfnt{a}{State currently does not have a charter school law.}
 \tabfnt{b}{Source: \citeA{cernumbers}}
 \end{singlespace} \end{center}
-\renewcommand{\thefootnote}{\arabic{footnote}}% Reset the footnotes back to numbers
+\renewcommand{\thefootnote}{\arabic{footnote}}
+% Reset the footnotes back to numbers
 
 
 %==================== Appendix B ====================================================================
@@ -124,7 +128,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-missing.pdf}
-\caption{Covariate missingness for grade 4 math}
+\caption[Covariate missingness for grade 4 math]{Covariate missingness for grade 4 math. Each colored cell provides the precent missing for each covariate within each state. The top and right panels provide overall missing for each state and covariate, respectively.}
 \label{fig:g4math:missing}
 \end{center}
 \end{figure}
@@ -132,7 +136,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-missing.pdf}
-\caption{Covariate missingness for grade 4 reading}
+\caption[Covariate missingness for grade 4 reading]{Covariate missingness for grade 4 reading. Each colored cell provides the precent missing for each covariate within each state. The top and right panels provide overall missing for each state and covariate, respectively.}
 \label{fig:g4reading:missing}
 \end{center}
 \end{figure}
@@ -140,7 +144,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-missing.pdf}
-\caption{Covariate missingness for grade 8 math}
+\caption[Covariate missingness for grade 8 math]{Covariate missingness for grade 8 math. Each colored cell provides the precent missing for each covariate within each state. The top and right panels provide overall missing for each state and covariate, respectively.}
 \label{fig:g8math:missing}
 \end{center}
 \end{figure}
@@ -148,7 +152,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-missing.pdf}
-\caption{Covariate missingness for grade 8 reading}
+\caption[Covariate missingness for grade 8 reading]{Covariate missingness for grade 8 reading. Each colored cell provides the precent missing for each covariate within each state. The top and right panels provide overall missing for each state and covariate, respectively.}
 \label{fig:g8reading:missing}
 \end{center}
 \end{figure}
@@ -162,56 +166,56 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g4read-loess.pdf}
-\caption{Loess regression assessment plot: Grade 4 reading}
+\includegraphics{../Figures2009/g4read-loess.pdf}
+\caption[Loess regression assessment plot: Grade 4 reading]{Loess regression assessment plot: Grade 4 reading. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g4read:loess}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g8math-loess.pdf}
-\caption{Loess regression assessment plot: Grade 8 math}
+\includegraphics{../Figures2009/g8math-loess.pdf}
+\caption[Loess regression assessment plot: Grade 8 math]{Loess regression assessment plot: Grade 8 math. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g8math:loess}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g8read-loess.pdf}
-\caption{Loess regression assessment plot: Grade 8 reading}
+\includegraphics{../Figures2009/g8read-loess.pdf}
+\caption[Loess regression assessment plot: Grade 8 reading]{Loess regression assessment plot: Grade 8 reading. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g8read:loess}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g4math-loessAIC.pdf}
-\caption{Loess regression AIC assessment plot: Grade 4 math}
+\includegraphics{../Figures2009/g4math-loessAIC.pdf}
+\caption[Loess regression AIC assessment plot: Grade 4 math]{Loess regression AIC assessment plot: Grade 4 math. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g4math:loessAIC}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g4read-loessAIC.pdf}
-\caption{Loess regression AIC assessment plot: Grade 4 reading}
+\includegraphics{../Figures2009/g4read-loessAIC.pdf}
+\caption[Loess regression AIC assessment plot: Grade 4 reading]{Loess regression AIC assessment plot: Grade 4 reading. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g4read:loess}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g8math-loessAIC.pdf}
-\caption{Loess regression AIC assessment plot: Grade 8 math}
+\includegraphics{../Figures2009/g8math-loessAIC.pdf}
+\caption[Loess regression AIC assessment plot: Grade 8 math]{Loess regression AIC assessment plot: Grade 8 math. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g8math:loess}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight]{../Figures2009/g8read-loessAIC.pdf}
-\caption{Loess regression AIC assessment plot: Grade 8 reading}
+\includegraphics{../Figures2009/g8read-loessAIC.pdf}
+\caption[Loess regression AIC assessment plot: Grade 8 reading]{Loess regression AIC assessment plot: Grade 8 reading. The upper panel provides the distributions of propensity scores. The right panel provides the unadjusted distributions of dependent variable grade 4 NAEP math score. The main panel plots each students' propensity score against their outcome variable. Two Loess regression lines are provided for charter and traditional public schools. The grey bands correspond to the 95\% confidence interval. Where the grey bands overlap indicate that there is not a statistically significant difference in that range of propensity scores.}
 \label{fig:g8read:loess}
 \end{center}
 \end{figure}
@@ -228,14 +232,14 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-lrAIC-balance.pdf}
-\caption{Covariate balance plot for logistic regression AIC stratification: Grade 4 math}
+\caption[Covariate balance plot for logistic regression AIC stratification: Grade 4 math]{Covariate balance plot for logistic regression AIC stratification: Grade 4 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-tree-balance.pdf}
-\caption{Covariate balance plot for classification tree stratification: Grade 4 math}
+\caption[Covariate balance plot for classification tree stratification: Grade 4 math]{Covariate balance plot for classification tree stratification: Grade 4 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
@@ -243,21 +247,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-lr-balance.pdf}
-\caption{Covariate balance plot for logistic regression stratification: Grade 4 reading}
+\caption[Covariate balance plot for logistic regression stratification: Grade 4 reading]{Covariate balance plot for logistic regression stratification: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-lrAIC-balance.pdf}
-\caption{Covariate balance plot for logistic regression AIC stratification: Grade 4 reading}
+\caption[Covariate balance plot for logistic regression AIC stratification: Grade 4 reading]{Covariate balance plot for logistic regression AIC stratification: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-tree-balance.pdf}
-\caption{Covariate balance plot for classification tree stratification: Grade 4 reading}
+\caption[Covariate balance plot for classification tree stratification: Grade 4 reading]{Covariate balance plot for classification tree stratification: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
@@ -265,21 +269,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-lr-balance.pdf}
-\caption{Covariate balance plot for logistic regression stratification: Grade 8 math}
+\caption[Covariate balance plot for logistic regression stratification: Grade 8 math]{Covariate balance plot for logistic regression stratification: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-lrAIC-balance.pdf}
-\caption{Covariate balance plot for logistic regression AIC stratification: Grade 8 math}
+\caption[Covariate balance plot for logistic regression AIC stratification: Grade 8 math]{Covariate balance plot for logistic regression AIC stratification: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-tree-balance.pdf}
-\caption{Covariate balance plot for classification tree stratification: Grade 8 math}
+\caption[Covariate balance plot for classification tree stratification: Grade 8 math]{Covariate balance plot for classification tree stratification: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
@@ -287,21 +291,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-lr-balance.pdf}
-\caption{Covariate balance plot for logistic regression stratification: Grade 8 reading}
+\caption[Covariate balance plot for logistic regression stratification: Grade 8 reading]{Covariate balance plot for logistic regression stratification: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-lrAIC-balance.pdf}
-\caption{Covariate balance plot for logistic regression AIC stratification: Grade 8 reading}
+\caption[Covariate balance plot for logistic regression AIC stratification: Grade 8 reading]{Covariate balance plot for logistic regression AIC stratification: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
 \begin{figure}
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-tree-balance.pdf}
-\caption{Covariate balance plot for classification tree stratification: Grade 8 reading}
+\caption[Covariate balance plot for classification tree stratification: Grade 8 reading]{Covariate balance plot for classification tree stratification: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (red points) and after PSA adjustment (blue points). The effect sizes for individual strata are provided by the blue letters.}
 \end{center}
 \end{figure}
 
@@ -312,97 +316,108 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \label{appendixF}
 
 % Grade 4 reading
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10.pdf}
-\caption{Propensity score assessment plot for logistic regression stratification: Grade 4 reading}
-\end{center}
-\end{figure}
 
 \input{../Tables2009/g4read-circpsa10.tex}
 
-\clearpage
-
-\begin{figure}
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa10-AIC.pdf}
-\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 4 reading}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g4read-circpsa10.pdf}
+\caption[Propensity score assessment plot for logistic regression stratification: Grade 4 reading]{Propensity score assessment plot for logistic regression stratification: Grade 4 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there is not a statistically significant effect.}
 \end{center}
 \end{figure}
+
+\clearpage
 
 \input{../Tables2009/g4read-circpsa10AIC.tex}
 
-\clearpage
-
 \begin{figure}
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g4read-circpsa-tree.pdf}
-\caption{Propensity score assessment plot for classification tree stratification: Grade 4 reading}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g4read-circpsa10-AIC.pdf}
+\caption[Propensity score assessment plot for logistic regression AIC stratification: Grade 4 reading]{Propensity score assessment plot for logistic regression AIC stratification: Grade 4 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there not a statistically significant effect.}
 \end{center}
 \end{figure}
+
+
+\clearpage
 
 \input{../Tables2009/g4read-circpsa-tree.tex}
 
-% Grade 8 math
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10.pdf}
-\caption{Propensity score assessment plot for logistic regression stratification: Grade 8 math}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g4read-circpsa-tree.pdf}
+\caption[Propensity score assessment plot for classification tree stratification: Grade 4 reading]{Propensity score assessment plot for classification tree stratification: Grade 4 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there is not a statistically significant effect.}
 \end{center}
 \end{figure}
+
+\clearpage
+
+% Grade 8 math
 
 \input{../Tables2009/g8math-circpsa10.tex}
 
-\clearpage
-\begin{figure}
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa10-AIC.pdf}
-\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 math}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8math-circpsa10.pdf}
+\caption[Propensity score assessment plot for logistic regression stratification: Grade 8 math]{Propensity score assessment plot for logistic regression stratification: Grade 8 math Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval does not span the unit line indicates there a statistically significant effect in favor of traditional public schools.}
 \end{center}
 \end{figure}
+
+\clearpage
 
 \input{../Tables2009/g8math-circpsa10AIC.tex}
 
-\clearpage
 \begin{figure}
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8math-circpsa-tree.pdf}
-\caption{Propensity score assessment plot for classification tree stratification: Grade 8 math}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8math-circpsa10-AIC.pdf}
+\caption[Propensity score assessment plot for logistic regression AIC stratification: Grade 8 math]{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 math Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval does not span the unit line indicates there a statistically significant effect in favor of traditional public schools.}
 \end{center}
 \end{figure}
+
+\clearpage
 
 \input{../Tables2009/g8math-circpsa-tree.tex}
 
-% Grade 8 reading
-\clearpage
-\begin{figure}[h!]
+\begin{figure}
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10.pdf}
-\caption{Propensity score assessment plot for logistic regression stratification: Grade 8 reading}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8math-circpsa-tree.pdf}
+\caption[Propensity score assessment plot for classification tree stratification: Grade 8 math]{Propensity score assessment plot for classification tree stratification: Grade 8 math Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there is not a statistically significant effect.}
 \end{center}
 \end{figure}
+
+% Grade 8 reading
+\clearpage
 
 \input{../Tables2009/g8read-circpsa10.tex}
 
-\clearpage
-\begin{figure}
+\begin{figure}[h!]
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa10-AIC.pdf}
-\caption{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 reading}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8read-circpsa10.pdf}
+\caption[Propensity score assessment plot for logistic regression stratification: Grade 8 reading]{Propensity score assessment plot for logistic regression stratification: Grade 8 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there is not a statistically significant effect.}
 \end{center}
 \end{figure}
+
+\clearpage
 
 \input{../Tables2009/g8read-circpsa10AIC.tex}
 
-\clearpage
 \begin{figure}
 \begin{center}
-\includegraphics[height=.4\textheight,width=.4\textheight]{../Figures2009/g8read-circpsa-tree.pdf}
-\caption{Propensity score assessment plot for classification tree stratification: Grade 8 reading}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8read-circpsa10-AIC.pdf}
+\caption[Propensity score assessment plot for logistic regression AIC stratification: Grade 8 reading]{Propensity score assessment plot for logistic regression AIC stratification: Grade 8 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval spans the unit line indicates there is not a statistically significant effect.}
 \end{center}
 \end{figure}
 
+\clearpage
+
 \input{../Tables2009/g8read-circpsa-tree.tex}
+
+\begin{figure}
+\begin{center}
+\includegraphics[trim=0 .7in 0 .7in]{../Figures2009/g8read-circpsa-tree.pdf}
+\caption[Propensity score assessment plot for classification tree stratification: Grade 8 reading]{Propensity score assessment plot for classification tree stratification: Grade 8 reading Each circle represents one strata. The \textit{x}-axis is the mean score for charter schools and the \textit{y}-axis is the mean score for traditional public schools. The red lines represent the overall adjusted mean for charter and traditional public schools. The dashed blue line and green bar represent the overall mean difference and 95\% confidence interval, respectively. Given that the confidence interval does not span the unit line indicates there a statistically significant effect in favor of charter schools.}
+\end{center}
+\end{figure}
+
 
 
 
@@ -416,21 +431,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression: Grade 4 math}
+\caption[Multilevel PSA covariate balance plot logistic regression: Grade 4 math]{Multilevel PSA covariate balance plot logistic regression: Grade 4 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 math}
+\caption[Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 math]{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4math-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA covariate balance plot classification tree: Grade 4 math}
+\caption[Multilevel PSA covariate balance plot classification tree: Grade 4 math]{Multilevel PSA covariate balance plot classification tree: Grade 4 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
@@ -438,21 +453,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression: Grade 4 reading}
+\caption[Multilevel PSA covariate balance plot logistic regression: Grade 4 reading]{Multilevel PSA covariate balance plot logistic regression: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 reading}
+\caption[Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 reading]{Multilevel PSA covariate balance plot logistic regression AIC: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA covariate balance plot classification tree: Grade 4 reading}
+\caption[Multilevel PSA covariate balance plot classification tree: Grade 4 reading]{Multilevel PSA covariate balance plot classification tree: Grade 4 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
@@ -460,21 +475,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression: Grade 8 math}
+\caption[Multilevel PSA covariate balance plot logistic regression: Grade 8 math]{Multilevel PSA covariate balance plot logistic regression: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 math}
+\caption[Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 math]{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA covariate balance plot classification tree: Grade 8 math}
+\caption[Multilevel PSA covariate balance plot classification tree: Grade 8 math]{Multilevel PSA covariate balance plot classification tree: Grade 8 math. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
@@ -482,21 +497,21 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression: Grade 8 reading}
+\caption[Multilevel PSA covariate balance plot logistic regression: Grade 8 reading]{Multilevel PSA covariate balance plot logistic regression: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-balance.pdf}
-\caption{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 reading}
+\caption[Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 reading]{Multilevel PSA covariate balance plot logistic regression AIC: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-balance.pdf}
-\caption{Multilevel PSA covariate balance plot classification tree: Grade 8 reading}
+\caption[Multilevel PSA covariate balance plot classification tree: Grade 8 reading]{Multilevel PSA covariate balance plot classification tree: Grade 8 reading. The effect sizes (standardized mean differences) for each covariate are provided before PSA adjustment (blue triangles) and after PSA adjustment (red circles).}
 \end{center}
 \end{figure}
 
@@ -510,43 +525,43 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 4 reading
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression: Grade 4 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g4read-mlpsa-lr-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression: Grade 4 reading]{Multilevel PSA assessment plot logistic regression: Grade 4 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression: Grade 4 reading}
+\caption[Multilevel PSA difference plot logistic regression: Grade 4 reading]{Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 4 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g4read-mlpsa-lrAIC-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression AIC: Grade 4 reading]{Multilevel PSA assessment plot logistic regression AIC: Grade 4 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression AIC: Grade 4 reading}
+\caption[Multilevel PSA difference plot logistic regression AIC: Grade 4 reading]{Multilevel PSA difference plot logistic regression AIC: Grade 4 reading. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA assessment plot classification trees: Grade 4 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g4read-mlpsa-ctree-circ.pdf}
+\caption[Multilevel PSA assessment plot classification trees: Grade 4 reading]{Multilevel PSA assessment plot classification trees: Grade 4 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g4read-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA difference plot classification trees: Grade 4 reading}
+\caption[Multilevel PSA difference plot classification trees: Grade 4 reading]{Multilevel PSA difference plot classification trees: Grade 4 reading. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \label{fig:g4read-mlpsa-ctree-diff}
 \end{figure}
@@ -554,43 +569,43 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 8 math
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression: Grade 8 math}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8math-mlpsa-lr-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression: Grade 8 math]{Multilevel PSA assessment plot logistic regression: Grade 8 math. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression: Grade 8 math}
+\caption[Multilevel PSA difference plot logistic regression: Grade 8 math]{Multilevel PSA difference plot logistic regression: Grade 8 math. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 8 math}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8math-mlpsa-lrAIC-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression AIC: Grade 8 math]{Multilevel PSA assessment plot logistic regression AIC: Grade 8 math. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression AIC: Grade 8 math}
+\caption[Multilevel PSA difference plot logistic regression AIC: Grade 8 math]{Multilevel PSA difference plot logistic regression AIC: Grade 8 math. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA assessment plot classification trees: Grade 8 math}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8math-mlpsa-ctree-circ.pdf}
+\caption[Multilevel PSA assessment plot classification trees: Grade 8 math]{Multilevel PSA assessment plot classification trees: Grade 8 math. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8math-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA difference plot classification trees: Grade 8 math}
+\caption[Multilevel PSA difference plot classification trees: Grade 8 math]{Multilevel PSA difference plot classification trees: Grade 8 math. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \label{fig:g8math-mlpsa-ctree-diff}
 \end{figure}
@@ -598,43 +613,43 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 % Grade 8 reading
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression: Grade 8 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8read-mlpsa-lr-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression: Grade 8 reading]{Multilevel PSA assessment plot logistic regression: Grade 8 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lr-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression: Grade 8 reading}
+\caption[Multilevel PSA difference plot logistic regression: Grade 8 reading]{Multilevel PSA difference plot logistic regression: Grade 8 reading. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-circ.pdf}
-\caption{Multilevel PSA assessment plot logistic regression AIC: Grade 8 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8read-mlpsa-lrAIC-circ.pdf}
+\caption[Multilevel PSA assessment plot logistic regression AIC: Grade 8 reading]{Multilevel PSA assessment plot logistic regression AIC: Grade 8 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-lrAIC-diff.pdf}
-\caption{Multilevel PSA difference plot logistic regression AIC: Grade 8 reading}
+\caption[Multilevel PSA difference plot logistic regression AIC: Grade 8 reading]{Multilevel PSA difference plot logistic regression AIC: Grade 8 reading. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
-\includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-circ.pdf}
-\caption{Multilevel PSA assessment plot classification trees: Grade 8 reading}
+\includegraphics[width=\textwidth,trim=0 .6in 0 .6in]{../Figures2009/g8read-mlpsa-ctree-circ.pdf}
+\caption[Multilevel PSA assessment plot classification trees: Grade 8 reading]{Multilevel PSA assessment plot classification trees: Grade 8 reading. The adjusted mean for charter (\textit{x}-axis) and traditional public (\textit{y}-axis) schools are provided for each state. The overall adjusted mean difference is represented by the dashed blue line and the 95\% confidence interval by the dashed green lines. There is a statistical significant difference between charter and traditional public school student performance if the confidence interval does not span zero (i.e. not crossing the unit line \textit{y}=\textit{x}.}
 \end{center}
 \end{figure}
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/g8read-mlpsa-ctree-diff.pdf}
-\caption{Multilevel PSA difference plot classification trees: Grade 8 reading}
+\caption[Multilevel PSA difference plot classification trees: Grade 8 reading]{Multilevel PSA difference plot classification trees: Grade 8 reading. Each blue point represents the overall mean difference between charter and traditional public schools for each state. The green bars are the state level confidence intervals. The dashed green lines Bonferroni-\v{S}id\'{a}k \cite<\textit{c.f.}>{Abdi2007} adjusted confidence intervals. The vertical blue and green lines represent the overall, national difference and confidence interval, respectively. The size of the point is proportional to the number of students in the sample from that state.}
 \end{center}
 \label{fig:g8read-mlpsa-ctree-diff}
 \end{figure}
@@ -661,7 +676,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g4read-mlpsa-ctree-heat.pdf}
-\caption{Heat map of relative importance of covariates from classification trees: Grade 4 reading}
+\caption[Heat map of relative importance of covariates from classification trees: Grade 4 reading]{Heat map of relative importance of covariates from classification trees: Grade 4 reading. Each colored cell indicates that that covariate was used in the classification tree for that state. The darkness indicates the relative importance for that covariate in that state such that darker colors indicate that the covariate was used to split closer to the root node.}
 \label{fig:g4read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -669,7 +684,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g8math-mlpsa-ctree-heat.pdf}
-\caption{Heat map of relative importance of covariates from classification trees: Grade 8 math}
+\caption[Heat map of relative importance of covariates from classification trees: Grade 8 math]{Heat map of relative importance of covariates from classification trees: Grade 8 math. Each colored cell indicates that that covariate was used in the classification tree for that state. The darkness indicates the relative importance for that covariate in that state such that darker colors indicate that the covariate was used to split closer to the root node.}
 \label{fig:g8math-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -677,7 +692,7 @@ Total                   &      & 4,578 & 657 & 1,407,421 & & 3,164 & 156,963 \\
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[height=.37\textheight]{../Figures2009/g8read-mlpsa-ctree-heat.pdf}
-\caption{Heat map of relative importance of covariates from classification trees: Grade 8 reading}
+\caption[Heat map of relative importance of covariates from classification trees: Grade 8 reading]{Heat map of relative importance of covariates from classification trees: Grade 8 reading. Each colored cell indicates that that covariate was used in the classification tree for that state. The darkness indicates the relative importance for that covariate in that state such that darker colors indicate that the covariate was used to split closer to the root node.}
 \label{fig:g8read-mlpsa-ctree-heat}
 \end{center}
 \end{figure}
@@ -830,7 +845,7 @@ This appendix contains the rubric used by the \citeA{NAPCS2010a} to rate the qua
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{../Figures2009/NAEPLawScoresMatrixPlot.pdf}
-\caption{Matrix plot of NAPCS charter law scores and NAEP charter school effect sizes}
+\caption[Matrix plot of NAPCS charter law scores and NAEP charter school effect sizes]{Matrix plot of NAPCS charter law scores and NAEP charter school effect sizes. The main diagonal provide histograms for the NAPCS scores and effect sizes for each state. The lower half are scatter plots and the upper half are the correlations between each pair of state variables.}
 \end{center}
 \end{figure}
 
