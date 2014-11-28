@@ -3,10 +3,11 @@ getwd()
 
 if(!require(naep) | !require(foreach) | !require(plyr) | !require(compiler) |
    	!require(mice) | !require(multilevelPSA) | !require(PSAgraphics) |
-   	!require(xtable) | !require(party) | !require(MASS) | !require(Matching) ) {
+   	!require(xtable) | !require(party) | !require(MASS) | !require(Matching) |
+   	!require(reshape)) {
 	# Install packages if not already.
 	install.packages(c('foreach','ggplot2','plyr','mice','PSAgraphics','xtable',
-					   'party','MASS','Matching','devtools'), 
+					   'party','MASS','Matching','devtools','reshape'), 
 					 repos='http://cran.r-project.org')
 	require(devtools)
 	install_github('naep','jbryer')
@@ -387,6 +388,21 @@ g8read.overall$GradeSubject <- 'Grade 8 Reading'
 
 overall <- rbind(g4math.overall, g4read.overall, g8math.overall, g8read.overall)
 write.csv(overall, file='../Data2009/OverallResults.csv', row.names=FALSE)
+
+# Create table with n's for number of students and states used in charter law analysis
+mlpsa.overall <- overall[overall$class == 'Multilevel PSA' & 
+						 overall$method == 'Classification Trees',
+						 c('GradeSubject','n.states','charter.n','public.n')]
+mlpsa.overall$n.states <- as.integer(mlpsa.overall$n.states)
+mlpsa.overall$charter.n <- as.integer(mlpsa.overall$charter.n)
+mlpsa.overall$public.n <- as.integer(mlpsa.overall$public.n)
+names(mlpsa.overall) <- c('Grade and Subject', 'State n', 'Charter n', 'Public n')
+x <- xtable(mlpsa.overall, align=c('l','l','r','r','r'),
+			label='tab:stateNs',
+			caption='Number of students and states used for the analysis of charter laws')
+print(x, include.rownames=FALSE, include.colnames=TRUE,
+	  caption.placement='top', file='../Tables2009/OverallStateNs.tex')
+
 
 #overall <- read.csv('../Data2009/OverallResults.csv')
 

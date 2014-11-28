@@ -39,9 +39,13 @@ results.psa.math <- mlpsa(response=mlpsa.df$MathScore,
 
 summary(results.psa.math)
 
+pdf('Figures/pisamlpsa.pdf', width=6, height=6)
 plot(results.psa.math)
-mlpsa.circ.plot(results.psa.math, level2.label=TRUE)
+dev.off()
+mlpsa.circ.plot(results.psa.math, level2.label=FALSE)
+ggsave('Figures/PISACircPlot.pdf', width=7, height=7)
 mlpsa.difference.plot(results.psa.math, sd=mean(mlpsa.df$MathScore, na.rm=TRUE), xlim=c(-.2, .05))
+ggsave('Figures/pisadiffplot.pdf', width=8, height=3)
 
 results.psa.lr.math <- mlpsa(response=pisana$MathScore,
 							 treatment=pisana$PUBPRIV,
